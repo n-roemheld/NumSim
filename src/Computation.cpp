@@ -27,7 +27,7 @@ void Computation::initialize (int argc, char *argv[])
 	//select SOR or GaussSeidel
 	if (settings_.pressureSolver == "SOR")
 	{
-		pressureSolver_ = std::make_unique<SORRedBlack>(discretization_, settings_.epsilon,
+		pressureSolver_ = std::make_unique<SOR>(discretization_, settings_.epsilon,
 		 settings_.maximumNumberOfIterations, settings_.omega);
 	}
 	else
@@ -56,7 +56,7 @@ void Computation::runSimulation ()
 		time += dt_;
 		//std::cout << "time_step" << dt_ << std::endl;
 
-		outputWriterText_->writeFile(time);
+		// outputWriterText_->writeFile(time);
 
 
 		// compute f and g
@@ -72,7 +72,7 @@ void Computation::runSimulation ()
 		computeVelocities();
 
 		outputWriterParaview_->writeFile(time);
-		// outputWriterText_->writeFile(time);
+		outputWriterText_->writeFile(time);
 		outputWriterText_->writePressureFile();
 	}
 };
@@ -216,8 +216,8 @@ void Computation::computeRightHandSide ()
 			{
 				for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
 				{
-					discretization_->rhs(i,j) = 1/dt*((discretization_->f(i,j)-discretization_->f(i-1,j))/meshWidth_[0]
-												     +(discretization_->g(i,j)-discretization_->g(i,j-1))/meshWidth_[1]);
+					discretization_->rhs(i,j) = 1/dt*((discretization_->f(i+discretization_->uIBegin()-1,j)-discretization_->f(i+discretization_->uIBegin()-2,j))/meshWidth_[0]
+												     +(discretization_->g(i,j+discretization_->vJBegin()-1)-discretization_->g(i,j+discretization_->vJBegin()-2))/meshWidth_[1]);
 				};
 			};
 };
