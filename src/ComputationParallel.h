@@ -3,6 +3,8 @@
 class ComputationParallel : public Computation 
 {
   public:
-  ComputationParallel();
+  
+  private:
+	void computeTimeStepWidth ();
   
 }
