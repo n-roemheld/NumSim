@@ -216,8 +216,11 @@ void Computation::computeRightHandSide ()
 			{
 				for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
 				{
-					discretization_->rhs(i,j) = 1/dt*((discretization_->f(i+discretization_->uIBegin()-1,j)-discretization_->f(i+discretization_->uIBegin()-2,j))/meshWidth_[0]
-												     +(discretization_->g(i,j+discretization_->vJBegin()-1)-discretization_->g(i,j+discretization_->vJBegin()-2))/meshWidth_[1]);
+//					discretization_->rhs(i,j) = 1/dt*((discretization_->f(i+discretization_->uIBegin()-1,j)-discretization_->f(i+discretization_->uIBegin()-2,j))/meshWidth_[0]
+//												     +(discretization_->g(i,j+discretization_->vJBegin()-1)-discretization_->g(i,j+discretization_->vJBegin()-2))/meshWidth_[1]);
+					discretization_->rhs(i,j) = 1/dt*((discretization_->f(i+1,j)-discretization_->f(i,j))/meshWidth_[0]
+																	     +(discretization_->g(i,j+1)-discretization_->g(i,j))/meshWidth_[1]);
+									};
 				};
 			};
 };
