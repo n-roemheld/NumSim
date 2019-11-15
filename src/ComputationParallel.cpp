@@ -89,11 +89,11 @@ void ComputationParallel::initialize (int argc, char *argv[])
         std::vector<MPI_Request> requests;
         MPI_Request current_request;
         MPI_Irecv(&ranks_neighbors, 10, MPI_INT, 0, 0, MPI_COMM_WORLD, &current_request);
-        current_request.push_back(current_request);
+        requests.push_back(current_request);
         MPI_Irecv(&is_boundary, 10, MPI_INT, 0, 1, MPI_COMM_WORLD, &current_request);
-        current_request.push_back(current_request);
+        requests.push_back(current_request);
         MPI_Irecv(&nCells_sub, 10, MPI_INT, 0, 2, MPI_COMM_WORLD, &current_request);
-        current_request.push_back(current_request);
+        requests.push_back(current_request);
         discretization_->set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub);
     }
     MPI_Wait(&requests,MPI_STATUS_IGNORE)
@@ -103,7 +103,137 @@ void ComputationParallel::computeTimeStepWidth ()
 {
     Computation::computeTimeStepWidth ();
     
-    
-    MPI_Allreduce(&dt_, &dtAll_, partitioning_.getSize(), MPI_DOUBLE, MPI_MIN, MPI_COMM_WORLD);
-    dt_ = dtAll_;
+    double dtAll;
+    MPI_Allreduce(&dt_, &dtAll, 1, MPI_DOUBLE, MPI_MIN, MPI_COMM_WORLD);
+    dt_ = dtAll;
 };
+
+void ComputationParallel::computePreliminaryVelocities ()
+{
+    Computation::computePreliminaryVelocities ();
+    std::vector<MPI_Request> requests;
+    
+    // F Communication (Send)
+    // communicate to below
+    int below = 0;
+    send_boundary_vertical(below, discretization_->uJBegin(), discretization_->uIBegin(), discretization_->uIEnd()-1, discretization_->rank_neighbor(below), discretization_->f, discretization_->is_boundary(below));
+    // communicate to above
+    int above = 2;
+    send_boundary_vertical(above, discretization_->uJEnd()-1, discretization_->uIBegin(), discretization_->uIEnd()-1, discretization_->rank_neighbor(above), discretization_->f, discretization_->is_boundary(above));
+    // communicate to right
+    int right = 1;
+    send_boundary_horizontal(right, discretization_->uIEnd()-2, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(right), discretization_->f, discretization_->is_boundary(right));
+    // communicate to left
+    int left = 3;
+    send_boundary_horizontal(left, discretization_->uIBegin(), discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(left), discretization_->f, discretization_->is_boundary(left));
+    
+    // G Communication (Send)
+    // communicate to below
+    int below = 0;
+    send_boundary_vertical(below + 4, discretization_->vJBegin(), discretization_->vIBegin(), discretization_->vIEnd(), discretization_->rank_neighbor(below), discretization_->g, discretization_->is_boundary(below));
+    // communicate to above
+    int above = 2;
+    send_boundary_vertical(above + 4, discretization_->vJEnd()-2, discretization_->vIBegin(), discretization_->vIEnd(), discretization_->rank_neighbor(above), discretization_->g, discretization_->is_boundary(above));
+    // communicate to right
+    int right = 1;
+    send_boundary_horizontal(right + 4, discretization_->vIEnd()-1, discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(right), discretization_->g, discretization_->is_boundary(right));
+    // communicate to left
+    int left = 3;
+    send_boundary_horizontal(left + 4, discretization_->vIBegin(), discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(left), discretization_->g, discretization_->is_boundary(left));
+    
+    // Receiving F ___________________________________________________________________ ToDo ___________________________________________________________________
+    std::vector<MPI_Request> requests;
+    MPI_Request current_request;
+    // below
+    current_request = send_boundary_vertical(int tag, int j_fixed, int i_begin, int i_end, int target_rank, double (*fVar)(int, int), bool do_nothing);
+    requests.push_back(current_request);
+    // above
+    current_request = send_boundary_vertical();
+    requests.push_back(current_request);
+    // right
+    current_request = send_boundary_horizontal();
+    requests.push_back(current_request);
+    //left
+    current_request = send_boundary_horizontal();
+    requests.push_back(current_request);
+    
+    MPI_Wait(&requests,MPI_STATUS_IGNORE)
+    
+    // for each neighbor
+    //      if not_boundary
+    //          send_to neighbor
+    //          receive_from_neighbor
+    //          set_inner_boundaries_according_to_received_data
+    //      else
+    //          do_nothing!
+    //      end
+    // end
+    // MPI_Wait
+};
+        
+
+void ComputationParallel::send_boundary_vertical(int tag, int j_fixed, int i_begin, int i_end, int target_rank, double (*fVar)(int, int), bool do_nothing)
+{
+    if (!do_nothing)
+    {
+        std::vector<double> send_buffer(i_end - i_begin);
+        int bi = 0;
+        for(int i = i_begin, i < i_end, i++)
+        {
+            send_buffer[bi] = fVar(i,j);
+            bi++;
+        }
+        MPI_Isend(&send_buffer, i_end-i_begin, MPI_DOUBLE, target_rank, direction, MPI_COMM_WORLD);
+
+    }
+};
+
+void ComputationParallel::send_boundary_horizontal(int tag, int i_fixed, int j_begin, int j_end, int target_rank, double (*fVar)(int, int), bool do_nothing)
+{
+    if (!do_nothing)
+    {
+        std::vector<double> send_buffer(j_end - j_begin);
+        int bj = 0;
+        for(int j = j_begin, j < j_end, j++)
+        {
+            send_buffer[bj] = fVar(i,j);
+            bj++;
+        }
+        MPI_Isend(&send_buffer, j_end-j_begin, MPI_DOUBLE, target_rank, direction, MPI_COMM_WORLD);
+
+    }
+};
+
+MPI_Request ComputationParallel::receive_boundary_vertical(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, double (*fVar)(int, int), bool do_nothing)
+{
+    if (!do_nothing)
+    {
+        MPI_Request current_request;
+        std::vector<double> rcv_buffer;
+        MPI_Irecv(&rcv_buffer, i_end - i_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
+        int j = j_fixed;
+        int bi = 0;
+        for (int i = i_begin; i < i_end; i++)
+        {
+            fVar(i,j) = rcv_buffer(bi);
+            bi++;
+        }
+    }
+}
+
+MPI_Request ComputationParallel::receive_boundary_horizontal(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, double (*fVar)(int, int), bool do_nothing)
+{
+    if (!do_nothing)
+    {
+        MPI_Request current_request;
+        std::vector<double> rcv_buffer;
+        MPI_Irecv(&rcv_buffer, j_end - j_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
+        int i = i_fixed;
+        int bj = 0;
+        for (int j = j_begin; j < j_end; j++)
+        {
+            fVar(i,j) = rcv_buffer(bj);
+            bj++;
+        }
+    }
+}

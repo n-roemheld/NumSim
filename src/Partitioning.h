@@ -6,9 +6,10 @@ class Partitioning
 {
   public:
   Partitioning(int MPI_rank, std::array<int,4> ranks_neighbors, std::array<bool,4> is_boundary, std::array<int,2> nCells);
-  int rank();
-  std::array<int,4> ranks_neighbors();
-  std::array<bool,4> is_boundary();
+  int ownRankNo();
+  bool is_boundary(int direction)// 0 = lower, 1 = right, 2 = upper, 3 = left
+  std::array<int,4> ranks_neighbors(); // lower, right, upper, left
+  // std::array<bool,4> is_boundary(); // lower, right, upper, left
   std::array<int,2> nCells();
 
   protected:

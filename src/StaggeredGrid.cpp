@@ -153,10 +153,29 @@ int StaggeredGrid::pJEnd() const
 	return nCells_[1] + 1;
 };
 
-  void set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells)
+void StaggeredGrid::set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells)
   {
     partitioning_ = new Partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells);
   };
+
+int StaggeredGrid::ownRankNo()
+{
+    return partitioning_.ownRankNo();
+};
+
+int StaggeredGrid::rank_neighbors(int direction)
+{
+    return partitioning_.ranks_neighbors(direction);
+};
+
+bool StaggeredGrid::is_boundary(int direction)
+{
+    return partitioning_.is_boundary(direction);
+};
+std::array<int,2> StaggeredGrid::nCells()
+{
+    return partitioning_.nCells();
+};
 
 // old non parallel version !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // #include "StaggeredGrid.h"

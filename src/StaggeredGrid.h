@@ -67,6 +67,11 @@ public:
   int 	pJEnd() const;
   
   void set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells);
+  
+  int ownRankNo();
+  bool is_boundary(int direction)// 0 = lower, 1 = right, 2 = upper, 3 = left
+  int rank_neighbor(int direction);
+  std::array<int,2> nCells();
 
 protected:
 	const std::array< int, 2 > nCells_;
@@ -78,5 +83,5 @@ protected:
 	FieldVariable 	f_;
 	FieldVariable 	g_;
   
-  Partitioning partitioning_;
+    Partitioning partitioning_;
 };
