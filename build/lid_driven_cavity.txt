@@ -4,13 +4,13 @@
 # Problem description
 physicalSizeX = 2.0  # physical size of the domain
 physicalSizeY = 2.0
-endTime = 1.0        # duration of the simulation
+endTime = 10.0        # duration of the simulation
 re = 1000             # Reynolds number
 gX = 0.0              # external forces, set to (gX,gY) = (0,-9.81) to account for gravity
 gY = 0.0
 
 # Dirichlet boundary conditions
-dirichletBottomX = 0
+  dirichletBottomX  =   0
 dirichletBottomY = 0
 dirichletTopX    = 1
 dirichletTopY    = 0
@@ -20,7 +20,7 @@ dirichletRightX  = 0
 dirichletRightY  = 0
 
 # Discretization parameters
-nCellsX = 16          # number of cells in x and y direction
+nCellsX = 16         # number of cells in x and y direction
 nCellsY = 16
 useDonorCell = true   # if donor cell discretization should be used, possible values: true false
 alpha = 0.5           # factor for donor-cell scheme, 0 is equivalent to central differences

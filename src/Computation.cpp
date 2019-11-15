@@ -56,12 +56,8 @@ void Computation::runSimulation ()
 		time += dt_;
 		//std::cout << "time_step" << dt_ << std::endl;
 
-		// outputWriterText_->writeFile(time);
-
-
 		// compute f and g
 		computePreliminaryVelocities();
-
 		// outputWriterText_->writeFile(time);
 
 		//compute rhs
@@ -129,28 +125,28 @@ void Computation::applyBoundaryValues ()
 	for(int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
 	{
 		discretization_->u(i,j) = 2*settings_.dirichletBcBottom[0]-discretization_->u(i,j+1);
-		// discretization_->f(i,j) = discretization_->u(i,j);
+		discretization_->f(i,j) = discretization_->u(i,j);
 	};
 	// upper u ghost layer without corners
 	j = discretization_->uJEnd();
 	for(int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
 	{
 		discretization_->u(i,j) = 2*settings_.dirichletBcTop[0]-discretization_->u(i,j-1);
-		// discretization_->f(i,j) = discretization_->u(i,j);
+		discretization_->f(i,j) = discretization_->u(i,j);
 	};
 	// left u ghost layer with corners
 	int i = discretization_->uIBegin()-1;
 	for(int j = discretization_->uJBegin()-1; j < discretization_->uJEnd()+1; j++)
 	{
 		discretization_->u(i,j) = settings_.dirichletBcLeft[0];
-		// discretization_->f(i,j) = discretization_->u(i,j);
+		discretization_->f(i,j) = discretization_->u(i,j);
 	}
 	// right u Nathi-not ghost layer with corners
 	i = discretization_->uIEnd()-1;
 	for(int j = discretization_->uJBegin()-1; j < discretization_->uJEnd()+1; j++)
 	{
 		discretization_->u(i,j) = settings_.dirichletBcRight[0];
-		// discretization_->f(i,j) = discretization_->u(i,j);
+		discretization_->f(i,j) = discretization_->u(i,j);
 	}
 
 	// v,g setting
@@ -159,28 +155,28 @@ void Computation::applyBoundaryValues ()
 	for(int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
 	{
 		discretization_->v(i,j) = settings_.dirichletBcBottom[1];
-		// discretization_->g(i,j) = discretization_->v(i,j);
+		discretization_->g(i,j) = discretization_->v(i,j);
 	};
 	// upper v  Nathi-not ghost layer without corners
 	j = discretization_->vJEnd()-1;
 	for(int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
 	{
 		discretization_->v(i,j) = settings_.dirichletBcTop[1];
-		// discretization_->g(i,j) = discretization_->v(i,j);
+		discretization_->g(i,j) = discretization_->v(i,j);
 	};
 	// left v ghost layer with corners
 	i = discretization_->vIBegin()-1;
 	for(int j = discretization_->vJBegin()-1; j < discretization_->vJEnd(); j++)
 	{
 		discretization_->v(i,j) = 2*settings_.dirichletBcLeft[1]-discretization_->v(i+1,j);
-		// discretization_->g(i,j) = discretization_->v(i,j);
+		discretization_->g(i,j) = discretization_->v(i,j);
 	}
 	// right v ghost layer with corners
 	i = discretization_->vIEnd();
 	for(int j = discretization_->vJBegin()-1; j < discretization_->vJEnd(); j++)
 	{
 		discretization_->v(i,j) = 2*settings_.dirichletBcRight[1]-discretization_->v(i-1,j);
-		// discretization_->g(i,j) = discretization_->v(i,j);
+		discretization_->g(i,j) = discretization_->v(i,j);
 	}
 };
 
@@ -216,11 +212,13 @@ void Computation::computeRightHandSide ()
 			{
 				for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
 				{
-//					discretization_->rhs(i,j) = 1/dt*((discretization_->f(i+discretization_->uIBegin()-1,j)-discretization_->f(i+discretization_->uIBegin()-2,j))/meshWidth_[0]
-//												     +(discretization_->g(i,j+discretization_->vJBegin()-1)-discretization_->g(i,j+discretization_->vJBegin()-2))/meshWidth_[1]);
-					discretization_->rhs(i,j) = 1/dt*((discretization_->f(i+1,j)-discretization_->f(i,j))/meshWidth_[0]
-																	     +(discretization_->g(i,j+1)-discretization_->g(i,j))/meshWidth_[1]);
-									};
+					// old version
+					// discretization_->rhs(i,j) = 1/dt*((discretization_->f(i,j)-discretization_->f(i-1,j))/meshWidth_[0]
+					// 							     +(discretization_->g(i,j)-discretization_->g(i,j-1))/meshWidth_[1]);
+	  			 // new version
+					 discretization_->rhs(i,j) = 1/dt*((discretization_->f(i+1,j)-discretization_->f(i,j))/meshWidth_[0]
+					 												     +(discretization_->g(i,j+1)-discretization_->g(i,j))/meshWidth_[1]);
+
 				};
 			};
 };
@@ -240,14 +238,20 @@ void Computation::computeVelocities ()
 			{
 				for (int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
 				{
-					discretization_->u(i,j) = discretization_->f(i,j) - dt*discretization_->computeDpDx(i,j);
+					// old version
+					// discretization_->u(i,j) = discretization_->f(i,j) - dt*discretization_->computeDpDx(i,j);
+					// new version
+					discretization_->u(i,j) = discretization_->f(i,j) - dt*discretization_->computeDpDx(i-1,j);
 				};
 			};
 	for(int j = discretization_->vJBegin(); j < discretization_->vJEnd()-1; j++)
 			{
 				for (int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
 				{
-					discretization_->v(i,j) = discretization_->g(i,j) - dt*discretization_->computeDpDy(i,j);
+					// old version
+					// discretization_->v(i,j) = discretization_->g(i,j) - dt*discretization_->computeDpDy(i,j);
+					// new version
+					discretization_->v(i,j) = discretization_->g(i,j) - dt*discretization_->computeDpDy(i,j-1);
 				};
 			};
 };

@@ -33,7 +33,6 @@ void SOR::solve()
 				};
 			};
 
-
 			// compute and update residuum
 			// wrong sign ????
 			res_squared = compute_res();

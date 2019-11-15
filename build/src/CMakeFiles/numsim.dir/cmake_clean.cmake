@@ -8,7 +8,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/numsim.dir/GaussSeidel.cpp.o"
   "CMakeFiles/numsim.dir/PressureSolver.cpp.o"
   "CMakeFiles/numsim.dir/SOR.cpp.o"
-  "CMakeFiles/numsim.dir/SORRedBlack.cpp.o"
   "CMakeFiles/numsim.dir/StaggeredGrid.cpp.o"
   "CMakeFiles/numsim.dir/main.cpp.o"
   "CMakeFiles/numsim.dir/output_writer/output_writer.cpp.o"
