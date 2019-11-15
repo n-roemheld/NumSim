@@ -27,7 +27,7 @@ void Computation::initialize (int argc, char *argv[])
 	//select SOR or GaussSeidel
 	if (settings_.pressureSolver == "SOR")
 	{
-		pressureSolver_ = std::make_unique<SOR>(discretization_, settings_.epsilon,
+		pressureSolver_ = std::make_unique<SORRedBlack>(discretization_, settings_.epsilon,
 		 settings_.maximumNumberOfIterations, settings_.omega);
 	}
 	else
