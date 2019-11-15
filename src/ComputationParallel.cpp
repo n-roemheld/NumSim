@@ -52,16 +52,16 @@ void ComputationParallel::initialize (int argc, char *argv[])
             {
                 if (i == 0 && j == 0)
                 {
-                    std::vector<int,4> ranks_neighbors = {ranks_domain(i,j-1), ranks_domain(i+1,j), ranks_domain(i,j+1), ranks_domain(i-1,j)}; // bottom, right, upper, left; caution: check for limits (boundaries)!
-                    std::vector<int,4> is_boundary = { (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
-                    std::vector<int,2> nCells_sub = {n_Cells_sub_x,n_Cells_sub_y};
+                    std::vector<int> ranks_neighbors{ranks_domain(i,j-1), ranks_domain(i+1,j), ranks_domain(i,j+1), ranks_domain(i-1,j)}; // bottom, right, upper, left; caution: check for limits (boundaries)!
+                    std::vector<int> is_boundary{ (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
+                    std::vector<int> nCells_sub{n_Cells_sub_x,n_Cells_sub_y};
                     discretization_->set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells);
                 }
                 else
                 {
-                    std::vector<int,4> ranks_neighbors = {ranks_domain(i,j-1), ranks_domain(i+1,j), ranks_domain(i,j+1), ranks_domain(i-1,j)}; // bottom, right, upper, left; caution: check for limits (boundaries)!
-                    std::vector<int,4> is_boundary = { (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
-                    std::vector<int,2> nCells_sub = {0,0};
+                    std::vector<int> ranks_neighbors{ranks_domain(i,j-1), ranks_domain(i+1,j), ranks_domain(i,j+1), ranks_domain(i-1,j)}; // bottom, right, upper, left; caution: check for limits (boundaries)!
+                    std::vector<int> is_boundary{ (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
+                    std::vector<int> nCells_sub{0,0};
                     if (j == n_pars_y) {
                         nCells_sub[1] = n_Cells_sub_y_last;
                     } else {
@@ -83,15 +83,20 @@ void ComputationParallel::initialize (int argc, char *argv[])
     }
     else
     {
-        std::vector<int,4> ranks_neighbors; // bottom, right, upper, left; caution: check for limits (boundaries)!
-        std::vector<int,4> is_boundary;
-        std::vector<int,2> nCells_sub;
-        MPI_Irecv(&ranks_neighbors, 10, MPI_INT, 0, 0, MPI_COMM_WORLD);
-        MPI_Irecv(&is_boundary, 10, MPI_INT, 0, 1, MPI_COMM_WORLD);
-        MPI_Irecv(&nCells_sub, 10, MPI_INT, 0, 2, MPI_COMM_WORLD);
+        std::vector<int> ranks_neighbors; // bottom, right, upper, left; caution: check for limits (boundaries)!
+        std::vector<int> is_boundary;
+        std::vector<int> nCells_sub;
+        std::vector<MPI_Request> requests;
+        MPI_Request current_request;
+        MPI_Irecv(&ranks_neighbors, 10, MPI_INT, 0, 0, MPI_COMM_WORLD, &current_request);
+        current_request.push_back(current_request);
+        MPI_Irecv(&is_boundary, 10, MPI_INT, 0, 1, MPI_COMM_WORLD, &current_request);
+        current_request.push_back(current_request);
+        MPI_Irecv(&nCells_sub, 10, MPI_INT, 0, 2, MPI_COMM_WORLD, &current_request);
+        current_request.push_back(current_request);
         discretization_->set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub);
     }
-    MPI_Wait()
+    MPI_Wait(&requests,MPI_STATUS_IGNORE)
 };
 
 void ComputationParallel::computeTimeStepWidth ()
