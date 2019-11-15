@@ -2,6 +2,7 @@
 
 #include <array>
 #include "FieldVariable.h"
+#include "Partitioning.h"
 
 class StaggeredGrid
 {
@@ -64,6 +65,8 @@ public:
   int 	pJBegin() const;
 
   int 	pJEnd() const;
+  
+  void set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells);
 
 protected:
 	const std::array< int, 2 > nCells_;
@@ -74,4 +77,6 @@ protected:
 	FieldVariable 	rhs_;
 	FieldVariable 	f_;
 	FieldVariable 	g_;
+  
+  Partitioning partitioning_;
 };
