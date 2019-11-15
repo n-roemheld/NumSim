@@ -10,7 +10,9 @@ add_executable(${PROJECT_NAME}
         DonorCell.cpp DonorCell.h
         CentralDifferences.h CentralDifferences.cpp
         SOR.h SOR.cpp 
-	GaussSeidel.h GaussSeidel.cpp
+		GaussSeidel.h GaussSeidel.cpp
+		SORRedBlack.h SORRedBlack.cpp
+		GaussSeidelRedBlack.h GaussSeidelRedBlack.cpp
         PressureSolver.cpp PressureSolver.h
         output_writer/output_writer_paraview.cpp output_writer/output_writer_paraview.h
         output_writer/output_writer_text.cpp output_writer/output_writer_text.h
