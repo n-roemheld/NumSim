@@ -1,9 +1,11 @@
 
 #include "ComputationParallel.h"
+#include "Partitioning.h"
 
 #include <math.h>
 #include <cassert>
 #include <assert.h>
+#include <vector>
 
 void ComputationParallel::initialize (int argc, char *argv[])
 {
@@ -48,9 +50,9 @@ void ComputationParallel::initialize (int argc, char *argv[])
         {
             for (int i = 0; i < n_pars_x; i++)
             {
-                std::array<int,4> ranks_neighbors = {ranks_domain(i,j-1), ranks_domain(i+1,j), ranks_domain(i,j+1), ranks_domain(i-1,j)}; // bottom, right, upper, left; caution: check for limits (boundaries)!
-                std::array<bool,4> is_boundary = { (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
-                std::array<int,2> nCells_sub = {0,0};
+                std::vector<int,4> ranks_neighbors = {ranks_domain(i,j-1), ranks_domain(i+1,j), ranks_domain(i,j+1), ranks_domain(i-1,j)}; // bottom, right, upper, left; caution: check for limits (boundaries)!
+                std::vector<int,4> is_boundary = { (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
+                std::vector<int,2> nCells_sub = {0,0};
                 if (j == n_pars_y) {
                     nCells_sub[1] = n_Cells_sub_y_last;
                 } else {
@@ -61,10 +63,15 @@ void ComputationParallel::initialize (int argc, char *argv[])
                 } else {
                     nCells_sub[0] = n_Cells_sub_x;
                 }
-                Partitioning part(ranks_domain(i,j), ranks_neighbors, is_boundary, nCells_sub);
+                std::vector<int> send_buffer;
+                send_buffer.reserve(ranks_neighbors.size() + is_boundary.size() + nCells_sub.size());
+                send_buffer.insert(send_buffer.end(), ranks_neighbors.begin(), ranks_neighbors.end());
+                send_buffer.insert(send_buffer.end(), is_boundary.begin(), is_boundary.end());
+                send_buffer.insert(send_buffer.end(), nCells_sub.begin(), nCells_sub.end());
                 
                 // send part to partition ranks_domain(i,j) or store in arrays and broadcast
-                    
+                MPI_Send(&send_buffer, 10, MPI_INT, ranks_domain(i,j),0,MPI_COMM_WORLD)
+
             }
         }
         
@@ -72,7 +79,15 @@ void ComputationParallel::initialize (int argc, char *argv[])
         
     
     Partitioning partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells);
-
+    }
+    else
+    {
+        std::vector<int> rcv_buffer;
+        MPI_Receive(&rcv_buffer, 10, MPI_INT, 0, 0, MPI_COMM_WORLD)
+        Partitioning partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells);
+    }
+    
+};
 
 void ComputationParallel::computeTimeStepWidth ()
 {
