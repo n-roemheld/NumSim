@@ -7,6 +7,7 @@ PressureSolver(discretization, epsilon, maximumNumberOfIterations), omega_(omega
 
 void SORRedBlack::solve()
 {
+	// std::cout << "SORRedBlack" << std::endl;
 	// change i,j for speed?
 		std::array<double,2> mW = discretization_->meshWidth();
 		double dx = mW[0];

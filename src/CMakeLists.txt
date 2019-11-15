@@ -11,7 +11,7 @@ add_executable(${PROJECT_NAME}
         CentralDifferences.h CentralDifferences.cpp
         SOR.h SOR.cpp 
 		GaussSeidel.h GaussSeidel.cpp
-		SORRedBlach.h SORRedBlack.cpp
+		SORRedBlack.h SORRedBlack.cpp
 		GaussSeidelRedBlack.h GaussSeidelRedBlack.cpp
         PressureSolver.cpp PressureSolver.h
         output_writer/output_writer_paraview.cpp output_writer/output_writer_paraview.h

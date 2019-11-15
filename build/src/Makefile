@@ -360,6 +360,33 @@ GaussSeidel.cpp.s:
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/GaussSeidel.cpp.s
 .PHONY : GaussSeidel.cpp.s
 
+GaussSeidelRedBlack.o: GaussSeidelRedBlack.cpp.o
+
+.PHONY : GaussSeidelRedBlack.o
+
+# target to build an object file
+GaussSeidelRedBlack.cpp.o:
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.o
+.PHONY : GaussSeidelRedBlack.cpp.o
+
+GaussSeidelRedBlack.i: GaussSeidelRedBlack.cpp.i
+
+.PHONY : GaussSeidelRedBlack.i
+
+# target to preprocess a source file
+GaussSeidelRedBlack.cpp.i:
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.i
+.PHONY : GaussSeidelRedBlack.cpp.i
+
+GaussSeidelRedBlack.s: GaussSeidelRedBlack.cpp.s
+
+.PHONY : GaussSeidelRedBlack.s
+
+# target to generate assembly for a file
+GaussSeidelRedBlack.cpp.s:
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.s
+.PHONY : GaussSeidelRedBlack.cpp.s
+
 PressureSolver.o: PressureSolver.cpp.o
 
 .PHONY : PressureSolver.o
@@ -413,6 +440,33 @@ SOR.s: SOR.cpp.s
 SOR.cpp.s:
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/SOR.cpp.s
 .PHONY : SOR.cpp.s
+
+SORRedBlack.o: SORRedBlack.cpp.o
+
+.PHONY : SORRedBlack.o
+
+# target to build an object file
+SORRedBlack.cpp.o:
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o
+.PHONY : SORRedBlack.cpp.o
+
+SORRedBlack.i: SORRedBlack.cpp.i
+
+.PHONY : SORRedBlack.i
+
+# target to preprocess a source file
+SORRedBlack.cpp.i:
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/SORRedBlack.cpp.i
+.PHONY : SORRedBlack.cpp.i
+
+SORRedBlack.s: SORRedBlack.cpp.s
+
+.PHONY : SORRedBlack.s
+
+# target to generate assembly for a file
+SORRedBlack.cpp.s:
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/SORRedBlack.cpp.s
+.PHONY : SORRedBlack.cpp.s
 
 StaggeredGrid.o: StaggeredGrid.cpp.o
 
@@ -610,12 +664,18 @@ help:
 	@echo "... GaussSeidel.o"
 	@echo "... GaussSeidel.i"
 	@echo "... GaussSeidel.s"
+	@echo "... GaussSeidelRedBlack.o"
+	@echo "... GaussSeidelRedBlack.i"
+	@echo "... GaussSeidelRedBlack.s"
 	@echo "... PressureSolver.o"
 	@echo "... PressureSolver.i"
 	@echo "... PressureSolver.s"
 	@echo "... SOR.o"
 	@echo "... SOR.i"
 	@echo "... SOR.s"
+	@echo "... SORRedBlack.o"
+	@echo "... SORRedBlack.i"
+	@echo "... SORRedBlack.s"
 	@echo "... StaggeredGrid.o"
 	@echo "... StaggeredGrid.i"
 	@echo "... StaggeredGrid.s"

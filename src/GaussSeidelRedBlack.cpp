@@ -1,4 +1,5 @@
 #include "GaussSeidelRedBlack.h"
+#include <iostream>
 
 GaussSeidelRedBlack::GaussSeidelRedBlack (std::shared_ptr< Discretization > discretization, double epsilon, int maximumNumberOfIterations) :
 	PressureSolver(discretization, epsilon, maximumNumberOfIterations)
@@ -7,6 +8,8 @@ GaussSeidelRedBlack::GaussSeidelRedBlack (std::shared_ptr< Discretization > disc
 
 void GaussSeidelRedBlack::solve()
 {
+	// std::cout << "GaussSeidelRedBlack" << std::endl;
+
 	double dx = discretization_->dx();
 	double dy = discretization_->dy();
 

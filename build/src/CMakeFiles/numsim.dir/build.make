@@ -174,9 +174,35 @@ src/CMakeFiles/numsim.dir/GaussSeidel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/numsim.dir/GaussSeidel.cpp.s"
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/henrik/Dokumente/Num_Sim/NumSim/src/GaussSeidel.cpp -o CMakeFiles/numsim.dir/GaussSeidel.cpp.s
 
+src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o: src/CMakeFiles/numsim.dir/flags.make
+src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o: ../src/SORRedBlack.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o"
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/numsim.dir/SORRedBlack.cpp.o -c /home/henrik/Dokumente/Num_Sim/NumSim/src/SORRedBlack.cpp
+
+src/CMakeFiles/numsim.dir/SORRedBlack.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/numsim.dir/SORRedBlack.cpp.i"
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/henrik/Dokumente/Num_Sim/NumSim/src/SORRedBlack.cpp > CMakeFiles/numsim.dir/SORRedBlack.cpp.i
+
+src/CMakeFiles/numsim.dir/SORRedBlack.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/numsim.dir/SORRedBlack.cpp.s"
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/henrik/Dokumente/Num_Sim/NumSim/src/SORRedBlack.cpp -o CMakeFiles/numsim.dir/SORRedBlack.cpp.s
+
+src/CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.o: src/CMakeFiles/numsim.dir/flags.make
+src/CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.o: ../src/GaussSeidelRedBlack.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.o"
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.o -c /home/henrik/Dokumente/Num_Sim/NumSim/src/GaussSeidelRedBlack.cpp
+
+src/CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.i"
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/henrik/Dokumente/Num_Sim/NumSim/src/GaussSeidelRedBlack.cpp > CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.i
+
+src/CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.s"
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/henrik/Dokumente/Num_Sim/NumSim/src/GaussSeidelRedBlack.cpp -o CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.s
+
 src/CMakeFiles/numsim.dir/PressureSolver.cpp.o: src/CMakeFiles/numsim.dir/flags.make
 src/CMakeFiles/numsim.dir/PressureSolver.cpp.o: ../src/PressureSolver.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/CMakeFiles/numsim.dir/PressureSolver.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/CMakeFiles/numsim.dir/PressureSolver.cpp.o"
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/numsim.dir/PressureSolver.cpp.o -c /home/henrik/Dokumente/Num_Sim/NumSim/src/PressureSolver.cpp
 
 src/CMakeFiles/numsim.dir/PressureSolver.cpp.i: cmake_force
@@ -189,7 +215,7 @@ src/CMakeFiles/numsim.dir/PressureSolver.cpp.s: cmake_force
 
 src/CMakeFiles/numsim.dir/output_writer/output_writer_paraview.cpp.o: src/CMakeFiles/numsim.dir/flags.make
 src/CMakeFiles/numsim.dir/output_writer/output_writer_paraview.cpp.o: ../src/output_writer/output_writer_paraview.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/CMakeFiles/numsim.dir/output_writer/output_writer_paraview.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/CMakeFiles/numsim.dir/output_writer/output_writer_paraview.cpp.o"
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/numsim.dir/output_writer/output_writer_paraview.cpp.o -c /home/henrik/Dokumente/Num_Sim/NumSim/src/output_writer/output_writer_paraview.cpp
 
 src/CMakeFiles/numsim.dir/output_writer/output_writer_paraview.cpp.i: cmake_force
@@ -202,7 +228,7 @@ src/CMakeFiles/numsim.dir/output_writer/output_writer_paraview.cpp.s: cmake_forc
 
 src/CMakeFiles/numsim.dir/output_writer/output_writer_text.cpp.o: src/CMakeFiles/numsim.dir/flags.make
 src/CMakeFiles/numsim.dir/output_writer/output_writer_text.cpp.o: ../src/output_writer/output_writer_text.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/CMakeFiles/numsim.dir/output_writer/output_writer_text.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/CMakeFiles/numsim.dir/output_writer/output_writer_text.cpp.o"
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/numsim.dir/output_writer/output_writer_text.cpp.o -c /home/henrik/Dokumente/Num_Sim/NumSim/src/output_writer/output_writer_text.cpp
 
 src/CMakeFiles/numsim.dir/output_writer/output_writer_text.cpp.i: cmake_force
@@ -215,7 +241,7 @@ src/CMakeFiles/numsim.dir/output_writer/output_writer_text.cpp.s: cmake_force
 
 src/CMakeFiles/numsim.dir/output_writer/output_writer.cpp.o: src/CMakeFiles/numsim.dir/flags.make
 src/CMakeFiles/numsim.dir/output_writer/output_writer.cpp.o: ../src/output_writer/output_writer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/CMakeFiles/numsim.dir/output_writer/output_writer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/CMakeFiles/numsim.dir/output_writer/output_writer.cpp.o"
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/numsim.dir/output_writer/output_writer.cpp.o -c /home/henrik/Dokumente/Num_Sim/NumSim/src/output_writer/output_writer.cpp
 
 src/CMakeFiles/numsim.dir/output_writer/output_writer.cpp.i: cmake_force
@@ -228,7 +254,7 @@ src/CMakeFiles/numsim.dir/output_writer/output_writer.cpp.s: cmake_force
 
 src/CMakeFiles/numsim.dir/Array2D.cpp.o: src/CMakeFiles/numsim.dir/flags.make
 src/CMakeFiles/numsim.dir/Array2D.cpp.o: ../src/Array2D.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/CMakeFiles/numsim.dir/Array2D.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object src/CMakeFiles/numsim.dir/Array2D.cpp.o"
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/numsim.dir/Array2D.cpp.o -c /home/henrik/Dokumente/Num_Sim/NumSim/src/Array2D.cpp
 
 src/CMakeFiles/numsim.dir/Array2D.cpp.i: cmake_force
@@ -241,7 +267,7 @@ src/CMakeFiles/numsim.dir/Array2D.cpp.s: cmake_force
 
 src/CMakeFiles/numsim.dir/FieldVariable.cpp.o: src/CMakeFiles/numsim.dir/flags.make
 src/CMakeFiles/numsim.dir/FieldVariable.cpp.o: ../src/FieldVariable.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/CMakeFiles/numsim.dir/FieldVariable.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object src/CMakeFiles/numsim.dir/FieldVariable.cpp.o"
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/numsim.dir/FieldVariable.cpp.o -c /home/henrik/Dokumente/Num_Sim/NumSim/src/FieldVariable.cpp
 
 src/CMakeFiles/numsim.dir/FieldVariable.cpp.i: cmake_force
@@ -263,6 +289,8 @@ numsim_OBJECTS = \
 "CMakeFiles/numsim.dir/CentralDifferences.cpp.o" \
 "CMakeFiles/numsim.dir/SOR.cpp.o" \
 "CMakeFiles/numsim.dir/GaussSeidel.cpp.o" \
+"CMakeFiles/numsim.dir/SORRedBlack.cpp.o" \
+"CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.o" \
 "CMakeFiles/numsim.dir/PressureSolver.cpp.o" \
 "CMakeFiles/numsim.dir/output_writer/output_writer_paraview.cpp.o" \
 "CMakeFiles/numsim.dir/output_writer/output_writer_text.cpp.o" \
@@ -282,6 +310,8 @@ src/numsim: src/CMakeFiles/numsim.dir/DonorCell.cpp.o
 src/numsim: src/CMakeFiles/numsim.dir/CentralDifferences.cpp.o
 src/numsim: src/CMakeFiles/numsim.dir/SOR.cpp.o
 src/numsim: src/CMakeFiles/numsim.dir/GaussSeidel.cpp.o
+src/numsim: src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o
+src/numsim: src/CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.o
 src/numsim: src/CMakeFiles/numsim.dir/PressureSolver.cpp.o
 src/numsim: src/CMakeFiles/numsim.dir/output_writer/output_writer_paraview.cpp.o
 src/numsim: src/CMakeFiles/numsim.dir/output_writer/output_writer_text.cpp.o
@@ -468,7 +498,7 @@ src/numsim: /usr/lib/x86_64-linux-gnu/libvtksys-7.1.so.7.1.1
 src/numsim: /usr/lib/x86_64-linux-gnu/libfreetype.so
 src/numsim: /usr/lib/x86_64-linux-gnu/libvtkCommonCore-7.1.so.7.1.1
 src/numsim: src/CMakeFiles/numsim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable numsim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/henrik/Dokumente/Num_Sim/NumSim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable numsim"
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/numsim.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

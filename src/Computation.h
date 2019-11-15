@@ -5,6 +5,8 @@
 #include "CentralDifferences.h"
 #include "SOR.h"
 #include "GaussSeidel.h"
+#include "SORRedBlack.h"
+#include "GaussSeidelRedBlack.h"
 #include "output_writer/output_writer_paraview.h"
 #include "output_writer/output_writer_text.h"
 #include "settings.h"

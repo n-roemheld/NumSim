@@ -21,8 +21,10 @@ src/CMakeFiles/numsim.dir/Computation.cpp.o
  /home/henrik/Dokumente/Num_Sim/NumSim/src/DonorCell.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/FieldVariable.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/GaussSeidel.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/GaussSeidelRedBlack.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/PressureSolver.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/SOR.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/SORRedBlack.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/StaggeredGrid.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/output_writer/output_writer_paraview.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/output_writer/output_writer_text.h
@@ -84,6 +86,14 @@ src/CMakeFiles/numsim.dir/GaussSeidel.cpp.o
  /home/henrik/Dokumente/Num_Sim/NumSim/src/GaussSeidel.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/PressureSolver.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/StaggeredGrid.h
+src/CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.o
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/Array2D.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/Discretization.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/FieldVariable.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/GaussSeidelRedBlack.cpp
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/GaussSeidelRedBlack.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/PressureSolver.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/StaggeredGrid.h
 src/CMakeFiles/numsim.dir/PressureSolver.cpp.o
  /home/henrik/Dokumente/Num_Sim/NumSim/src/Array2D.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/Discretization.h
@@ -99,6 +109,14 @@ src/CMakeFiles/numsim.dir/SOR.cpp.o
  /home/henrik/Dokumente/Num_Sim/NumSim/src/SOR.cpp
  /home/henrik/Dokumente/Num_Sim/NumSim/src/SOR.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/StaggeredGrid.h
+src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/Array2D.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/Discretization.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/FieldVariable.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/PressureSolver.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/SORRedBlack.cpp
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/SORRedBlack.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/StaggeredGrid.h
 src/CMakeFiles/numsim.dir/StaggeredGrid.cpp.o
  /home/henrik/Dokumente/Num_Sim/NumSim/src/Array2D.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/FieldVariable.h
@@ -113,8 +131,10 @@ src/CMakeFiles/numsim.dir/main.cpp.o
  /home/henrik/Dokumente/Num_Sim/NumSim/src/DonorCell.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/FieldVariable.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/GaussSeidel.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/GaussSeidelRedBlack.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/PressureSolver.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/SOR.h
+ /home/henrik/Dokumente/Num_Sim/NumSim/src/SORRedBlack.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/StaggeredGrid.h
  /home/henrik/Dokumente/Num_Sim/NumSim/src/main.cpp
  /home/henrik/Dokumente/Num_Sim/NumSim/src/output_writer/output_writer_paraview.h
