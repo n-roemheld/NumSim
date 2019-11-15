@@ -27,7 +27,7 @@ void Computation::initialize (int argc, char *argv[])
 	//select SOR or GaussSeidel
 	if (settings_.pressureSolver == "SOR")
 	{
-		pressureSolver_ = std::make_unique<SORRedBlack>(discretization_, settings_.epsilon,
+		pressureSolver_ = std::make_unique<SOR>(discretization_, settings_.epsilon,
 		 settings_.maximumNumberOfIterations, settings_.omega);
 	}
 	else
@@ -49,19 +49,15 @@ void Computation::runSimulation ()
 	{
 		applyBoundaryValues();
 
-		std::cout << "time" << time << std::endl;
+		// std::cout << "time" << time << std::endl;
 		// compute dt_ and time
 		computeTimeStepWidth();
 		if(time+dt_>settings_.endTime) dt_ = settings_.endTime - time;
 		time += dt_;
-		std::cout << "time_step" << dt_ << std::endl;
-
-		// outputWriterText_->writeFile(time);
-
+		//std::cout << "time_step" << dt_ << std::endl;
 
 		// compute f and g
 		computePreliminaryVelocities();
-
 		// outputWriterText_->writeFile(time);
 
 		//compute rhs
@@ -81,9 +77,6 @@ void Computation::computeTimeStepWidth ()
 {
 	double dx = meshWidth_[0];
 	double dy = meshWidth_[1];
-	// std::cout << "dx" << dx << std::endl;
-	// std::cout << "dy" << dy << std::endl;
-
 	double Re = settings_.re;
 	double u_max = 0;
 	double v_max = 0;
@@ -110,10 +103,6 @@ void Computation::computeTimeStepWidth ()
 	double lim = dx*dx*dy*dy/(dx*dx+dy*dy)*Re/2;
 	// check whether mesh dependent time step criterion is restricting
 	if (lim<max_dt) max_dt= lim;
-
-	// std::cout << "dx/u_max" << dx/u_max << std::endl;
-	// std::cout << "dy/v_max" << dy/v_max << std::endl;
-
 
 	// check whether velocity dependent time step criterions are restricting
 	if (u_max>0)
@@ -223,11 +212,13 @@ void Computation::computeRightHandSide ()
 			{
 				for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
 				{
-//					discretization_->rhs(i,j) = 1/dt*((discretization_->f(i+discretization_->uIBegin()-1,j)-discretization_->f(i+discretization_->uIBegin()-2,j))/meshWidth_[0]
-//												     +(discretization_->g(i,j+discretization_->vJBegin()-1)-discretization_->g(i,j+discretization_->vJBegin()-2))/meshWidth_[1]);
-					discretization_->rhs(i,j) = 1/dt*((discretization_->f(i+1,j)-discretization_->f(i,j))/meshWidth_[0]
-																	     +(discretization_->g(i,j+1)-discretization_->g(i,j))/meshWidth_[1]);
-									};
+					// old version
+					// discretization_->rhs(i,j) = 1/dt*((discretization_->f(i,j)-discretization_->f(i-1,j))/meshWidth_[0]
+					// 							     +(discretization_->g(i,j)-discretization_->g(i,j-1))/meshWidth_[1]);
+	  			 // new version
+					 discretization_->rhs(i,j) = 1/dt*((discretization_->f(i+1,j)-discretization_->f(i,j))/meshWidth_[0]
+					 												     +(discretization_->g(i,j+1)-discretization_->g(i,j))/meshWidth_[1]);
+
 				};
 			};
 };
@@ -247,14 +238,20 @@ void Computation::computeVelocities ()
 			{
 				for (int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
 				{
-					discretization_->u(i,j) = discretization_->f(i,j) - dt*discretization_->computeDpDx(i,j);
+					// old version
+					// discretization_->u(i,j) = discretization_->f(i,j) - dt*discretization_->computeDpDx(i,j);
+					// new version
+					discretization_->u(i,j) = discretization_->f(i,j) - dt*discretization_->computeDpDx(i-1,j);
 				};
 			};
 	for(int j = discretization_->vJBegin(); j < discretization_->vJEnd()-1; j++)
 			{
 				for (int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
 				{
-					discretization_->v(i,j) = discretization_->g(i,j) - dt*discretization_->computeDpDy(i,j);
+					// old version
+					// discretization_->v(i,j) = discretization_->g(i,j) - dt*discretization_->computeDpDy(i,j);
+					// new version
+					discretization_->v(i,j) = discretization_->g(i,j) - dt*discretization_->computeDpDy(i,j-1);
 				};
 			};
 };

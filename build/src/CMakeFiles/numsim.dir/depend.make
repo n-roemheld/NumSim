@@ -20,10 +20,8 @@ src/CMakeFiles/numsim.dir/Computation.cpp.o: ../src/Discretization.h
 src/CMakeFiles/numsim.dir/Computation.cpp.o: ../src/DonorCell.h
 src/CMakeFiles/numsim.dir/Computation.cpp.o: ../src/FieldVariable.h
 src/CMakeFiles/numsim.dir/Computation.cpp.o: ../src/GaussSeidel.h
-src/CMakeFiles/numsim.dir/Computation.cpp.o: ../src/GaussSeidelRedBlack.h
 src/CMakeFiles/numsim.dir/Computation.cpp.o: ../src/PressureSolver.h
 src/CMakeFiles/numsim.dir/Computation.cpp.o: ../src/SOR.h
-src/CMakeFiles/numsim.dir/Computation.cpp.o: ../src/SORRedBlack.h
 src/CMakeFiles/numsim.dir/Computation.cpp.o: ../src/StaggeredGrid.h
 src/CMakeFiles/numsim.dir/Computation.cpp.o: ../src/output_writer/output_writer_paraview.h
 src/CMakeFiles/numsim.dir/Computation.cpp.o: ../src/output_writer/output_writer_text.h
@@ -101,14 +99,6 @@ src/CMakeFiles/numsim.dir/SOR.cpp.o: ../src/SOR.cpp
 src/CMakeFiles/numsim.dir/SOR.cpp.o: ../src/SOR.h
 src/CMakeFiles/numsim.dir/SOR.cpp.o: ../src/StaggeredGrid.h
 
-src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o: ../src/Array2D.h
-src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o: ../src/Discretization.h
-src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o: ../src/FieldVariable.h
-src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o: ../src/PressureSolver.h
-src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o: ../src/SORRedBlack.cpp
-src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o: ../src/SORRedBlack.h
-src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o: ../src/StaggeredGrid.h
-
 src/CMakeFiles/numsim.dir/StaggeredGrid.cpp.o: ../src/Array2D.h
 src/CMakeFiles/numsim.dir/StaggeredGrid.cpp.o: ../src/FieldVariable.h
 src/CMakeFiles/numsim.dir/StaggeredGrid.cpp.o: ../src/StaggeredGrid.cpp
@@ -122,10 +112,8 @@ src/CMakeFiles/numsim.dir/main.cpp.o: ../src/Discretization.h
 src/CMakeFiles/numsim.dir/main.cpp.o: ../src/DonorCell.h
 src/CMakeFiles/numsim.dir/main.cpp.o: ../src/FieldVariable.h
 src/CMakeFiles/numsim.dir/main.cpp.o: ../src/GaussSeidel.h
-src/CMakeFiles/numsim.dir/main.cpp.o: ../src/GaussSeidelRedBlack.h
 src/CMakeFiles/numsim.dir/main.cpp.o: ../src/PressureSolver.h
 src/CMakeFiles/numsim.dir/main.cpp.o: ../src/SOR.h
-src/CMakeFiles/numsim.dir/main.cpp.o: ../src/SORRedBlack.h
 src/CMakeFiles/numsim.dir/main.cpp.o: ../src/StaggeredGrid.h
 src/CMakeFiles/numsim.dir/main.cpp.o: ../src/main.cpp
 src/CMakeFiles/numsim.dir/main.cpp.o: ../src/output_writer/output_writer_paraview.h

@@ -414,33 +414,6 @@ SOR.cpp.s:
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/SOR.cpp.s
 .PHONY : SOR.cpp.s
 
-SORRedBlack.o: SORRedBlack.cpp.o
-
-.PHONY : SORRedBlack.o
-
-# target to build an object file
-SORRedBlack.cpp.o:
-	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/SORRedBlack.cpp.o
-.PHONY : SORRedBlack.cpp.o
-
-SORRedBlack.i: SORRedBlack.cpp.i
-
-.PHONY : SORRedBlack.i
-
-# target to preprocess a source file
-SORRedBlack.cpp.i:
-	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/SORRedBlack.cpp.i
-.PHONY : SORRedBlack.cpp.i
-
-SORRedBlack.s: SORRedBlack.cpp.s
-
-.PHONY : SORRedBlack.s
-
-# target to generate assembly for a file
-SORRedBlack.cpp.s:
-	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/SORRedBlack.cpp.s
-.PHONY : SORRedBlack.cpp.s
-
 StaggeredGrid.o: StaggeredGrid.cpp.o
 
 .PHONY : StaggeredGrid.o
@@ -643,9 +616,6 @@ help:
 	@echo "... SOR.o"
 	@echo "... SOR.i"
 	@echo "... SOR.s"
-	@echo "... SORRedBlack.o"
-	@echo "... SORRedBlack.i"
-	@echo "... SORRedBlack.s"
 	@echo "... StaggeredGrid.o"
 	@echo "... StaggeredGrid.i"
 	@echo "... StaggeredGrid.s"
