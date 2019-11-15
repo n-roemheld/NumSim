@@ -158,6 +158,11 @@ int StaggeredGrid::pJEnd() const
     partitioning_ = new Partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells);
   };
 
+  const Partitioning& partitioning()
+  {
+	  return partitioning_;
+  };
+
 // old non parallel version !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // #include "StaggeredGrid.h"
 //

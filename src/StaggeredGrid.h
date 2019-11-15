@@ -68,6 +68,8 @@ public:
   
   void set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells);
 
+  const Partitioning& partitioning();
+
 protected:
 	const std::array< int, 2 > nCells_;
 	const std::array< double, 2 > meshWidth_;
