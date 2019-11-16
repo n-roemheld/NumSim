@@ -11,10 +11,12 @@ class Partitioning
   std::array<int,4> ranks_neighbors(); // lower, right, upper, left
   // std::array<bool,4> is_boundary(); // lower, right, upper, left
   std::array<int,2> nCells();
+  const std::array<int,2> nCellsGlobal();
 
   protected:
   const int MPI_rank_;
   const std::array<int,4> ranks_neighbors_; // lower, right, upper, left
   const std::array<bool,4> is_boundary_; // lower, right, upper, left
   const std::array<int,2> nCells_;
+  const std::array<int,2> nCellsGlobal_;
 };

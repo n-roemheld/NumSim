@@ -95,7 +95,10 @@ double StaggeredGrid::dy() const
 
 int StaggeredGrid::uIBegin() const
 {
-	return 2;
+    if (is_boundary(3)) {
+        return 2; 
+    }
+	return 1; // one additional column to the left for inner boundaries
 };
 
 int StaggeredGrid::uIEnd() const
@@ -125,7 +128,10 @@ int StaggeredGrid::vIEnd() const
 
 int StaggeredGrid::vJBegin() const
 {
-	return 2;
+    if (is_boundary(0)) {
+        return 2;
+    }
+	return 1;
 };
 
 int StaggeredGrid::vJEnd() const
@@ -153,9 +159,9 @@ int StaggeredGrid::pJEnd() const
 	return nCells_[1] + 1;
 };
 
-void StaggeredGrid::set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells)
+void StaggeredGrid::set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells, nCellsGlobal)
   {
-    partitioning_ = new Partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells);
+    partitioning_ = new Partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells, nCellsGlobal);
   };
 
 int StaggeredGrid::ownRankNo()
@@ -172,10 +178,87 @@ bool StaggeredGrid::is_boundary(int direction)
 {
     return partitioning_.is_boundary(direction);
 };
+
 std::array<int,2> StaggeredGrid::nCells()
 {
     return partitioning_.nCells();
 };
+
+std::array<int,2> StaggeredGrid::nCellsGlobal()
+{
+    return partitioning_.nCellsglobal();
+};
+
+const Partitioning& partitioning()
+  {
+	return partitioning_;
+  };
+
+void StaggeredGrid::send_boundary_vertical(int tag, int j_fixed, int i_begin, int i_end, int target_rank, double (*fVar)(int, int), bool do_nothing)
+{
+    if (!do_nothing)
+    {
+        std::vector<double> send_buffer(i_end - i_begin);
+        int bi = 0;
+        for(int i = i_begin, i < i_end, i++)
+        {
+            send_buffer[bi] = fVar(i,j);
+            bi++;
+        }
+        MPI_Isend(&send_buffer, i_end-i_begin, MPI_DOUBLE, target_rank, direction, MPI_COMM_WORLD);
+
+    }
+};
+
+void StaggeredGrid::send_boundary_horizontal(int tag, int i_fixed, int j_begin, int j_end, int target_rank, double (*fVar)(int, int), bool do_nothing)
+{
+    if (!do_nothing)
+    {
+        std::vector<double> send_buffer(j_end - j_begin);
+        int bj = 0;
+        for(int j = j_begin, j < j_end, j++)
+        {
+            send_buffer[bj] = fVar(i,j);
+            bj++;
+        }
+        MPI_Isend(&send_buffer, j_end-j_begin, MPI_DOUBLE, target_rank, direction, MPI_COMM_WORLD);
+
+    }
+};
+
+MPI_Request StaggeredGrid::receive_boundary_vertical(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, double (*fVar)(int, int), bool do_nothing)
+{
+    if (!do_nothing)
+    {
+        MPI_Request current_request;
+        std::vector<double> rcv_buffer;
+        MPI_Irecv(&rcv_buffer, i_end - i_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
+        int j = j_fixed;
+        int bi = 0;
+        for (int i = i_begin; i < i_end; i++)
+        {
+            fVar(i,j) = rcv_buffer(bi);
+            bi++;
+        }
+    }
+}
+
+MPI_Request StaggeredGrid::receive_boundary_horizontal(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, double (*fVar)(int, int), bool do_nothing)
+{
+    if (!do_nothing)
+    {
+        MPI_Request current_request;
+        std::vector<double> rcv_buffer;
+        MPI_Irecv(&rcv_buffer, j_end - j_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
+        int i = i_fixed;
+        int bj = 0;
+        for (int j = j_begin; j < j_end; j++)
+        {
+            fVar(i,j) = rcv_buffer(bj);
+            bj++;
+        }
+    }
+}
 
 // old non parallel version !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // #include "StaggeredGrid.h"

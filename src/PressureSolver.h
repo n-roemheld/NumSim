@@ -14,10 +14,13 @@ public:
 protected:
 	//!	set the boundary values to account for homogenous Neumann boundary conditions, this has to be called after every iteration
 	void setBoundaryValues ();
+    void pressure_communication();
 
 	std::shared_ptr< Discretization > discretization_;
 	double 	epsilon_;
 	int 	maximumNumberOfIterations_;
 
 	double compute_res();
+    
+    
 };

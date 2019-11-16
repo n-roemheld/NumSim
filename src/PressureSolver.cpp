@@ -39,6 +39,102 @@ void PressureSolver::setBoundaryValues ()
 		}
 };
 
+void PressureSolver::setBoundaryValuesParallel()
+{    
+    // neigbor indices
+    int below = 0;
+    int above = 2;
+    int right = 1;
+    int left = 3;
+    
+    
+    for(int s = 0; s < 4; s++)
+    {
+        // lower p ghost layer
+        if (discretization_->is_boundary(below)) 
+        {
+            int j = discretization_->pJBegin()-1;
+            for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+            {
+                discretization_->p(i,j) = discretization_->p(i,j+1);
+            };
+        }
+        
+		// upper p ghost layer
+        if (discretization_->is_boundary(above)) 
+        {        
+            int j = discretization_->pJEnd();
+            for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+            {
+                discretization_->p(i,j) = discretization_->p(i,j-1);
+            };
+        }
+        
+		// left p ghost layer
+        if (discretization_->is_boundary(left))
+        {
+            int i = discretization_->pIBegin()-1;
+            for(int j = discretization_->pJBegin()-1; j < discretization_->pJEnd()+1; j++)
+            {
+                discretization_->p(i,j) = discretization_->p(i+1,j);
+            }
+        }
+        
+		// right p ghost layer
+        if (discretization_->is_boundary(right))
+        {
+            int i = discretization_->pIEnd();
+            for(int j = discretization_->pJBegin()-1; j < discretization_->pJEnd()+1; j++)
+            {
+                discretization_->p(i,j) = discretization_->p(i-1,j);
+            }
+        }
+    }
+};
+
+void pressure_communication()
+{
+    // neigbor indices
+    int below = 0;
+    int above = 2;
+    int right = 1;
+    int left = 3;
+    
+    // MPI tags of information sent (communication directions)
+    int down = 0;
+    int to_right = 1;
+    int up = 2;
+    int to_left = 3;
+    
+    // Sending Pressures
+    // send to right
+    discretization_->send_boundary_horizontal(to_right, discretization_->pIEnd()-1, discretization_->pJBegin(), discretization_->pJEnd(), discretization_->rank_neighbor(right), discretization_->p, discretization_->is_boundary(right));
+    // send to left
+    discretization_->send_boundary_horizontal(to_left, discretization_->pIBegin(), discretization_->pJBegin(), discretization_->pJEnd(), discretization_->rank_neighbor(left), discretization_->p, discretization_->is_boundary(left));
+    // send to above
+    discretization_->send_boundary_vertical(up, discretization_->pJEnd()-1, discretization_->pIBegin(), discretization_->pIEnd(), discretization_->rank_neighbor(above), discretization_->p, discretization_->is_boundary(above));
+    // send to below
+    discretization_->send_boundary_vertical(down, discretization_->pJBegin(), discretization_->pIBegin(), discretization_->pIEnd(), discretization_->rank_neighbor(below), discretization_->p, discretization_->is_boundary(below));
+    
+    // Receiving Pressures
+    std::vector<MPI_Request> requests;
+    // receive from right
+    current_request = discretization_->receive_boundary_horizontal(to_left, discretization_->pIEnd(), discretization_->pJBegin(), discretization_->pJEnd(), discretization_->rank_neighbor(right), discretization_->p, discretization_->is_boundary(right));
+    requests.push_back(current_request);
+    // receive from left
+    current_request = discretization_->receive_boundary_horizontal(to_right, discretization_->pIBegin()-1, discretization_->pJBegin(), discretization_->pJEnd(), discretization_->rank_neighbor(left), discretization_->p, discretization_->is_boundary(left));
+    requests.push_back(current_request);
+    // receive from above
+    current_request = discretization_->receive_boundary_vertical(down, discretization_->pJEnd(), discretization_->pIBegin(), discretization_->pIEnd(), discretization_->rank_neighbor(above), discretization_->p, discretization_->is_boundary(above));
+    requests.push_back(current_request);
+    // receive from below
+    current_request = discretization_->receive_boundary_vertical(up, discretization_->pJBegin()-1, discretization_->pIBegin(), discretization_->pIEnd(), discretization_->rank_neighbor(below), discretization_->p, discretization_->is_boundary(below));
+    requests.push_back(current_request);
+    
+    MPI_Wait(&requests, MPI_STATUS_IGNORE);
+    
+};
+
 double PressureSolver::compute_res()
 {
 	//Array2D res_vec = Array2D(discretization_->nCells());
@@ -59,3 +155,14 @@ double PressureSolver::compute_res()
 	res /= (discretization_->nCells()[0]*discretization_->nCells()[1]);
 	return res;
 };
+
+double PressureSolver::compute_res_parallel()
+{
+    double res_local = compute_res()*(discretization_->nCells()[0]*discretization_->nCells()[1]);
+    double res_global;
+    
+    MPI_Allreduce(&res_local, &res_global, 1, MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+    
+    res_global /= discretization_->nCellsGlobal();
+    return res_global;
+}

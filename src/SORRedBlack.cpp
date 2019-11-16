@@ -21,7 +21,7 @@ void SORRedBlack::solve()
 		while (it <= maximumNumberOfIterations_ && res_squared > epsilon_*epsilon_)
 		{
 			// set boundary values for p to achieve 0-Neumann conditions
-			setBoundaryValues();
+			setBoundaryValuesParallel();
 			// perform one itertaion step for RED with (0,0) RED
 			for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 			{
@@ -33,6 +33,7 @@ void SORRedBlack::solve()
 					   - discretization_->rhs(i,j) );
 				};
 			};
+            pressure_communication();
 
 			// perform one itertaion step for BLACK with (0,0) RED
 			for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
@@ -45,6 +46,7 @@ void SORRedBlack::solve()
 						 - discretization_->rhs(i,j) );
 				};
 			};
+            pressure_communication();
 
 			// compute and update residuum
 			// wrong sign ????
@@ -52,6 +54,6 @@ void SORRedBlack::solve()
 			it++;
 		}
 		if(it > maximumNumberOfIterations_) std::cout << it << std::endl;
-		setBoundaryValues();
+		setBoundaryValuesParallel();
 
 };
