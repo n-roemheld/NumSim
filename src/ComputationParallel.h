@@ -7,7 +7,11 @@ class ComputationParallel : public Computation
   
   private:
 	void computeTimeStepWidth ();
-  
+    
+	void computePreliminaryVelocities ();
+    
+    void velocity_communication(double (*u_or_f)(int, int), double (*v_or_g)(int, int));
+
   
   
 }

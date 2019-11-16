@@ -67,6 +67,18 @@ public:
   int 	pJEnd() const;
   
   void set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells);
+  
+  int ownRankNo();
+  
+  bool is_boundary(int direction)// 0 = lower, 1 = right, 2 = upper, 3 = left
+  
+  int rank_neighbor(int direction);
+  
+  std::array<int,2> nCells();
+  
+  std::array<int,2> nCellsGlobal();
+
+  const Partitioning& partitioning();
 
 protected:
 	const std::array< int, 2 > nCells_;
@@ -78,5 +90,10 @@ protected:
 	FieldVariable 	f_;
 	FieldVariable 	g_;
   
-  Partitioning partitioning_;
+    Partitioning partitioning_;
+    
+    void send_boundary_vertical(int direction, int j_fixed, int i_begin, int i_end, int target_rank, double (*fVar)(int, int), bool do_nothing);
+    void send_boundary_horizontal(int direction, int i_fixed, int j_begin, int j_end, int target_rank, double (*fVar)(int, int), bool do_nothing);
+    MPI_Request receive_boundary_vertical(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, double (*fVar)(int, int), bool do_nothing);
+    MPI_Request receive_boundary_horizontal(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, double (*fVar)(int, int), bool do_nothing);
 };
