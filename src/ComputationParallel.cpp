@@ -16,7 +16,7 @@ void ComputationParallel::initialize (int argc, char *argv[])
 	double dy = settings_.physicalSize[1]/settings_.nCells[1];
 	meshWidth_ = {dx, dy};
 
-    
+
     MPI_Init(Null,Null); // Number of processes determined by command line
     // Get the number of processes
     int MPI_n_processes;
@@ -24,7 +24,7 @@ void ComputationParallel::initialize (int argc, char *argv[])
     // Get the rank of the process
     int MPI_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
-    
+
     // compute nCells and assign physical relationships
     if(MPI_rank == 0)
     {
@@ -36,10 +36,10 @@ void ComputationParallel::initialize (int argc, char *argv[])
         // Number of cells in each partiotion except the last one
         int n_Cells_sub_x = int (settings_->nCells[0]) / n_pars_x);
         int n_Cells_sub_y = int (settings_->nCells[1]) / n_pars_y);
-        // Number of cells in the last partitions in each dimension 
+        // Number of cells in the last partitions in each dimension
         int n_Cells_sub_x_last = settings_->nCells[0] - n_pars_x*n_Cells_sub_x;
         int n_Cells_sub_y_last = settings_->nCells[1] - n_pars_y*n_Cells_sub_y;
-        
+
         // Defining ranks for all partitions
         Array2D ranks_domain({n_pars_x,n_pars_y});
         int rank_counter = 0;
@@ -51,7 +51,7 @@ void ComputationParallel::initialize (int argc, char *argv[])
                 rank_counter++;
             }
         }
-        
+
         // Setting neighbor and boundary properties for all partitions
         for(int j = 0; j < n_pars_y; j++)
         {
@@ -81,7 +81,7 @@ void ComputationParallel::initialize (int argc, char *argv[])
                     } else {
                         nCells_sub[0] = n_Cells_sub_x;
                     }
-                    
+
                     // send part to partition ranks_domain(i,j) or store in arrays and broadcast
                     MPI_Isend(&ranks_neighbors, 10, MPI_INT, ranks_domain(i,j),0,MPI_COMM_WORLD);
                     MPI_Isend(&is_boundary, 10, MPI_INT, ranks_domain(i,j),1,MPI_COMM_WORLD);
@@ -89,7 +89,7 @@ void ComputationParallel::initialize (int argc, char *argv[])
                 }
             }
         }
-    
+
     }
     else
     {
@@ -109,13 +109,13 @@ void ComputationParallel::initialize (int argc, char *argv[])
         // Not changing physicalSize because it's not used. Caution: Inconsistent to nCells
         settings_.nCells = nCells_sub;
     }
-    
+
 };
 
 void ComputationParallel::computeTimeStepWidth ()
 {
     Computation::computeTimeStepWidth ();
-    
+
     double dtAll;
     MPI_Allreduce(&dt_, &dtAll, 1, MPI_DOUBLE, MPI_MIN, MPI_COMM_WORLD);
     dt_ = dtAll;
@@ -140,24 +140,24 @@ void ComputationParallel::velocity_communication(double (*u_or_f)(int, int), dou
     int above = 2;
     int right = 1;
     int left = 3;
-    
+
     // MPI tags of information sent (communication directions)
     int down = 0;
     int to_right = 1;
     int up = 2;
     int to_left = 3;
-    
+
     // Communication horizontal first, then vertical!!
-    
+
     // HORIZONTAL COMMUNICATION
     std::vector<MPI_Request> requests_horizontal;
-    
+
     // F Communication (Send)
     // communicate to right
     discretization_->send_boundary_horizontal(to_right, discretization_->uIEnd()-2, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(right), u_or_f, discretization_->is_boundary(right));
     // communicate to left
     discretization_->send_boundary_horizontal(to_left, discretization_->uIBegin(), discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(left), u_or_f, discretization_->is_boundary(left));
-    
+
     // G Communication (Send)
     // communicate to right
     discretization_->send_boundary_horizontal(to_right + 4, discretization_->vIEnd()-1, discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(right), v_or_g, discretization_->is_boundary(right));
@@ -172,7 +172,7 @@ void ComputationParallel::velocity_communication(double (*u_or_f)(int, int), dou
     // from left
     current_request = discretization_->send_boundary_horizontal(to_right, discretization_->uIBegin()-1, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(left), u_or_f, discretization_->is_boundary(left)););
     requests_horizontal.push_back(current_request);
-    
+
     // Receiving G
     MPI_Request current_request;
     // from right
@@ -181,19 +181,19 @@ void ComputationParallel::velocity_communication(double (*u_or_f)(int, int), dou
     // from left
     current_request = discretization_->send_boundary_horizontal(to_right, discretization_->vIBegin()-1, discretization_->vJBegin(), discretization_->vJEnd(), discretization_->rank_neighbor(left), v_or_g, discretization_->is_boundary(left)););
     requests_horizontal.push_back(current_request);
-    
+
     MPI_Wait(&requests_horizontal,MPI_STATUS_IGNORE)
-    
-    
+
+
     // VERTICAL COMMUNICATION
     std::vector<MPI_Request> requests_vertical;
-    
+
     // F Communication (Send)
     // communicate to below
     discretization_->send_boundary_vertical(down, discretization_->uJBegin(), discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(below), u_or_f, discretization_->is_boundary(below));
     // communicate to above
     discretization_->send_boundary_vertical(up, discretization_->uJEnd()-1, discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(above), u_or_f, discretization_->is_boundary(above));
-    
+
     // G Communication (send)
     // communicate to below
     discretization_->send_boundary_vertical(down + 4, discretization_->vJBegin(), discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(below), v_or_g, discretization_->is_boundary(below));
@@ -207,7 +207,7 @@ void ComputationParallel::velocity_communication(double (*u_or_f)(int, int), dou
     // from above
     current_request = discretization_->receive_boundary_vertical(down, discretization_->uJEnd(), discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(above), u_or_f, discretization_->is_boundary(above));
     requests_vertical.push_back(current_request);
-    
+
     // G Communication (receive)
     // from below
     current_request = discretization_->receive_boundary_vertical(up, discretization_->vJBegin()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(below), v_or_g, discretization_->is_boundary(below));
@@ -216,7 +216,99 @@ void ComputationParallel::velocity_communication(double (*u_or_f)(int, int), dou
     current_request = discretization_->receive_boundary_vertical(down, discretization_->vJEnd()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(above), v_or_g, discretization_->is_boundary(above));
     requests_vertical.push_back(current_request);
 
-    
-    MPI_Wait(&requests_vertical,MPI_STATUS_IGNORE)
-};    
 
+    MPI_Wait(&requests_vertical,MPI_STATUS_IGNORE)
+};
+
+void ComputationParallel::applyBoundaryValues ()
+{
+  // neigbor indices
+  int below = 0;
+  int above = 2;
+  int right = 1;
+  int left = 3;
+
+	// u,f setting
+	// lower u ghost layer without corners
+  if (discretization_->is_boundary(below))
+  {
+  	int j = discretization_->uJBegin()-1;
+  	for(int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
+  	{
+  		discretization_->u(i,j) = 2*settings_.dirichletBcBottom[0]-discretization_->u(i,j+1);
+  		discretization_->f(i,j) = discretization_->u(i,j);
+  	};
+  }
+	// upper u ghost layer without corners
+  if (discretization_->is_boundary(above))
+  {
+  	int j = discretization_->uJEnd();
+  	for(int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
+  	{
+  		discretization_->u(i,j) = 2*settings_.dirichletBcTop[0]-discretization_->u(i,j-1);
+  		discretization_->f(i,j) = discretization_->u(i,j);
+  	};
+  }
+	// left u ghost layer with corners
+  if (discretization_->is_boundary(left))
+  {
+  	int i = discretization_->uIBegin()-1;
+  	for(int j = discretization_->uJBegin()-1; j < discretization_->uJEnd()+1; j++)
+  	{
+  		discretization_->u(i,j) = settings_.dirichletBcLeft[0];
+  		discretization_->f(i,j) = discretization_->u(i,j);
+  	}
+  }
+	// right u Nathi-not ghost layer with corners
+  if (discretization_->is_boundary(right))
+  {
+  	int i = discretization_->uIEnd()-1;
+  	for(int j = discretization_->uJBegin()-1; j < discretization_->uJEnd()+1; j++)
+  	{
+  		discretization_->u(i,j) = settings_.dirichletBcRight[0];
+  		discretization_->f(i,j) = discretization_->u(i,j);
+  	}
+  }
+
+	// v,g setting
+	// lower v ghost layer without corners
+  if (discretization_->is_boundary(below))
+  {
+  	int j = discretization_->vJBegin()-1;
+  	for(int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
+  	{
+  		discretization_->v(i,j) = settings_.dirichletBcBottom[1];
+  		discretization_->g(i,j) = discretization_->v(i,j);
+  	};
+  }
+	// upper v  Nathi-not ghost layer without corners
+  if (discretization_->is_boundary(above))
+  {
+  	int j = discretization_->vJEnd()-1;
+  	for(int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
+  	{
+  		discretization_->v(i,j) = settings_.dirichletBcTop[1];
+  		discretization_->g(i,j) = discretization_->v(i,j);
+  	};
+  }
+	// left v ghost layer with corners
+  if (discretization_->is_boundary(left))
+  {
+  	i = discretization_->vIBegin()-1;
+  	for(int j = discretization_->vJBegin()-1; j < discretization_->vJEnd(); j++)
+  	{
+  		discretization_->v(i,j) = 2*settings_.dirichletBcLeft[1]-discretization_->v(i+1,j);
+  		discretization_->g(i,j) = discretization_->v(i,j);
+  	}
+  }
+	// right v ghost layer with corners
+  if (discretization_->is_boundary(right))
+  {
+  	i = discretization_->vIEnd();
+  	for(int j = discretization_->vJBegin()-1; j < discretization_->vJEnd(); j++)
+  	{
+  		discretization_->v(i,j) = 2*settings_.dirichletBcRight[1]-discretization_->v(i-1,j);
+  		discretization_->g(i,j) = discretization_->v(i,j);
+  	}
+  }
+};

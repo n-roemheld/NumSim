@@ -1,7 +1,7 @@
 todo:
 
-parallel initialize (nCells, physicalSize, no of partitions)
 
-uIBegin etc. für Randdomains modifizieren
+evtl inner communication nochmal ändern für ungenutzte Ecken, die aber bei viszualisierung wichtig werden
 
-Randwerte für u v f g setzen
+
+uIBegin etc. in computations überprüfen
