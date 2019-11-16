@@ -8,17 +8,19 @@
 #include <vtkPointData.h>
 #include <mpi.h>
 
-OutputWriterParaviewParallel::OutputWriterParaviewParallel(std::shared_ptr<Discretization> discretization, const Partitioning &partitioning) :
+// OutputWriterParaviewParallel::OutputWriterParaviewParallel(std::shared_ptr<Discretization> discretization, const Partitioning &partitioning) :
+OutputWriterParaviewParallel::OutputWriterParaviewParallel(std::shared_ptr<Discretization> discretization, Partitioning &partitioning) :
+
    OutputWriter(discretization, partitioning),
 
   nCellsGlobal_(partitioning_.nCellsGlobal()),
   nPointsGlobal_ {nCellsGlobal_[0]+1, nCellsGlobal_[1]+1},    // we have one point more than cells in every coordinate direction
-  
+
   // create field variables for resulting values, only for local data as send buffer
   u_(nPointsGlobal_, std::array<double,2>{0.,0.}, discretization_->meshWidth()),
   v_(nPointsGlobal_, std::array<double,2>{0.,0.}, discretization_->meshWidth()),
   p_(nPointsGlobal_, std::array<double,2>{0.,0.}, discretization_->meshWidth()),
-  
+
   // create field variables for resulting values, after MPI communication
   uGlobal_(nPointsGlobal_, std::array<double,2>{0.,0.}, discretization_->meshWidth()),
   vGlobal_(nPointsGlobal_, std::array<double,2>{0.,0.}, discretization_->meshWidth()),
@@ -95,13 +97,13 @@ void OutputWriterParaviewParallel::writeFile(double currentTime)
   // Assemble the filename
   std::stringstream fileName;
   fileName << "out/output_" << std::setw(4) << setfill('0') << fileNo_ << "." << vtkWriter_->GetDefaultFileExtension();
-  
+
   // increment file no.
   fileNo_++;
 
   // assign the new file name to the output vtkWriter_
   vtkWriter_->SetFileName(fileName.str().c_str());
-  
+
   // initialize data set that will be output to the file
   vtkSmartPointer<vtkImageData> dataSet = vtkSmartPointer<vtkImageData>::New();
   dataSet->SetOrigin(0, 0, 0);
@@ -114,7 +116,7 @@ void OutputWriterParaviewParallel::writeFile(double currentTime)
 
   // set number of points in each dimension, 1 cell in z direction
   dataSet->SetDimensions(nCellsGlobal_[0]+1, nCellsGlobal_[1]+1, 1);  // we want to have points at each corner of each cell
-  
+
 
   // add pressure field variable
   // ---------------------------
@@ -125,7 +127,7 @@ void OutputWriterParaviewParallel::writeFile(double currentTime)
 
   // Set the number of pressure values and allocate memory for it. We already know the number, it has to be the same as there are nodes in the mesh.
   arrayPressure->SetNumberOfTuples(dataSet->GetNumberOfPoints());
-  
+
   arrayPressure->SetName("pressure");
 
   // loop over the nodes of the mesh and assign the interpolated p values in the vtk data structure
@@ -145,18 +147,18 @@ void OutputWriterParaviewParallel::writeFile(double currentTime)
 
   // add the field variable to the data set
   dataSet->GetPointData()->AddArray(arrayPressure);
-  
+
   // add velocity field variable
   // ---------------------------
   vtkSmartPointer<vtkDoubleArray> arrayVelocity = vtkDoubleArray::New();
 
-  // here we have two components (u,v), but ParaView will only allow vector glyphs if we have an ℝ^3 vector, 
+  // here we have two components (u,v), but ParaView will only allow vector glyphs if we have an ℝ^3 vector,
   // therefore we use a 3-dimensional vector and set the 3rd component to zero
   arrayVelocity->SetNumberOfComponents(3);
 
   // set the number of values
   arrayVelocity->SetNumberOfTuples(dataSet->GetNumberOfPoints());
-  
+
   arrayVelocity->SetName("velocity");
 
   // loop over the mesh where p is defined and assign the values in the vtk data structure
@@ -182,8 +184,8 @@ void OutputWriterParaviewParallel::writeFile(double currentTime)
 
   // add the field variable to the data set
   dataSet->GetPointData()->AddArray(arrayVelocity);
-  
-  // add current time 
+
+  // add current time
   vtkSmartPointer<vtkDoubleArray> arrayTime = vtkDoubleArray::New();
   arrayTime->SetName("TIME");
   arrayTime->SetNumberOfTuples(1);
@@ -192,10 +194,10 @@ void OutputWriterParaviewParallel::writeFile(double currentTime)
 
   // Remove unused memory
   dataSet->Squeeze();
-  
+
   // Write the data
   vtkWriter_->SetInputData(dataSet);
-  
+
   //vtkWriter_->SetDataModeToAscii();     // comment this in to get ascii text files: those can be checked in an editor
   vtkWriter_->SetDataModeToBinary();      // set file mode to binary files: smaller file sizes
 

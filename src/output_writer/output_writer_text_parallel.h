@@ -1,13 +1,13 @@
 #pragma once
 
 #include "output_writer/output_writer_text.h"
-#include "partitioning/partitioning.h"
+#include "Partitioning.h"
 
 /** Write *.txt files that are useful for debugging.
  *  All values are written to the file as they are stored in the field variables,
  *  no interpolation takes place.
  */
-class OutputWriterTextParallel : 
+class OutputWriterTextParallel :
   public OutputWriterText
 {
 public:

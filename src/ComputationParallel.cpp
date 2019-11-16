@@ -7,6 +7,8 @@
 #include <assert.h>
 #include <vector>
 
+#include <iostream>
+
 void ComputationParallel::initialize (int argc, char *argv[])
 {
   //Computation::initialize (int argc, char *argv[]);
@@ -30,6 +32,7 @@ void ComputationParallel::initialize (int argc, char *argv[])
     // compute nCells and assign physical relationships
     if(MPI_rank == 0)
     {
+        std::cout << "rank" << MPI_rank << std::endl;
         settings_.printSettings();
 
         // Computing numer of partitions in each direction
@@ -167,6 +170,9 @@ void ComputationParallel::initialize (int argc, char *argv[])
   	//initialize outputWriters
    	outputWriterParaview_ = std::make_unique<OutputWriterParaviewParallel>(discretization_, parti);
   	outputWriterText_ = std::make_unique<OutputWriterTextParallel>(discretization_, parti);
+
+    std::cout << "rank" << MPI_rank << std::endl;
+    settings_.printSettings();
 
 
 };

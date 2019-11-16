@@ -3,5 +3,6 @@ todo:
 
 evtl inner communication nochmal ändern für ungenutzte Ecken, die aber bei viszualisierung wichtig werden
 
+outputwriter anpassen
 
 uIBegin etc. in computations überprüfen

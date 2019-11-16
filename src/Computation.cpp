@@ -37,8 +37,8 @@ void Computation::initialize (int argc, char *argv[])
 	}
 
 	//initialize outputWriters
- 	outputWriterParaview_ = std::make_unique<OutputWriterParaview>(discretization_);
-	outputWriterText_ = std::make_unique<OutputWriterText>(discretization_);
+ 	// outputWriterParaview_ = std::make_unique<OutputWriterParaview>(discretization_);
+	// outputWriterText_ = std::make_unique<OutputWriterText>(discretization_);
 
 };
 
