@@ -6,6 +6,8 @@ class DonorCell : public Discretization
 {
 public:
 	DonorCell (std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, double alpha);
+	DonorCell (std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, double alpha, Partitioning parti);
+
 
 	virtual double computeDu2Dx (int i, int j) const;
 

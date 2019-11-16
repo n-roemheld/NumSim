@@ -1,8 +1,11 @@
 #include "settings.h"
-#include "Computation.h"
+#include "ComputationParallel.h"
 
 #include <iostream>
 #include <cstdlib>
+
+#include <mpi.h>
+#include "Partitioning.h"
 
 
 int main(int argc, char *argv[])
@@ -15,7 +18,9 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
-  Computation comp;
+
+
+  ComputationParallel comp;
   comp.initialize(argc, argv);
   time_t startTime;
   time_t endTime;
@@ -26,6 +31,6 @@ int main(int argc, char *argv[])
 
 
 
-
+  MPI_Finalize();
   return EXIT_SUCCESS;
 }

@@ -16,7 +16,12 @@ class Computation
 public:
 	void initialize (int argc, char *argv[]);
 	void runSimulation ();
-private:
+
+protected:
+	Settings settings_;
+	std::array< double, 2 > meshWidth_;
+	double dt_;
+
 	void computeTimeStepWidth ();
 	void applyBoundaryValues ();
 	void computePreliminaryVelocities ();
@@ -24,12 +29,10 @@ private:
 	void computePressure ();
 	void computeVelocities ();
 
-	Settings settings_;
 	std::shared_ptr< Discretization > discretization_;
 	std::unique_ptr< PressureSolver > pressureSolver_;
 	std::unique_ptr< OutputWriterParaview > outputWriterParaview_;
 	std::unique_ptr< OutputWriterText > outputWriterText_;
-	std::array< double, 2 > meshWidth_;
-	double dt_;
+
 
 };
