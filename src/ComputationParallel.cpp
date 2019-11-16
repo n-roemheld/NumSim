@@ -166,7 +166,7 @@ void ComputationParallel::initialize (int argc, char *argv[])
 
   	//initialize outputWriters
    	outputWriterParaview_ = std::make_unique<OutputWriterParaviewParallel>(discretization_, parti);
-  	outputWriterText_ = std::make_unique<OutputWriterTextParallel>(discretization_);
+  	outputWriterText_ = std::make_unique<OutputWriterTextParallel>(discretization_, parti);
 
 
 };
