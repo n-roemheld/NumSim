@@ -11,9 +11,10 @@ void ComputationParallel::initialize (int argc, char *argv[])
 {
     //Computation::initialize (int argc, char *argv[]);
     settings_.loadFromFile(argv[1]);
+    std::vector<int> nCellsGlobal = settings_.nCells;
 	// computing meshWidth (everywhere with global values)
-	double dx = settings_.physicalSize[0]/settings_.nCells[0];
-	double dy = settings_.physicalSize[1]/settings_.nCells[1];
+	double dx = settings_.physicalSize[0]/settings_.nCellsGlobal[0];
+	double dy = settings_.physicalSize[1]/settings_.nCellsGlobal[1];
 	meshWidth_ = {dx, dy};
 
     
@@ -29,16 +30,36 @@ void ComputationParallel::initialize (int argc, char *argv[])
     if(MPI_rank == 0)
     {
         settings_.printSettings();
+        
+        // Computing numer of partitions in each direction
+        double ratio_nCellsGlobal = nCellsGlobal[0]/nCellsGlobal[1]; // x/y
+        double ratio;
+        double ratio_difference;
+        double ratio_difference_best = 1000;
+        int divisor_best = 1;
+        
+        for (int d = 1; d <= MPI_n_processes; d++)
+        {
+            if (MPI_n_processes % d == 0)
+            {
+                ratio = d*d/MPI_n_processes;
+                ratio_difference = abs(ratio - ratio_nCellsGlobal);
+                if (ratio_difference < ratio_difference_best)
+                    ratio_difference_best = ratio_difference;
+                    divisor_best = d;
+                }
+            }
+        }
         // Number of partitions in both dimensions
-        int n_pars_x = int (std::sqrt(settings_->nCells[0]));
-        int n_pars_y = int (std::sqrt(settings_->nCells[1]));
-        assert( n_pars_x*n_pars_y == MPI_n_processes);
+        int n_pars_x = dividor_best;
+        int n_pars_y = MPI_n_processes/dividor_best;
+        
         // Number of cells in each partiotion except the last one
-        int n_Cells_sub_x = int (settings_->nCells[0]) / n_pars_x);
-        int n_Cells_sub_y = int (settings_->nCells[1]) / n_pars_y);
+        int n_Cells_sub_x = int (nCellsGlobal[0]) / n_pars_x);
+        int n_Cells_sub_y = int (nCellsGlobal[1]) / n_pars_y);
         // Number of cells in the last partitions in each dimension 
-        int n_Cells_sub_x_last = settings_->nCells[0] - n_pars_x*n_Cells_sub_x;
-        int n_Cells_sub_y_last = settings_->nCells[1] - n_pars_y*n_Cells_sub_y;
+        int n_Cells_sub_x_last = nCellsGlobal[0] - (n_pars_x-1)*n_Cells_sub_x;
+        int n_Cells_sub_y_last = nCellsGlobal[1] - (n_pars_y-1)*n_Cells_sub_y;
         
         // Defining ranks for all partitions
         Array2D ranks_domain({n_pars_x,n_pars_y});
@@ -62,9 +83,11 @@ void ComputationParallel::initialize (int argc, char *argv[])
                     std::vector<int> ranks_neighbors{ranks_domain(i,j-1), ranks_domain(i+1,j), ranks_domain(i,j+1), ranks_domain(i-1,j)}; // bottom, right, upper, left; caution: check for limits (boundaries)!
                     std::vector<int> is_boundary{ (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
                     std::vector<int> nCells_sub{n_Cells_sub_x,n_Cells_sub_y};
+                    
+                    // setting nCellsGlobal and overwriting nCells for rank 0
+                    discretization_->set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub, nCellsGlobal);
                     // Not changing physicalSize because it's not used. Caution: Inconsistent to nCells
                     settings_.nCells = nCells_sub;
-                    discretization_->set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub, settings_->nCells);
                 }
                 else
                 {
@@ -104,8 +127,10 @@ void ComputationParallel::initialize (int argc, char *argv[])
         requests.push_back(current_request);
         MPI_Irecv(&nCells_sub, 10, MPI_INT, 0, 2, MPI_COMM_WORLD, &current_request);
         requests.push_back(current_request);
-        discretization_->set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub, settings_->nCells);
         MPI_Wait(&requests,MPI_STATUS_IGNORE);
+        
+        // setting nCellsGlobal and overwriting nCells for all ranks except 0
+        discretization_->set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub, nCellsGlobal);
         // Not changing physicalSize because it's not used. Caution: Inconsistent to nCells
         settings_.nCells = nCells_sub;
     }
