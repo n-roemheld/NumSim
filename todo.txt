@@ -1,0 +1,7 @@
+todo:
+
+parallel initialize (nCells, physicalSize, no of partitions)
+
+uIBegin etc. für Randdomains modifizieren
+
+Randwerte für u v f g setzen
