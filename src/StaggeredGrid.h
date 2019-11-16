@@ -4,11 +4,15 @@
 #include "FieldVariable.h"
 #include "Partitioning.h"
 
+#include <mpi.h>
+
 class StaggeredGrid
 {
 public:
   //!constructor
   StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth);
+  StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, Partitioning parti);
+
 
   const std::array< double, 2 > 	meshWidth() const;
 
@@ -65,20 +69,51 @@ public:
   int 	pJBegin() const;
 
   int 	pJEnd() const;
-  
-  void set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells);
-  
+
+  // void set_partitioning(int MPI_rank, std::array<int,4> ranks_neighbors, std::array<bool,4> is_boundary, std::array<int,2> nCells, std::array<int,2> nCellsGlobal);
+
   int ownRankNo();
-  
-  bool is_boundary(int direction)// 0 = lower, 1 = right, 2 = upper, 3 = left
-  
+
+  bool is_boundary(int direction) const;// 0 = lower, 1 = right, 2 = upper, 3 = left
+
+  // bool is_boundary(int direction) const;// 0 = lower, 1 = right, 2 = upper, 3 = left
+
+
   int rank_neighbor(int direction);
-  
+
   std::array<int,2> nCells();
-  
+
   std::array<int,2> nCellsGlobal();
 
-  const Partitioning& partitioning();
+  // Partitioning& partitioning();
+
+  // const Partitioning partitioning();
+
+  void send_boundary_vertical_u(int direction, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing);
+  void send_boundary_horizontal_u(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
+  MPI_Request receive_boundary_vertical_u(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
+  MPI_Request receive_boundary_horizontal_u(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
+
+  void send_boundary_vertical_v(int direction, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing);
+  void send_boundary_horizontal_v(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
+  MPI_Request receive_boundary_vertical_v(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
+  MPI_Request receive_boundary_horizontal_v(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
+
+  void send_boundary_vertical_f(int direction, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing);
+  void send_boundary_horizontal_f(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
+  MPI_Request receive_boundary_vertical_f(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
+  MPI_Request receive_boundary_horizontal_f(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
+
+  void send_boundary_vertical_g(int direction, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing);
+  void send_boundary_horizontal_g(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
+  MPI_Request receive_boundary_vertical_g(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
+  MPI_Request receive_boundary_horizontal_g(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
+
+  void send_boundary_vertical_p(int direction, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing);
+  void send_boundary_horizontal_p(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
+  MPI_Request receive_boundary_vertical_p(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
+  MPI_Request receive_boundary_horizontal_p(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
+
 
 protected:
 	const std::array< int, 2 > nCells_;
@@ -89,11 +124,8 @@ protected:
 	FieldVariable 	rhs_;
 	FieldVariable 	f_;
 	FieldVariable 	g_;
-  
-    Partitioning partitioning_;
-    
-    void send_boundary_vertical(int direction, int j_fixed, int i_begin, int i_end, int target_rank, double (*fVar)(int, int), bool do_nothing);
-    void send_boundary_horizontal(int direction, int i_fixed, int j_begin, int j_end, int target_rank, double (*fVar)(int, int), bool do_nothing);
-    MPI_Request receive_boundary_vertical(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, double (*fVar)(int, int), bool do_nothing);
-    MPI_Request receive_boundary_horizontal(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, double (*fVar)(int, int), bool do_nothing);
+
+  Partitioning partitioning_;
+
+
 };

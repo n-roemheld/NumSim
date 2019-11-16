@@ -5,6 +5,10 @@ CentralDifferences::CentralDifferences(std::array< int, 2 > nCells, std::array< 
 	Discretization(nCells, meshWidth)
 {};
 
+CentralDifferences::CentralDifferences(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, Partitioning parti) :
+	Discretization(nCells, meshWidth, parti)
+{};
+
 
 double CentralDifferences::computeDu2Dx (int i, int j) const
 {

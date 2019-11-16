@@ -252,6 +252,33 @@ Computation.cpp.s:
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/Computation.cpp.s
 .PHONY : Computation.cpp.s
 
+ComputationParallel.o: ComputationParallel.cpp.o
+
+.PHONY : ComputationParallel.o
+
+# target to build an object file
+ComputationParallel.cpp.o:
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/ComputationParallel.cpp.o
+.PHONY : ComputationParallel.cpp.o
+
+ComputationParallel.i: ComputationParallel.cpp.i
+
+.PHONY : ComputationParallel.i
+
+# target to preprocess a source file
+ComputationParallel.cpp.i:
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/ComputationParallel.cpp.i
+.PHONY : ComputationParallel.cpp.i
+
+ComputationParallel.s: ComputationParallel.cpp.s
+
+.PHONY : ComputationParallel.s
+
+# target to generate assembly for a file
+ComputationParallel.cpp.s:
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/ComputationParallel.cpp.s
+.PHONY : ComputationParallel.cpp.s
+
 Discretization.o: Discretization.cpp.o
 
 .PHONY : Discretization.o
@@ -386,6 +413,33 @@ GaussSeidelRedBlack.s: GaussSeidelRedBlack.cpp.s
 GaussSeidelRedBlack.cpp.s:
 	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/GaussSeidelRedBlack.cpp.s
 .PHONY : GaussSeidelRedBlack.cpp.s
+
+Partitioning.o: Partitioning.cpp.o
+
+.PHONY : Partitioning.o
+
+# target to build an object file
+Partitioning.cpp.o:
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/Partitioning.cpp.o
+.PHONY : Partitioning.cpp.o
+
+Partitioning.i: Partitioning.cpp.i
+
+.PHONY : Partitioning.i
+
+# target to preprocess a source file
+Partitioning.cpp.i:
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/Partitioning.cpp.i
+.PHONY : Partitioning.cpp.i
+
+Partitioning.s: Partitioning.cpp.s
+
+.PHONY : Partitioning.s
+
+# target to generate assembly for a file
+Partitioning.cpp.s:
+	cd /home/henrik/Dokumente/Num_Sim/NumSim/build && $(MAKE) -f src/CMakeFiles/numsim.dir/build.make src/CMakeFiles/numsim.dir/Partitioning.cpp.s
+.PHONY : Partitioning.cpp.s
 
 PressureSolver.o: PressureSolver.cpp.o
 
@@ -652,6 +706,9 @@ help:
 	@echo "... Computation.o"
 	@echo "... Computation.i"
 	@echo "... Computation.s"
+	@echo "... ComputationParallel.o"
+	@echo "... ComputationParallel.i"
+	@echo "... ComputationParallel.s"
 	@echo "... Discretization.o"
 	@echo "... Discretization.i"
 	@echo "... Discretization.s"
@@ -667,6 +724,9 @@ help:
 	@echo "... GaussSeidelRedBlack.o"
 	@echo "... GaussSeidelRedBlack.i"
 	@echo "... GaussSeidelRedBlack.s"
+	@echo "... Partitioning.o"
+	@echo "... Partitioning.i"
+	@echo "... Partitioning.s"
 	@echo "... PressureSolver.o"
 	@echo "... PressureSolver.i"
 	@echo "... PressureSolver.s"

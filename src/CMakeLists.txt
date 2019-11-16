@@ -3,8 +3,10 @@ project(numsim)
 
 add_executable(${PROJECT_NAME}
         main.cpp
-        Computation.cpp
-        settings.cpp
+        Computation.cpp Computation.h
+	ComputationParallel.cpp Computation.h
+	Partitioning.cpp Partitioning.h
+        settings.cpp settings.h
         StaggeredGrid.h StaggeredGrid.cpp
         Discretization.cpp Discretization.h
         DonorCell.cpp DonorCell.h
@@ -16,6 +18,9 @@ add_executable(${PROJECT_NAME}
         PressureSolver.cpp PressureSolver.h
         output_writer/output_writer_paraview.cpp output_writer/output_writer_paraview.h
         output_writer/output_writer_text.cpp output_writer/output_writer_text.h
+        PressureSolver.cpp PressureSolver.h
+        output_writer/output_writer_paraview_parallel.cpp output_writer/output_writer_paraview_parallel.h
+        output_writer/output_writer_text_parallel.cpp output_writer/output_writer_text_parallel.h
         output_writer/output_writer.cpp output_writer/output_writer.h
         Array2D.cpp Array2D.h
         FieldVariable.cpp FieldVariable.h)

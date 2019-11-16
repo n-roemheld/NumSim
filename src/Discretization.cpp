@@ -1,6 +1,11 @@
 #include "Discretization.h"
 
 Discretization::Discretization(std::array<int, 2> nCells,
+		std::array<double, 2> meshWidth, Partitioning parti) :
+		StaggeredGrid(nCells, meshWidth, parti)
+{};
+
+Discretization::Discretization(std::array<int, 2> nCells,
 		std::array<double, 2> meshWidth) :
 		StaggeredGrid(nCells, meshWidth)
 {};

@@ -7,6 +7,8 @@ class CentralDifferences : public Discretization
 public:
 
 	CentralDifferences(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth);
+	CentralDifferences(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, Partitioning parti);
+
 
 	virtual double computeDu2Dx (int i, int j) const;
 
