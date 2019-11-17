@@ -50,7 +50,7 @@ void SORRedBlack::solve()
 
 			// compute and update residuum
 			// wrong sign ????
-			res_squared = compute_res();
+			res_squared = compute_res_parallel();
 			it++;
 		}
 		if(it > maximumNumberOfIterations_) std::cout << it << std::endl;

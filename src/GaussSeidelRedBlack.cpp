@@ -45,7 +45,7 @@ void GaussSeidelRedBlack::solve()
     };
 
 		// compute and update residuum
-		res_squared = compute_res();
+		res_squared = compute_res_parallel();
 		it++;
 	}
 	setBoundaryValues();

@@ -87,9 +87,10 @@ void ComputationParallel::initialize (int argc, char *argv[])
                     std::array<int,4> ranks_neighbors = {ranks_domain[i][j-1], ranks_domain[i+1][j], ranks_domain[i][j+1], ranks_domain[i-1][j]}; // bottom, right, upper, left; caution: check for limits (boundaries)!
                     std::array<bool,4> is_boundary ={ (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
                     std::array<int,2> nCells_sub = {n_Cells_sub_x,n_Cells_sub_y};
+                    std::array<int,2> nodeOffset = {n_Cells_sub_x*i, n_Cells_sub_y*j);
 
                     // setting nCellsGlobal and overwriting nCells for rank 0
-                    parti = Partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub, nCellsGlobal);
+                    parti = Partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub, nCellsGlobal, nodeOffset);
                     // discretization_->set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub, nCellsGlobal);
                     // Not changing physicalSize because it's not used. Caution: Inconsistent to nCells
                     settings_.nCells = nCells_sub;
@@ -99,6 +100,7 @@ void ComputationParallel::initialize (int argc, char *argv[])
                     std::array<int,4> ranks_neighbors = {ranks_domain[i][j-1], ranks_domain[i+1][j], ranks_domain[i][j+1], ranks_domain[i-1][j]}; // bottom, right, upper, left; caution: check for limits (boundaries)!
                     std::array<bool,4> is_boundary = { (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
                     std::array<int,2> nCells_sub = {0,0};
+                    std::array<int,2> nodeOffset = {n_Cells_sub_x*i, n_Cells_sub_y*j);
                     if (j == n_pars_y) {
                         nCells_sub[1] = n_Cells_sub_y_last;
                     } else {
@@ -118,6 +120,9 @@ void ComputationParallel::initialize (int argc, char *argv[])
                     MPI_Request_free(&current_request);
                     MPI_Isend(&nCells_sub, 10, MPI_INT, ranks_domain[i][j],2,MPI_COMM_WORLD, &current_request);
                     MPI_Request_free(&current_request);
+                   // hier sent einfügen für nodeOffset
+                    MPI_Isend(&nodeOffset, 10, MPI_INT, ranks_domain[i][j], 3, MPI_COMM_WORLD, &current_request);
+                    MPI_Request_free(&current_request);
                 }
             }
         }
@@ -128,6 +133,7 @@ void ComputationParallel::initialize (int argc, char *argv[])
         std::array<int,4> ranks_neighbors; // bottom, right, upper, left; caution: check for limits (boundaries)!
         std::array<bool,4> is_boundary;
         std::array<int,2> nCells_sub;
+        std::array<int,2> nodeOffset;
         std::vector<MPI_Request> requests;
         MPI_Request current_request;
         MPI_Irecv(&ranks_neighbors, 10, MPI_INT, 0, 0, MPI_COMM_WORLD, &current_request);
@@ -136,10 +142,12 @@ void ComputationParallel::initialize (int argc, char *argv[])
         requests.push_back(current_request);
         MPI_Irecv(&nCells_sub, 10, MPI_INT, 0, 2, MPI_COMM_WORLD, &current_request);
         requests.push_back(current_request);
+        MPI_Irecv(&nodeOffset, 10, MPI_INT, 0, 3, MPI_COMM_WORLD, &current_request);
+        requests.push_back(current_request);
         MPI_Waitall(requests.size(), requests.data(), MPI_STATUS_IGNORE);
 
         // setting nCellsGlobal and overwriting nCells for all ranks except 0
-        parti = Partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub, nCellsGlobal);
+        parti = Partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub, nCellsGlobal, nodeOffset);
         // discretization_->set_partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub, nCellsGlobal);
         // Not changing physicalSize because it's not used. Caution: Inconsistent to nCells
         settings_.nCells = nCells_sub;
