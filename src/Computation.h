@@ -14,20 +14,20 @@
 class Computation
 {
 public:
-	void initialize (int argc, char *argv[]);
-	void runSimulation ();
+	virtual void initialize (int argc, char *argv[]);
+	virtual void runSimulation ();
 
 protected:
 	Settings settings_;
 	std::array< double, 2 > meshWidth_;
 	double dt_;
 
-	void computeTimeStepWidth ();
-	void applyBoundaryValues ();
-	void computePreliminaryVelocities ();
+	virtual void computeTimeStepWidth ();
+	virtual void applyBoundaryValues ();
+	virtual void computePreliminaryVelocities ();
 	void computeRightHandSide ();
 	void computePressure ();
-	void computeVelocities ();
+	virtual void computeVelocities ();
 
 	std::shared_ptr< Discretization > discretization_;
 	std::unique_ptr< PressureSolver > pressureSolver_;

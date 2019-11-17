@@ -206,7 +206,7 @@ void ComputationParallel::computeVelocities()
     velocity_communication();
 }
 
-void ComputationParallel::velocity_communication()
+void ComputationParallel::velocity_communication() //NUR Kommunikation von f und g, was ist mit u und v???
 {
     // neigbor indices
     int below = 0;
@@ -220,7 +220,7 @@ void ComputationParallel::velocity_communication()
     int up = 2;
     int to_left = 3;
 
-    // Communication horizontal first, then vertical!!
+    // Communication horizontal first, then vertical!! // warum?
 
     // HORIZONTAL COMMUNICATION
     std::vector<MPI_Request> requests_horizontal;
@@ -248,10 +248,10 @@ void ComputationParallel::velocity_communication()
 
     // Receiving G
     // from right
-    current_request = discretization_->receive_boundary_horizontal_g(to_left, discretization_->vIEnd(), discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(right), discretization_->is_boundary(right));
+    current_request = discretization_->receive_boundary_horizontal_g(to_left + 4, discretization_->vIEnd(), discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(right), discretization_->is_boundary(right));
     requests_horizontal.push_back(current_request);
     // from left
-    current_request = discretization_->receive_boundary_horizontal_g(to_right, discretization_->vIBegin()-1, discretization_->vJBegin(), discretization_->vJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
+    current_request = discretization_->receive_boundary_horizontal_g(to_right + 4, discretization_->vIBegin()-1, discretization_->vJBegin(), discretization_->vJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
     requests_horizontal.push_back(current_request);
 
     MPI_Waitall(requests_horizontal.size(), requests_horizontal.data() ,MPI_STATUS_IGNORE);
@@ -282,10 +282,10 @@ void ComputationParallel::velocity_communication()
 
     // G Communication (receive)
     // from below
-    current_request = discretization_->receive_boundary_vertical_g(up, discretization_->vJBegin()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
+    current_request = discretization_->receive_boundary_vertical_g(up + 4, discretization_->vJBegin()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
     requests_vertical.push_back(current_request);
     // from above
-    current_request = discretization_->receive_boundary_vertical_g(down, discretization_->vJEnd()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
+    current_request = discretization_->receive_boundary_vertical_g(down + 4, discretization_->vJEnd()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
     requests_vertical.push_back(current_request);
 
 
@@ -384,3 +384,5 @@ void ComputationParallel::applyBoundaryValues ()
   	}
   }
 };
+
+//void ComputationParallel::computeRightHandSide ????

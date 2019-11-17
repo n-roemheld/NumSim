@@ -1,5 +1,4 @@
 
-
 #include "Computation.h"
 #include <math.h>
 #include <ctime>
