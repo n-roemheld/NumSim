@@ -11,7 +11,7 @@ add_executable(${PROJECT_NAME}
         Discretization.cpp Discretization.h
         DonorCell.cpp DonorCell.h
         CentralDifferences.h CentralDifferences.cpp
-        SOR.h SOR.cpp 
+        SOR.h SOR.cpp
 		GaussSeidel.h GaussSeidel.cpp
 		SORRedBlack.h SORRedBlack.cpp
 		GaussSeidelRedBlack.h GaussSeidelRedBlack.cpp
@@ -41,6 +41,21 @@ if (VTK_FOUND)
     include_directories(${VTK_INCLUDE_DIRS})               # add the include directory where the header files are for the compiler
     target_link_libraries(${PROJECT_NAME} ${VTK_LIBRARIES}) # add the libraries for the linker
 endif(VTK_FOUND)
+
+find_package(MPI REQUIRED)
+
+include_directories(${MPI_INCLUDE_PATH})
+target_link_libraries(${PROJECT_NAME} ${MPI_LIBRARIES})
+
+if(MPI_COMPILE_FLAGS)
+  set_target_properties(${PROJECT_NAME} PROPERTIES
+    COMPILE_FLAGS "${MPI_COMPILE_FLAGS}")
+endif()
+
+if(MPI_LINK_FLAGS)
+  set_target_properties(${PROJECT_NAME} PROPERTIES
+    LINK_FLAGS "${MPI_LINK_FLAGS}")
+endif()
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${PROJECT_SOURCE_DIR}/../build)
 # Add additonial compile options to enable more warnings
