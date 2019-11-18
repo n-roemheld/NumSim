@@ -7,7 +7,7 @@ Partitioning::Partitioning(int MPI_rank, std::array<int,4> ranks_neighbors, std:
         MPI_rank_(MPI_rank), ranks_neighbors_(ranks_neighbors), is_boundary_(is_boundary), nCells_(nCells), nCellsGlobal_(nCellsGlobal), nodeOffset_(nodeOffset)
             {};
 
-int Partitioning::ownRankNo()
+int Partitioning::ownRankNo() const
 {
     return MPI_rank_;
 };
@@ -26,19 +26,19 @@ std::array<int,2> Partitioning::nCells()
 {
     return nCells_;
 };
-std::array<int,2> Partitioning::nCellsGlobal()
+const std::array<int,2> Partitioning::nCellsGlobal() const
 {
     return nCellsGlobal_;
 };
-bool Partitioning::ownPartitionContainsRightBoundary()
+bool Partitioning::ownPartitionContainsRightBoundary() const
 {
 	return is_boundary(1);
 }
-bool Partitioning::ownPartitionContainsTopBoundary()
+bool Partitioning::ownPartitionContainsTopBoundary() const
 {
 	return is_boundary(2);
 }
-std::array<int,2> Partitioning::nodeOffset()
+std::array<int,2> Partitioning::nodeOffset() const
 {
 	return nodeOffset_;
 };

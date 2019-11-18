@@ -6,7 +6,7 @@
  *  All values are written to the file as they are stored in the field variables,
  *  no interpolation takes place.
  */
-class OutputWriterText : 
+class OutputWriterText :
   public OutputWriter
 {
 public:
