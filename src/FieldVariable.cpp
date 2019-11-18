@@ -67,3 +67,24 @@
 
 
     };
+
+    void FieldVariable::setToZero()
+    {
+      for(int i = 0; i < size_[0]; i++)
+      {
+        for(int j = 0; j < size_[1]; j++)
+        {
+          Array2D::operator()(i,j) = 0;
+        }
+      }
+    }
+
+    // const void* FieldVariable::data()
+    // {
+    //   return &data_;
+    // }
+
+    void* FieldVariable::data()
+    {
+      return &data_;
+    }

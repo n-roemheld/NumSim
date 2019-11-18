@@ -1,7 +1,7 @@
 #include "output_writer/output_writer_paraview_parallel.h"
 
-#include "storage/field_variable.h"
-#include "discretization/1_discretization.h"
+#include "FieldVariable.h"
+#include "Discretization.h"
 
 #include <vtkImageData.h>
 #include <vtkDoubleArray.h>
@@ -11,7 +11,7 @@
 // OutputWriterParaviewParallel::OutputWriterParaviewParallel(std::shared_ptr<Discretization> discretization, const Partitioning &partitioning) :
 OutputWriterParaviewParallel::OutputWriterParaviewParallel(std::shared_ptr<Discretization> discretization, Partitioning &partitioning) :
 
-   OutputWriter(discretization, partitioning),
+  OutputWriter(discretization, partitioning),
 
   nCellsGlobal_(partitioning_.nCellsGlobal()),
   nPointsGlobal_ {nCellsGlobal_[0]+1, nCellsGlobal_[1]+1},    // we have one point more than cells in every coordinate direction
@@ -85,14 +85,20 @@ void OutputWriterParaviewParallel::gatherData()
 
 void OutputWriterParaviewParallel::writeFile(double currentTime)
 {
+  int MPI_rank;
+  MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
   // communicate all data to rank 0
+  std::cout << "here we are 12: " << MPI_rank << std::endl;
+
   gatherData();
+  std::cout << "here we are 13: " << MPI_rank << std::endl;
 
   // only continue to write the file on rank 0
   if (partitioning_.ownRankNo() != 0)
   {
     return;
   }
+  std::cout << "here we are 14: " << MPI_rank << std::endl;
 
   // Assemble the filename
   std::stringstream fileName;

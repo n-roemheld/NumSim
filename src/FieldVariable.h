@@ -15,6 +15,13 @@ public:
 
 	FieldVariable& operator=(FieldVariable rhs);
 
+	void setToZero();
+
+	// const void* data();
+	void* data();
+
+
+
 private:
 	// to do: make const again!
 	const std::array<double,2> origin_;

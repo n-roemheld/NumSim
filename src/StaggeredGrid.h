@@ -91,28 +91,28 @@ public:
 
   void send_boundary_vertical_u(int direction, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing);
   void send_boundary_horizontal_u(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
-  MPI_Request receive_boundary_vertical_u(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
-  MPI_Request receive_boundary_horizontal_u(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
+  void receive_boundary_vertical_u(MPI_Request& current_request, int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
+  void receive_boundary_horizontal_u(MPI_Request& current_request, int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
 
   void send_boundary_vertical_v(int direction, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing);
   void send_boundary_horizontal_v(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
-  MPI_Request receive_boundary_vertical_v(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
-  MPI_Request receive_boundary_horizontal_v(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
-
+  void receive_boundary_vertical_v(MPI_Request& current_request, int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
+  void receive_boundary_horizontal_v(MPI_Request& current_request, int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
+  
   void send_boundary_vertical_f(int direction, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing);
   void send_boundary_horizontal_f(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
-  MPI_Request receive_boundary_vertical_f(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
-  MPI_Request receive_boundary_horizontal_f(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
+  void receive_boundary_vertical_f(MPI_Request& current_request, int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
+  void receive_boundary_horizontal_f(MPI_Request& current_request, int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
 
   void send_boundary_vertical_g(int direction, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing);
   void send_boundary_horizontal_g(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
-  MPI_Request receive_boundary_vertical_g(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
-  MPI_Request receive_boundary_horizontal_g(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
+  void receive_boundary_vertical_g(MPI_Request& current_request, int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
+  void receive_boundary_horizontal_g(MPI_Request& current_request, int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
 
   void send_boundary_vertical_p(int direction, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing);
   void send_boundary_horizontal_p(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
-  MPI_Request receive_boundary_vertical_p(int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
-  MPI_Request receive_boundary_horizontal_p(int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
+  void receive_boundary_vertical_p(MPI_Request& current_request, int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
+  void receive_boundary_horizontal_p(MPI_Request& current_request, int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
 
 
 protected:

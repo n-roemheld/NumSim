@@ -2,10 +2,12 @@
 #include "output_writer/output_writer_paraview_parallel.h"
 #include "output_writer/output_writer_text_parallel.h"
 
+
 class ComputationParallel : public Computation
 {
   public:
 	void initialize (int argc, char *argv[]);
+  void runSimulation ();
 
   private:
 	void computeTimeStepWidth ();
@@ -16,8 +18,10 @@ class ComputationParallel : public Computation
 
   void computeVelocities();
 
-  void velocity_communication();
+  void preliminaryVelocity_communication();
+  void finalVelocity_communication();
 
-
+  std::unique_ptr< OutputWriterParaviewParallel > outputWriterParaviewParallel_;
+	std::unique_ptr< OutputWriterTextParallel > outputWriterTextParallel_;
 
 };

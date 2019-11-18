@@ -9,13 +9,12 @@ void SORRedBlack::solve()
 {
 	// std::cout << "SORRedBlack" << std::endl;
 	// change i,j for speed?
-		std::array<double,2> mW = discretization_->meshWidth();
-		double dx = mW[0];
-		double dy = mW[1];
+	double dx = discretization_->dx();
+	double dy = discretization_->dy();
 
 		int it = 0;
 		// compute_res????
-		double res_squared = compute_res();
+		double res_squared = compute_res_parallel();
 		// double res_squared = 2*epsilon_*epsilon_;
 
 		while (it <= maximumNumberOfIterations_ && res_squared > epsilon_*epsilon_)

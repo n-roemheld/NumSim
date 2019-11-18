@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
   }
 
 
-
+  MPI_Init(&argc, &argv);
   ComputationParallel comp;
   comp.initialize(argc, argv);
   time_t startTime;
@@ -29,8 +29,11 @@ int main(int argc, char *argv[])
   std::cout << "EndTime: "<< time(&endTime) << std::endl;
   std::cout << "Difference: " << -(startTime-endTime) << std::endl;
 
+  std::cout << "here we are 130: "  << std::endl;
 
 
   MPI_Finalize();
+  std::cout << "here we are 131: "  << std::endl;
+
   return EXIT_SUCCESS;
 }
