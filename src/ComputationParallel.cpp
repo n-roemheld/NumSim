@@ -22,10 +22,10 @@ void ComputationParallel::initialize (int argc, char *argv[])
 
     // Number of processes determined by command line
     // Get the number of processes
-    int MPI_n_processes;
+    int MPI_n_processes = 0;
     MPI_Comm_size(MPI_COMM_WORLD, &MPI_n_processes);
     // Get the rank of the process
-    int MPI_rank;
+    int MPI_rank =0;
     MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
     std::cout << "here we are" << MPI_rank << std::endl;
 

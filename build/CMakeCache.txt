@@ -275,7 +275,7 @@ Project_BINARY_DIR:STATIC=/home/henrik/Dokumente/Num_Sim/NumSim/build
 Project_SOURCE_DIR:STATIC=/home/henrik/Dokumente/Num_Sim/NumSim
 
 //The directory containing a CMake configuration file for VTK.
-VTK_DIR:PATH=/usr/lib/cmake/vtk-7.1
+VTK_DIR:PATH=VTK_DIR-NOTFOUND
 
 //Value Computed by CMake
 numsim_BINARY_DIR:STATIC=/home/henrik/Dokumente/Num_Sim/NumSim/build/src
