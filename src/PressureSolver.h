@@ -16,7 +16,7 @@ protected:
 	void setBoundaryValues ();
 	void setBoundaryValuesParallel();
 
-  void pressure_communication();
+  	void pressure_communication();
 
 	std::shared_ptr< Discretization > discretization_;
 	double 	epsilon_;

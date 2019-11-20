@@ -24,6 +24,23 @@ int main(int argc, char *argv[])
   int MPI_rank;
   MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
 
+  // if(MPI_rank == 1)
+  // {
+  //   int buffer= 0;
+  //   MPI_Request req;
+  //   MPI_Isend(&buffer, 1, MPI_INT, 0, 7, MPI_COMM_WORLD, &req);
+  // }
+  // if(MPI_rank == 0)
+  // {
+  //   MPI_Request req2;
+  //   int buffer2;
+  //   MPI_Irecv(&buffer2, 1, MPI_INT, 1, 7, MPI_COMM_WORLD, &req2);
+  //
+  //   MPI_Wait(&req2, MPI_STATUS_IGNORE);
+  // }
+
+
+
   ComputationParallel comp;
   comp.initialize(argc, argv);
   time_t startTime;
