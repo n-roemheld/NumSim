@@ -3,7 +3,7 @@
 Partitioning::Partitioning()
 {};
 
-Partitioning::Partitioning(int MPI_rank, std::array<int,4> ranks_neighbors, std::array<bool,4> is_boundary, std::array<int,2> nCells, std::array<int,2> nCellsGlobal, std::array<int,2> nodeOffset) :
+Partitioning::Partitioning(int MPI_rank, std::array<int,4> ranks_neighbors, std::array<int,4> is_boundary, std::array<int,2> nCells, std::array<int,2> nCellsGlobal, std::array<int,2> nodeOffset) :
         MPI_rank_(MPI_rank), ranks_neighbors_(ranks_neighbors), is_boundary_(is_boundary), nCells_(nCells), nCellsGlobal_(nCellsGlobal), nodeOffset_(nodeOffset)
             {};
 

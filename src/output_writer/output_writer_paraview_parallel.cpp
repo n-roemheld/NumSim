@@ -8,6 +8,8 @@
 #include <vtkPointData.h>
 #include <mpi.h>
 
+#include <iostream>
+
 OutputWriterParaviewParallel::OutputWriterParaviewParallel(std::shared_ptr<Discretization> discretization, const Partitioning &partitioning) :
    OutputWriter(discretization, partitioning),
 
@@ -30,6 +32,8 @@ OutputWriterParaviewParallel::OutputWriterParaviewParallel(std::shared_ptr<Discr
 
 void OutputWriterParaviewParallel::gatherData()
 {
+  int MPI_rank;
+  MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
  // std::array<int,2> size, std::array<double,2> origin, std::array<double,2> meshWidth
 
   int nPointsGlobalTotal = nPointsGlobal_[0] * nPointsGlobal_[1];
@@ -57,6 +61,8 @@ void OutputWriterParaviewParallel::gatherData()
   v_.setToZero();
   p_.setToZero();
 
+  std::cout << MPI_rank << "here we are 122,0: "<< std::endl;
+
   for (int j = 0; j < jEnd; j++)
   {
     for (int i = 0; i < iEnd; i++)
@@ -68,12 +74,28 @@ void OutputWriterParaviewParallel::gatherData()
       int iGlobal = nodeOffset[0] + i;
       int jGlobal = nodeOffset[1] + j;
 
+      // std::cout << MPI_rank << "here we are 122a: "  << iGlobal << std::endl;
+      // std::cout << MPI_rank << "here we are 122b: "  << jGlobal << std::endl;
+      // std::cout << MPI_rank << "here we are 122c: "  << nCellsGlobal_[0] << " "<< nCellsGlobal_[1]<< std::endl;
+      // std::cout << MPI_rank << "here we are 122d: "  << u_.size()[0] << " "<< u_.size()[1] << std::endl;
+
+      // std::cout << "here we are 123: "  << std::endl;
+
       u_(iGlobal,jGlobal) = discretization_->u().interpolateAt(x,y);
+      // std::cout << "here we are 123,5: "  << std::endl;
+
       v_(iGlobal,jGlobal) = discretization_->v().interpolateAt(x,y);
+
       p_(iGlobal,jGlobal) = discretization_->p().interpolateAt(x,y);
     }
   }
-
+  std::cout << MPI_rank << "here we are now "  << u_.size()[0] << " "<< u_.size()[1] << std::endl;
+  std::cout << MPI_rank << "here we are now "  << v_.size()[0] << " "<< v_.size()[1] << std::endl;
+  std::cout << MPI_rank << "here we are now "  << p_.size()[0] << " "<< p_.size()[1] << std::endl;
+  std::cout << MPI_rank << "here we are now "  << uGlobal_.size()[0] << " "<< uGlobal_.size()[1] << std::endl;
+  std::cout << MPI_rank << "here we are now "  << vGlobal_.size()[0] << " "<< vGlobal_.size()[1] << std::endl;
+  std::cout << MPI_rank << "here we are now "  << pGlobal_.size()[0] << " "<< pGlobal_.size()[1] << std::endl;
+  std::cout << MPI_rank << "here we are now "  << nPointsGlobalTotal << std::endl;
   // sum up values from all ranks, not set values are zero
   MPI_Reduce(u_.data(), uGlobal_.data(), nPointsGlobalTotal, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
   MPI_Reduce(v_.data(), vGlobal_.data(), nPointsGlobalTotal, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
@@ -83,42 +105,60 @@ void OutputWriterParaviewParallel::gatherData()
 
 void OutputWriterParaviewParallel::writeFile(double currentTime)
 {
+  int MPI_rank;
+  MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
   // communicate all data to rank 0
   gatherData();
+  // std::cout << "here we are apache: " << MPI_rank << std::endl;
 
   // only continue to write the file on rank 0
   if (partitioning_.ownRankNo() != 0)
   {
     return;
   }
+  std::cout << "here we are beluga: " << MPI_rank << std::endl;
 
   // Assemble the filename
   std::stringstream fileName;
+  // std::cout << "here we are brodo: " << MPI_rank << std::endl;
+
   fileName << "out/output_" << std::setw(4) << setfill('0') << fileNo_ << "." << vtkWriter_->GetDefaultFileExtension();
 
   // increment file no.
   fileNo_++;
+  std::cout << "here we are chaos: " << MPI_rank << std::endl;
 
   // assign the new file name to the output vtkWriter_
   vtkWriter_->SetFileName(fileName.str().c_str());
 
+  std::cout << "here we are 123,9: " << MPI_rank << std::endl;
+
   // initialize data set that will be output to the file
   vtkSmartPointer<vtkImageData> dataSet = vtkSmartPointer<vtkImageData>::New();
+
+  std::cout << "here we are 124: " << MPI_rank << std::endl;
+
+
   dataSet->SetOrigin(0, 0, 0);
 
   // set spacing of mesh
   const double dx = discretization_->meshWidth()[0];
   const double dy = discretization_->meshWidth()[1];
   const double dz = 1;
+  std::cout << "here we are 124,5: " << MPI_rank << std::endl;
+
   dataSet->SetSpacing(dx, dy, dz);
+  std::cout << "here we are 124,7: " << MPI_rank << std::endl;
 
   // set number of points in each dimension, 1 cell in z direction
   dataSet->SetDimensions(nCellsGlobal_[0]+1, nCellsGlobal_[1]+1, 1);  // we want to have points at each corner of each cell
 
+  std::cout << "here we are 125: " << MPI_rank << std::endl;
 
   // add pressure field variable
   // ---------------------------
   vtkSmartPointer<vtkDoubleArray> arrayPressure = vtkDoubleArray::New();
+  // std::cout << "here we are 126: " << MPI_rank << std::endl;
 
   // the pressure is a scalar which means the number of components is 1
   arrayPressure->SetNumberOfComponents(1);
@@ -127,9 +167,13 @@ void OutputWriterParaviewParallel::writeFile(double currentTime)
   arrayPressure->SetNumberOfTuples(dataSet->GetNumberOfPoints());
 
   arrayPressure->SetName("pressure");
+  std::cout << "here we are 127: " << MPI_rank << std::endl;
+  arrayPressure->SetValue(0, pGlobal_(0,0));
 
   // loop over the nodes of the mesh and assign the interpolated p values in the vtk data structure
   // we only consider the cells that are the actual computational domain, not the helper values in the "halo"
+  std::cout << "here we are 127,3: " << pGlobal_.size()[0] << " " << pGlobal_.size()[1] << MPI_rank << std::endl;
+  std::cout << "here we are 127,4 " << nCellsGlobal_[0]+1 << " " << nCellsGlobal_[1]+1 << MPI_rank << std::endl;
 
   int index = 0;   // index for the vtk data structure, will be incremented in the inner loop
   for (int j = 0; j < nCellsGlobal_[1]+1; j++)
@@ -139,6 +183,7 @@ void OutputWriterParaviewParallel::writeFile(double currentTime)
       arrayPressure->SetValue(index, pGlobal_(i,j));
     }
   }
+  std::cout << "here we are 127,5: " << MPI_rank << std::endl;
 
   // now, we should have added as many values as there are points in the vtk data structure
   assert(index == dataSet->GetNumberOfPoints());
@@ -189,6 +234,7 @@ void OutputWriterParaviewParallel::writeFile(double currentTime)
   arrayTime->SetNumberOfTuples(1);
   arrayTime->SetTuple1(0, currentTime);
   dataSet->GetFieldData()->AddArray(arrayTime);
+  // std::cout << "here we are 128: " << MPI_rank << std::endl;
 
   // Remove unused memory
   dataSet->Squeeze();
@@ -201,4 +247,6 @@ void OutputWriterParaviewParallel::writeFile(double currentTime)
 
   // finally write out the data
   vtkWriter_->Write();
+  std::cout << "here we are 129: " << MPI_rank << std::endl;
+
 }

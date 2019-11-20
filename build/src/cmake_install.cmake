@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "")
+    set(CMAKE_INSTALL_CONFIG_NAME "DEBUG")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -57,7 +57,7 @@ file(INSTALL DESTINATION "/home/henrik/Dokumente/Num_Sim/NumSim/src/../build" TY
      NOT IS_SYMLINK "$ENV{DESTDIR}/home/henrik/Dokumente/Num_Sim/NumSim/src/../build/numsim_parallel")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}/home/henrik/Dokumente/Num_Sim/NumSim/src/../build/numsim_parallel"
-         OLD_RPATH "/usr/local/lib:"
+         OLD_RPATH "/usr/lib/x86_64-linux-gnu/hdf5/openmpi:/usr/lib/x86_64-linux-gnu/openmpi/lib:/usr/local/lib:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/henrik/Dokumente/Num_Sim/NumSim/src/../build/numsim_parallel")

@@ -18,7 +18,7 @@ public:
 	void setToZero();
 
 	// const void* data();
-	void* data();
+	double* data();
 
 
 

@@ -19,7 +19,7 @@ CMAKE_AR:FILEPATH=/usr/bin/ar
 
 //Choose the type of build, options are: None Debug Release RelWithDebInfo
 // MinSizeRel ...
-CMAKE_BUILD_TYPE:STRING=
+CMAKE_BUILD_TYPE:STRING=DEBUG
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -275,13 +275,7 @@ Project_BINARY_DIR:STATIC=/home/henrik/Dokumente/Num_Sim/NumSim/build
 Project_SOURCE_DIR:STATIC=/home/henrik/Dokumente/Num_Sim/NumSim
 
 //The directory containing a CMake configuration file for VTK.
-VTK_DIR:PATH=VTK_DIR-NOTFOUND
-
-//Value Computed by CMake
-numsim_BINARY_DIR:STATIC=/home/henrik/Dokumente/Num_Sim/NumSim/build/src
-
-//Value Computed by CMake
-numsim_SOURCE_DIR:STATIC=/home/henrik/Dokumente/Num_Sim/NumSim/src
+VTK_DIR:PATH=/usr/lib/cmake/vtk-7.1
 
 //Value Computed by CMake
 numsim_parallel_BINARY_DIR:STATIC=/home/henrik/Dokumente/Num_Sim/NumSim/build/src

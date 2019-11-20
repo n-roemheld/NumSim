@@ -84,7 +84,7 @@
     //   return &data_;
     // }
 
-    void* FieldVariable::data()
+    double* FieldVariable::data()
     {
-      return &data_;
+      return data_.data();
     }

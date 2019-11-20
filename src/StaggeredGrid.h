@@ -85,9 +85,9 @@ public:
 
   std::array<int,2> nCellsGlobal();
 
-  // Partitioning& partitioning();
+  // Partitioning& partitioning(); // never comment in
 
-  // const Partitioning partitioning();
+  // const Partitioning& partitioning();
 
   void send_boundary_vertical_u(int direction, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing);
   void send_boundary_horizontal_u(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
@@ -98,7 +98,7 @@ public:
   void send_boundary_horizontal_v(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
   void receive_boundary_vertical_v(MPI_Request& current_request, int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);
   void receive_boundary_horizontal_v(MPI_Request& current_request, int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing);
-  
+
   void send_boundary_vertical_f(int direction, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing);
   void send_boundary_horizontal_f(int direction, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing);
   void receive_boundary_vertical_f(MPI_Request& current_request, int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing);

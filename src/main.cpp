@@ -20,6 +20,10 @@ int main(int argc, char *argv[])
 
 
   MPI_Init(&argc, &argv);
+
+  int MPI_rank;
+  MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
+
   ComputationParallel comp;
   comp.initialize(argc, argv);
   time_t startTime;
@@ -29,11 +33,11 @@ int main(int argc, char *argv[])
   std::cout << "EndTime: "<< time(&endTime) << std::endl;
   std::cout << "Difference: " << -(startTime-endTime) << std::endl;
 
-  std::cout << "here we are 130: "  << std::endl;
+  std::cout << "here we are 130: "  << MPI_rank << std::endl;
 
 
   MPI_Finalize();
-  std::cout << "here we are 131: "  << std::endl;
+  std::cout << "here we are 131: " << MPI_rank  << std::endl;
 
   return EXIT_SUCCESS;
 }

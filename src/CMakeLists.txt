@@ -29,7 +29,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR})
 message("Including ${PROJECT_SOURCE_DIR}")
 
 # Search for the external package "VTK"
-find_package(VTK REQUIRED HINTS C:/Program Files/VTK 7.1.1/bin)
+find_package(VTK)
 
 # Output various cmake variables for demonstration purpose
 message("If VTK was found on the system: VTK_FOUND: ${VTK_FOUND}")

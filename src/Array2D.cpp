@@ -22,6 +22,8 @@ double &Array2D::operator()(int i, int j)
   const int index = j*size_[0] + i;
   // std::cout << "i" << i  << "j" << j << std::endl;
   // std::cout << size_[0] << size_[1] << std::endl;
+  // std::cout << data_.size() << std::endl;
+
   // assert that indices are in range
   assert(0 <= i && i < size_[0]);
   assert(0 <= j && j < size_[1]);

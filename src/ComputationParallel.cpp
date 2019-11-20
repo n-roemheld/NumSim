@@ -8,25 +8,30 @@
 #include <vector>
 
 #include <iostream>
+#include <mpi.h>
 
 void ComputationParallel::initialize (int argc, char *argv[])
 {
-  //Computation::initialize (int argc, char *argv[]);
+  int MPI_rank =0;
+  MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
+
   settings_.loadFromFile(argv[1]);
   std::array<int,2> nCellsGlobal = settings_.nCells;
+  std::cout << MPI_rank<< "here we are 765909896: " << nCellsGlobal[0] << nCellsGlobal[1] << std::endl;
+
 	// computing meshWidth (everywhere with global values)
 	double dx = settings_.physicalSize[0]/nCellsGlobal[0];
 	double dy = settings_.physicalSize[1]/nCellsGlobal[1];
 	meshWidth_ = {dx, dy};
   Partitioning parti;
+  std::cout << MPI_rank<< "here we are Alpha: " << nCellsGlobal[0] << nCellsGlobal[1] << std::endl;
 
     // Number of processes determined by command line
     // Get the number of processes
     int MPI_n_processes = 0;
     MPI_Comm_size(MPI_COMM_WORLD, &MPI_n_processes);
     // Get the rank of the process
-    int MPI_rank =0;
-    MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
+
     std::cout << "here we are" << MPI_rank << std::endl;
 
     // compute nCells and assign physical relationships
@@ -55,9 +60,12 @@ void ComputationParallel::initialize (int argc, char *argv[])
                 }
             }
         }
-        // Number of partitions in both dimensions
+        // // Number of partitions in both dimensions
+        // MPI_n_processes = 1; //PFUSCH!!!!!!!!!!!
         int n_pars_x = divisor_best;
         int n_pars_y = MPI_n_processes/divisor_best;
+        std::cout << MPI_rank<< "here we are beta: " << nCellsGlobal[0] << nCellsGlobal[1] << std::endl;
+        std::cout << MPI_rank<< "here we are gormund: " << n_pars_x << n_pars_y << std::endl;
 
         // Number of cells in each partiotion except the last one
         int n_Cells_sub_x = int (nCellsGlobal[0] / n_pars_x);
@@ -85,9 +93,12 @@ void ComputationParallel::initialize (int argc, char *argv[])
                 if (i == 0 && j == 0)
                 {
                     std::array<int,4> ranks_neighbors = {ranks_domain[i][j-1], ranks_domain[i+1][j], ranks_domain[i][j+1], ranks_domain[i-1][j]}; // bottom, right, upper, left; caution: check for limits (boundaries)!
-                    std::array<bool,4> is_boundary ={ (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
+                    std::array<int,4> is_boundary ={ (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
                     std::array<int,2> nCells_sub = {n_Cells_sub_x,n_Cells_sub_y};
                     std::array<int,2> nodeOffset = {n_Cells_sub_x*i, n_Cells_sub_y*j};
+
+                    settings_.printSettings();
+                    std::cout << MPI_rank<< "here we are 7656: " << nCellsGlobal[0] << nCellsGlobal[1] << std::endl;
 
                     // setting nCellsGlobal and overwriting nCells for rank 0
                     parti = Partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub, nCellsGlobal, nodeOffset);
@@ -97,8 +108,10 @@ void ComputationParallel::initialize (int argc, char *argv[])
                 }
                 else
                 {
+                  std::cout << MPI_rank<< "here we are gamma: " << nCellsGlobal[0] << nCellsGlobal[1] << std::endl;
+
                     std::array<int,4> ranks_neighbors = {ranks_domain[i][j-1], ranks_domain[i+1][j], ranks_domain[i][j+1], ranks_domain[i-1][j]}; // bottom, right, upper, left; caution: check for limits (boundaries)!
-                    std::array<bool,4> is_boundary = { (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
+                    std::array<int,4> is_boundary = { (j-1) == -1, (i+1) == n_pars_x, (j+1) == n_pars_y, (i-1) == -1};
                     std::array<int,2> nCells_sub = {0,0};
                     std::array<int,2> nodeOffset = {n_Cells_sub_x*i, n_Cells_sub_y*j};
                     if (j == n_pars_y) {
@@ -113,16 +126,19 @@ void ComputationParallel::initialize (int argc, char *argv[])
                     }
 
                     // send part to partition ranks_domain(i,j) or store in arrays and broadcast
-                    MPI_Request current_request;
-                    MPI_Isend(&ranks_neighbors, 4, MPI_INT, ranks_domain[i][j],0,MPI_COMM_WORLD, &current_request);
-                    MPI_Request_free(&current_request);
-                    MPI_Isend(&is_boundary, 4, MPI_INT, ranks_domain[i][j],1,MPI_COMM_WORLD, &current_request);
-                    MPI_Request_free(&current_request);
-                    MPI_Isend(&nCells_sub, 2, MPI_INT, ranks_domain[i][j],2,MPI_COMM_WORLD, &current_request);
-                    MPI_Request_free(&current_request);
+                    MPI_Request current_request_neighbors;
+                    MPI_Isend(&ranks_neighbors, 4, MPI_INT, ranks_domain[i][j],0,MPI_COMM_WORLD, &current_request_neighbors);
+                    MPI_Request_free(&current_request_neighbors);
+                    MPI_Request current_request_boundary;
+                    MPI_Isend(&is_boundary, 4, MPI_INT, ranks_domain[i][j],1,MPI_COMM_WORLD, &current_request_boundary);
+                    MPI_Request_free(&current_request_boundary);
+                    MPI_Request current_request_cells;
+                    MPI_Isend(&nCells_sub, 2, MPI_INT, ranks_domain[i][j],2,MPI_COMM_WORLD, &current_request_cells);
+                    MPI_Request_free(&current_request_cells);
                    // hier sent einf�gen f�r nodeOffset
-                    MPI_Isend(&nodeOffset, 2, MPI_INT, ranks_domain[i][j], 3, MPI_COMM_WORLD, &current_request);
-                    MPI_Request_free(&current_request);
+                   MPI_Request current_request_nodes;
+                    MPI_Isend(&nodeOffset, 2, MPI_INT, ranks_domain[i][j], 3, MPI_COMM_WORLD, &current_request_nodes);
+                    MPI_Request_free(&current_request_nodes);
                 }
             }
         }
@@ -130,21 +146,36 @@ void ComputationParallel::initialize (int argc, char *argv[])
     }
     else
     {
+      std::cout << MPI_rank<< "here we are delta: " << nCellsGlobal[0] << nCellsGlobal[1] << std::endl;
+
         std::array<int,4> ranks_neighbors; // bottom, right, upper, left; caution: check for limits (boundaries)!
-        std::array<bool,4> is_boundary;
+        std::array<int,4> is_boundary;
         std::array<int,2> nCells_sub;
         std::array<int,2> nodeOffset;
         std::vector<MPI_Request> requests;
-        MPI_Request current_request;
-        MPI_Irecv(&ranks_neighbors, 4, MPI_INT, 0, 0, MPI_COMM_WORLD, &current_request);
-        requests.push_back(current_request);
-        MPI_Irecv(&is_boundary, 4, MPI_INT, 0, 1, MPI_COMM_WORLD, &current_request);
-        requests.push_back(current_request);
-        MPI_Irecv(&nCells_sub, 2, MPI_INT, 0, 2, MPI_COMM_WORLD, &current_request);
-        requests.push_back(current_request);
-        MPI_Irecv(&nodeOffset, 2, MPI_INT, 0, 3, MPI_COMM_WORLD, &current_request);
-        requests.push_back(current_request);
+        MPI_Request current_request_neighbors;
+        MPI_Irecv(&ranks_neighbors, 4, MPI_INT, 0, 0, MPI_COMM_WORLD, &current_request_neighbors);
+        requests.push_back(current_request_neighbors);
+        MPI_Request current_request_boundary;
+        // MPI_Recv(&is_boundary, 4, MPI_INT, 0, 1, MPI_COMM_WORLD,  MPI_STATUS_IGNORE);
+        MPI_Irecv(&is_boundary, 4, MPI_INT, 0, 1, MPI_COMM_WORLD, &current_request_boundary);
+        requests.push_back(current_request_boundary);
+        MPI_Request current_request_cells;
+          // std::cout << MPI_rank<< "here we are bravo: " << nCellsGlobal[0] << nCellsGlobal[1] << std::endl;
+
+        MPI_Irecv(&nCells_sub, 2, MPI_INT, 0, 2, MPI_COMM_WORLD, &current_request_cells);
+        requests.push_back(current_request_cells);
+        MPI_Request current_request_nodes;
+        // std::cout << MPI_rank<< "here we are charlie: " << nCellsGlobal[0] << nCellsGlobal[1] << std::endl;
+
+        MPI_Irecv(&nodeOffset, 2, MPI_INT, 0, 3, MPI_COMM_WORLD, &current_request_nodes);
+        requests.push_back(current_request_nodes);
+        // std::cout << MPI_rank<< "here we are echo: " << nCellsGlobal[0] << nCellsGlobal[1] << std::endl;
+
         MPI_Waitall(requests.size(), requests.data(), MPI_STATUSES_IGNORE);
+        std::cout << MPI_rank<< "here we are foxtrott: " << nCellsGlobal[0] << nCellsGlobal[1] << std::endl;
+
+        std::cout << MPI_rank<< "here we are 7656: " << nCellsGlobal[0] << nCellsGlobal[1] << std::endl;
 
         // setting nCellsGlobal and overwriting nCells for all ranks except 0
         parti = Partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells_sub, nCellsGlobal, nodeOffset);
@@ -176,6 +207,10 @@ void ComputationParallel::initialize (int argc, char *argv[])
   	}
 
   	//initialize outputWriters
+    outputWriterParaview_ = std::make_unique<OutputWriterParaview>(discretization_, parti);
+    outputWriterText_ = std::make_unique<OutputWriterText>(discretization_, parti);
+
+
    	outputWriterParaviewParallel_ = std::make_unique<OutputWriterParaviewParallel>(discretization_, parti);
   	outputWriterTextParallel_ = std::make_unique<OutputWriterTextParallel>(discretization_, parti);
 
@@ -190,22 +225,24 @@ void ComputationParallel::runSimulation ()
 	double time = 0;
   int MPI_rank;
   MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
-  std::cout << "here we are 2: " << MPI_rank << std::endl;
+  // std::cout << "here we are 2: " << MPI_rank << std::endl;
 	while(time<settings_.endTime)
 	{
 		applyBoundaryValues();
-    std::cout << "here we are 3: " << MPI_rank << std::endl;
+    // std::cout << "here we are 3: " << MPI_rank << std::endl;
 
-		// std::cout << "time" << time << std::endl;
+		std::cout << "time" << time << std::endl;
 		// compute dt_ and time
 		computeTimeStepWidth();
-    std::cout << "here we are 4: " << MPI_rank << std::endl;
+    // std::cout << "here we are 4: " << MPI_rank << std::endl;
 
 		if(time+dt_>settings_.endTime) dt_ = settings_.endTime - time;
 		time += dt_;
-		//std::cout << "time_step" << dt_ << std::endl;
+		std::cout << "time_step" << dt_ << std::endl;
 
-    std::cout << "here we are 5: " << MPI_rank << std::endl;
+    //PFUSCH
+    dt_ = settings_.endTime - time;
+    // std::cout << "here we are 5: " << MPI_rank << std::endl;
 
 
 		// compute f and g
@@ -229,8 +266,11 @@ void ComputationParallel::runSimulation ()
 
     std::cout << "here we are 9: " << MPI_rank << std::endl;
 
+    // outputWriterParaview_->writeFile(time);
 
 		outputWriterParaviewParallel_->writeFile(time);
+    std::cout << "here we are 10: " << MPI_rank << std::endl;
+
 		outputWriterTextParallel_->writeFile(time);
 		outputWriterTextParallel_->writePressureFile();
 	}
@@ -248,12 +288,12 @@ void ComputationParallel::computeTimeStepWidth ()
 void ComputationParallel::computePreliminaryVelocities ()
 {
   int MPI_rank;
-  MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
-  std::cout << "here we are 5.1: " << MPI_rank << std::endl;
+  // MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
+  // std::cout << "here we are 5.1: " << MPI_rank << std::endl;
     Computation::computePreliminaryVelocities ();
-      std::cout << "here we are 5.2: " << MPI_rank << std::endl;
+      // std::cout << "here we are 5.2: " << MPI_rank << std::endl;
     preliminaryVelocity_communication();
-      std::cout << "here we are 5.3: " << MPI_rank << std::endl;
+      // std::cout << "here we are 5.3: " << MPI_rank << std::endl;
 };
 
 void ComputationParallel::computeVelocities()
@@ -290,44 +330,58 @@ void ComputationParallel::finalVelocity_communication() //NUR Kommunikation von 
     // communicate to left
     discretization_->send_boundary_horizontal_u(to_left, discretization_->uIBegin(), discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
 
-    // G Communication (Send)
-    // communicate to right
-    discretization_->send_boundary_horizontal_v(to_right + 4, discretization_->vIEnd()-1, discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(right), discretization_->is_boundary(right));
-    // communicate to left
-    discretization_->send_boundary_horizontal_v(to_left + 4, discretization_->vIBegin(), discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(left), discretization_->is_boundary(left));
+    // // G Communication (Send)
+    // // communicate to right
+    // discretization_->send_boundary_horizontal_v(to_right + 4, discretization_->vIEnd()-1, discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(right), discretization_->is_boundary(right));
+    // // communicate to left
+    // discretization_->send_boundary_horizontal_v(to_left + 4, discretization_->vIBegin(), discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(left), discretization_->is_boundary(left));
 
     std::cout << "here we are 6.2.2: " << MPI_rank << std::endl;
 
     std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
 
 
-    // Receiving F
-    MPI_Request current_request;
+    // Receiving U
     // from right
-    discretization_->receive_boundary_horizontal_u(current_request, to_left, discretization_->uIEnd()-1, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(right), discretization_->is_boundary(right));
+    MPI_Request request_f_right;
+    discretization_->receive_boundary_horizontal_u(request_f_right, to_left, discretization_->uIEnd()-1, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(right), discretization_->is_boundary(right));
     std::cout << "is_boundary(right): " << discretization_->is_boundary(right) << MPI_rank << std::endl;
-    if(!discretization_->is_boundary(right)) requests_horizontal.push_back(current_request);
+    if(!discretization_->is_boundary(right))
+    {
+       requests_horizontal.push_back(request_f_right);
+     }
+     else{
+       // MPI_Request_free(&request_f_right);
+     }
 
     std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
 
     // from left
-    discretization_->receive_boundary_horizontal_u(current_request, to_right, discretization_->uIBegin()-1, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
-    if(!discretization_->is_boundary(left)) requests_horizontal.push_back(current_request);
+    MPI_Request request_f_left;
+    discretization_->receive_boundary_horizontal_u(request_f_left, to_right, discretization_->uIBegin()-1, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
+    if(!discretization_->is_boundary(left)){
+      requests_horizontal.push_back(request_f_left);
+    }
+    else{
+      // MPI_Request_free(&request_f_left);
+    }
 
     std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
 
 
-    // Receiving G
-    // from right
-    discretization_->receive_boundary_horizontal_v(current_request, to_left + 4, discretization_->vIEnd(), discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(right), discretization_->is_boundary(right));
-    if(!discretization_->is_boundary(right)) requests_horizontal.push_back(current_request);
-    // from left
-    discretization_->receive_boundary_horizontal_v(current_request, to_right + 4, discretization_->vIBegin()-1, discretization_->vJBegin(), discretization_->vJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
-    if(!discretization_->is_boundary(left)) requests_horizontal.push_back(current_request);
-
-    std::cout << "here we are 6.2.3: " << MPI_rank << std::endl;
-
-    std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
+    // // Receiving G
+    // // from right
+    // MPI_Request request_g_right;
+    // discretization_->receive_boundary_horizontal_v(request_g_right, to_left + 4, discretization_->vIEnd(), discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(right), discretization_->is_boundary(right));
+    // if(!discretization_->is_boundary(right)) requests_horizontal.push_back(request_g_right);
+    // // from left
+    // MPI_Request request_g_left;
+    // discretization_->receive_boundary_horizontal_v(request_g_left, to_right + 4, discretization_->vIBegin()-1, discretization_->vJBegin(), discretization_->vJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
+    // if(!discretization_->is_boundary(left)) requests_horizontal.push_back(request_g_left);
+    //
+    // std::cout << "here we are 6.2.3: " << MPI_rank << std::endl;
+    //
+    // std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
 
     MPI_Waitall(requests_horizontal.size(), requests_horizontal.data() ,MPI_STATUSES_IGNORE);
 
@@ -342,31 +396,66 @@ void ComputationParallel::finalVelocity_communication() //NUR Kommunikation von 
     // communicate to above
     discretization_->send_boundary_vertical_u(up, discretization_->uJEnd()-1, discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
 
-    // G Communication (send)
-    // communicate to below
-    discretization_->send_boundary_vertical_g(down + 4, discretization_->vJBegin(), discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
-    // communicate to above
-    discretization_->send_boundary_vertical_g(up + 4, discretization_->vJEnd()-2, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
+    // // G Communication (send)
+    // // communicate to below
+    // discretization_->send_boundary_vertical_g(down + 4, discretization_->vJBegin(), discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
+    // // communicate to above
+    // discretization_->send_boundary_vertical_g(up + 4, discretization_->vJEnd()-2, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
 
     // F Communication (receive)
     // from below
-    discretization_->receive_boundary_vertical_u(current_request, up, discretization_->uJBegin()-1, discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
-    if(!discretization_->is_boundary(below)) requests_vertical.push_back(current_request);
+    MPI_Request request_f_below;
+    discretization_->receive_boundary_vertical_u(request_f_below, up, discretization_->uJBegin()-1, discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
+    std::cout << "here we are 6.2.4,01: " << MPI_rank << std::endl;
+
+    if(!discretization_->is_boundary(below))
+    {
+      requests_vertical.push_back(request_f_below);
+    }
+    else
+    {
+      // MPI_Request_free(&request_f_below);
+    }
+    std::cout << "here we are 6.2.4,1: " << MPI_rank << std::endl;
+
     // from above
-    discretization_->receive_boundary_vertical_u(current_request, down, discretization_->uJEnd(), discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
-    if(!discretization_->is_boundary(above)) requests_vertical.push_back(current_request);
+    MPI_Request request_f_above;
+    discretization_->receive_boundary_vertical_u(request_f_above, down, discretization_->uJEnd(), discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
+    std::cout << "here we are 6.2.4,2: " << MPI_rank << std::endl;
+
+    if(!discretization_->is_boundary(above))
+    {
+      requests_vertical.push_back(request_f_above);
+    }
+    else
+    {
+      // MPI_Request_free(&request_f_above);
+    }
+    std::cout << "here we are 6.2.4,5: " << MPI_rank << std::endl;
+
+    std::cout << "request_length: " << requests_vertical.size() << MPI_rank << std::endl;
+
 
     // G Communication (receive)
     // from below
-    discretization_->receive_boundary_vertical_g(current_request, up + 4, discretization_->vJBegin()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
-    if(!discretization_->is_boundary(below)) requests_vertical.push_back(current_request);
-    // from above
-    discretization_->receive_boundary_vertical_g(current_request, down + 4, discretization_->vJEnd()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
-    if(!discretization_->is_boundary(above)) requests_vertical.push_back(current_request);
-    std::cout << "here we are 6.2.5: " << MPI_rank << std::endl;
+    // MPI_Request request_g_below;
+    // discretization_->receive_boundary_vertical_g(request_g_below, up + 4, discretization_->vJBegin()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
+    // if(!discretization_->is_boundary(below)) requests_vertical.push_back(request_g_below);
+    // // from above
+    //
+    // std::cout << "request_length: " << requests_vertical.size() << MPI_rank << std::endl;
+    //
+    //
+    // MPI_Request request_g_above;
+    // discretization_->receive_boundary_vertical_g(request_g_above, down + 4, discretization_->vJEnd()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
+    // if(!discretization_->is_boundary(above)) requests_vertical.push_back(request_g_above);
+    // std::cout << "here we are 6.2.5: " << MPI_rank << std::endl;
+    //
+    // std::cout << "request_length: " << requests_vertical.size() << MPI_rank << std::endl;
 
+    std::cout << "request_length: " << requests_vertical.data() << " " << MPI_rank << std::endl;
 
-    MPI_Waitall(requests_vertical.size(), requests_vertical.data(),MPI_STATUSES_IGNORE);
+    MPI_Waitall(requests_vertical.size(), requests_vertical.data(), MPI_STATUSES_IGNORE);
 
     std::cout << "here we are 6.2.6: " << MPI_rank << std::endl;
 
@@ -374,111 +463,125 @@ void ComputationParallel::finalVelocity_communication() //NUR Kommunikation von 
 
 void ComputationParallel::preliminaryVelocity_communication() //NUR Kommunikation von f und g, was ist mit u und v???
 {
-  int MPI_rank;
-  MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
-  std::cout << "here we are 5.2.1: " << MPI_rank << std::endl;
-    // neigbor indices
-    int below = 0;
-    int above = 2;
-    int right = 1;
-    int left = 3;
-
-    // MPI tags of information sent (communication directions)
-    int down = 0;
-    int to_right = 1;
-    int up = 2;
-    int to_left = 3;
-
-    // Communication horizontal first, then vertical!! // warum?
-
-    // HORIZONTAL COMMUNICATION
-    std::vector<MPI_Request> requests_horizontal;
-
-    // F Communication (Send)
-    // communicate to right
-    discretization_->send_boundary_horizontal_f(to_right, discretization_->uIEnd()-2, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(right), discretization_->is_boundary(right));
-    // communicate to left
-    discretization_->send_boundary_horizontal_f(to_left, discretization_->uIBegin(), discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
-
-    // G Communication (Send)
-    // communicate to right
-    discretization_->send_boundary_horizontal_g(to_right + 4, discretization_->vIEnd()-1, discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(right), discretization_->is_boundary(right));
-    // communicate to left
-    discretization_->send_boundary_horizontal_g(to_left + 4, discretization_->vIBegin(), discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(left), discretization_->is_boundary(left));
-
-    std::cout << "here we are 5.2.2: " << MPI_rank << std::endl;
-
-    std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
-
-
-    // Receiving F
-    MPI_Request current_request;
-    // from right
-    discretization_->receive_boundary_horizontal_f(current_request, to_left, discretization_->uIEnd()-1, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(right), discretization_->is_boundary(right));
-    std::cout << "is_boundary(right): " << discretization_->is_boundary(right) << MPI_rank << std::endl;
-    if(!discretization_->is_boundary(right)) requests_horizontal.push_back(current_request);
-
-    std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
-
-    // from left
-    discretization_->receive_boundary_horizontal_f(current_request, to_right, discretization_->uIBegin()-1, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
-    if(!discretization_->is_boundary(left)) requests_horizontal.push_back(current_request);
-
-    std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
-
-
-    // Receiving G
-    // from right
-    discretization_->receive_boundary_horizontal_g(current_request, to_left + 4, discretization_->vIEnd(), discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(right), discretization_->is_boundary(right));
-    if(!discretization_->is_boundary(right)) requests_horizontal.push_back(current_request);
-    // from left
-    discretization_->receive_boundary_horizontal_g(current_request, to_right + 4, discretization_->vIBegin()-1, discretization_->vJBegin(), discretization_->vJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
-    if(!discretization_->is_boundary(left)) requests_horizontal.push_back(current_request);
-
-    std::cout << "here we are 5.2.3: " << MPI_rank << std::endl;
-
-    std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
-
-    MPI_Waitall(requests_horizontal.size(), requests_horizontal.data() ,MPI_STATUSES_IGNORE);
-
-    std::cout << "here we are 5.2.4: " << MPI_rank << std::endl;
-
-    // VERTICAL COMMUNICATION
-    std::vector<MPI_Request> requests_vertical;
-
-    // F Communication (Send)
-    // communicate to below
-    discretization_->send_boundary_vertical_f(down, discretization_->uJBegin(), discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
-    // communicate to above
-    discretization_->send_boundary_vertical_f(up, discretization_->uJEnd()-1, discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
-
-    // G Communication (send)
-    // communicate to below
-    discretization_->send_boundary_vertical_g(down + 4, discretization_->vJBegin(), discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
-    // communicate to above
-    discretization_->send_boundary_vertical_g(up + 4, discretization_->vJEnd()-2, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
-
-    // F Communication (receive)
-    // from below
-    discretization_->receive_boundary_vertical_f(current_request, up, discretization_->uJBegin()-1, discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
-    if(!discretization_->is_boundary(below)) requests_vertical.push_back(current_request);
-    // from above
-    discretization_->receive_boundary_vertical_f(current_request, down, discretization_->uJEnd(), discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
-    if(!discretization_->is_boundary(above)) requests_vertical.push_back(current_request);
-
-    // G Communication (receive)
-    // from below
-    discretization_->receive_boundary_vertical_g(current_request, up + 4, discretization_->vJBegin()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
-    if(!discretization_->is_boundary(below)) requests_vertical.push_back(current_request);
-    // from above
-    discretization_->receive_boundary_vertical_g(current_request, down + 4, discretization_->vJEnd()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
-    if(!discretization_->is_boundary(above)) requests_vertical.push_back(current_request);
-    std::cout << "here we are 5.2.5: " << MPI_rank << std::endl;
-
-
-    MPI_Waitall(requests_vertical.size(), requests_vertical.data(),MPI_STATUSES_IGNORE);
-
-    std::cout << "here we are 5.2.6: " << MPI_rank << std::endl;
+  // int MPI_rank;
+  // MPI_Comm_rank(MPI_COMM_WORLD, &MPI_rank);
+  // std::cout << "here we are 5.2.1: " << MPI_rank << std::endl;
+  //   // neigbor indices
+  //   int below = 0;
+  //   int above = 2;
+  //   int right = 1;
+  //   int left = 3;
+  //
+  //   // MPI tags of information sent (communication directions)
+  //   int down = 0;
+  //   int to_right = 1;
+  //   int up = 2;
+  //   int to_left = 3;
+  //
+  //   // Communication horizontal first, then vertical!! // warum?
+  //
+  //   // HORIZONTAL COMMUNICATION
+  //   std::vector<MPI_Request> requests_horizontal;
+  //
+  //   // F Communication (Send)
+  //   // communicate to right
+  //   discretization_->send_boundary_horizontal_f(to_right, discretization_->uIEnd()-2, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(right), discretization_->is_boundary(right));
+  //   // communicate to left
+  //   discretization_->send_boundary_horizontal_f(to_left, discretization_->uIBegin(), discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
+  //
+  //   // G Communication (Send)
+  //   // communicate to right
+  //   discretization_->send_boundary_horizontal_g(to_right + 4, discretization_->vIEnd()-1, discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(right), discretization_->is_boundary(right));
+  //   // communicate to left
+  //   discretization_->send_boundary_horizontal_g(to_left + 4, discretization_->vIBegin(), discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(left), discretization_->is_boundary(left));
+  //
+  //   std::cout << "here we are 5.2.2: " << MPI_rank << std::endl;
+  //
+  //   std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
+  //
+  //
+  //   // Receiving F
+  //   MPI_Request current_request;
+  //   // from right
+  //   discretization_->receive_boundary_horizontal_f(current_request, to_left, discretization_->uIEnd()-1, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(right), discretization_->is_boundary(right));
+  //   std::cout << "is_boundary(right): " << discretization_->is_boundary(right) << MPI_rank << std::endl;
+  //   if(!discretization_->is_boundary(right)) requests_horizontal.push_back(current_request);
+  //
+  //   std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
+  //
+  //   // from left
+  //   discretization_->receive_boundary_horizontal_f(current_request, to_right, discretization_->uIBegin()-1, discretization_->uJBegin(), discretization_->uJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
+  //   if(!discretization_->is_boundary(left)) requests_horizontal.push_back(current_request);
+  //
+  //   std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
+  //
+  //
+  //   // Receiving G
+  //   // from right
+  //   discretization_->receive_boundary_horizontal_g(current_request, to_left + 4, discretization_->vIEnd(), discretization_->vJBegin(), discretization_->vJEnd()-1, discretization_->rank_neighbor(right), discretization_->is_boundary(right));
+  //   if(!discretization_->is_boundary(right)) requests_horizontal.push_back(current_request);
+  //   // from left
+  //   discretization_->receive_boundary_horizontal_g(current_request, to_right + 4, discretization_->vIBegin()-1, discretization_->vJBegin(), discretization_->vJEnd(), discretization_->rank_neighbor(left), discretization_->is_boundary(left));
+  //   if(!discretization_->is_boundary(left)) requests_horizontal.push_back(current_request);
+  //
+  //   std::cout << "here we are 5.2.3: " << MPI_rank << std::endl;
+  //
+  //   std::cout << "request_length: " << requests_horizontal.size() << MPI_rank << std::endl;
+  //
+  //   MPI_Waitall(requests_horizontal.size(), requests_horizontal.data() ,MPI_STATUSES_IGNORE);
+  //
+  //   std::cout << "here we are 5.2.4: " << MPI_rank << std::endl;
+  //
+  //   // VERTICAL COMMUNICATION
+  //   std::vector<MPI_Request> requests_vertical;
+  //
+  //   // F Communication (Send)
+  //   // communicate to below
+  //   discretization_->send_boundary_vertical_f(down, discretization_->uJBegin(), discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
+  //   // communicate to above
+  //   discretization_->send_boundary_vertical_f(up, discretization_->uJEnd()-1, discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
+  //
+  //   // G Communication (send)
+  //   // communicate to below
+  //   discretization_->send_boundary_vertical_g(down + 4, discretization_->vJBegin(), discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
+  //   // communicate to above
+  //   discretization_->send_boundary_vertical_g(up + 4, discretization_->vJEnd()-2, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
+  //
+  //   std::cout << "request_length: " << requests_vertical.size() << MPI_rank << std::endl;
+  //
+  //
+  //   // F Communication (receive)
+  //   // from below
+  //   discretization_->receive_boundary_vertical_f(current_request, up, discretization_->uJBegin()-1, discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
+  //   if(!discretization_->is_boundary(below)) requests_vertical.push_back(current_request);
+  //   // MPI_Request_free(&current_request);
+  //
+  //   std::cout << "Arequest_length: " << requests_vertical.size() << MPI_rank << std::endl;
+  //
+  //   // from above
+  //   discretization_->receive_boundary_vertical_f(current_request, down, discretization_->uJEnd(), discretization_->uIBegin(), discretization_->uIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
+  //   if(!discretization_->is_boundary(above)) requests_vertical.push_back(current_request);
+  //   // MPI_Request_free(&current_request);
+  //
+  //   std::cout << "Arequest_length: " << requests_vertical.size() << MPI_rank << std::endl;
+  //
+  //
+  //   // G Communication (receive)
+  //   // from below
+  //   discretization_->receive_boundary_vertical_g(current_request, up + 4, discretization_->vJBegin()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(below), discretization_->is_boundary(below));
+  //   if(!discretization_->is_boundary(below)) requests_vertical.push_back(current_request);
+  //   // from above
+  //   discretization_->receive_boundary_vertical_g(current_request, down + 4, discretization_->vJEnd()-1, discretization_->vIBegin()-1, discretization_->vIEnd(), discretization_->rank_neighbor(above), discretization_->is_boundary(above));
+  //   if(!discretization_->is_boundary(above)) requests_vertical.push_back(current_request);
+  //   std::cout << "here we are 5.2.5: " << MPI_rank << std::endl;
+  //
+  //   std::cout << "Arequest_length: " << requests_vertical.size() << MPI_rank << std::endl;
+  //
+  //   MPI_Waitall(requests_vertical.size(), requests_vertical.data(),MPI_STATUSES_IGNORE);
+  //
+  //   std::cout << "Arequest_length: " << requests_vertical.size() << MPI_rank << std::endl;
+  //
+  //   std::cout << "here we are 5.2.6: " << MPI_rank << std::endl;
 
 };
 

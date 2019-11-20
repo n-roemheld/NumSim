@@ -170,7 +170,7 @@ int StaggeredGrid::pJEnd() const
 	return nCells_[1] + 1;
 };
 
-// void StaggeredGrid::set_partitioning(int MPI_rank, std::array<int,4> ranks_neighbors, std::array<bool,4> is_boundary, std::array<int,2> nCells, std::array<int,2> nCellsGlobal)
+// void StaggeredGrid::set_partitioning(int MPI_rank, std::array<int,4> ranks_neighbors, std::array<int,4> is_boundary, std::array<int,2> nCells, std::array<int,2> nCellsGlobal)
 //   {
 //     partitioning_ = Partitioning(MPI_rank, ranks_neighbors, is_boundary, nCells, nCellsGlobal);
 //   };
@@ -187,7 +187,7 @@ int StaggeredGrid::rank_neighbor(int direction)
 
 bool StaggeredGrid::is_boundary(int direction) const
 {
-    return partitioning_.is_boundary(direction);
+    return partitioning_.is_boundary(direction)==1;
 };
 
 std::array<int,2> StaggeredGrid::nCells()
@@ -205,42 +205,42 @@ std::array<int,2> StaggeredGrid::nCellsGlobal()
 // 	return partitioning_;
 //   };
 
-// const	Partitioning partitioning()
+// const	Partitioning& partitioning()
 //   {
 // 	return partitioning_;
 //   };
 
 void StaggeredGrid::send_boundary_vertical_u(int tag, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> send_buffer(i_end - i_begin);
-        int bi = 0;
-        for(int i = i_begin; i < i_end; i++)
-        {
-            send_buffer[bi] = u(i,j_fixed);
-            bi++;
-        }
-				MPI_Request request;
-        MPI_Isend(&send_buffer, i_end-i_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
-				MPI_Request_free(&request);
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> send_buffer(i_end - i_begin);
+    //     int bi = 0;
+    //     for(int i = i_begin; i < i_end; i++)
+    //     {
+    //         send_buffer[bi] = u(i,j_fixed);
+    //         bi++;
+    //     }
+		// 		MPI_Request request;
+    //     MPI_Isend(&send_buffer, i_end-i_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
+		// 		MPI_Request_free(&request);
+    // }
 };
 void StaggeredGrid::send_boundary_vertical_v(int tag, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> send_buffer(i_end - i_begin);
-        int bi = 0;
-        for(int i = i_begin; i < i_end; i++)
-        {
-            send_buffer[bi] = v(i,j_fixed);
-            bi++;
-        }
-				MPI_Request request;
-        MPI_Isend(&send_buffer, i_end-i_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
-				MPI_Request_free(&request);
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> send_buffer(i_end - i_begin);
+    //     int bi = 0;
+    //     for(int i = i_begin; i < i_end; i++)
+    //     {
+    //         send_buffer[bi] = v(i,j_fixed);
+    //         bi++;
+    //     }
+		// 		MPI_Request request;
+    //     MPI_Isend(&send_buffer, i_end-i_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
+		// 		MPI_Request_free(&request);
+    // }
 };
 void StaggeredGrid::send_boundary_vertical_f(int tag, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing)
 {
@@ -253,75 +253,75 @@ void StaggeredGrid::send_boundary_vertical_f(int tag, int j_fixed, int i_begin, 
             send_buffer[bi] = f(i,j_fixed);
             bi++;
         }
-				MPI_Request request;
-        MPI_Isend(&send_buffer, i_end-i_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
-				MPI_Request_free(&request);
+				// MPI_Request request;
+        // MPI_Isend(&send_buffer, i_end-i_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
+				// MPI_Request_free(&request);
     }
 };
 void StaggeredGrid::send_boundary_vertical_g(int tag, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> send_buffer(i_end - i_begin);
-        int bi = 0;
-        for(int i = i_begin; i < i_end; i++)
-        {
-            send_buffer[bi] = g(i,j_fixed);
-            bi++;
-        }
-				MPI_Request request;
-        MPI_Isend(&send_buffer, i_end-i_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
-				MPI_Request_free(&request);
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> send_buffer(i_end - i_begin);
+    //     int bi = 0;
+    //     for(int i = i_begin; i < i_end; i++)
+    //     {
+    //         send_buffer[bi] = g(i,j_fixed);
+    //         bi++;
+    //     }
+		// 		MPI_Request request;
+    //     MPI_Isend(&send_buffer, i_end-i_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
+		// 		MPI_Request_free(&request);
+    // }
 };
 void StaggeredGrid::send_boundary_vertical_p(int tag, int j_fixed, int i_begin, int i_end, int target_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> send_buffer(i_end - i_begin);
-        int bi = 0;
-        for(int i = i_begin; i < i_end; i++)
-        {
-            send_buffer[bi] = p(i,j_fixed);
-            bi++;
-        }
-				MPI_Request request;
-        MPI_Isend(&send_buffer, i_end-i_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
-				MPI_Request_free(&request);
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> send_buffer(i_end - i_begin);
+    //     int bi = 0;
+    //     for(int i = i_begin; i < i_end; i++)
+    //     {
+    //         send_buffer[bi] = p(i,j_fixed);
+    //         bi++;
+    //     }
+		// 		MPI_Request request;
+    //     MPI_Isend(&send_buffer, i_end-i_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
+		// 		MPI_Request_free(&request);
+    // }
 };
 
 void StaggeredGrid::send_boundary_horizontal_u(int tag, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> send_buffer(j_end - j_begin);
-        int bj = 0;
-        for(int j = j_begin; j < j_end; j++)
-        {
-            send_buffer[bj] = u(i_fixed,j);
-            bj++;
-        }
-				MPI_Request request;
-        MPI_Isend(&send_buffer, j_end-j_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
-				MPI_Request_free(&request);
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> send_buffer(j_end - j_begin);
+    //     int bj = 0;
+    //     for(int j = j_begin; j < j_end; j++)
+    //     {
+    //         send_buffer[bj] = u(i_fixed,j);
+    //         bj++;
+    //     }
+		// 		MPI_Request request;
+    //     MPI_Isend(&send_buffer, j_end-j_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
+		// 		MPI_Request_free(&request);
+    // }
 };
 void StaggeredGrid::send_boundary_horizontal_v(int tag, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> send_buffer(j_end - j_begin);
-        int bj = 0;
-        for(int j = j_begin; j < j_end; j++)
-        {
-            send_buffer[bj] = v(i_fixed,j);
-            bj++;
-        }
-				MPI_Request request;
-        MPI_Isend(&send_buffer, j_end-j_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
-				MPI_Request_free(&request);
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> send_buffer(j_end - j_begin);
+    //     int bj = 0;
+    //     for(int j = j_begin; j < j_end; j++)
+    //     {
+    //         send_buffer[bj] = v(i_fixed,j);
+    //         bj++;
+    //     }
+		// 		MPI_Request request;
+    //     MPI_Isend(&send_buffer, j_end-j_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
+		// 		MPI_Request_free(&request);
+    // }
 };void StaggeredGrid::send_boundary_horizontal_f(int tag, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing)
 {
     if (!do_nothing)
@@ -333,41 +333,41 @@ void StaggeredGrid::send_boundary_horizontal_v(int tag, int i_fixed, int j_begin
             send_buffer[bj] = f(i_fixed,j);
             bj++;
         }
-				MPI_Request request;
-        MPI_Isend(&send_buffer, j_end-j_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
-				MPI_Request_free(&request);
+				// MPI_Request request;
+        // MPI_Isend(&send_buffer, j_end-j_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
+				// MPI_Request_free(&request);
     }
 };void StaggeredGrid::send_boundary_horizontal_g(int tag, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> send_buffer(j_end - j_begin);
-        int bj = 0;
-        for(int j = j_begin; j < j_end; j++)
-        {
-            send_buffer[bj] = g(i_fixed,j);
-            bj++;
-        }
-				MPI_Request request;
-        MPI_Isend(&send_buffer, j_end-j_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
-				MPI_Request_free(&request);
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> send_buffer(j_end - j_begin);
+    //     int bj = 0;
+    //     for(int j = j_begin; j < j_end; j++)
+    //     {
+    //         send_buffer[bj] = g(i_fixed,j);
+    //         bj++;
+    //     }
+		// 		MPI_Request request;
+    //     MPI_Isend(&send_buffer, j_end-j_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
+		// 		MPI_Request_free(&request);
+    // }
 };
 void StaggeredGrid::send_boundary_horizontal_p(int tag, int i_fixed, int j_begin, int j_end, int target_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> send_buffer(j_end - j_begin);
-        int bj = 0;
-        for(int j = j_begin; j < j_end; j++)
-        {
-            send_buffer[bj] = g(i_fixed,j);
-            bj++;
-        }
-				MPI_Request request;
-        MPI_Isend(&send_buffer, j_end-j_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
-				MPI_Request_free(&request);
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> send_buffer(j_end - j_begin);
+    //     int bj = 0;
+    //     for(int j = j_begin; j < j_end; j++)
+    //     {
+    //         send_buffer[bj] = g(i_fixed,j);
+    //         bj++;
+    //     }
+		// 		MPI_Request request;
+    //     MPI_Isend(&send_buffer, j_end-j_begin, MPI_DOUBLE, target_rank, tag, MPI_COMM_WORLD, &request);
+		// 		MPI_Request_free(&request);
+    // }
 };
 
 
@@ -388,59 +388,59 @@ void StaggeredGrid::receive_boundary_vertical_u(MPI_Request& current_request, in
 }
 void StaggeredGrid::receive_boundary_vertical_v(MPI_Request& current_request, int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> rcv_buffer;
-        MPI_Irecv(&rcv_buffer, i_end - i_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
-        int bi = 0;
-        for (int i = i_begin; i < i_end; i++)
-        {
-            v(i,j_fixed) = rcv_buffer[bi];
-            bi++;
-        }
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> rcv_buffer;
+    //     MPI_Irecv(&rcv_buffer, i_end - i_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
+    //     int bi = 0;
+    //     for (int i = i_begin; i < i_end; i++)
+    //     {
+    //         v(i,j_fixed) = rcv_buffer[bi];
+    //         bi++;
+    //     }
+    // }
 }
 void StaggeredGrid::receive_boundary_vertical_f(MPI_Request& current_request, int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> rcv_buffer;
-        MPI_Irecv(&rcv_buffer, i_end - i_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
-        int bi = 0;
-        for (int i = i_begin; i < i_end; i++)
-        {
-            f(i,j_fixed) = rcv_buffer[bi];
-            bi++;
-        }
-		}
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> rcv_buffer;
+    //     MPI_Irecv(&rcv_buffer, i_end - i_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
+    //     int bi = 0;
+    //     for (int i = i_begin; i < i_end; i++)
+    //     {
+    //         f(i,j_fixed) = rcv_buffer[bi];
+    //         bi++;
+    //     }
+		// }
 }
 void StaggeredGrid::receive_boundary_vertical_g(MPI_Request& current_request, int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> rcv_buffer;
-        MPI_Irecv(&rcv_buffer, i_end - i_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
-        int bi = 0;
-        for (int i = i_begin; i < i_end; i++)
-        {
-            g(i,j_fixed) = rcv_buffer[bi];
-            bi++;
-        }
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> rcv_buffer;
+    //     MPI_Irecv(&rcv_buffer, i_end - i_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
+    //     int bi = 0;
+    //     for (int i = i_begin; i < i_end; i++)
+    //     {
+    //         g(i,j_fixed) = rcv_buffer[bi];
+    //         bi++;
+    //     }
+    // }
 }
 void StaggeredGrid::receive_boundary_vertical_p(MPI_Request& current_request, int sender_tag, int j_fixed, int i_begin, int i_end, int source_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> rcv_buffer;
-        MPI_Irecv(&rcv_buffer, i_end - i_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
-        int bi = 0;
-        for (int i = i_begin; i < i_end; i++)
-        {
-            p(i,j_fixed) = rcv_buffer[bi];
-            bi++;
-        }
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> rcv_buffer;
+    //     MPI_Irecv(&rcv_buffer, i_end - i_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
+    //     int bi = 0;
+    //     for (int i = i_begin; i < i_end; i++)
+    //     {
+    //         p(i,j_fixed) = rcv_buffer[bi];
+    //         bi++;
+    //     }
+    // }
 }
 
 void StaggeredGrid::receive_boundary_horizontal_u(MPI_Request& current_request, int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing)
@@ -459,59 +459,59 @@ void StaggeredGrid::receive_boundary_horizontal_u(MPI_Request& current_request, 
 }
 void StaggeredGrid::receive_boundary_horizontal_v(MPI_Request& current_request, int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> rcv_buffer;
-        MPI_Irecv(&rcv_buffer, j_end - j_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
-        int bj = 0;
-        for (int j = j_begin; j < j_end; j++)
-        {
-            v(i_fixed,j) = rcv_buffer[bj];
-            bj++;
-        }
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> rcv_buffer;
+    //     MPI_Irecv(&rcv_buffer, j_end - j_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
+    //     int bj = 0;
+    //     for (int j = j_begin; j < j_end; j++)
+    //     {
+    //         v(i_fixed,j) = rcv_buffer[bj];
+    //         bj++;
+    //     }
+    // }
 }
 void StaggeredGrid::receive_boundary_horizontal_f(MPI_Request& current_request, int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> rcv_buffer;
-        MPI_Irecv(&rcv_buffer, j_end - j_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
-        int bj = 0;
-        for (int j = j_begin; j < j_end; j++)
-        {
-            f(i_fixed,j) = rcv_buffer[bj];
-            bj++;
-        }
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> rcv_buffer;
+    //     MPI_Irecv(&rcv_buffer, j_end - j_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
+    //     int bj = 0;
+    //     for (int j = j_begin; j < j_end; j++)
+    //     {
+    //         f(i_fixed,j) = rcv_buffer[bj];
+    //         bj++;
+    //     }
+    // }
 }
 void StaggeredGrid::receive_boundary_horizontal_g(MPI_Request& current_request, int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> rcv_buffer;
-        MPI_Irecv(&rcv_buffer, j_end - j_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
-        int bj = 0;
-        for (int j = j_begin; j < j_end; j++)
-        {
-            g(i_fixed,j) = rcv_buffer[bj];
-            bj++;
-        }
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> rcv_buffer;
+    //     MPI_Irecv(&rcv_buffer, j_end - j_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
+    //     int bj = 0;
+    //     for (int j = j_begin; j < j_end; j++)
+    //     {
+    //         g(i_fixed,j) = rcv_buffer[bj];
+    //         bj++;
+    //     }
+    // }
 }
 void StaggeredGrid::receive_boundary_horizontal_p(MPI_Request& current_request, int sender_tag, int i_fixed, int j_begin, int j_end, int source_rank, bool do_nothing)
 {
-    if (!do_nothing)
-    {
-        std::vector<double> rcv_buffer;
-        MPI_Irecv(&rcv_buffer, j_end - j_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
-        int bj = 0;
-        for (int j = j_begin; j < j_end; j++)
-        {
-            p(i_fixed,j) = rcv_buffer[bj];
-            bj++;
-        }
-    }
+    // if (!do_nothing)
+    // {
+    //     std::vector<double> rcv_buffer;
+    //     MPI_Irecv(&rcv_buffer, j_end - j_begin, MPI_DOUBLE, source_rank, sender_tag, MPI_COMM_WORLD, &current_request);
+    //     int bj = 0;
+    //     for (int j = j_begin; j < j_end; j++)
+    //     {
+    //         p(i_fixed,j) = rcv_buffer[bj];
+    //         bj++;
+    //     }
+    // }
 }
 
 // old non parallel version !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
