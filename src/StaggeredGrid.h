@@ -3,7 +3,7 @@
 #include <array>
 #include "FieldVariable.h"
 #include "Partitioning.h"
-
+#include <iostream>
 #include <mpi.h>
 
 class StaggeredGrid
