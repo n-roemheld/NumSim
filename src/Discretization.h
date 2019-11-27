@@ -28,5 +28,12 @@ public:
 	virtual double computeDpDx (int i, int j) const;
 
 	virtual double computeDpDy (int i, int j) const;
-};
 
+	double computeD2TDx2 (int i, int j) const;
+
+	double computeD2TDy2 (int i, int j) const;
+
+	virtual double computeDuTDx (int i, int j) const=0;
+
+	virtual double computeDvTDy (int i, int j) const=0;
+};

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<VTKFile type="ImageData" version="0.1" byte_order="LittleEndian" header_type="UInt32" compressor="vtkZLibDataCompressor">
+  <ImageData WholeExtent="0 16 0 16 0 0" Origin="0 0 0" Spacing="0.125 0.125 1">
+    <FieldData>
+      <DataArray type="Float64" Name="TIME" NumberOfTuples="1" format="binary" RangeMin="0" RangeMax="0">
+        AQAAAACAAAAIAAAACwAAAA==eJxjYIAAAAAIAAE=
+      </DataArray>
+    </FieldData>
+  <Piece Extent="0 16 0 16 0 0">
+    <PointData>
+      <DataArray type="Float64" Name="pressure" format="binary" RangeMin="0" RangeMax="0">
+        AQAAAACAAAAICQAAGAAAAA==eJztwQEBAAAAgiD/r25IQAEAfBoJCAAB
+      </DataArray>
+      <DataArray type="Float64" Name="velocity" NumberOfComponents="3" format="binary" RangeMin="0" RangeMax="0">
+        AQAAAACAAAAYGwAAZwAAAA==eJztjiESgEAMxPr/F+NgEAiOYC8mazpNTGbuHee87rP4Hr56uyfO3u6Js7d74uztnjh7uyfO3u6Js7d74uztnjh7uyfO3u6Js7d74uztnjh7uyfO3u6Js7d74uz//vhe/t0Fm1wtHQ==
+      </DataArray>
+    </PointData>
+    <CellData>
+    </CellData>
+  </Piece>
+  </ImageData>
+</VTKFile>

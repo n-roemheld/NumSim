@@ -16,4 +16,8 @@ public:
 
 	virtual double computeDuvDy (int i, int j) const;
 
+	virtual double computeDuTDx (int i, int j) const;
+
+	virtual double computeDvTDy (int i, int j) const;
+
 };

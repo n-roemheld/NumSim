@@ -56,6 +56,9 @@ void Computation::runSimulation ()
 		time += dt_;
 		//std::cout << "time_step" << dt_ << std::endl;
 
+		// compute T
+		computeTemperature();
+
 		// compute f and g
 		computePreliminaryVelocities();
 		// outputWriterText_->writeFile(time);
@@ -78,6 +81,7 @@ void Computation::computeTimeStepWidth ()
 	double dx = meshWidth_[0];
 	double dy = meshWidth_[1];
 	double Re = settings_.re;
+	double prandtl = settings_.prandtl;
 	double u_max = 0;
 	double v_max = 0;
 
@@ -101,10 +105,14 @@ void Computation::computeTimeStepWidth ()
 	double max_dt= settings_.maximumDt;
 	// compute mesh dependent time step criterion
 	double lim = dx*dx*dy*dy/(dx*dx+dy*dy)*Re/2;
-	// check whether mesh dependent time step criterion is restricting
+	// check whether pressure diffusion criterion is restricting
 	if (lim<max_dt) max_dt= lim;
 
-	// check whether velocity dependent time step criterions are restricting
+	lim *= prandtl;
+	// check whether temperature diffusion criterion is restricting
+	if (lim<max_dt) max_dt= lim;
+
+	// check whether momentum criterions are restricting
 	if (u_max>0)
 	{
 		if(dx/u_max<max_dt) max_dt= dx/u_max;
@@ -125,28 +133,28 @@ void Computation::applyBoundaryValues ()
 	for(int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
 	{
 		discretization_->u(i,j) = 2*settings_.dirichletBcBottom[0]-discretization_->u(i,j+1);
-		// discretization_->f(i,j) = discretization_->u(i,j);
+		discretization_->f(i,j) = discretization_->u(i,j);
 	};
 	// upper u ghost layer without corners
 	j = discretization_->uJEnd();
 	for(int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
 	{
 		discretization_->u(i,j) = 2*settings_.dirichletBcTop[0]-discretization_->u(i,j-1);
-		// discretization_->f(i,j) = discretization_->u(i,j);
+		discretization_->f(i,j) = discretization_->u(i,j);
 	};
 	// left u ghost layer with corners
 	int i = discretization_->uIBegin()-1;
 	for(int j = discretization_->uJBegin()-1; j < discretization_->uJEnd()+1; j++)
 	{
 		discretization_->u(i,j) = settings_.dirichletBcLeft[0];
-		// discretization_->f(i,j) = discretization_->u(i,j);
+		discretization_->f(i,j) = discretization_->u(i,j);
 	}
 	// right u Nathi-not ghost layer with corners
 	i = discretization_->uIEnd()-1;
 	for(int j = discretization_->uJBegin()-1; j < discretization_->uJEnd()+1; j++)
 	{
 		discretization_->u(i,j) = settings_.dirichletBcRight[0];
-		// discretization_->f(i,j) = discretization_->u(i,j);
+		discretization_->f(i,j) = discretization_->u(i,j);
 	}
 
 	// v,g setting
@@ -155,28 +163,28 @@ void Computation::applyBoundaryValues ()
 	for(int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
 	{
 		discretization_->v(i,j) = settings_.dirichletBcBottom[1];
-		// discretization_->g(i,j) = discretization_->v(i,j);
+		discretization_->g(i,j) = discretization_->v(i,j);
 	};
 	// upper v  Nathi-not ghost layer without corners
 	j = discretization_->vJEnd()-1;
 	for(int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
 	{
 		discretization_->v(i,j) = settings_.dirichletBcTop[1];
-		// discretization_->g(i,j) = discretization_->v(i,j);
+		discretization_->g(i,j) = discretization_->v(i,j);
 	};
 	// left v ghost layer with corners
 	i = discretization_->vIBegin()-1;
 	for(int j = discretization_->vJBegin()-1; j < discretization_->vJEnd(); j++)
 	{
 		discretization_->v(i,j) = 2*settings_.dirichletBcLeft[1]-discretization_->v(i+1,j);
-		// discretization_->g(i,j) = discretization_->v(i,j);
+		discretization_->g(i,j) = discretization_->v(i,j);
 	}
 	// right v ghost layer with corners
 	i = discretization_->vIEnd();
 	for(int j = discretization_->vJBegin()-1; j < discretization_->vJEnd(); j++)
 	{
 		discretization_->v(i,j) = 2*settings_.dirichletBcRight[1]-discretization_->v(i-1,j);
-		// discretization_->g(i,j) = discretization_->v(i,j);
+		discretization_->g(i,j) = discretization_->v(i,j);
 	}
 };
 
@@ -191,7 +199,8 @@ void Computation::computePreliminaryVelocities ()
 					{
 						discretization_->f(i,j) = discretization_->u(i,j)
 								+ dt*(1/Re*(discretization_->computeD2uDx2(i,j) + discretization_->computeD2uDy2(i,j))
-									- discretization_->computeDu2Dx(i,j) - discretization_->computeDuvDy(i,j) + settings_.g[0]);
+									- discretization_->computeDu2Dx(i,j) - discretization_->computeDuvDy(i,j)
+									+ (1-settings_.beta*(discretization_->T(i,j)+discretization_->T(i+1,j))/2) * settings_.g[0]);
 					};
 				};
 	for(int j = discretization_->vJBegin(); j < discretization_->vJEnd()-1; j++)
@@ -200,7 +209,8 @@ void Computation::computePreliminaryVelocities ()
 					{
 						discretization_->g(i,j) = discretization_->v(i,j)
 								+ dt*(1/Re*(discretization_->computeD2vDx2(i,j) + discretization_->computeD2vDy2(i,j))
-									- discretization_->computeDv2Dy(i,j) - discretization_->computeDuvDx(i,j) + settings_.g[1]);
+									- discretization_->computeDv2Dy(i,j) - discretization_->computeDuvDx(i,j)
+									+ (1-settings_.beta*(discretization_->T(i,j)+discretization_->T(i,j+1))/2) * settings_.g[1]);
 					};
 				};
 };
@@ -241,6 +251,20 @@ void Computation::computeVelocities ()
 				for (int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
 				{
 					discretization_->v(i,j) = discretization_->g(i,j) - dt*discretization_->computeDpDy(i,j);
+				};
+			};
+};
+
+void Computation::computeTemperature()
+{
+	double dt = dt_;
+	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
+			{
+				for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+				{
+					discretization_->T(i,j) = discretization_->T(i,j)
+						+ dt*(1/(settings_.re * settings_.prandtl)*(discretization_->computeD2TDx2(i,j)+discretization_->computeD2TDy2(i,j)
+						- discretization_->computeDuTDx(i,j) - discretization_->computeDvTDy(i,j)));
 				};
 			};
 };

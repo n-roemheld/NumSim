@@ -7,7 +7,8 @@ StaggeredGrid::StaggeredGrid(std::array<int,2> nCells, std::array<double,2> mesh
 	p_( {nCells[0]+2, nCells[1]+2},  {-0.5*meshWidth[0], -0.5*meshWidth[1]}, meshWidth),
 	f_( {nCells[0]+1, nCells[1]+2},  {0*meshWidth[0],    -0.5*meshWidth[1]}, meshWidth ),
 	g_( {nCells[0]+2, nCells[1]+1},  {-0.5*meshWidth[0], 0*meshWidth[1]}, meshWidth ),
-	rhs_( {nCells[0]+2, nCells[1]+2},{-0.5*meshWidth[0], -0.5*meshWidth[1]}, meshWidth)
+	rhs_( {nCells[0]+2, nCells[1]+2},{-0.5*meshWidth[0], -0.5*meshWidth[1]}, meshWidth),
+	T_( {nCells[0]+2, nCells[1]+2},  {-0.5*meshWidth[0], -0.5*meshWidth[1]}, meshWidth)
 {};
 
 const std::array< double, 2 > StaggeredGrid::meshWidth() const
@@ -81,6 +82,16 @@ double& StaggeredGrid::f(int i, int j)
 double& StaggeredGrid::g(int i, int j)
 {
   return StaggeredGrid::g_(i,j);
+};
+
+double& StaggeredGrid::T(int i, int j)
+{
+  return StaggeredGrid::T_(i,j);
+};
+
+double StaggeredGrid::T(int i, int j) const
+{
+  return StaggeredGrid::T_(i,j);
 };
 
 double StaggeredGrid::dx() const

@@ -19,6 +19,9 @@ public:
 
   const FieldVariable & 	p() const;
 
+  const FieldVariable &   T() const;
+
+
   double 	u(int i, int j) const;
 
   double& 	u(int i, int j);
@@ -36,6 +39,11 @@ public:
   double& 	f(int i, int j);
 
   double& 	g(int i, int j);
+
+  double   T(int i, int j) const;
+
+  double&   T(int i, int j);
+
 
   double 	dx() const;
 
@@ -74,4 +82,5 @@ protected:
 	FieldVariable 	rhs_;
 	FieldVariable 	f_;
 	FieldVariable 	g_;
+  FieldVariable   T_;
 };

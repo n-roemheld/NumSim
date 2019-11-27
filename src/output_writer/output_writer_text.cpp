@@ -170,6 +170,29 @@ void OutputWriterText::writeFile(double currentTime)
   }
   file << std::endl;
 
+  // write T
+  // ---------
+  // write header lines
+  file << "T (" << discretization_->T().size()[0] << "x" << discretization_->T().size()[1] << "): " << std::endl
+    << std::string(fieldWidth, ' ') << "|";
+  for (int i = discretization_->pIBegin()-1; i < discretization_->pIEnd()+1; i++)
+  {
+    file << std::setw(fieldWidth) << i;
+  }
+  file << std::endl << std::string(fieldWidth*(discretization_->p().size()[0]+2)+1, '-') << std::endl;
+
+  // write p values
+  for (int j = discretization_->pJEnd(); j >= discretization_->pJBegin()-1; j--)
+  {
+    file << std::setw(fieldWidth) << j << "|";
+    for (int i = discretization_->pIBegin()-1; i < discretization_->pIEnd()+1; i++)
+    {
+      file << std::setw(fieldWidth) << std::setprecision(fieldWidth-6) << discretization_->T(i,j);
+    }
+    file << std::endl;
+  }
+  file << std::endl;
+
 }
 
 void OutputWriterText::writePressureFile()

@@ -36,3 +36,17 @@ double DonorCell::computeDuvDy(int i, int j) const {
            + alpha_ * 1 / dy() * (fabs(v(i, j) + v(i + 1, j)) / 2 * (u(i, j) - u(i, j + 1)) / 2 -
                                   fabs(v(i, j - 1) + v(i + 1, j - 1)) / 2 * (u(i, j - 1) - u(i, j)) / 2);
 }
+
+double DonorCell::computeDuTDx(int i, int j) const
+{
+	return (u(i,j)*(T(i+1,j)+T(i,j))/2-u(i-1,j)*(T(i,j)+T(i-1,j))/2
+         + alpha_*(fabs(u(i,j))*(T(i,j)-T(i+1,j))/2
+			            -fabs(u(i-1,j))*(T(i-1,j)-T(i,j))/2))/meshWidth_[0];
+}
+
+double DonorCell::computeDvTDy(int i, int j) const
+{
+	return (v(i,j)*(T(i,j+1)+T(i,j))/2-v(i,j-1)*(T(i,j)+T(i,j-1))/2
+         + alpha_*(fabs(v(i,j))*(T(i,j)-T(i,j+1))/2
+			            -fabs(v(i,j-1))*(T(i,j-1)-T(i,j))/2))/meshWidth_[1];
+}
