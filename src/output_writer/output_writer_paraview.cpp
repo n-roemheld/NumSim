@@ -85,7 +85,7 @@ void OutputWriterParaview::writeFile(double currentTime)
   // loop over the nodes of the mesh and assign the interpolated p values in the vtk data structure
   // we only consider the cells that are the actual computational domain, not the helper values in the "halo"
 
-  int index = 0;   // index for the vtk data structure, will be incremented in the inner loop
+  index = 0;   // index for the vtk data structure, will be incremented in the inner loop
   for (int j = 0; j < nCells[1]+1; j++)
   {
     for (int i = 0; i < nCells[0]+1; i++, index++)

@@ -1,4 +1,4 @@
-# Install script for directory: /home/henrik/Dokumente/Num_Sim/NumSim/src
+# Install script for directory: /mnt/c/Users/Nathanael/NumSim/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,29 +38,29 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}/home/henrik/Dokumente/Num_Sim/NumSim/src/../build/numsim" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/home/henrik/Dokumente/Num_Sim/NumSim/src/../build/numsim")
+  if(EXISTS "$ENV{DESTDIR}/mnt/c/Users/Nathanael/NumSim/src/../build/numsim" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/mnt/c/Users/Nathanael/NumSim/src/../build/numsim")
     file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}/home/henrik/Dokumente/Num_Sim/NumSim/src/../build/numsim"
+         FILE "$ENV{DESTDIR}/mnt/c/Users/Nathanael/NumSim/src/../build/numsim"
          RPATH "")
   endif()
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/henrik/Dokumente/Num_Sim/NumSim/src/../build/numsim")
+   "/mnt/c/Users/Nathanael/NumSim/src/../build/numsim")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/henrik/Dokumente/Num_Sim/NumSim/src/../build" TYPE EXECUTABLE FILES "/home/henrik/Dokumente/Num_Sim/NumSim/build/src/numsim")
-  if(EXISTS "$ENV{DESTDIR}/home/henrik/Dokumente/Num_Sim/NumSim/src/../build/numsim" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/home/henrik/Dokumente/Num_Sim/NumSim/src/../build/numsim")
+file(INSTALL DESTINATION "/mnt/c/Users/Nathanael/NumSim/src/../build" TYPE EXECUTABLE FILES "/mnt/c/Users/Nathanael/NumSim/build/src/numsim")
+  if(EXISTS "$ENV{DESTDIR}/mnt/c/Users/Nathanael/NumSim/src/../build/numsim" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/mnt/c/Users/Nathanael/NumSim/src/../build/numsim")
     file(RPATH_CHANGE
-         FILE "$ENV{DESTDIR}/home/henrik/Dokumente/Num_Sim/NumSim/src/../build/numsim"
+         FILE "$ENV{DESTDIR}/mnt/c/Users/Nathanael/NumSim/src/../build/numsim"
          OLD_RPATH "/usr/lib/x86_64-linux-gnu/hdf5/openmpi:/usr/lib/x86_64-linux-gnu/openmpi/lib:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/home/henrik/Dokumente/Num_Sim/NumSim/src/../build/numsim")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/mnt/c/Users/Nathanael/NumSim/src/../build/numsim")
     endif()
   endif()
 endif()
