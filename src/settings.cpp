@@ -197,7 +197,7 @@ void Settings::loadFromFile(std::string filename) {
 			}
 			else
 			{
-				std::cout << "also wirklich gar nichts funktioniert"
+				std::cout << "Unknown parameter name: " << parameterName
 						<< std::endl;
 			}
 
@@ -236,11 +236,11 @@ void Settings::loadGeometryFile() {
 	//geometry file
 	// open file
 	std::ifstream file(geometryFile.c_str(), std::ios::in);
+	std::cout <<  geometryFile << std::endl;
 
 	// check if file is open
 	if (!file.is_open()) {
-		std::cout << "Could not open geometry file \"" << geometryFile << "\"."
-				<< std::endl;
+		std::cout << "Could not  open geometry file " << geometryFile << "Komische Bugs." << std::endl;
 		return;
 	}
 
