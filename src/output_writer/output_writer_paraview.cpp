@@ -101,7 +101,7 @@ void OutputWriterParaview::writeFile(double currentTime)
   assert(index == dataSet->GetNumberOfPoints());
 
   // add the field variable to the data set
-  dataSet->GetPointData()->AddArray(arrayPressure);
+  dataSet->GetPointData()->AddArray(arrayTemperature);
 
   // add velocity field variable
   // ---------------------------
