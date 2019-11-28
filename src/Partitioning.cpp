@@ -3,7 +3,7 @@
 Partitioning::Partitioning()
 {};
 
-Partitioning::Partitioning(int MPI_rank, std::array<int,4> ranks_neighbors, std::array<bool,4> is_boundary, std::array<int,2> nCells, std::array<int,2> nCellsGlobal, std::array<int,2> nodeOffset) :
+Partitioning::Partitioning(int MPI_rank, std::array<int,4> ranks_neighbors, std::array<int,4> is_boundary, std::array<int,2> nCells, std::array<int,2> nCellsGlobal, std::array<int,2> nodeOffset) :
         MPI_rank_(MPI_rank), ranks_neighbors_(ranks_neighbors), is_boundary_(is_boundary), nCells_(nCells), nCellsGlobal_(nCellsGlobal), nodeOffset_(nodeOffset)
             {};
 
@@ -19,7 +19,7 @@ int Partitioning::rank_neighbor(int direction)
 
 bool Partitioning::is_boundary(int direction) const
 {
-    return is_boundary_[direction];
+    return is_boundary_[direction] == 1;
 };
 
 std::array<int,2> Partitioning::nCells()
@@ -32,11 +32,11 @@ const std::array<int,2> Partitioning::nCellsGlobal() const
 };
 bool Partitioning::ownPartitionContainsRightBoundary() const
 {
-	return is_boundary(1);
+	return is_boundary(1) == 1;
 }
 bool Partitioning::ownPartitionContainsTopBoundary() const
 {
-	return is_boundary(2);
+	return is_boundary(2) == 1;
 }
 std::array<int,2> Partitioning::nodeOffset() const
 {

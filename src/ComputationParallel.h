@@ -24,4 +24,7 @@ class ComputationParallel : public Computation
   std::unique_ptr< OutputWriterParaviewParallel > outputWriterParaviewParallel_;
 	std::unique_ptr< OutputWriterTextParallel > outputWriterTextParallel_;
 
+  
+	void gdbParallelDebuggingBarrier();
+
 };

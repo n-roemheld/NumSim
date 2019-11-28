@@ -17,6 +17,7 @@ public:
 	virtual void initialize (int argc, char *argv[]);
 	virtual void runSimulation ();
 
+
 protected:
 	Settings settings_;
 	std::array< double, 2 > meshWidth_;

@@ -84,7 +84,3 @@
     //   return &data_;
     // }
 
-    void* FieldVariable::data()
-    {
-      return &data_;
-    }

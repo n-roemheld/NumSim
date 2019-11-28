@@ -17,9 +17,6 @@ public:
 
 	void setToZero();
 
-	// const void* data();
-	void* data();
-
 
 
 private:
