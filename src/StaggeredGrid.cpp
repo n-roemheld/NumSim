@@ -39,6 +39,12 @@ const FieldVariable& StaggeredGrid::p() const
   return p_;
 };
 
+// removed const after function
+const FieldVariable& StaggeredGrid::T() const
+{
+  return T_;
+};
+
 double StaggeredGrid::u(int i, int j) const
 {
   return StaggeredGrid::u_(i,j);
