@@ -11,16 +11,19 @@ Array2D::Array2D(std::array<int,2> size) :
   data_.resize(size_[0]*size_[1], 0.0);
 };
 
-Array2D::fillIn(int value)
-{
-  for(int j = 0; j < size_[1]; j++)
-  {
-    for(int i = 0; i < size_[0]; i++)
-    {
-      operator()(i,j) = value;
-    }
-  }
-}
+// Array2D::Array2D(std::array<int,2> size, int value) :
+// {
+//   // allocate data, initialize to 0
+//   data_.resize(size_[0]*size_[1], 0.0);
+//
+//   for(int j = 0; j < size_[1]; j++)
+//   {
+//     for(int i = 0; i < size_[0]; i++)
+//     {
+//       operator()(i,j) = value;
+//     }
+//   }
+// }
 
 //! get the size
 std::array<int,2> Array2D::size() const
