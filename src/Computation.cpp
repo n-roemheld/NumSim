@@ -44,24 +44,37 @@ void Computation::initialize (int argc, char *argv[])
 
 void Computation::runSimulation ()
 {
+	double outputFileEveryDt = 1;
+	double nextSnapshotTime = outputFileEveryDt;
+
 	double time = 0;
 	while(time<settings_.endTime)
 	{
 		applyBoundaryValues();
 
-		// std::cout << "time" << time << std::endl;
+
+		if(time == 0) outputWriterParaview_->writeFile(time);
+
+		std::cout << "time" << time << std::endl;
 		// compute dt_ and time
 		computeTimeStepWidth();
 		if(time+dt_>settings_.endTime) dt_ = settings_.endTime - time;
 		time += dt_;
-		//std::cout << "time_step" << dt_ << std::endl;
+		std::cout << "time_step" << dt_ << std::endl;
 
-		// compute T
-		computeTemperature();
+		if (time >= nextSnapshotTime)
+		{
+			// outputWriterParaview_->writeFile(time);
+			// outputWriterText_->writeFile(time);
+			// outputWriterText_->writePressureFile();
+		}
 
 		// compute f and g
 		computePreliminaryVelocities();
 		// outputWriterText_->writeFile(time);
+
+		// compute T
+		computeTemperature();
 
 		//compute rhs
 		computeRightHandSide();
@@ -70,9 +83,13 @@ void Computation::runSimulation ()
 		//compute u and v
 		computeVelocities();
 
-		outputWriterParaview_->writeFile(time);
-		outputWriterText_->writeFile(time);
-		outputWriterText_->writePressureFile();
+		if (time >= nextSnapshotTime)
+		{
+			outputWriterParaview_->writeFile(time);
+			outputWriterText_->writeFile(time);
+			// outputWriterText_->writePressureFile();
+			nextSnapshotTime += outputFileEveryDt;
+		}
 	}
 };
 
@@ -127,6 +144,28 @@ void Computation::computeTimeStepWidth ()
 
 void Computation::applyBoundaryValues ()
 {
+	// PFUSCH !!!!!!!!!!!!!!!!!!!!!
+
+	// setting T bc
+	int i_left = discretization_->pIBegin()-1;
+	int i_right = discretization_->pIEnd();
+	for (int j= discretization_->pJBegin()-1; j < discretization_->pJEnd(); j++)
+	{
+		discretization_->T(i_left,j) = discretization_->T(i_left+1,j);
+		discretization_->T(i_right,j) = discretization_->T(i_right-1,j);
+	}
+
+	int j_up = discretization_->pJEnd();
+	int j_low = discretization_->pJBegin()-1;
+	for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+	{
+		discretization_->T(i, j_up) = 2-discretization_->T(i,j_up-1);
+		discretization_->T(i, j_low) = -discretization_->T(i,j_low+1);
+	}
+
+	// PFUSCH !!!!!!!!!!!!!!!!!!!!!
+
+
 	// u,f setting
 	// lower u ghost layer without corners
 	int j = discretization_->uJBegin()-1;
@@ -258,13 +297,24 @@ void Computation::computeVelocities ()
 void Computation::computeTemperature()
 {
 	double dt = dt_;
+	FieldVariable T_copy( {settings_.nCells[0]+2, settings_.nCells[1]+2},  {-0.5*meshWidth_[0], -0.5*meshWidth_[1]}, meshWidth_);
 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 			{
 				for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
 				{
-					discretization_->T(i,j) = discretization_->T(i,j)
+					// discretization_->T(i,j) = discretization_->T(i,j)
+					T_copy(i,j) = discretization_->T(i,j)
 						+ dt*(1/(settings_.re * settings_.prandtl)*(discretization_->computeD2TDx2(i,j)+discretization_->computeD2TDy2(i,j)
 						- discretization_->computeDuTDx(i,j) - discretization_->computeDvTDy(i,j)));
 				};
 			};
+
+	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
+			{
+				for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+				{
+					discretization_->T(i,j) = T_copy(i,j);
+				};
+			};
+
 };
