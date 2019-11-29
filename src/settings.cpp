@@ -236,11 +236,11 @@ void Settings::loadGeometryFile() {
 	//geometry file
 	// open file
 	std::ifstream file(geometryFile.c_str(), std::ios::in);
-	std::cout <<  geometryFile << std::endl;
+	std::cout << 'a' <<  geometryFile.c_str() << "Something wierd is happening." << std::endl;
 
 	// check if file is open
 	if (!file.is_open()) {
-		std::cout << "Could not  open geometry file " << geometryFile << "Komische Bugs." << std::endl;
+		std::cout << "Could not open geometry file " << geometryFile << std::endl;
 		return;
 	}
 
@@ -302,7 +302,12 @@ void Settings::loadGeometryFile() {
 				{
 					std::string cellAll = line.substr(0,line.find_first_of(","));
 					line.erase(0,line.find_first_of(",")+1);
-					if(cellAll.at(0) != 'F')
+					if(cellAll.at(0) == 'F')
+					{
+						geometryPVString->operator()(i,j) = -1;
+
+					} 
+					else
 					{
 						std::string cellPressure = cellAll.substr(0,cellAll.find_first_of(";"));
 						cellAll.erase(0, cellAll.find_first_of(";")+1);

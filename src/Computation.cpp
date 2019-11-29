@@ -130,8 +130,18 @@ void Computation::applyBoundaryValues ()
 	// u,f setting
 	// lower u ghost layer without corners
 	int j = discretization_->uJBegin()-1;
+	int jn = j+1;
 	for(int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
 	{
+		if (settings_->geometryPVString->operator()(i,jn) != -1) // if neighbor is not fluid, 
+		{
+			discretization_->u(i,j) = std::nan;
+		}
+		else
+		{
+			/* code */
+		}
+		
 		discretization_->u(i,j) = 2*settings_.dirichletBcBottom[0]-discretization_->u(i,j+1);
 		discretization_->f(i,j) = discretization_->u(i,j);
 	};
@@ -268,3 +278,212 @@ void Computation::computeTemperature()
 				};
 			};
 };
+
+
+void Computation::setBoundaryValues_u_f(int location_boundary, int i, int j)
+{
+	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
+	int igeom = i-discretization_->uIBegin()+1; // todo: double check!!
+	int jgeom = j-discretization_->uJBegin()+1;
+	// indices of the neigboring cell (can be fluid or solid)
+	int in = i;
+	int jn = j; 
+	switch location_boundary // 0: Left, 1: Right, 2: Lower, 3: Upper
+	{
+		case 0:	in = i+1; igeom = 0; break;
+		case 1: in = i-1; igeom = settings_->geometryPVString->size()[0]; break;
+		case 2: jn = j+1; jgeom = 0; break;
+		case 3: jn = j-1; jgeom = settings_->geometryPVString->size()[1]; break;
+	}
+	// set boundary values to nan if not needed (neighbor not fluid cell)
+	if (settings_->geometryPVString->operator()(igeom + in - i, jgeom + jn - j) != -1)	{
+		discretization_->u(i,j) = std::nan;
+	} 
+	else 
+	{
+		// set boundary values of one cell
+		int boundary_type = settings_->geometryPVString->operator()(igeom, jgeom);
+		switch boundary_type 
+		{
+			case 0: // NOSLIP
+			{
+				if (location_type == 0 || location_type == 1) { // left or right
+					discretization_->u(i,j) = 0;
+				} else { // upper or lower
+					discretization_->u(i,j) = - discretization_->u(in,jn);
+				}
+				break;
+			}
+			case 1: // SLIP
+			{
+				if (location_type == 0 || location_type == 1) { // left or right
+					discretization_->u(i,j) = 0;
+				} else { // upper or lower
+					discretization_->u(i,j) = discretization_->u(in,jn);
+				}
+				break;
+			}
+			case 2: // INFLOW
+			{
+				if (location_type == 0 || location_type == 1) { // left or right
+					discretization_->u(i,j) = settings_->geometryPV1->operator()(igeom,jgeom);
+				} else { // upper or lower
+					discretization_->u(i,j) = 2*settings_->geometryPV1->operator()(igeom,jgeom) - discretization_->u(in,jn);
+				}
+				break;
+			}
+			case 3: // OUTFLOW (same as case 4)
+			case 4: // PRESSURE 
+			{
+				if (location_type == 0 || location_type == 1) { // left or right
+					discretization_->u(i,j) = discretization_->u(in,jn);
+				} else { // upper or lower
+					discretization_->u(i,j) = discretization_->u(in,jn);
+				}
+				break;
+			}
+
+		}
+	}
+	discretization_->f(i,j) = discretization_->u(i,j);
+}
+
+void Computation::setBoundaryValues_v_g(int location_boundary, int i, int j)
+{
+	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
+	int igeom = i-discretization_->vIBegin()+1; // todo: double check!!
+	int jgeom = j-discretization_->vJBegin()+1;
+	// indices of the neigboring cell (can be fluid or solid)
+	int in = i;
+	int jn = j; 
+	switch location_boundary // 0: Left, 1: Right, 2: Lower, 3: Upper
+	{
+		case 0:	in = i+1; igeom = 0; break;
+		case 1: in = i-1; igeom = settings_->geometryPVString->size()[0]; break;
+		case 2: jn = j+1; jgeom = 0; break;
+		case 3: jn = j-1; jgeom = settings_->geometryPVString->size()[1]; break;
+	}
+	// set boundary values to nan if not needed (neighbor not fluid cell)
+	if (settings_->geometryPVString->operator()(igeom + in - i, jgeom + jn - j) != -1)	{
+		discretization_->v(i,j) = std::nan;
+	} 
+	else 
+	{
+		// set boundary values of one cell
+		int boundary_type = settings_->geometryPVString->operator()(igeom, jgeom);
+		switch boundary_type 
+		{
+			case 0: // NOSLIP
+			{
+				if (location_type == 0 || location_type == 1) { // left or right
+					discretization_->v(i,j) = 0;
+				} else { // upper or lower
+					discretization_->v(i,j) = - discretization_->v(in,jn);
+				}
+				break;
+			}
+			case 1: // SLIP
+			{
+				if (location_type == 0 || location_type == 1) { // left or right
+					discretization_->v(i,j) = 0;
+				} else { // upper or lower
+					discretization_->v(i,j) = discretization_->v(in,jn);
+				}
+				break;
+			}
+			case 2: // INFLOW
+			{
+				if (location_type == 0 || location_type == 1) { // left or right
+					discretization_->v(i,j) = settings_->geometryPV1->operator()(igeom,jgeom);
+				} else { // upper or lower
+					discretization_->v(i,j) = 2*settings_->geometryPV1->operator()(igeom,jgeom) - discretization_->v(in,jn);
+				}
+				break;
+			}
+			case 3: // OUTFLOW (same as case 4)
+			case 4: // PRESSURE 
+			{
+				if (location_type == 0 || location_type == 1) { // left or right
+					discretization_->v(i,j) = discretization_->v(in,jn);
+				} else { // upper or lower
+					discretization_->v(i,j) = discretization_->v(in,jn);
+				}
+				break;
+			}
+
+		}
+	}
+	discretization_->g(i,j) = discretization_->v(i,j);
+}
+
+void Computation::setBoundaryValues_p(int location_boundary, int i, int j)
+{
+	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
+	int igeom = i-discretization_->pIBegin()+1; // todo: double check!!
+	int jgeom = j-discretization_->pJBegin()+1;
+	// indices of the neigboring cell (can be fluid or solid)
+	int in = i;
+	int jn = j; 
+	switch location_boundary // 0: Left, 1: Right, 2: Lower, 3: Upper
+	{
+		case 0:	in = i+1; igeom = 0; break;
+		case 1: in = i-1; igeom = settings_->geometryPVString->size()[0]; break;
+		case 2: jn = j+1; jgeom = 0; break;
+		case 3: jn = j-1; jgeom = settings_->geometryPVString->size()[1]; break;
+	}
+	// set boundary values to nan if not needed (neighbor not fluid cell)
+	if (settings_->geometryPVString->operator()(igeom + in - i, jgeom + jn - j) != -1)	{
+		discretization_->p(i,j) = std::nan;
+	} 
+	else 
+	{
+		// set boundary values of one cell
+		int boundary_type = settings_->geometryPVString->operator()(igeom, jgeom);
+		if (boundary_type == 4) // PRESSURE 
+		{
+			discretization_->p(i,j) = 2*settings_->geometryPV1->operator()(igeom, jgeom) - discretization_->p(in,jn);
+		} 
+		else
+		{
+			discretization_->p(i,j) = discretization_->p(in,jn);
+		}
+		
+	}
+}
+
+void Computation::setBoundaryValues_T(int location_boundary, int i, int j)
+{
+	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
+	int igeom = i-discretization_->pIBegin()+1; // todo: double check!!
+	int jgeom = j-discretization_->pJBegin()+1;
+	// mesh width h 
+	double h = meshWidth_[0];
+	// indices of the neigboring cell (can be fluid or solid)
+	int in = i;
+	int jn = j; 
+	switch location_boundary // 0: Left, 1: Right, 2: Lower, 3: Upper
+	{
+		case 0:	in = i+1; igeom = 0; break;
+		case 1: in = i-1; igeom = settings_->geometryPVString->size()[0]; break;
+		case 2: jn = j+1; jgeom = 0; h = meshWidth_[1]; break;
+		case 3: jn = j-1; jgeom = settings_->geometryPVString->size()[1]; h = meshWidth_[1]; break;
+	}
+	// set boundary values to nan if not needed (neighbor not fluid cell)
+	if (settings_->geometryPVString->operator()(igeom + in - i, jgeom + jn - j) != -1)	{
+		discretization_->T(i,j) = std::nan;
+	} 
+	else 
+	{
+		// set boundary values of one cell
+		int boundary_type = settings_->geometryTString->operator()(igeom, jgeom);
+		if (boundary_type == 0) // TD
+		{
+			discretization_->T(i,j) = 2*settings_->geometryT1->operator()(igeom, jgeom) - discretization_->T(in,jn);
+		} 
+		else // TN
+		{
+			discretization_->T(i,j) = discretization_->T(in,jn) + h*geometryT1->operator()(igeom, jgeom);
+		}
+		
+	}
+}
