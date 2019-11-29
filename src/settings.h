@@ -1,8 +1,10 @@
 
 #pragma once
 
+#include "FieldVariable.h"
 #include <iostream>
 #include <array>
+#include <memory>
 
 /** All settings that parametrize a simulation run.
  */
@@ -20,7 +22,8 @@ struct Settings
   std::array<double,2> g;    //< external forces
 
   bool useDonorCell = false;         //< if the donor cell scheme schould be used
-  double alpha = 0.5;                //< factor for donor-cell scheme
+  double alpha = 0.5;                //< factor for donor-cell scheme for pressure
+  double gamma = 0.5;				 //< factor for donor-cell scheme for temperature
 
   std::array<double,2> dirichletBcBottom;  //< prescribed values of u,v at bottom of domain
   std::array<double,2> dirichletBcTop;     //< prescribed values of u,v at top of domain
@@ -32,9 +35,27 @@ struct Settings
   double epsilon = 1e-5;             //< tolerance for the residual in the pressure solver
   int maximumNumberOfIterations = 1e5;    //< maximum number of iterations in the solver
 
+  double uInit; //< initial value for velocity u
+  double vInit; //< initial value for velocity v
+  double pInit; //< initial value for pressure p
+  double tInit; //< initial value for temperature T
+
+  std::shared_ptr<Array2D> geometryPVString; //< describes typ of cell for pressure
+  std::shared_ptr<Array2D> geometryPV1;
+  std::shared_ptr<Array2D> geometryPV2;
+
+  std::shared_ptr<Array2D> geometryTString;
+  std::shared_ptr<Array2D> geometryT1;
+
+  std::string geometryFile = "";
+
+
+
   //! parse a text file with settings, each line contains "<parameterName> = <value>"
   void loadFromFile(std::string filename);
 
   //! output all settings to console
   void printSettings();
+
+  void loadGeometryFile();
 };
