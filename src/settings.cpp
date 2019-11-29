@@ -177,19 +177,19 @@ void Settings::loadFromFile(std::string filename) {
 			}
 			else if (parameterName == "uInit")
 			{
-				uInit = atof(parameterValue.c_str());
+				uInit_ = atof(parameterValue.c_str());
 			}
 			else if (parameterName == "vInit")
 			{
-				vInit = atof(parameterValue.c_str());
+				vInit_ = atof(parameterValue.c_str());
 			}
 			else if (parameterName == "pInit")
 			{
-				pInit = atof(parameterValue.c_str());
+				pInit_ = atof(parameterValue.c_str());
 			}
 			else if (parameterName == "tInit")
 			{
-				tInit = atof(parameterValue.c_str());
+				TInit_ = atof(parameterValue.c_str());
 			}
 			else if (parameterName == "geometryFile")
 			{
