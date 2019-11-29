@@ -5,6 +5,10 @@ Discretization::Discretization(std::array<int, 2> nCells,
 		StaggeredGrid(nCells, meshWidth)
 {};
 
+Discretization::Discretization(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1) :
+	StaggeredGrid(nCells, meshWidth, geometryPVString, geometryPV1, geometryPV2, geometryTString, geometryT1)
+{};
+
 double Discretization::computeD2uDx2(int i, int j) const
 {
 	return (u_(i + 1, j) - 2 * u_(i, j) + u_(i - 1, j))

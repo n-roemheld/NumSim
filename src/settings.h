@@ -40,12 +40,12 @@ struct Settings
   double pInit; //< initial value for pressure p
   double tInit; //< initial value for temperature T
 
-  std::shared_ptr<Array2D> geometryPVString; //< describes typ of cell for pressure
-  std::shared_ptr<Array2D> geometryPV1;
-  std::shared_ptr<Array2D> geometryPV2;
+  std::shared_ptr<Array2D> geometryPVString_; //< describes typ of cell for pressure
+  std::shared_ptr<Array2D> geometryPV1_;
+  std::shared_ptr<Array2D> geometryPV2_;
 
-  std::shared_ptr<Array2D> geometryTString;
-  std::shared_ptr<Array2D> geometryT1;
+  std::shared_ptr<Array2D> geometryTString_;
+  std::shared_ptr<Array2D> geometryT1_;
 
   std::string geometryFile = "";
 

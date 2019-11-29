@@ -6,6 +6,10 @@ DonorCell::DonorCell(std::array<int, 2> nCells, std::array<double, 2> meshWidth,
 		Discretization(nCells, meshWidth), alpha_(alpha)
 {};
 
+DonorCell::DonorCell(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1, double alpha) :
+	Discretization(nCells, meshWidth, geometryPVString, geometryPV1, geometryPV2, geometryTString, geometryT1), alpha_(alpha)
+{};
+
 // alpha parameterized donor cell /centrall difference scheme
 double DonorCell::computeDu2Dx(int i, int j) const {
 

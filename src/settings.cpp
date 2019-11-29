@@ -226,11 +226,11 @@ void Settings::loadGeometryFile() {
 	int nCellx = nCells[0] + 2;
 	int nCelly = nCells[1] + 2;
 	std::array<int,2> nCellsGeometry = {nCellx, nCelly};
-	geometryPVString = std::make_shared<Array2D>(nCellsGeometry); //nur Parameter, Rest egal
-	geometryPV1 = std::make_shared<Array2D>(nCellsGeometry);
-	geometryPV2 = std::make_shared<Array2D>(nCellsGeometry);
-	geometryTString = std::make_shared<Array2D>(nCellsGeometry);
-	geometryT1 = std::make_shared<Array2D>(nCellsGeometry);
+	geometryPVString_ = std::make_shared<Array2D>(nCellsGeometry); //nur Parameter, Rest egal
+	geometryPV1_ = std::make_shared<Array2D>(nCellsGeometry);
+	geometryPV2_ = std::make_shared<Array2D>(nCellsGeometry);
+	geometryTString_ = std::make_shared<Array2D>(nCellsGeometry);
+	geometryT1_ = std::make_shared<Array2D>(nCellsGeometry);
 
 
 	//geometry file
@@ -303,7 +303,7 @@ void Settings::loadGeometryFile() {
 					line.erase(0,line.find_first_of(",")+1);
 					if(cellAll.at(0) == 'F')
 					{
-						geometryPVString->operator()(i,j) = -1;
+						geometryPVString_->operator()(i,j) = -1;
 
 					} 
 					else
@@ -315,45 +315,45 @@ void Settings::loadGeometryFile() {
 						cellPressure.erase(0,cellPressure.find_first_of(":")+1);
 						if(cellPressureTyp == "NSW")
 						{
-							geometryPVString->operator()(i,j) = 0;
+							geometryPVString_->operator()(i,j) = 0;
 						}
 						else if(cellPressureTyp == "SLW")
 						{
-							geometryPVString->operator()(i,j) = 1;
+							geometryPVString_->operator()(i,j) = 1;
 						}
 						else if(cellPressureTyp == "IN")
 						{
-							geometryPVString->operator()(i,j) = 2;
+							geometryPVString_->operator()(i,j) = 2;
 							std::string cellPressure1 = cellPressure.substr(0,cellPressure.find_first_of(":"));
 							cellPressure.erase(0,cellPressure.find_first_of(":")+1);
 							std::string cellPressure2 = cellPressure.substr(0);
-							geometryPV1->operator()(i,j) = atof(cellPressure1.c_str());
-							geometryPV2->operator()(i,j) = atof(cellPressure2.c_str());
+							geometryPV1_->operator()(i,j) = atof(cellPressure1.c_str());
+							geometryPV2_->operator()(i,j) = atof(cellPressure2.c_str());
 						}
 						else if(cellPressureTyp == "OUT")
 						{
-							geometryPVString->operator()(i,j) = 3;
+							geometryPVString_->operator()(i,j) = 3;
 						}
 						else if(cellPressureTyp == "PR")
 						{
-							geometryPVString->operator()(i,j) = 4;
+							geometryPVString_->operator()(i,j) = 4;
 							std::string cellPressure1 = cellPressure.substr(0,cellPressure.find_first_of(":"));
 							cellPressure.erase(0,cellPressure.find_first_of(":")+1);
-							geometryPV1->operator()(i,j) = atof(cellPressure1.c_str());
+							geometryPV1_->operator()(i,j) = atof(cellPressure1.c_str());
 						}
 						std::string cellTemperatureType = cellTemperature.substr(0,cellTemperature.find_first_of(":"));
 						cellTemperature.erase(0,cellTemperature.find_first_of(":")+1);
 						if(cellTemperatureType == "TD")
 						{
-							geometryTString->operator()(i,j) = 0;
+							geometryTString_->operator()(i,j) = 0;
 							std::string cellTemperature1 = cellTemperature.substr(0);
-							geometryT1->operator()(i,j) = atof(cellTemperature1.c_str());
+							geometryT1_->operator()(i,j) = atof(cellTemperature1.c_str());
 						} 
 						else if(cellTemperatureType == "TN")
 						{
-							geometryTString->operator()(i,j) = 1;
+							geometryTString_->operator()(i,j) = 1;
 							std::string cellTemperature1 = cellTemperature.substr(0);
-							geometryT1->operator()(i,j) = atof(cellTemperature1.c_str());
+							geometryT1_->operator()(i,j) = atof(cellTemperature1.c_str());
 						}
 					}
 
