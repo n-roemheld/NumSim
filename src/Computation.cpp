@@ -55,12 +55,12 @@ void Computation::runSimulation ()
 
 		if(time == 0) outputWriterParaview_->writeFile(time);
 
-		std::cout << "time" << time << std::endl;
+		// std::cout << "time" << time << std::endl;
 		// compute dt_ and time
 		computeTimeStepWidth();
 		if(time+dt_>settings_.endTime) dt_ = settings_.endTime - time;
 		time += dt_;
-		std::cout << "time_step" << dt_ << std::endl;
+		// std::cout << "time_step" << dt_ << std::endl;
 
 		if (time >= nextSnapshotTime)
 		{
@@ -69,12 +69,12 @@ void Computation::runSimulation ()
 			// outputWriterText_->writePressureFile();
 		}
 
+		// compute T
+		computeTemperature(); //PFUSCH!!!!!
+
 		// compute f and g
 		computePreliminaryVelocities();
 		// outputWriterText_->writeFile(time);
-
-		// compute T
-		computeTemperature();
 
 		//compute rhs
 		computeRightHandSide();
@@ -149,7 +149,8 @@ void Computation::applyBoundaryValues ()
 	// setting T bc
 	int i_left = discretization_->pIBegin()-1;
 	int i_right = discretization_->pIEnd();
-	for (int j= discretization_->pJBegin()-1; j < discretization_->pJEnd(); j++)
+	// for (int j= discretization_->pJBegin()-1; j < discretization_->pJEnd()+1; j++)
+	for (int j= discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 	{
 		discretization_->T(i_left,j) = discretization_->T(i_left+1,j);
 		discretization_->T(i_right,j) = discretization_->T(i_right-1,j);
@@ -157,7 +158,8 @@ void Computation::applyBoundaryValues ()
 
 	int j_up = discretization_->pJEnd();
 	int j_low = discretization_->pJBegin()-1;
-	for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+	// for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+	for (int i = discretization_->pIBegin()-1; i < discretization_->pIEnd()+1; i++)
 	{
 		discretization_->T(i, j_up) = 2-discretization_->T(i,j_up-1);
 		discretization_->T(i, j_low) = -discretization_->T(i,j_low+1);
