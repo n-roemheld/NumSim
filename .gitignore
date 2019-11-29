@@ -92,3 +92,10 @@ fabric.properties
 .vscode
 build
 out
+
+# Experiments
+build/
+out/
+*.vti
+*.txt
+\!todo!.txt
