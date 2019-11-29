@@ -35,10 +35,10 @@ struct Settings
   double epsilon = 1e-5;             //< tolerance for the residual in the pressure solver
   int maximumNumberOfIterations = 1e5;    //< maximum number of iterations in the solver
 
-  double uInit; //< initial value for velocity u
-  double vInit; //< initial value for velocity v
-  double pInit; //< initial value for pressure p
-  double tInit; //< initial value for temperature T
+  double uInit_; //< initial value for velocity u
+  double vInit_; //< initial value for velocity v
+  double pInit_; //< initial value for pressure p
+  double TInit_; //< initial value for temperature T
 
   std::shared_ptr<Array2D> geometryPVString_; //< describes typ of cell for pressure
   std::shared_ptr<Array2D> geometryPV1_;
