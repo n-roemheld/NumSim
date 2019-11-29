@@ -2,12 +2,15 @@
 
 #include <array>
 #include "FieldVariable.h"
+#include <memory>
+#include <cmath>
 
 class StaggeredGrid
 {
 public:
   //!constructor
   StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth);
+  StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1);
 
   const std::array< double, 2 > 	meshWidth() const;
 
@@ -73,6 +76,12 @@ public:
 
   int 	pJEnd() const;
 
+  
+	void setBoundaryValues_u_f(int location_boundary, int i, int j);
+	void setBoundaryValues_v_g(int location_boundary, int i, int j);
+	void setBoundaryValues_p(int location_boundary, int i, int j);
+	void setBoundaryValues_T(int location_boundary, int i, int j);
+
 protected:
 	const std::array< int, 2 > nCells_;
 	const std::array< double, 2 > meshWidth_;
@@ -83,4 +92,11 @@ protected:
 	FieldVariable 	f_;
 	FieldVariable 	g_;
   FieldVariable   T_;
+
+  std::shared_ptr<Array2D> geometryPVString_; //< describes typ of cell for pressure
+  std::shared_ptr<Array2D> geometryPV1_;
+  std::shared_ptr<Array2D> geometryPV2_;
+
+  std::shared_ptr<Array2D> geometryTString_;
+  std::shared_ptr<Array2D> geometryT1_;
 };

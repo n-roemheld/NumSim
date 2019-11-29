@@ -23,11 +23,6 @@ private:
 	void computeVelocities ();
 	void computeTemperature();
 
-	void setBoundaryValues_u_f(int location_boundary, int i, int j);
-	void setBoundaryValues_v_g(int location_boundary, int i, int j);
-	void setBoundaryValues_p(int location_boundary, int i, int j);
-	void setBoundaryValues_T(int location_boundary, int i, int j);
-
 	Settings settings_;
 	std::shared_ptr< Discretization > discretization_;
 	std::unique_ptr< PressureSolver > pressureSolver_;

@@ -263,7 +263,6 @@ void Settings::loadGeometryFile() {
 		// delete spaces before parameterValue
 		if (parameterValue.find_first_of(" \t") != std::string::npos)
 		{
-		parameterValue.erase(0,parameterValue.find_first_not_of(" \t"));
 		}
 		// delete commands
 		if (parameterValue.find_first_of("#") != std::string::npos)
