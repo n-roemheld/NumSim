@@ -13,11 +13,8 @@ public:
   //! constructor
   Array2D(std::array<int,2> size);
 
-<<<<<<< HEAD
   void fillIn(int value);
-=======
   // Array2D(std::array<int,2> size, int value);
->>>>>>> a7c63559a8bd9c1d2199596945e2c9e41372169f
 
   //! get the size
   std::array<int,2> size() const;
