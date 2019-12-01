@@ -76,11 +76,14 @@ public:
 
   int 	pJEnd() const;
 
-  
+
 	void setBoundaryValues_u_f(int location_boundary, int i, int j);
 	void setBoundaryValues_v_g(int location_boundary, int i, int j);
 	void setBoundaryValues_p(int location_boundary, int i, int j);
 	void setBoundaryValues_T(int location_boundary, int i, int j);
+
+  void fillIn(int uInit, int vInit, int pInit, int TInit);
+
 
 protected:
 	const std::array< int, 2 > nCells_;
