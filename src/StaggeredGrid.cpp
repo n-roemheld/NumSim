@@ -201,7 +201,7 @@ void StaggeredGrid::setBoundaryValues_u_f(int location_boundary, int i, int j)
 	}
 	// set boundary values to nan if not needed (neighbor not fluid cell)
 	if (geometryPVString_->operator()(igeom + in - i, jgeom + jn - j) != -1)	{
-		u(i,j) = std::nan("1");
+		u(i,j) = -1; //std::nan("1");
 	}
 	else
 	{
@@ -269,7 +269,7 @@ void StaggeredGrid::setBoundaryValues_v_g(int location_boundary, int i, int j)
 	}
 	// set boundary values to nan if not needed (neighbor not fluid cell)
 	if (geometryPVString_->operator()(igeom + in - i, jgeom + jn - j) != -1)	{
-		v(i,j) = std::nan("1");
+		v(i,j) = -1; //std::nan("1");
 	}
 	else
 	{
@@ -337,7 +337,7 @@ void StaggeredGrid::setBoundaryValues_p(int location_boundary, int i, int j)
 	}
 	// set boundary values to nan if not needed (neighbor not fluid cell)
 	if (geometryPVString_->operator()(igeom + in - i, jgeom + jn - j) != -1)	{
-		p(i,j) = std::nan("1");
+		p(i,j) = -1; //std::nan("1");
 	}
 	else
 	{
@@ -374,7 +374,7 @@ void StaggeredGrid::setBoundaryValues_T(int location_boundary, int i, int j)
 	}
 	// set boundary values to nan if not needed (neighbor not fluid cell)
 	if (geometryPVString_->operator()(igeom + in - i, jgeom + jn - j) != -1)	{
-		T(i,j) = std::nan("1");
+		T(i,j) = -1; //std::nan("1");
 	}
 	else
 	{

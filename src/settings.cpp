@@ -140,7 +140,7 @@ void Settings::loadFromFile(std::string filename) {
 				}
 				else
 				{
-					std::cout << "nix funktioniert" << std::endl;
+					std::cout << "unknown useDonorCell parameter" << std::endl;
 				}
 			}
 			else if (parameterName == "alpha")
