@@ -222,21 +222,12 @@ void Settings::loadFromFile(std::string filename) {
 };
 
 void Settings::loadGeometryFile() {
-	//initializing data structures
-	int nCellx = nCells[0] + 2;
-	int nCelly = nCells[1] + 2;
-	std::array<int,2> nCellsGeometry = {nCellx, nCelly};
-	geometryPVString_ = std::make_shared<Array2D>(nCellsGeometry); //nur Parameter, Rest egal
-	geometryPV1_ = std::make_shared<Array2D>(nCellsGeometry);
-	geometryPV2_ = std::make_shared<Array2D>(nCellsGeometry);
-	geometryTString_ = std::make_shared<Array2D>(nCellsGeometry);
-	geometryT1_ = std::make_shared<Array2D>(nCellsGeometry);
-
+	int nCellx;
+	int nCelly;
 
 	//geometry file
 	// open file
 	std::ifstream file(geometryFile.c_str(), std::ios::in);
-	std::cout << 'a' <<  geometryFile.c_str() << "Something wierd is happening." << std::endl;
 
 	// check if file is open
 	if (!file.is_open()) {
@@ -260,22 +251,23 @@ void Settings::loadGeometryFile() {
 			parameterName.erase(parameterName.find_first_of(" \t"));
 		}
 		std::string parameterValue = line.substr(line.find_first_of('=') + 1);
-		// delete spaces before parameterValue
-		if (parameterValue.find_first_of(" \t") != std::string::npos)
-		{
-		}
-		// delete commands
-		if (parameterValue.find_first_of("#") != std::string::npos)
-		{
-			parameterValue.erase(parameterValue.find_first_of("#"));
-		}
 
-		// delete spaces after parameterValue
-		if (parameterValue.find_first_of(" \t") != std::string::npos)
-		{
-			parameterValue.erase(parameterValue.find_first_of(" \t"));
-		}
+		// // delete spaces before parameterValue
+		// if (parameterValue.find_first_of(" \t") != std::string::npos)
+		// {
+		// }
+		// // delete commands
+		// if (parameterValue.find_first_of("#") != std::string::npos)
+		// {
+		// 	parameterValue.erase(parameterValue.find_first_of("#"));
+		// }
 
+		// // delete spaces after parameterValue
+		// if (parameterValue.find_first_of(" \t") != std::string::npos)
+		// {
+		// 	parameterValue.erase(parameterValue.find_first_of(" \t"));
+		// }
+		
 		if (parameterName == "physicalSizeX")
 		{
 			physicalSize[0] = atof(parameterValue.c_str());
@@ -291,6 +283,15 @@ void Settings::loadGeometryFile() {
 		else if (parameterName == "nCellsY")
 		{
 			nCells[1] = int(atof(parameterValue.c_str()));
+			//initializing data structures
+			nCellx = nCells[0] + 2;
+			nCelly = nCells[1] + 2;
+			std::array<int,2> nCellsGeometry = {nCellx, nCelly};
+			geometryPVString_ = std::make_shared<Array2D>(nCellsGeometry); //nur Parameter, Rest egal
+			geometryPV1_ = std::make_shared<Array2D>(nCellsGeometry);
+			geometryPV2_ = std::make_shared<Array2D>(nCellsGeometry);
+			geometryTString_ = std::make_shared<Array2D>(nCellsGeometry);
+			geometryT1_ = std::make_shared<Array2D>(nCellsGeometry);
 		}
 		 else if(parameterName == "Mesh")
 		{
