@@ -48,6 +48,8 @@ public:
 
   double&   T(int i, int j);
 
+  double geometryPVString(int i, int j) const;
+
 
   double 	dx() const;
 

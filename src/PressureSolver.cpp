@@ -47,15 +47,21 @@ double PressureSolver::compute_res()
 	std::array<double,2> mW = discretization_->meshWidth();
 	double dx = mW[0];
 	double dy = mW[1];
+	int fluidCellCount = 0;
+	//igeom and jgeom are identical to the indices of the pressure cell (?)
 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 	{
 		for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
 		{
-			res += pow((p(i+1,j)-2*p(i,j)+p(i-1,j))/(dx*dx) + (p(i,j+1)-2*p(i,j)+p(i,j-1))/(dy*dy) - discretization_->rhs(i,j),2);
+			if(discretization_->geometryPVString(i,j) == -1) // prove, if cell is fluid cell
+			{
+				res += pow((p(i+1,j)-2*p(i,j)+p(i-1,j))/(dx*dx) + (p(i,j+1)-2*p(i,j)+p(i,j-1))/(dy*dy) - discretization_->rhs(i,j),2);
+				fluidCellCount++;
+			}
 		};
 	};
 
 	// average residuum with respect to number of cells
-	res /= (discretization_->nCells()[0]*discretization_->nCells()[1]);
+	res /= fluidCellCount;
 	return res;
 };
