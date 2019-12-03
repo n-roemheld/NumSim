@@ -1,8 +1,8 @@
 # Settings file for numsim program
-# Run ./numsim driven_cavity.txt
+# Run ../numsim driven_cavity.txt
 
 # Problem description
-geometryFile = karmanvortex_10x10.geom
+geometryFile = ../karmanvortex_10x10.geom
 endTime = 500.0        # duration of the simulation
 re = 10000             # Reynolds number
 prandtl = 1.0 # Prandtl number

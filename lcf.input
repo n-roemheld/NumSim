@@ -2,7 +2,7 @@
 # Run ./numsim driven_cavity.txt
 
 # Problem description
-geometryFile = channelflow_25x5.geom
+geometryFile = ../channelflow_25x5.geom
 endTime = 20.0        # duration of the simulation
 re = 10             # Reynolds number
 prandtl = 1.0 # Prandtl number

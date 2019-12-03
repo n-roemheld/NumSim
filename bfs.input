@@ -2,7 +2,7 @@
 # Run ./numsim driven_cavity.txt
 
 # Problem description
-geometryFile = backwardfacingstep_20x4.geom
+geometryFile = ../backwardfacingstep_20x4.geom
 endTime = 500.0        # duration of the simulation
 re = 100             # Reynolds number
 prandtl = 1.0 # Prandtl number

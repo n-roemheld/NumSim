@@ -2,7 +2,7 @@
 # Run ./numsim driven_cavity.txt
 
 # Problem description
-geometryFile = rayleighbenardconvection_setting2_10x10.geom
+geometryFile = ../rayleighbenardconvection_setting2_10x10.geom
 endTime = 100.0        # duration of the simulation
 re = 100             # Reynolds number
 prandtl = 1 # Prandtl number

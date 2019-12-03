@@ -45,10 +45,10 @@ double Discretization::computeDpDy(int i, int j) const
 
 double Discretization::computeD2TDx2(int i, int j) const
 {
-	return (T_(i+1,j)-2*T_(i,j)+T_(i-1,j))/meshWidth_[0];
+	return (T_(i+1,j)-2*T_(i,j)+T_(i-1,j))/(meshWidth_[0]*meshWidth_[0]);
 };
 
 double Discretization::computeD2TDy2(int i, int j) const
 {
-	return (T_(i,j+1)-2*T_(i,j)+T_(i,j-1))/meshWidth_[1];
+	return (T_(i,j+1)-2*T_(i,j)+T_(i,j-1))/(meshWidth_[1]*meshWidth_[1]);
 };

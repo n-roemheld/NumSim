@@ -2,7 +2,7 @@
 # Run ./numsim driven_cavity.txt
 
 # Problem description
-geometryFile = naturalconvection_10x10.geom
+geometryFile = ../naturalconvection_10x10.geom
 endTime = 10000.0        # duration of the simulation
 re = 20000             # Reynolds number
 prandtl = 7.0 # Prandtl number

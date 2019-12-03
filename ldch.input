@@ -2,7 +2,7 @@
 # Run ./numsim driven_cavity.txt
 
 # Problem description
-geometryFile = ../liddriven_cavity_heat_20x20.geom
+geometryFile = ../liddriven_cavity_heat_10x10.geom
 endTime = 10.0        # duration of the simulation
 re = 1000             # Reynolds number
 prandtl = 1.0 # Prandtl number
