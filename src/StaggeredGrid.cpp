@@ -343,8 +343,8 @@ void StaggeredGrid::setBoundaryValues_p(int location_boundary, int i, int j)
 	}
 	// set boundary values to nan if not needed (neighbor not fluid cell)
 	if (geometryPVString_->operator()(igeom + in - i, jgeom + jn - j) != -1)	{
-		std::cout << "nan3" << std::endl;
-		p(i,j) = -1; //std::nan("1");
+		// std::cout << "nan3: " << location_boundary << ", " << in << ", " << i << ", " << igeom << ", j: " << jn << j << jgeom << std::endl;
+		p(i,j) = std::nan("1");
 	}
 	else
 	{

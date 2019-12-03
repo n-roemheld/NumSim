@@ -24,7 +24,7 @@ void Computation::initialize (int argc, char *argv[])
 		discretization_ = std::make_shared<CentralDifferences>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_);
 	}
 	discretization_->fillIn(settings_.uInit_, settings_.vInit_, settings_.pInit_, settings_.TInit_);
-	
+
 	//select SOR or GaussSeidel
 	if (settings_.pressureSolver == "SOR")
 	{
@@ -143,6 +143,8 @@ void Computation::computeTimeStepWidth ()
 
 void Computation::applyBoundaryValues ()
 {
+	// todo: double check indices
+
 	// locations:
 	int left = 0;
 	int right = 1;
@@ -152,19 +154,19 @@ void Computation::applyBoundaryValues ()
 	// setting T boundaries without corners (p grid, all ghost cells)
 	// lower T 
 	int j = discretization_->pJBegin()-1;
-	for(int i = discretization_->pIBegin(); i < discretization_->uIEnd()-1; i++)
+	for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
 	{
 		discretization_->setBoundaryValues_T(lower,i,j);
 	};
 	// upper T
 	j = discretization_->pJEnd();
-	for(int i = discretization_->pIBegin(); i < discretization_->pIEnd()-1; i++)
+	for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
 	{
 		discretization_->setBoundaryValues_T(upper,i,j);
 	};
 	// left T
 	int i = discretization_->pIBegin()-1;
-	for(int j = discretization_->uJBegin()-1; j < discretization_->uJEnd()+1; j++)
+	for(int j = discretization_->pJBegin()-1; j < discretization_->pJEnd()+1; j++)
 	{
 		discretization_->setBoundaryValues_T(left,i,j);
 	}
@@ -300,22 +302,22 @@ void Computation::computeTemperature()
 	double dt = dt_;
 	FieldVariable T_copy( {settings_.nCells[0]+2, settings_.nCells[1]+2},  {-0.5*meshWidth_[0], -0.5*meshWidth_[1]}, meshWidth_);
 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
-			{
-				for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
-				{
-					// discretization_->T(i,j) = discretization_->T(i,j)
-					T_copy(i,j) = discretization_->T(i,j)
-						+ dt*(1/(settings_.re * settings_.prandtl)*(discretization_->computeD2TDx2(i,j)+discretization_->computeD2TDy2(i,j)
-						- discretization_->computeDuTDx(i,j) - discretization_->computeDvTDy(i,j)));
-				};
-			};
+	{
+		for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+		{
+			// discretization_->T(i,j) = discretization_->T(i,j)
+			T_copy(i,j) = discretization_->T(i,j)
+				+ dt*(1/(settings_.re * settings_.prandtl) * ( discretization_->computeD2TDx2(i,j) + discretization_->computeD2TDy2(i,j) )
+				- discretization_->computeDuTDx(i,j) - discretization_->computeDvTDy(i,j));
+		};
+	};
 
 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
-			{
-				for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
-				{
-					discretization_->T(i,j) = T_copy(i,j);
-				};
-			};
+	{
+		for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+		{
+			discretization_->T(i,j) = T_copy(i,j);
+		};
+	};
 
 };

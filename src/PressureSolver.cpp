@@ -11,32 +11,37 @@ PressureSolver::PressureSolver (std::shared_ptr< Discretization > discretization
 //!	set the boundary values to account for homogenous Neumann boundary conditions, this has to be called after every iteration
 void PressureSolver::setBoundaryValues ()
 {
-	// ???????? verschattet C++ Variablen??? -> scheinbar ja
-	// p setting
-		// lower p ghost layer
-		int j = discretization_->pJBegin()-1;
-		for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
-		{
-			discretization_->p(i,j) = discretization_->p(i,j+1);
-		};
-		// upper p ghost layer
-		j = discretization_->pJEnd();
-		for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
-		{
-			discretization_->p(i,j) = discretization_->p(i,j-1);
-		};
-		// left p ghost layer
-		int i = discretization_->pIBegin()-1;
-		for(int j = discretization_->pJBegin()-1; j < discretization_->pJEnd()+1; j++)
-		{
-			discretization_->p(i,j) = discretization_->p(i+1,j);
-		}
-		// right p ghost layer
-		i = discretization_->pIEnd();
-		for(int j = discretization_->pJBegin()-1; j < discretization_->pJEnd()+1; j++)
-		{
-			discretization_->p(i,j) = discretization_->p(i-1,j);
-		}
+	// locations:
+	int left = 0;
+	int right = 1;
+	int lower = 2;
+	int upper = 3;
+
+	// setting p boundaries without corners (p grid, all ghost cells)
+	// lower p
+	int j = discretization_->pJBegin()-1;
+	for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+	{
+		discretization_->setBoundaryValues_p(lower,i,j);
+	};
+	// upper p
+	j = discretization_->pJEnd();
+	for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+	{
+		discretization_->setBoundaryValues_p(upper,i,j);
+	};
+	// left p
+	int i = discretization_->pIBegin()-1;
+	for(int j = discretization_->pJBegin()-1; j < discretization_->pJEnd()+1; j++)
+	{
+		discretization_->setBoundaryValues_p(left,i,j);
+	}
+	// right p
+	i = discretization_->pIEnd();
+	for(int j = discretization_->pJBegin()-1; j < discretization_->pJEnd()+1; j++)
+	{
+		discretization_->setBoundaryValues_p(right,i,j);
+	}
 };
 
 double PressureSolver::compute_res()
