@@ -286,27 +286,27 @@ void StaggeredGrid::setBoundaryValues_v_g(int location_boundary, int i, int j)
 			case 0: // NOSLIP
 			{
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
-					v(i,j) = 0;
-				} else { // upper or lower
 					v(i,j) = - v(in,jn);
+				} else { // upper or lower
+					v(i,j) = 0;
 				}
 				break;
 			}
 			case 1: // SLIP
 			{
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
-					v(i,j) = 0;
-				} else { // upper or lower
 					v(i,j) = v(in,jn);
+				} else { // upper or lower
+					v(i,j) = 0;
 				}
 				break;
 			}
 			case 2: // INFLOW
 			{
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
-					v(i,j) = geometryPV2_->operator()(igeom,jgeom);
-				} else { // upper or lower
 					v(i,j) = 2*geometryPV2_->operator()(igeom,jgeom) - v(in,jn);
+				} else { // upper or lower
+					v(i,j) = geometryPV2_->operator()(igeom,jgeom);
 				}
 				break;
 			}

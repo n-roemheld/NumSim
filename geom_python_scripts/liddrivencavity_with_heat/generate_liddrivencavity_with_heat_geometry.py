@@ -4,8 +4,8 @@ velXTop=1.0
 temperatureTop=1.0
 temperatureBottom=0.0
 
-nx = 10 #20
-ny = 10 #20
+nx = 20
+ny = 20
 
 lx = 1.
 ly = 1.

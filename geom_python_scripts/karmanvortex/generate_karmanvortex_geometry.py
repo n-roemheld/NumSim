@@ -4,8 +4,8 @@ uIn = 1.0
 vIn = 0.0
 #pressureRight = -5.0
 
-nx = 10 # 10 
-ny = 10 # 10 
+nx = 20 # 10 
+ny = 5 # 10 
 
 lx = 2.
 ly = 2.

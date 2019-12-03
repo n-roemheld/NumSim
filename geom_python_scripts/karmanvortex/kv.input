@@ -2,7 +2,7 @@
 # Run ./numsim driven_cavity.txt
 
 # Problem description
-geometryFile = karmanvortex_100x20.geom
+geometryFile = karmanvortex_20x5.geom
 endTime = 500.0        # duration of the simulation
 re = 10000             # Reynolds number
 prandtl = 1.0 # Prandtl number

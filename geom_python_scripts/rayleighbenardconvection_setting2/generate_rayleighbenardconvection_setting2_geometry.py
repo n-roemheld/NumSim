@@ -3,8 +3,8 @@
 temperatureTop=1
 temperatureBottom=2
 
-nx = 10 #20
-ny = 10 #20
+nx = 20 #20
+ny = 20 #20
 
 lx = 1.
 ly = 1.

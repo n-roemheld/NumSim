@@ -3,8 +3,8 @@
 temperatureLeft=1.0
 temperatureRight=0.0
 
-nx = 10 #50
-ny = 10 #50
+nx = 20 #50
+ny = 20 #50
 
 lx = 1.
 ly = 1.
