@@ -18,14 +18,13 @@ void Computation::initialize (int argc, char *argv[])
 	if (settings_.useDonorCell == true)
 	{
 		discretization_ = std::make_shared<DonorCell>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, settings_.alpha);
-		discretization_->fillIn(settings_.uInit_, settings_.vInit_, settings_.pInit_, settings_.TInit_);
-
 	}
 	else
 	{
 		discretization_ = std::make_shared<CentralDifferences>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_);
 	}
-
+	discretization_->fillIn(settings_.uInit_, settings_.vInit_, settings_.pInit_, settings_.TInit_);
+	
 	//select SOR or GaussSeidel
 	if (settings_.pressureSolver == "SOR")
 	{

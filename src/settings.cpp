@@ -299,10 +299,10 @@ void Settings::loadGeometryFile() {
 		}
 		 else if(parameterName == "Mesh")
 		{
-			for(int i = nCelly-1; i >= 0; i--)
+			for(int j = nCelly-1; j >= 0; j--) //(int i = nCelly-1; i >= 0; i--) // (int j = nCelly-1; j >= 0; j--)
 			{
 				getline(file, line);
-				for(int j = nCellx-1; j >= 0; j--)
+				for(int i = 0; i < nCellx; i++) //(int j = nCellx-1; j >= 0; j--) // (int i = 0; i < nCellx; i++)
 				{
 					std::string cellAll = line.substr(0,line.find_first_of(","));
 					line.erase(0,line.find_first_of(",")+1);
