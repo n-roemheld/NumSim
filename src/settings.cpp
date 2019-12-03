@@ -195,6 +195,10 @@ void Settings::loadFromFile(std::string filename) {
 			{
 				geometryFile = parameterValue.c_str();
 			}
+			else if (parameterName == "outputFileEveryDt")
+			{
+				outputFileEveryDt = atof(parameterValue.c_str());
+			}
 			else
 			{
 				std::cout << "Unknown parameter name: " << parameterName

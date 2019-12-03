@@ -19,6 +19,8 @@ struct Settings
   double tau = 0.5;                  //< safety factor for time step width
   double maximumDt = 0.1;            //< maximum time step width
 
+  double outputFileEveryDt = 0;        //< call ouput writers only every dt (or at every iteration if provided value is too small)
+
   std::array<double,2> g;    //< external forces
 
   bool useDonorCell = false;         //< if the donor cell scheme schould be used

@@ -46,10 +46,8 @@ void Computation::initialize (int argc, char *argv[])
 
 void Computation::runSimulation ()
 {
-	double outputFileEveryDt = 1;
-	double nextSnapshotTime = outputFileEveryDt;
-
 	double time = 0;
+	double lastOutputTime = 0;
 	while(time<settings_.endTime)
 	{
 		applyBoundaryValues();
@@ -64,12 +62,12 @@ void Computation::runSimulation ()
 		time += dt_;
 		// std::cout << "time_step" << dt_ << std::endl;
 
-		if (time >= nextSnapshotTime)
-		{
-			// outputWriterParaview_->writeFile(time);
-			// outputWriterText_->writeFile(time);
-			// outputWriterText_->writePressureFile();
-		}
+		// if (time >= nextSnapshotTime)
+		// {
+		// 	// outputWriterParaview_->writeFile(time);
+		// 	// outputWriterText_->writeFile(time);
+		// 	// outputWriterText_->writePressureFile();
+		// }
 
 		// compute T
 		computeTemperature(); //PFUSCH!!!!!
@@ -85,12 +83,12 @@ void Computation::runSimulation ()
 		//compute u and v
 		computeVelocities();
 
-		if (time >= nextSnapshotTime)
+		if (time - lastOutputTime > settings_.outputFileEveryDt - 1e-4)
 		{
 			outputWriterParaview_->writeFile(time);
-			outputWriterText_->writeFile(time);
+			outputWriterText_->writeFile(time); // todo: disable before submission!
 			// outputWriterText_->writePressureFile();
-			nextSnapshotTime += outputFileEveryDt;
+			lastOutputTime = time;
 		}
 	}
 };
@@ -173,7 +171,7 @@ void Computation::applyBoundaryValues ()
 	int left = 0;
 	int right = 1;
 	int lower = 2;
-	int upper = 4;
+	int upper = 3;
 
 	// u,f setting
 	// lower u ghost layer without corners

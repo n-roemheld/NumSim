@@ -4,6 +4,7 @@
 #include "FieldVariable.h"
 #include <memory>
 #include <cmath>
+#include <iostream>
 
 class StaggeredGrid
 {
