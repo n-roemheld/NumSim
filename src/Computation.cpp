@@ -70,7 +70,7 @@ void Computation::runSimulation ()
 		// }
 
 		// compute T
-		computeTemperature(); //PFUSCH!!!!!
+		computeTemperature(); // Reihenfolge?
 
 		// compute f and g
 		computePreliminaryVelocities();
@@ -144,38 +144,41 @@ void Computation::computeTimeStepWidth ()
 
 void Computation::applyBoundaryValues ()
 {
-	// PFUSCH !!!!!!!!!!!!!!!!!!!!!
-
-	// setting T bc
-	int i_left = discretization_->pIBegin()-1;
-	int i_right = discretization_->pIEnd();
-	// for (int j= discretization_->pJBegin()-1; j < discretization_->pJEnd()+1; j++)
-	for (int j= discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
-	{
-		discretization_->T(i_left,j) = discretization_->T(i_left+1,j);
-		discretization_->T(i_right,j) = discretization_->T(i_right-1,j);
-	}
-
-	int j_up = discretization_->pJEnd();
-	int j_low = discretization_->pJBegin()-1;
-	// for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
-	for (int i = discretization_->pIBegin()-1; i < discretization_->pIEnd()+1; i++)
-	{
-		discretization_->T(i, j_up) = 2-discretization_->T(i,j_up-1);
-		discretization_->T(i, j_low) = -discretization_->T(i,j_low+1);
-	}
-
-	// PFUSCH !!!!!!!!!!!!!!!!!!!!!
-
 	// locations:
 	int left = 0;
 	int right = 1;
 	int lower = 2;
 	int upper = 3;
 
+	// setting T boundaries without corners (p grid, all ghost cells)
+	// lower T 
+	int j = discretization_->pJBegin()-1;
+	for(int i = discretization_->pIBegin(); i < discretization_->uIEnd()-1; i++)
+	{
+		discretization_->setBoundaryValues_T(lower,i,j);
+	};
+	// upper T
+	j = discretization_->pJEnd();
+	for(int i = discretization_->pIBegin(); i < discretization_->pIEnd()-1; i++)
+	{
+		discretization_->setBoundaryValues_T(upper,i,j);
+	};
+	// left T
+	int i = discretization_->pIBegin()-1;
+	for(int j = discretization_->uJBegin()-1; j < discretization_->uJEnd()+1; j++)
+	{
+		discretization_->setBoundaryValues_T(left,i,j);
+	}
+	// right T
+	i = discretization_->pIEnd();
+	for(int j = discretization_->pJBegin()-1; j < discretization_->pJEnd()+1; j++)
+	{
+		discretization_->setBoundaryValues_T(right,i,j);
+	}
+
 	// u,f setting
 	// lower u ghost layer without corners
-	int j = discretization_->uJBegin()-1;
+	j = discretization_->uJBegin()-1;
 	for(int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
 	{
 		discretization_->setBoundaryValues_u_f(lower,i,j);
@@ -187,7 +190,7 @@ void Computation::applyBoundaryValues ()
 		discretization_->setBoundaryValues_u_f(upper,i,j);
 	};
 	// left u ghost layer with corners
-	int i = discretization_->uIBegin()-1;
+	i = discretization_->uIBegin()-1;
 	for(int j = discretization_->uJBegin()-1; j < discretization_->uJEnd()+1; j++)
 	{
 		discretization_->setBoundaryValues_u_f(left,i,j);
