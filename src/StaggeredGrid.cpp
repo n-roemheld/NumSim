@@ -113,6 +113,11 @@ double StaggeredGrid::T(int i, int j) const
   return StaggeredGrid::T_(i,j);
 };
 
+double StaggeredGrid::geometryPVString(int i, int j) const
+{
+	return StaggeredGrid::geometryPVString_->operator()(i, j);
+}
+
 double StaggeredGrid::dx() const
 {
   return meshWidth_[0];
