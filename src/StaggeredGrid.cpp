@@ -411,9 +411,9 @@ void StaggeredGrid::setObstacleValues_u_f(int i, int j)
 	int index = 0;
 	for(int i = 0; i < 4; i++)
 	{
-		if(index > 1)
+		if(index > 2)
 		{
-			std::cout << "u: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled" << std::endl;
+			std::cout << "u: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
 		}
 		
 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
@@ -457,7 +457,7 @@ void StaggeredGrid::setObstacleValues_u_f(int i, int j)
 
 	setObstacleValues_u_f(locations_boundary, i, j);
 	}
-	
+
 }
 
 void StaggeredGrid::setObstacleValues_v_g(int i, int j)
@@ -471,9 +471,9 @@ void StaggeredGrid::setObstacleValues_v_g(int i, int j)
 	int index = 0;
 	for(int i = 0; i < 4; i++)
 	{
-		if(index > 1)
+		if(index > 2)
 		{
-			std::cout << "v: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled" << std::endl;
+			std::cout << "v: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
 		}
 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
 		{
@@ -529,9 +529,9 @@ void StaggeredGrid::setObstacleValues_p(int i, int j)
 	int index = 0;
 	for(int i = 0; i < 4; i++)
 	{
-		if(index > 1)
+		if(index > 2)
 		{
-			std::cout << "p: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled" << std::endl;
+			std::cout << "p: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
 		}
 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
 		{
@@ -587,9 +587,9 @@ void StaggeredGrid::setObstacleValues_T(int i, int j)
 	int index = 0;
 	for(int i = 0; i < 4; i++)
 	{
-		if(index > 1)
+		if(index > 2)
 		{
-			std::cout << "T: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled" << std::endl;
+			std::cout << "T: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
 		}
 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
 		{
@@ -877,9 +877,10 @@ void StaggeredGrid::setObstacleValues_u_f(std::array<int, 2> locations_boundary,
 	{
 		u_(i,j) = std::nan("1");
 		f_(i,j) = u_(i,j);
+		return;
 	}
 
-	// proof if corner or not 
+	// proof if corner or not
 	if(locations_boundary[1] == -1)
 	{
 		switch(locations_boundary[0]) // 0: Left, 1: Right, 2: Lower, 3: Upper
@@ -904,7 +905,7 @@ void StaggeredGrid::setObstacleValues_u_f(std::array<int, 2> locations_boundary,
 				break;
 		}
 	}
-	else 
+	else
 	{
 		if(locations_boundary[0] == 2)
 		{
@@ -921,7 +922,7 @@ void StaggeredGrid::setObstacleValues_u_f(std::array<int, 2> locations_boundary,
 					f_(i,j) = u_(i,j);
 					break;
 			}
-		} 
+		}
 		else if(locations_boundary[0] == 3)
 		{
 			switch(locations_boundary[1])
@@ -942,7 +943,7 @@ void StaggeredGrid::setObstacleValues_u_f(std::array<int, 2> locations_boundary,
 		{
 			std::cout << "Unterscheidung der Fälle für das Setzen der Obstakle-Werte u lief falsch: i: " << i << " j: " << j << std::endl;
 		}
-		
+
 	}
 }
 
@@ -961,9 +962,10 @@ void StaggeredGrid::setObstacleValues_v_g(std::array<int, 2> locations_boundary,
 	{
 		v_(i,j) = std::nan("1");
 		g_(i,j) = v_(i,j);
+		return;
 	}
 
-	// proof if corner or not 
+	// proof if corner or not
 	if(locations_boundary[1] == -1)
 	{
 		switch(locations_boundary[0]) // 0: Left, 1: Right, 2: Lower, 3: Upper
@@ -988,7 +990,7 @@ void StaggeredGrid::setObstacleValues_v_g(std::array<int, 2> locations_boundary,
 				break;
 		}
 	}
-	else 
+	else
 	{
 		if(locations_boundary[0] == 2)
 		{
@@ -1007,7 +1009,7 @@ void StaggeredGrid::setObstacleValues_v_g(std::array<int, 2> locations_boundary,
 					g_(i,j) = v_(i,j);
 				break;
 			}
-		} 
+		}
 		else if(locations_boundary[0] == 3)
 		{
 			switch(locations_boundary[1])
@@ -1026,7 +1028,7 @@ void StaggeredGrid::setObstacleValues_v_g(std::array<int, 2> locations_boundary,
 		{
 			std::cout << "Unterscheidung der Fälle für das Setzen der Obstakle-Werte v lief falsch: i: " << i << " j: " << j << std::endl;
 		}
-		
+
 	}
 }
 
@@ -1044,21 +1046,22 @@ void StaggeredGrid::setObstacleValues_p(std::array<int, 2> locations_boundary, i
 	if(locations_boundary[0] == -1 && locations_boundary[1] == -1)
 	{
 		p_(i,j) = std::nan("1");
+		return;
 	}
 
-	// proof if corner or not 
+	// proof if corner or not
 	if(locations_boundary[1] == -1)
 	{
 		int iNeighborShift;
 		int jNeighborShift;
 		switch(locations_boundary[0]) // 0: Left, 1: Right, 2: Lower, 3: Upper
 		{
-			case 0: 
+			case 0:
 				iNeighborShift = -1;
 				jNeighborShift = 0;
 				break;
-			case 1: 
-				iNeighborShift = 1; 
+			case 1:
+				iNeighborShift = 1;
 				jNeighborShift = 0;
 				break;
 			case 2:
@@ -1068,11 +1071,12 @@ void StaggeredGrid::setObstacleValues_p(std::array<int, 2> locations_boundary, i
 			case 3:
 				iNeighborShift = 0;
 				jNeighborShift = 1;
+				break;
 		}
 		p_(i,j) = p_(i+iNeighborShift, j+jNeighborShift);
 
 	}
-	else 
+	else
 	{
 		int iNeighborShift0;
 		int jNeighborShift0;
@@ -1080,12 +1084,12 @@ void StaggeredGrid::setObstacleValues_p(std::array<int, 2> locations_boundary, i
 		int jNeighborShift1;
 		switch(locations_boundary[0]) // 0: Left, 1: Right, 2: Lower, 3: Upper
 		{
-			case 0: 
+			case 0:
 				iNeighborShift0 = -1;
 				jNeighborShift0 = 0;
 				break;
-			case 1: 
-				iNeighborShift0 = 1; 
+			case 1:
+				iNeighborShift0 = 1;
 				jNeighborShift0 = 0;
 				break;
 			case 2:
@@ -1095,15 +1099,16 @@ void StaggeredGrid::setObstacleValues_p(std::array<int, 2> locations_boundary, i
 			case 3:
 				iNeighborShift0 = 0;
 				jNeighborShift0 = 1;
+				break;
 		}
 		switch(locations_boundary[1]) // 0: Left, 1: Right, 2: Lower, 3: Upper
 		{
-			case 0: 
+			case 0:
 				iNeighborShift1 = -1;
 				jNeighborShift1 = 0;
 				break;
-			case 1: 
-				iNeighborShift1 = 1; 
+			case 1:
+				iNeighborShift1 = 1;
 				jNeighborShift1 = 0;
 				break;
 			case 2:
@@ -1113,6 +1118,7 @@ void StaggeredGrid::setObstacleValues_p(std::array<int, 2> locations_boundary, i
 			case 3:
 				iNeighborShift1 = 0;
 				jNeighborShift1 = 1;
+				break;
 		}
 		p_(i,j) = 1/2*(p(i+iNeighborShift0, j+jNeighborShift0) + p(i+iNeighborShift1, j+jNeighborShift1));
 	}
@@ -1132,21 +1138,22 @@ void StaggeredGrid::setObstacleValues_T(std::array<int, 2> locations_boundary, i
 	if(locations_boundary[0] == -1 && locations_boundary[1] == -1)
 	{
 		T_(i,j) = std::nan("1");
+		return;
 	}
 
-	// proof if corner or not 
+	// proof if corner or not
 	if(locations_boundary[1] == -1)
 	{
 		int iNeighborShift;
 		int jNeighborShift;
 		switch(locations_boundary[0]) // 0: Left, 1: Right, 2: Lower, 3: Upper
 		{
-			case 0: 
+			case 0:
 				iNeighborShift = -1;
 				jNeighborShift = 0;
 				break;
-			case 1: 
-				iNeighborShift = 1; 
+			case 1:
+				iNeighborShift = 1;
 				jNeighborShift = 0;
 				break;
 			case 2:
@@ -1156,11 +1163,12 @@ void StaggeredGrid::setObstacleValues_T(std::array<int, 2> locations_boundary, i
 			case 3:
 				iNeighborShift = 0;
 				jNeighborShift = 1;
+				break;
 		}
 		T_(i,j) = T_(i+iNeighborShift, j+jNeighborShift);
 
 	}
-	else 
+	else
 	{
 		int iNeighborShift0;
 		int jNeighborShift0;
@@ -1168,12 +1176,12 @@ void StaggeredGrid::setObstacleValues_T(std::array<int, 2> locations_boundary, i
 		int jNeighborShift1;
 		switch(locations_boundary[0]) // 0: Left, 1: Right, 2: Lower, 3: Upper
 		{
-			case 0: 
+			case 0:
 				iNeighborShift0 = -1;
 				jNeighborShift0 = 0;
 				break;
-			case 1: 
-				iNeighborShift0 = 1; 
+			case 1:
+				iNeighborShift0 = 1;
 				jNeighborShift0 = 0;
 				break;
 			case 2:
@@ -1183,15 +1191,16 @@ void StaggeredGrid::setObstacleValues_T(std::array<int, 2> locations_boundary, i
 			case 3:
 				iNeighborShift0 = 0;
 				jNeighborShift0 = 1;
+				break;
 		}
 		switch(locations_boundary[1]) // 0: Left, 1: Right, 2: Lower, 3: Upper
 		{
-			case 0: 
+			case 0:
 				iNeighborShift1 = -1;
 				jNeighborShift1 = 0;
 				break;
-			case 1: 
-				iNeighborShift1 = 1; 
+			case 1:
+				iNeighborShift1 = 1;
 				jNeighborShift1 = 0;
 				break;
 			case 2:
@@ -1201,9 +1210,11 @@ void StaggeredGrid::setObstacleValues_T(std::array<int, 2> locations_boundary, i
 			case 3:
 				iNeighborShift1 = 0;
 				jNeighborShift1 = 1;
+				break;
 		}
 		T_(i,j) = 1/2*(T_(i+iNeighborShift0, j+jNeighborShift0) + T_(i+iNeighborShift1, j+jNeighborShift1));
 	}
+
 }
 
 void StaggeredGrid::fillIn(int uInit, int vInit, int pInit, int TInit)
