@@ -47,7 +47,7 @@ void Computation::runSimulation ()
 {
 	double time = 0;
 	double lastOutputTime = 0;
-	while(time<settings_.endTime)
+	while(time < settings_.endTime)
 	{
 		applyBoundaryValues();
 
@@ -92,6 +92,14 @@ void Computation::runSimulation ()
 			lastOutputTime = time;
 		}
 	}
+	// output data using VTK if we did not do this in the last time step
+	if ( std::fabs( time - lastOutputTime ) > 1e-4 )
+	{
+		outputWriterParaview_->writeFile(time);
+		outputWriterText_->writeFile(time); // todo: disable before submission!
+		lastOutputTime = time;
+	}
+
 };
 
 void Computation::computeTimeStepWidth ()
