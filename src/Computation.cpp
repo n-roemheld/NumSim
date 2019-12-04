@@ -68,12 +68,14 @@ void Computation::runSimulation ()
 		// 	// outputWriterText_->writePressureFile();
 		// }
 
-		// compute T
-		computeTemperature(); // Reihenfolge?
+
 
 		// compute f and g
 		computePreliminaryVelocities();
 		// outputWriterText_->writeFile(time);
+
+		// compute T
+		computeTemperature(); // Reihenfolge?
 
 		//compute rhs
 		computeRightHandSide();
@@ -152,7 +154,7 @@ void Computation::applyBoundaryValues ()
 	int upper = 3;
 
 	// setting T boundaries without corners (p grid, all ghost cells)
-	// lower T 
+	// lower T
 	int j = discretization_->pJBegin()-1;
 	for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
 	{
