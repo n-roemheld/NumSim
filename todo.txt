@@ -10,6 +10,6 @@ todo:
 --CHECK settings: Pr und beta anlegen 
 --CHECK computation: T berechnen
 --CHECK computation: berechnung von T in rumsimulation
--- gamma und alpha unterscheiden
+--CHECK gamma und alpha unterscheiden
 
 -boundaries implementieren
