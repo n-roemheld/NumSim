@@ -44,6 +44,17 @@ void PressureSolver::setBoundaryValues ()
 	}
 };
 
+void PressureSolver::setObstacleValues()
+{
+	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
+	{
+		for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+		{
+			discretization_->setObstacleValues_p(i,j);
+		}
+	}
+}
+
 double PressureSolver::compute_res()
 {
 	//Array2D res_vec = Array2D(discretization_->nCells());
@@ -58,7 +69,7 @@ double PressureSolver::compute_res()
 	{
 		for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
 		{
-			if(discretization_->geometryPVString(i,j) == -1) // prove, if cell is fluid cell
+			if(discretization_->geometryPVString(i,j) == -1) // proof, if cell is fluid cell
 			{
 				res += pow((p(i+1,j)-2*p(i,j)+p(i-1,j))/(dx*dx) + (p(i,j+1)-2*p(i,j)+p(i,j-1))/(dy*dy) - discretization_->rhs(i,j),2);
 				fluidCellCount++;

@@ -22,6 +22,7 @@ private:
 	void computePressure ();
 	void computeVelocities ();
 	void computeTemperature();
+	void applyObstacleValues();
 
 	Settings settings_;
 	std::shared_ptr< Discretization > discretization_;

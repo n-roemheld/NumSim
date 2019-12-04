@@ -85,6 +85,16 @@ public:
 	void setBoundaryValues_p(int location_boundary, int i, int j);
 	void setBoundaryValues_T(int location_boundary, int i, int j);
 
+  void setObstacleValues_u_f(int i, int j);
+  void setObstacleValues_v_g(int i, int j);
+  void setObstacleValues_p(int i, int j);
+  void setObstacleValues_T(int i, int j);
+
+  void setObstacleValues_u_f(std::array<int, 2> locations_boundary, int i, int j);
+  void setObstacleValues_v_g(std::array<int, 2> locations_boundary, int i, int j);
+  void setObstacleValues_p(std::array<int, 2> locations_boundary, int i, int j);
+  void setObstacleValues_T(std::array<int, 2> locations_boundary, int i, int j);
+
   void fillIn(int uInit, int vInit, int pInit, int TInit);
 
 
