@@ -59,7 +59,6 @@ void Computation::runSimulation ()
 		// compute dt_ and time
 		computeTimeStepWidth();
 		if(time+dt_>settings_.endTime) dt_ = settings_.endTime - time;
-		time += dt_;
 		// std::cout << "time_step" << dt_ << std::endl;
 
 		// if (time >= nextSnapshotTime)
@@ -84,6 +83,8 @@ void Computation::runSimulation ()
 		computePressure();
 		//compute u and v
 		computeVelocities();
+
+		time += dt_;
 
 		if (time - lastOutputTime > settings_.outputFileEveryDt - 1e-4)
 		{
