@@ -54,6 +54,8 @@ void Computation::runSimulation ()
 
 
 		if(time == 0) outputWriterParaview_->writeFile(time);
+		if(time == 0) outputWriterText_->writeFile(time);
+
 
 		// std::cout << "time" << time << std::endl;
 		// compute dt_ and time
@@ -63,9 +65,9 @@ void Computation::runSimulation ()
 
 		// if (time >= nextSnapshotTime)
 		// {
-		// 	// outputWriterParaview_->writeFile(time);
-		// 	// outputWriterText_->writeFile(time);
-		// 	// outputWriterText_->writePressureFile();
+			// outputWriterParaview_->writeFile(time);
+			// outputWriterText_->writeFile(time);
+			// outputWriterText_->writePressureFile();
 		// }
 
 

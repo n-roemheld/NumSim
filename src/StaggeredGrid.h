@@ -102,7 +102,7 @@ public:
 
   void fillIn(int uInit, int vInit, int pInit, int TInit);
 
-  void setObstacleValues(int i, int j);
+  // void setObstacleValues(int i, int j);
 
 
 protected:

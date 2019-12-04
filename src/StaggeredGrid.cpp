@@ -219,8 +219,10 @@ void StaggeredGrid::setBoundaryValues_u_f(int location_boundary, int i, int j)
 			{
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
 					u(i,j) = 0;
-				} else { // upper or lower
+					f(i,j) = u(i,j);
+				} else { // upper or lower  skript meint einfach wir kompliziert
 					u(i,j) = - u(in,jn);
+					f(i,j) = u(i,j);
 				}
 				break;
 			}
@@ -228,8 +230,11 @@ void StaggeredGrid::setBoundaryValues_u_f(int location_boundary, int i, int j)
 			{
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
 					u(i,j) = 0;
+					f(i,j) = u(i,j);
 				} else { // upper or lower
+					double u_old = u(i,j);
 					u(i,j) = u(in,jn);
+					f(i,j) = 2*u(i,j)-u_old;
 				}
 				break;
 			}
@@ -237,8 +242,10 @@ void StaggeredGrid::setBoundaryValues_u_f(int location_boundary, int i, int j)
 			{
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
 					u(i,j) = geometryPV1_->operator()(igeom,jgeom);
+					f(i,j) = u(i,j);
 				} else { // upper or lower
 					u(i,j) = 2*geometryPV1_->operator()(igeom,jgeom) - u(in,jn);
+					f(i,j) = u(i,j);
 				}
 				break;
 			}
@@ -246,16 +253,19 @@ void StaggeredGrid::setBoundaryValues_u_f(int location_boundary, int i, int j)
 			case 4: // PRESSURE
 			{
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
+					double u_old = u(i,j);
 					u(i,j) = u(in,jn);
+					f(i,j) = 2*u(i,j)-u_old;
 				} else { // upper or lower
+					double u_old = u(i,j);
 					u(i,j) = u(in,jn);
+					f(i,j) = 2*u(i,j)-u_old;
 				}
 				break;
 			}
 
 		}
 	}
-	f(i,j) = u(i,j);
 }
 
 void StaggeredGrid::setBoundaryValues_v_g(int location_boundary, int i, int j)
@@ -287,17 +297,22 @@ void StaggeredGrid::setBoundaryValues_v_g(int location_boundary, int i, int j)
 			{
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
 					v(i,j) = - v(in,jn);
+					g(i,j) = v(i,j);
 				} else { // upper or lower
 					v(i,j) = 0;
+					g(i,j) = v(i,j);
 				}
 				break;
 			}
 			case 1: // SLIP
 			{
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
+					double v_old = v(i,j);
 					v(i,j) = v(in,jn);
+					g(i,j) = 2*v(i,j)-v_old;
 				} else { // upper or lower
 					v(i,j) = 0;
+					g(i,j) = v(i,j);
 				}
 				break;
 			}
@@ -305,8 +320,10 @@ void StaggeredGrid::setBoundaryValues_v_g(int location_boundary, int i, int j)
 			{
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
 					v(i,j) = 2*geometryPV2_->operator()(igeom,jgeom) - v(in,jn);
+					g(i,j) = v(i,j);
 				} else { // upper or lower
 					v(i,j) = geometryPV2_->operator()(igeom,jgeom);
+					g(i,j) = v(i,j);
 				}
 				break;
 			}
@@ -314,16 +331,19 @@ void StaggeredGrid::setBoundaryValues_v_g(int location_boundary, int i, int j)
 			case 4: // PRESSURE
 			{
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
+					double v_old = v(i,j);
 					v(i,j) = v(in,jn);
+					g(i,j) = 2*v(i,j)-v_old;
 				} else { // upper or lower
+					double v_old = v(i,j);
 					v(i,j) = v(in,jn);
+					g(i,j) = 2*v(i,j)-v_old;
 				}
 				break;
 			}
 
 		}
 	}
-	g(i,j) = v(i,j);
 }
 
 void StaggeredGrid::setBoundaryValues_p(int location_boundary, int i, int j)
@@ -415,7 +435,7 @@ void StaggeredGrid::setObstacleValues_u_f(int i, int j)
 		{
 			std::cout << "u: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
 		}
-		
+
 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
 		{
 			case 0:
@@ -677,18 +697,18 @@ void StaggeredGrid::setObstacleValues_u_f2(int i, int j)
 
 	f_(i,j) = u(i,j);
 
-	if (geometryPVString_->operator()(igeom, jgeom + 1) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom + 1) != -1) // upper is fluid but not upper-right
-	{
-		u_(i,j) = std::nan("1");
-	}
-	else if (geometryPVString_->operator()(igeom, jgeom - 1) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom - 1) != -1) // lower is fluid, but not lower-right
-	{
-		u_(i,j) = std::nan("1");
-	}
-	else if (geometryPVString_->operator()(igeom - 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom - 1, jgeom + 1) != -1) // left is fluid, but not upper-left
-	{
-		u_(i,j) = std::nan("1");
-	}
+	// if (geometryPVString_->operator()(igeom, jgeom + 1) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom + 1) != -1) // upper is fluid but not upper-right
+	// {
+	// 	u_(i,j) = std::nan("1");
+	// }
+	// else if (geometryPVString_->operator()(igeom, jgeom - 1) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom - 1) != -1) // lower is fluid, but not lower-right
+	// {
+	// 	u_(i,j) = std::nan("1");
+	// }
+	// else if (geometryPVString_->operator()(igeom - 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom - 1, jgeom + 1) != -1) // left is fluid, but not upper-left
+	// {
+	// 	u_(i,j) = std::nan("1");
+	// }
 }
 
 void StaggeredGrid::setObstacleValues_v_g2(int i, int j)
@@ -718,7 +738,7 @@ void StaggeredGrid::setObstacleValues_v_g2(int i, int j)
 		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // right and lower is fluid
 		{
 			v_(i,j-1) = 0; g_(i,j-1) = v_(i,j-1);
-		}	
+		}
 	}
 	else // left and right not fluid
 	{
@@ -738,18 +758,18 @@ void StaggeredGrid::setObstacleValues_v_g2(int i, int j)
 	}
 
 	g_(i,j) = v(i,j);
-	if (geometryPVString_->operator()(igeom, jgeom - 1) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom - 1) != -1) // lower is fluid, but not lower-right
-	{
-		v_(i,j) = std::nan("1");
-	}
-	else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom + 1) != -1) // right is fluid but not upper-right
-	{
-		v_(i,j) = std::nan("1");
-	}
-	else if (geometryPVString_->operator()(igeom - 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom - 1, jgeom + 1) != -1) // left is fluid, but not upper-left
-	{
-		v_(i,j) = std::nan("1");
-	}
+	// if (geometryPVString_->operator()(igeom, jgeom - 1) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom - 1) != -1) // lower is fluid, but not lower-right
+	// {
+	// 	v_(i,j) = std::nan("1");
+	// }
+	// else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom + 1) != -1) // right is fluid but not upper-right
+	// {
+	// 	v_(i,j) = std::nan("1");
+	// }
+	// else if (geometryPVString_->operator()(igeom - 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom - 1, jgeom + 1) != -1) // left is fluid, but not upper-left
+	// {
+	// 	v_(i,j) = std::nan("1");
+	// }
 }
 
 void StaggeredGrid::setObstacleValues_p2(int i, int j)
@@ -789,7 +809,7 @@ void StaggeredGrid::setObstacleValues_p2(int i, int j)
 		else // only right is fluid
 		{
 			p_(i,j) = p_(i+1,j);
-		}		
+		}
 	}
 	else // left and right not fluid
 	{
@@ -805,7 +825,7 @@ void StaggeredGrid::setObstacleValues_p2(int i, int j)
 		{
 			p_(i,j) = std::nan("1");
 		}
-		
+
 	}
 }
 
@@ -841,7 +861,7 @@ void StaggeredGrid::setObstacleValues_T2(int i, int j)
 		else // only right is fluid
 		{
 			T_(i,j) = T_(i+1,j);
-		}		
+		}
 	}
 	else // left and right not fluid
 	{
@@ -857,7 +877,7 @@ void StaggeredGrid::setObstacleValues_T2(int i, int j)
 		{
 			T_(i,j) = std::nan("1");
 		}
-		
+
 	}
 }
 
