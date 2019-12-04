@@ -3,8 +3,8 @@
 pressureLeft = 5.0
 pressureRight = -5.0
 
-nx = 100
-ny = 20
+nx = 25 # 100
+ny = 5 # 20
 
 lx = 10.
 ly = 2.
