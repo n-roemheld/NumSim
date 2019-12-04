@@ -80,7 +80,7 @@ void OutputWriterParaview::writeFile(double currentTime)
   // Set the number of pressure values and allocate memory for it. We already know the number, it has to be the same as there are nodes in the mesh.
   arrayTemperature->SetNumberOfTuples(dataSet->GetNumberOfPoints());
 
-  arrayTemperature->SetName("temperature");
+  arrayTemperature->SetName("T");
 
   // loop over the nodes of the mesh and assign the interpolated p values in the vtk data structure
   // we only consider the cells that are the actual computational domain, not the helper values in the "halo"
