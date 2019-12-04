@@ -55,6 +55,18 @@ void PressureSolver::setObstacleValues()
 	}
 }
 
+void PressureSolver::setObstacleValues2()
+{
+	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
+	{
+		for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+		{
+			// check if cell solid in setObstacleValues_p2
+			discretization_->setObstacleValues_p2(i,j);
+		}
+	}
+}
+
 double PressureSolver::compute_res()
 {
 	//Array2D res_vec = Array2D(discretization_->nCells());

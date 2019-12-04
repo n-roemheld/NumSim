@@ -275,10 +275,10 @@ void Computation::applyObstacleValues2()
 	// u and f
 	for(int j = discretization_->uJBegin(); j < discretization_->uJEnd(); j++)
 	{
-		int jgeom = j-pJBegin()+1;
+		int jgeom = j-uJBegin()+1;
 		for(int i = discretization_->uIBegin(); i < discretization_->uIEnd(); i++)
 		{
-			int igeom = i-pIBegin()+1; // todo: double check!!
+			int igeom = i-uIBegin()+1; // todo: double check!!
 			if (geometryPVString_->operator()(igeom, jgeom) == -1)
 			{
 				discretization_->setObstacleValues_u_f2(i,j);
@@ -288,10 +288,10 @@ void Computation::applyObstacleValues2()
 	// v and g
 	for(int j = discretization_->vJBegin(); j < discretization_->vJEnd(); j++)
 	{
-		int jgeom = j-pJBegin()+1;
+		int jgeom = j-vJBegin()+1;
 		for(int i = discretization_-> vIBegin(); i < discretization_->vIEnd(); i++)
 		{
-			int igeom = i-pIBegin()+1; // todo: double check!!
+			int igeom = i-vIBegin()+1; // todo: double check!!
 			if (geometryPVString_->operator()(igeom, jgeom) == -1)
 			{
 				discretization_->setObstacleValues_v_g2(i,j);

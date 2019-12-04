@@ -636,8 +636,8 @@ void StaggeredGrid::setObstacleValues_T(int i, int j)
 
 void StaggeredGrid::setObstacleValues_u_f2(int i, int j)
 {
-	int igeom = i-pIBegin()+1; // todo: double check!!
-	int jgeom = j-pJBegin()+1;
+	int igeom = i-uIBegin()+1; // todo: double check!!
+	int jgeom = j-uJBegin()+1;
 
 	if (geometryPVString_->operator()(igeom - 1, jgeom) == -1) // left is fluid
 	{
@@ -693,8 +693,8 @@ void StaggeredGrid::setObstacleValues_u_f2(int i, int j)
 
 void StaggeredGrid::setObstacleValues_v_g2(int i, int j)
 {
-	int igeom = i-pIBegin()+1; // todo: double check!!
-	int jgeom = j-pJBegin()+1;
+	int igeom = i-vIBegin()+1; // todo: double check!!
+	int jgeom = j-vJBegin()+1;
 
 	if (geometryPVString_->operator()(igeom - 1, jgeom) == -1) // left is fluid
 	{
@@ -757,6 +757,11 @@ void StaggeredGrid::setObstacleValues_p2(int i, int j)
 	int igeom = i-pIBegin()+1; // todo: double check!!
 	int jgeom = j-pJBegin()+1;
 
+	if (geometryPVString_->operator()(igeom, jgeom) == 5) // if current cell is not solid
+	{
+		return;
+	}
+
 	if (geometryPVString_->operator()(igeom - 1, jgeom) == -1) // left is fluid
 	{
 		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // left and lower is fluid //todo: correct grammar
@@ -813,44 +818,44 @@ void StaggeredGrid::setObstacleValues_T2(int i, int j)
 	{
 		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // left and lower is fluid //todo: correct grammar
 		{
-			T_((i,j) = .5*(T_((i-1,j) + T_((i,j-1));
+			T_(i,j) = .5*(T_(i-1,j) + T_(i,j-1));
 		}
 		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // left and upper is fluid
 		{
 		}
 		else // only left is fluid
 		{
-			T_((i,j) = T_((i-1,j);
+			T_(i,j) = T_(i-1,j);
 		}
 	}
 	else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1) // right is fluid
 	{
 		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // right and lower is fluid
 		{
-			T_((i,j) = .5*(T_((i+1,j) + T_((i,j-1));
+			T_(i,j) = .5*(T_(i+1,j) + T_(i,j-1));
 		}
 		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // right and upper is fluid
 		{
-			T_((i,j) = .5*(T_((i+1,j) + T_((i,j+1));
+			T_(i,j) = .5*(T_(i+1,j) + T_(i,j+1));
 		}
 		else // only right is fluid
 		{
-			T_((i,j) = T_((i+1,j);
+			T_(i,j) = T_(i+1,j);
 		}		
 	}
 	else // left and right not fluid
 	{
 		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // only lower is fluid
 		{
-			T_((i,j) = T_((i,j-1);
+			T_(i,j) = T_(i,j-1);
 		}
 		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // only upper is fluid
 		{
-			T_((i,j) = T_((i,j+1);
+			T_(i,j) = T_(i,j+1);
 		}
 		else // no direct neighbors are fluid
 		{
-			T_((i,j) = std::nan("1");
+			T_(i,j) = std::nan("1");
 		}
 		
 	}

@@ -16,6 +16,7 @@ protected:
 	void setBoundaryValues ();
 
 	void setObstacleValues();
+	void setObstacleValues2();
 
 	std::shared_ptr< Discretization > discretization_;
 	double 	epsilon_;
