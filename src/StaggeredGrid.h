@@ -90,12 +90,19 @@ public:
   void setObstacleValues_p(int i, int j);
   void setObstacleValues_T(int i, int j);
 
+  void setObstacleValues_u_f2(int i, int j);
+  void setObstacleValues_v_g2(int i, int j);
+  void setObstacleValues_p2(int i, int j);
+  void setObstacleValues_T2(int i, int j);
+
   void setObstacleValues_u_f(std::array<int, 2> locations_boundary, int i, int j);
   void setObstacleValues_v_g(std::array<int, 2> locations_boundary, int i, int j);
   void setObstacleValues_p(std::array<int, 2> locations_boundary, int i, int j);
   void setObstacleValues_T(std::array<int, 2> locations_boundary, int i, int j);
 
   void fillIn(int uInit, int vInit, int pInit, int TInit);
+
+  void setObstacleValues(int i, int j);
 
 
 protected:

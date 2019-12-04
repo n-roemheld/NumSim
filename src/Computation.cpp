@@ -270,6 +270,49 @@ void Computation::applyObstacleValues()
 	}
 }
 
+void Computation::applyObstacleValues2()
+{
+	// u and f
+	for(int j = discretization_->uJBegin(); j < discretization_->uJEnd(); j++)
+	{
+		int jgeom = j-pJBegin()+1;
+		for(int i = discretization_->uIBegin(); i < discretization_->uIEnd(); i++)
+		{
+			int igeom = i-pIBegin()+1; // todo: double check!!
+			if (geometryPVString_->operator()(igeom, jgeom) == -1)
+			{
+				discretization_->setObstacleValues_u_f2(i,j);
+			}
+		}
+	}
+	// v and g
+	for(int j = discretization_->vJBegin(); j < discretization_->vJEnd(); j++)
+	{
+		int jgeom = j-pJBegin()+1;
+		for(int i = discretization_-> vIBegin(); i < discretization_->vIEnd(); i++)
+		{
+			int igeom = i-pIBegin()+1; // todo: double check!!
+			if (geometryPVString_->operator()(igeom, jgeom) == -1)
+			{
+				discretization_->setObstacleValues_v_g2(i,j);
+			}
+		}
+	}
+	// T
+	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
+	{
+		int jgeom = j-pJBegin()+1;
+		for(int i = discretization_-> pIBegin(); i < discretization_->pIEnd(); i++)
+		{
+			int igeom = i-pIBegin()+1; // todo: double check!!
+			if (geometryPVString_->operator()(igeom, jgeom) == -1)
+			{
+				discretization_->setObstacleValues_T2(i,j);
+			}
+		}
+	}
+}
+
 // only for not boundary values
 void Computation::computePreliminaryVelocities ()
 {

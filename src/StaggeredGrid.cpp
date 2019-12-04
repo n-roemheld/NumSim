@@ -415,6 +415,7 @@ void StaggeredGrid::setObstacleValues_u_f(int i, int j)
 		{
 			std::cout << "u: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled" << std::endl;
 		}
+		
 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
 		{
 			case 0:
@@ -633,6 +634,227 @@ void StaggeredGrid::setObstacleValues_T(int i, int j)
 	}
 }
 
+void StaggeredGrid::setObstacleValues_u_f2(int i, int j)
+{
+	int igeom = i-pIBegin()+1; // todo: double check!!
+	int jgeom = j-pJBegin()+1;
+
+	if (geometryPVString_->operator()(igeom - 1, jgeom) == -1) // left is fluid
+	{
+		u_(i-1,j) = 0; f_(i-1,j) = u_(i-1,j);
+		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // left and lower is fluid //todo: correct grammar
+		{
+			u_(i,j) = -u_(i,j-1);
+		}
+		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // left and upper is fluid
+		{
+			u_(i,j) = -u_(i,j+1);
+		}
+		else // only left is fluid
+		{
+			u_(i,j) = std::nan("1");
+		}
+	}
+	else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1) // right is fluid
+	{
+		u_(i,j) = 0;
+	}
+	else // left and right not fluid
+	{
+		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // only lower is fluid
+		{
+			u_(i,j) = -u_(i,j-1);
+		}
+		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // only upper is fluid
+		{
+			u_(i,j) = -u_(i,j+1);
+		}
+		else // no direct neighbors are fluid
+		{
+			u_(i,j) = std::nan("1");
+		}
+	}
+
+	f_(i,j) = u(i,j);
+
+	if (geometryPVString_->operator()(igeom, jgeom + 1) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom + 1) != -1) // upper is fluid but not upper-right
+	{
+		u_(i,j) = std::nan("1");
+	}
+	else if (geometryPVString_->operator()(igeom, jgeom - 1) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom - 1) != -1) // lower is fluid, but not lower-right
+	{
+		u_(i,j) = std::nan("1");
+	}
+	else if (geometryPVString_->operator()(igeom - 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom - 1, jgeom + 1) != -1) // left is fluid, but not upper-left
+	{
+		u_(i,j) = std::nan("1");
+	}
+}
+
+void StaggeredGrid::setObstacleValues_v_g2(int i, int j)
+{
+	int igeom = i-pIBegin()+1; // todo: double check!!
+	int jgeom = j-pJBegin()+1;
+
+	if (geometryPVString_->operator()(igeom - 1, jgeom) == -1) // left is fluid
+	{
+		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // left and lower is fluid //todo: correct grammar
+		{
+			v_(i,j-1) = 0; g_(i,j-1) = v_(i,j-1);
+			v_(i,j) = -v_(i-1,j);
+		}
+		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // left and upper is fluid
+		{
+			v_(i,j) = 0;
+		}
+		else // only left is fluid
+		{
+			v_(i,j) = -v_(i-1,j);
+		}
+	}
+	else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1) // right is fluid
+	{
+		v_(i,j) = -v_(i+1,j);
+		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // right and lower is fluid
+		{
+			v_(i,j-1) = 0; g_(i,j-1) = v_(i,j-1);
+		}	
+	}
+	else // left and right not fluid
+	{
+		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // only lower is fluid
+		{
+			v_(i,j-1) = 0; g_(i,j-1) = v_(i,j-1);
+			v_(i,j) = std::nan("1");
+		}
+		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // only upper is fluid
+		{
+			v_(i,j) = 0;
+		}
+		else // no direct neighbors are fluid
+		{
+			v_(i,j) = std::nan("1");
+		}
+	}
+
+	g_(i,j) = v(i,j);
+	if (geometryPVString_->operator()(igeom, jgeom - 1) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom - 1) != -1) // lower is fluid, but not lower-right
+	{
+		v_(i,j) = std::nan("1");
+	}
+	else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom + 1) != -1) // right is fluid but not upper-right
+	{
+		v_(i,j) = std::nan("1");
+	}
+	else if (geometryPVString_->operator()(igeom - 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom - 1, jgeom + 1) != -1) // left is fluid, but not upper-left
+	{
+		v_(i,j) = std::nan("1");
+	}
+}
+
+void StaggeredGrid::setObstacleValues_p2(int i, int j)
+{
+	int igeom = i-pIBegin()+1; // todo: double check!!
+	int jgeom = j-pJBegin()+1;
+
+	if (geometryPVString_->operator()(igeom - 1, jgeom) == -1) // left is fluid
+	{
+		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // left and lower is fluid //todo: correct grammar
+		{
+			p_(i,j) = .5*(p_(i-1,j) + p_(i,j-1));
+		}
+		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // left and upper is fluid
+		{
+		}
+		else // only left is fluid
+		{
+			p_(i,j) = p_(i-1,j);
+		}
+	}
+	else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1) // right is fluid
+	{
+		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // right and lower is fluid
+		{
+			p_(i,j) = .5*(p_(i+1,j) + p_(i,j-1));
+		}
+		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // right and upper is fluid
+		{
+			p_(i,j) = .5*(p_(i+1,j) + p_(i,j+1));
+		}
+		else // only right is fluid
+		{
+			p_(i,j) = p_(i+1,j);
+		}		
+	}
+	else // left and right not fluid
+	{
+		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // only lower is fluid
+		{
+			p_(i,j) = p_(i,j-1);
+		}
+		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // only upper is fluid
+		{
+			p_(i,j) = p_(i,j+1);
+		}
+		else // no direct neighbors are fluid
+		{
+			p_(i,j) = std::nan("1");
+		}
+		
+	}
+}
+
+void StaggeredGrid::setObstacleValues_T2(int i, int j)
+{
+	int igeom = i-pIBegin()+1; // todo: double check!!
+	int jgeom = j-pJBegin()+1;
+
+	if (geometryPVString_->operator()(igeom - 1, jgeom) == -1) // left is fluid
+	{
+		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // left and lower is fluid //todo: correct grammar
+		{
+			T_((i,j) = .5*(T_((i-1,j) + T_((i,j-1));
+		}
+		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // left and upper is fluid
+		{
+		}
+		else // only left is fluid
+		{
+			T_((i,j) = T_((i-1,j);
+		}
+	}
+	else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1) // right is fluid
+	{
+		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // right and lower is fluid
+		{
+			T_((i,j) = .5*(T_((i+1,j) + T_((i,j-1));
+		}
+		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // right and upper is fluid
+		{
+			T_((i,j) = .5*(T_((i+1,j) + T_((i,j+1));
+		}
+		else // only right is fluid
+		{
+			T_((i,j) = T_((i+1,j);
+		}		
+	}
+	else // left and right not fluid
+	{
+		if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // only lower is fluid
+		{
+			T_((i,j) = T_((i,j-1);
+		}
+		else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // only upper is fluid
+		{
+			T_((i,j) = T_((i,j+1);
+		}
+		else // no direct neighbors are fluid
+		{
+			T_((i,j) = std::nan("1");
+		}
+		
+	}
+}
 
 
 void StaggeredGrid::setObstacleValues_u_f(std::array<int, 2> locations_boundary, int i, int j)
