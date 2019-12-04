@@ -17,7 +17,7 @@ void Computation::initialize (int argc, char *argv[])
 	//select DonorCell or CentralDifferences
 	if (settings_.useDonorCell == true)
 	{
-		discretization_ = std::make_shared<DonorCell>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, settings_.alpha);
+		discretization_ = std::make_shared<DonorCell>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, settings_.alpha, settings_.gamma);
 	}
 	else
 	{

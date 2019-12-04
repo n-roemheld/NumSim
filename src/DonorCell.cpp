@@ -6,8 +6,8 @@ DonorCell::DonorCell(std::array<int, 2> nCells, std::array<double, 2> meshWidth,
 		Discretization(nCells, meshWidth), alpha_(alpha)
 {};
 
-DonorCell::DonorCell(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1, double alpha) :
-	Discretization(nCells, meshWidth, geometryPVString, geometryPV1, geometryPV2, geometryTString, geometryT1), alpha_(alpha)
+DonorCell::DonorCell(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1, double alpha, double gamma) :
+	Discretization(nCells, meshWidth, geometryPVString, geometryPV1, geometryPV2, geometryTString, geometryT1), alpha_(alpha), gamma_(gamma)
 {};
 
 // alpha parameterized donor cell /centrall difference scheme
@@ -44,13 +44,13 @@ double DonorCell::computeDuvDy(int i, int j) const {
 double DonorCell::computeDuTDx(int i, int j) const
 {
 	return 1/meshWidth_[0]*(u(i,j)*(T(i+1,j)+T(i,j))/2-u(i-1,j)*(T(i,j)+T(i-1,j))/2
-                         + 0.5*( fabs(u(i,j))*  (T(i,j)-T(i+1,j))/2
+                         + gamma_*( fabs(u(i,j))*  (T(i,j)-T(i+1,j))/2
 			                         -fabs(u(i-1,j))*(T(i-1,j)-T(i,j))/2 ));
 }
 
 double DonorCell::computeDvTDy(int i, int j) const
 {
 	return 1/meshWidth_[1]*(v(i,j)*(T(i,j+1)+T(i,j))/2-v(i,j-1)*(T(i,j)+T(i,j-1))/2
-                         + 0.5*( fabs(v(i,j))  *(T(i,j)-T(i,j+1))/2
+                         + gamma_*( fabs(v(i,j))  *(T(i,j)-T(i,j+1))/2
 			                        - fabs(v(i,j-1))*(T(i,j-1)-T(i,j))/2 ));
 }
