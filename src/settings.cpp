@@ -346,6 +346,15 @@ void Settings::loadGeometryFile() {
 							cellPressure.erase(0,cellPressure.find_first_of(":")+1);
 							geometryPV1_->operator()(i,j) = atof(cellPressure1.c_str());
 						}
+						else if (cellPressureTyp == "S")
+						{
+							geometryPVString_->operator()(i,j) = 5;
+						}
+						else 
+						{
+							std::cout << "Unknow Cell Type!" << std::endl;
+						}
+
 						std::string cellTemperatureType = cellTemperature.substr(0,cellTemperature.find_first_of(":"));
 						cellTemperature.erase(0,cellTemperature.find_first_of(":")+1);
 						if(cellTemperatureType == "TD")
