@@ -78,7 +78,7 @@ void Settings::loadFromFile(std::string filename) {
 			}
 			else if (parameterName == "beta")
 			{
-				beta = int(atof(parameterValue.c_str()));
+				beta = atof(parameterValue.c_str());
 			}
 			else if (parameterName == "gX")
 			{
