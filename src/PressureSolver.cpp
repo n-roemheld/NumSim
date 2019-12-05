@@ -2,6 +2,7 @@
 #include "PressureSolver.h"
 #include <math.h>
 #include <memory>
+#include <iostream>
 
 
 PressureSolver::PressureSolver (std::shared_ptr< Discretization > discretization, double epsilon, int maximumNumberOfIterations) :
@@ -88,8 +89,8 @@ double PressureSolver::compute_res()
 			}
 		};
 	};
-
 	// average residuum with respect to number of cells
 	res /= fluidCellCount;
+
 	return res;
 };
