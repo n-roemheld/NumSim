@@ -56,6 +56,7 @@ void Computation::runSimulation ()
 		if(time == 0) outputWriterParaview_->writeFile(time);
 		if(time == 0) outputWriterText_->writeFile(time);
 
+		std::cout << "time alpha" << time << '\n';
 
 		// std::cout << "time" << time << std::endl;
 		// compute dt_ and time
@@ -69,6 +70,7 @@ void Computation::runSimulation ()
 			outputWriterText_->writeFile(time);
 			outputWriterText_->writePressureFile();
 		// }
+		std::cout << "time beta" << time << '\n';
 
 
 
