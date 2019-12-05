@@ -63,12 +63,12 @@ void Computation::runSimulation ()
 		if(time+dt_>settings_.endTime) dt_ = settings_.endTime - time;
 		// std::cout << "time_step" << dt_ << std::endl;
 
-		// if (time >= nextSnapshotTime)
-		// {
+		if (time - lastOutputTime > settings_.outputFileEveryDt - 1e-4)
+		{
 			outputWriterParaview_->writeFile(time);
 			outputWriterText_->writeFile(time);
 			outputWriterText_->writePressureFile();
-		// }
+		}
 
 
 
