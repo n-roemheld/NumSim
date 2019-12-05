@@ -3,11 +3,11 @@
 pressureLeft = 10.
 pressureRight = 9.96
 
-nx = 20 # 100
-ny = 4 # 20
+nx = 32 # 100
+ny = 16 # 20
 
-lx = 10.
-ly = 2.
+lx = 32.
+ly = 16.
 
 #assert ( abs( ( lx / nx ) - (ly / ny ) ) < 1e-14 )
 assert nx % 2 == 0 and ny % 2 == 0, "Number of grid cells has to be even in both dimensions!"

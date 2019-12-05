@@ -45,7 +45,9 @@ void PressureSolver::setBoundaryValues ()
 	}
 };
 
-void PressureSolver::setObstacleValues()
+// setObstacleValues is used, setObstacleValues2 not
+// Marc
+void PressureSolver::setObstacleValues2()
 {
 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 	{
@@ -56,7 +58,8 @@ void PressureSolver::setObstacleValues()
 	}
 }
 
-void PressureSolver::setObstacleValues2()
+// Nathanael
+void PressureSolver::setObstacleValues()
 {
 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 	{

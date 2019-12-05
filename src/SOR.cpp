@@ -13,9 +13,9 @@ void SOR::solve()
 		double dy = mW[1];
 
 		int it = 0;
-		// compute_res????
-		// double res_squared = compute_res();
-		double res_squared = 2*epsilon_*epsilon_;
+		// compute_res???
+		double res_squared = compute_res();
+		// double res_squared = 2*epsilon_*epsilon_;
 
 		while (it <= maximumNumberOfIterations_ && res_squared > epsilon_*epsilon_)
 		{

@@ -777,7 +777,7 @@ void StaggeredGrid::setObstacleValues_p2(int i, int j)
 	int igeom = i-pIBegin()+1; // todo: double check!!
 	int jgeom = j-pJBegin()+1;
 
-	if (geometryPVString_->operator()(igeom, jgeom) == 5) // if current cell is not solid
+	if (geometryPVString_->operator()(igeom, jgeom) != 5) // if current cell is not solid
 	{
 		return;
 	}
