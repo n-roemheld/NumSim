@@ -28,5 +28,5 @@ epsilon = 1e-5        # tolerance for 2-norm of residual
 maximumNumberOfIterations = 1e4    # maximum number of iterations in the solver
 
 # Output parameters
-outputFileEveryDt = 1
+outputFileEveryDt = 0
 
