@@ -65,9 +65,9 @@ void Computation::runSimulation ()
 
 		// if (time >= nextSnapshotTime)
 		// {
-			// outputWriterParaview_->writeFile(time);
-			// outputWriterText_->writeFile(time);
-			// outputWriterText_->writePressureFile();
+			outputWriterParaview_->writeFile(time);
+			outputWriterText_->writeFile(time);
+			outputWriterText_->writePressureFile();
 		// }
 
 
@@ -88,13 +88,13 @@ void Computation::runSimulation ()
 
 		time += dt_;
 
-		if (time - lastOutputTime > settings_.outputFileEveryDt - 1e-4)
-		{
-			outputWriterParaview_->writeFile(time);
-			outputWriterText_->writeFile(time); // todo: disable before submission!
-			// outputWriterText_->writePressureFile();
-			lastOutputTime = time;
-		}
+		// if (time - lastOutputTime > settings_.outputFileEveryDt - 1e-4)
+		// {
+		// 	outputWriterParaview_->writeFile(time);
+		// 	outputWriterText_->writeFile(time); // todo: disable before submission!
+		// 	// outputWriterText_->writePressureFile();
+		// 	lastOutputTime = time;
+		// }
 	}
 	// output data using VTK if we did not do this in the last time step
 	if ( std::fabs( time - lastOutputTime ) > 1e-4 )
