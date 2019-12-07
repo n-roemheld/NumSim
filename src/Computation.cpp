@@ -56,7 +56,7 @@ void Computation::runSimulation ()
 		if(time == 0) outputWriterParaview_->writeFile(time);
 		if(time == 0) outputWriterText_->writeFile(time);
 
-		std::cout << "time alpha" << time << '\n';
+		// std::cout << "time alpha" << time << '\n';
 
 		// std::cout << "time" << time << std::endl;
 		// compute dt_ and time
@@ -245,33 +245,33 @@ void Computation::applyBoundaryValues ()
 	}
 };
 
-void Computation::applyObstacleValues()
-{
-	// u and f
-	for(int j = discretization_->uJBegin(); j < discretization_->uJEnd(); j++)
-	{
-		for(int i = discretization_->uIBegin(); i < discretization_->uIEnd(); i++)
-		{
-			discretization_->setObstacleValues_u_f(i,j);
-		}
-	}
-	// v and g
-	for(int j = discretization_->vJBegin(); j < discretization_->vJEnd(); j++)
-	{
-		for(int i = discretization_-> vIBegin(); i < discretization_->vIEnd(); i++)
-		{
-			discretization_->setObstacleValues_v_g(i,j);
-		}
-	}
-	// T
-	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
-	{
-		for(int i = discretization_-> pIBegin(); i < discretization_->pIEnd(); i++)
-		{
-			discretization_->setObstacleValues_T(i,j);
-		}
-	}
-}
+// void Computation::applyObstacleValues()
+// {
+// 	// u and f
+// 	for(int j = discretization_->uJBegin(); j < discretization_->uJEnd(); j++)
+// 	{
+// 		for(int i = discretization_->uIBegin(); i < discretization_->uIEnd(); i++)
+// 		{
+// 			discretization_->setObstacleValues_u_f(i,j);
+// 		}
+// 	}
+// 	// v and g
+// 	for(int j = discretization_->vJBegin(); j < discretization_->vJEnd(); j++)
+// 	{
+// 		for(int i = discretization_-> vIBegin(); i < discretization_->vIEnd(); i++)
+// 		{
+// 			discretization_->setObstacleValues_v_g(i,j);
+// 		}
+// 	}
+// 	// T
+// 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
+// 	{
+// 		for(int i = discretization_-> pIBegin(); i < discretization_->pIEnd(); i++)
+// 		{
+// 			discretization_->setObstacleValues_T(i,j);
+// 		}
+// 	}
+// }
 
 void Computation::applyObstacleValues2()
 {

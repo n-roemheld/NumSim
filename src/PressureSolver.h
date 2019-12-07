@@ -15,7 +15,7 @@ protected:
 	//!	set the boundary values to account for homogenous Neumann boundary conditions, this has to be called after every iteration
 	void setBoundaryValues ();
 
-	void setObstacleValues();
+	// void setObstacleValues();
 	void setObstacleValues2();
 
 	std::shared_ptr< Discretization > discretization_;

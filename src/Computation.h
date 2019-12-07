@@ -22,7 +22,7 @@ private:
 	void computePressure ();
 	void computeVelocities ();
 	void computeTemperature();
-	void applyObstacleValues();
+	// void applyObstacleValues();
 	void applyObstacleValues2();
 
 	Settings settings_;

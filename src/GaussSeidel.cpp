@@ -17,7 +17,7 @@ void GaussSeidel::solve()
 	while (it < maximumNumberOfIterations_ && res_squared > epsilon_*epsilon_)
 	{
 		// set boundary values for p to achieve 0-Neumann conditions
-		setObstacleValues();
+		setObstacleValues2();
 		setBoundaryValues();
 		// perform one itertaion step
 		for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
@@ -40,7 +40,7 @@ void GaussSeidel::solve()
 		res_squared = compute_res();
 		it++;
 	}
-	setObstacleValues();
+	setObstacleValues2();
 	setBoundaryValues();
 
 };
