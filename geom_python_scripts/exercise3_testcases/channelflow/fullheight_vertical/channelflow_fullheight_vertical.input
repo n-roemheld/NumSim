@@ -2,32 +2,33 @@
 # Run ./numsim driven_cavity.txt
 
 # Problem description
-geometryFile = ../karmanvortex_100x20.geom
-endTime = 10.0        # duration of the simulation
-re = 10000             # Reynolds number
+geometryFile = channelflow_vertical_20x100.geom
+endTime = 20.0        # duration of the simulation
+re = 10             # Reynolds number
 prandtl = 1.0 # Prandtl number
 beta = 0.0 # Volumetric expansion coefficient beta = Ri / (g * Re^2)
 gX = 0.    # external forces, set to (gX,gY) = (0,-9.81) to account for gravity
 gY = 0.0
 
-uInit = 1
-vInit = 0
-pInit = 0
-tInit = 0
+# Initial values
+uInit = 0.0       # velocity u
+vInit = 0.0       # velocity v
+pInit = 0.0       # pressure
+tInit = 0.0       # temperature
 
 # Discretization parameters
 useDonorCell = true   # if donor cell discretization should be used, possible values: true false
-alpha = 0.9           # factor for donor-cell scheme, 0 is equivalent to central differences
+alpha = 0.5           # factor for donor-cell scheme, 0 is equivalent to central differences
 gamma = 0.5
 tau = 0.5             # safety factor for time step width
-maximumDt = 1.0       # maximum values for time step width
+maximumDt = 0.1       # maximum values for time step width
 
 # Solver parameters
 pressureSolver = SOR  # which pressure solver to use, possible values: GaussSeidel SOR CG
-omega = 1.7           # overrelaxation factor, only for SOR solver
-epsilon = 1e-3        # tolerance for 2-norm of residual
+omega = 1.6           # overrelaxation factor, only for SOR solver
+epsilon = 1e-5        # tolerance for 2-norm of residual
 maximumNumberOfIterations = 1e4    # maximum number of iterations in the solver
 
 # Output parameters
-outputFileEveryDt = 0.
+outputFileEveryDt = 1
 
