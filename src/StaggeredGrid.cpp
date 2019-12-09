@@ -222,7 +222,7 @@ void StaggeredGrid::setBoundaryValues_u_f(int location_boundary, int i, int j)
 					f(i,j) = u(i,j);
 				} else { // upper or lower  skript meint einfach wir kompliziert
 					u(i,j) = - u(in,jn);
-					f(i,j) = 40000; //u(i,j);
+					f(i,j) = u(i,j); //40000; //u(i,j);
 				}
 				break;
 			}
@@ -234,7 +234,7 @@ void StaggeredGrid::setBoundaryValues_u_f(int location_boundary, int i, int j)
 				} else { // upper or lower
 					double u_old = u(i,j);
 					u(i,j) = u(in,jn);
-					f(i,j) = 40000; //2*u(i,j)-u_old;
+					f(i,j) = u(i,j); //40000; //2*u(i,j)-u_old;
 				}
 				break;
 			}
@@ -266,6 +266,8 @@ void StaggeredGrid::setBoundaryValues_u_f(int location_boundary, int i, int j)
 
 		}
 	}
+	// f(i,j) = u(i,j);
+
 }
 
 void StaggeredGrid::setBoundaryValues_v_g(int location_boundary, int i, int j)
@@ -297,7 +299,7 @@ void StaggeredGrid::setBoundaryValues_v_g(int location_boundary, int i, int j)
 			{
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
 					v(i,j) = - v(in,jn);
-					g(i,j) = 40000; //v(i,j);
+					g(i,j) = v(i,j);//40000; //v(i,j);
 				} else { // upper or lower
 					v(i,j) = 0;
 					g(i,j) = v(i,j);
@@ -309,7 +311,7 @@ void StaggeredGrid::setBoundaryValues_v_g(int location_boundary, int i, int j)
 				if (location_boundary == 0 || location_boundary == 1) { // left or right
 					double v_old = v(i,j);
 					v(i,j) = v(in,jn);
-					g(i,j) = 40000; //2*v(i,j)-v_old;
+					g(i,j) = v(i,j);//40000; //2*v(i,j)-v_old;
 				} else { // upper or lower
 					v(i,j) = 0;
 					g(i,j) = v(i,j);
@@ -344,6 +346,8 @@ void StaggeredGrid::setBoundaryValues_v_g(int location_boundary, int i, int j)
 
 		}
 	}
+	// g(i,j) = v(i,j);
+
 }
 
 void StaggeredGrid::setBoundaryValues_p(int location_boundary, int i, int j)
@@ -427,241 +431,6 @@ void StaggeredGrid::setBoundaryValues_T(int location_boundary, int i, int j)
 	}
 }
 
-// // set obstaclesValues iff cell is solid for u and f
-// void StaggeredGrid::setObstacleValues_u_f(int i, int j)
-// {
-// 	std::array<int , 2> locations_boundary = {-2,-2};
-// 	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-// 	int igeom = i-uIBegin()+1; // todo: double check!!
-// 	int jgeom = j-uJBegin()+1;
-// 	if(geometryPVString_->operator()(igeom, jgeom) == 5) // proof, if cell is solid
-// 	{
-// 	int index = 0;
-// 	for(int i = 0; i < 4; i++)
-// 	{
-// 		if(index > 2)
-// 		{
-// 			std::cout << "u: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
-// 		}
-//
-// 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
-// 		{
-// 			case 0:
-// 				if(geometryPVString_->operator()(igeom-1, jgeom) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 			case 1:
-// 				if(geometryPVString_->operator()(igeom+1, jgeom) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 			case 2:
-// 				if(geometryPVString_->operator()(igeom, jgeom-1) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 			case 3:
-// 				if(geometryPVString_->operator()(igeom, jgeom+1) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 		}
-// 	}
-//
-// 	while(index < 2)
-// 	{
-// 		locations_boundary[index] = -1;
-// 		index++;
-// 	}
-//
-// 	setObstacleValues_u_f(locations_boundary, i, j);
-// 	}
-//
-// }
-//
-// void StaggeredGrid::setObstacleValues_v_g(int i, int j)
-// {
-// 	std::array<int , 2> locations_boundary = {-2,-2};
-// 	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-// 	int igeom = i-vIBegin()+1; // todo: double check!!
-// 	int jgeom = j-vJBegin()+1;
-// 	if(geometryPVString_->operator()(igeom, jgeom) == 5) // proof, if cell is solid
-// 	{
-// 	int index = 0;
-// 	for(int i = 0; i < 4; i++)
-// 	{
-// 		if(index > 2)
-// 		{
-// 			std::cout << "v: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
-// 		}
-// 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
-// 		{
-// 			case 0:
-// 				if(geometryPVString_->operator()(igeom-1, jgeom) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 			case 1:
-// 				if(geometryPVString_->operator()(igeom+1, jgeom) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 			case 2:
-// 				if(geometryPVString_->operator()(igeom, jgeom-1) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 			case 3:
-// 				if(geometryPVString_->operator()(igeom, jgeom+1) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 		}
-// 	}
-//
-// 	while(index < 2)
-// 	{
-// 		locations_boundary[index] = -1;
-// 		index++;
-// 	}
-//
-// 	setObstacleValues_v_g(locations_boundary, i, j);
-// 	}
-// }
-//
-// void StaggeredGrid::setObstacleValues_p(int i, int j)
-// {
-// 	std::array<int , 2> locations_boundary = {-2,-2};
-// 	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-// 	int igeom = i-pIBegin()+1; // todo: double check!!
-// 	int jgeom = j-pJBegin()+1;
-// 	if(geometryPVString_->operator()(igeom, jgeom) == 5) // proof, if cell is solid
-// 	{
-// 	int index = 0;
-// 	for(int i = 0; i < 4; i++)
-// 	{
-// 		if(index > 2)
-// 		{
-// 			std::cout << "p: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
-// 		}
-// 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
-// 		{
-// 			case 0:
-// 				if(geometryPVString_->operator()(igeom-1, jgeom) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 			case 1:
-// 				if(geometryPVString_->operator()(igeom+1, jgeom) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 			case 2:
-// 				if(geometryPVString_->operator()(igeom, jgeom-1) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 			case 3:
-// 				if(geometryPVString_->operator()(igeom, jgeom+1) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 		}
-// 	}
-//
-// 	while(index < 2)
-// 	{
-// 		locations_boundary[index] = -1;
-// 		index++;
-// 	}
-//
-// 	setObstacleValues_p(locations_boundary, i, j);
-// 	}
-// }
-//
-// void StaggeredGrid::setObstacleValues_T(int i, int j)
-// {
-// 	std::array<int , 2> locations_boundary = {-2,-2};
-// 	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-// 	int igeom = i-pIBegin()+1; // todo: double check!!
-// 	int jgeom = j-pJBegin()+1;
-// 	if(geometryPVString_->operator()(igeom, jgeom) == 5) // proof, if cell is solid
-// 	{
-// 	int index = 0;
-// 	for(int i = 0; i < 4; i++)
-// 	{
-// 		if(index > 2)
-// 		{
-// 			std::cout << "T: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
-// 		}
-// 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
-// 		{
-// 			case 0:
-// 				if(geometryPVString_->operator()(igeom-1, jgeom) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 			case 1:
-// 				if(geometryPVString_->operator()(igeom+1, jgeom) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 			case 2:
-// 				if(geometryPVString_->operator()(igeom, jgeom-1) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 			case 3:
-// 				if(geometryPVString_->operator()(igeom, jgeom+1) == -1)
-// 				{
-// 					locations_boundary[index] = i;
-// 					index++;
-// 				}
-// 				break;
-// 		}
-// 	}
-//
-// 	while(index < 2)
-// 	{
-// 		locations_boundary[index] = -1;
-// 		index++;
-// 	}
-//
-// 	setObstacleValues_T(locations_boundary, i, j);
-// 	}
-// }
-
 void StaggeredGrid::setObstacleValues_u_f2(int i, int j)
 {
 	int igeom = i-uIBegin()+1; // todo: double check!!
@@ -737,84 +506,8 @@ void StaggeredGrid::setObstacleValues_v_g2(int i, int j)
 			v_(i,j) = std::nan("1");
 		}
 	}
-
-<<<<<<< HEAD
 	g_(i,j) = v_(i,j);
 
-	// int igeom = i-vIBegin()+1; // todo: double check!!
-	// int jgeom = j-vJBegin()+1;
-	//
-	// if (geometryPVString_->operator()(igeom - 1, jgeom) == -1) // left is fluid
-	// {
-	// 	if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // left and lower is fluid //todo: correct grammar
-	// 	{
-	// 		v_(i,j-1) = 0; g_(i,j-1) = v_(i,j-1);
-	// 		v_(i,j) = -v_(i-1,j);
-	// 	}
-	// 	else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // left and upper is fluid
-	// 	{
-	// 		v_(i,j) = 0;
-	// 	}
-	// 	else // only left is fluid
-	// 	{
-	// 		v_(i,j) = -v_(i-1,j);
-	// 	}
-	// }
-	// else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1) // right is fluid
-	// {
-	// 	v_(i,j) = -v_(i+1,j);
-	// 	if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // right and lower is fluid
-	// 	{
-	// 		v_(i,j-1) = 0; g_(i,j-1) = v_(i,j-1);
-	// 	}
-	// }
-	// else // left and right not fluid
-	// {
-	// 	if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // only lower is fluid
-	// 	{
-	// 		v_(i,j-1) = 0; g_(i,j-1) = v_(i,j-1);
-	// 		v_(i,j) = std::nan("1");
-	// 	}
-	// 	else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // only upper is fluid
-	// 	{
-	// 		v_(i,j) = 0;
-	// 	}
-	// 	else // no direct neighbors are fluid
-	// 	{
-	// 		v_(i,j) = std::nan("1");
-	// 	}
-	// }
-	//
-	// g_(i,j) = v(i,j);
-
-
-	// if (geometryPVString_->operator()(igeom, jgeom - 1) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom - 1) != -1) // lower is fluid, but not lower-right
-	// {
-	// 	v_(i,j) = std::nan("1");
-	// }
-	// else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom + 1) != -1) // right is fluid but not upper-right
-	// {
-	// 	v_(i,j) = std::nan("1");
-	// }
-	// else if (geometryPVString_->operator()(igeom - 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom - 1, jgeom + 1) != -1) // left is fluid, but not upper-left
-	// {
-	// 	v_(i,j) = std::nan("1");
-	// }
-=======
-	g_(i,j) = v(i,j);
-	if (geometryPVString_->operator()(igeom, jgeom - 1) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom - 1) != -1) // lower is fluid, but not lower-right
-	{
-		v_(i,j) = std::nan("1");
-	}
-	else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom + 1, jgeom + 1) != -1) // right is fluid but not upper-right
-	{
-		v_(i,j) = std::nan("1");
-	}
-	else if (geometryPVString_->operator()(igeom - 1, jgeom) == -1   &&   geometryPVString_->operator()(igeom - 1, jgeom + 1) != -1) // left is fluid, but not upper-left
-	{
-		v_(i,j) = std::nan("1");
-	}
->>>>>>> 67b8c670eb50d47e176fbbdc8e6cf373d46a7efb
 }
 
 void StaggeredGrid::setObstacleValues_p2(int i, int j)
@@ -866,51 +559,6 @@ void StaggeredGrid::setObstacleValues_p2(int i, int j)
 		p_(i,j) = std::nan("1");
 	}
 
-	// if (geometryPVString_->operator()(igeom - 1, jgeom) == -1) // left is fluid
-	// {
-	// 	if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // left and lower is fluid //todo: correct grammar
-	// 	{
-	// 		p_(i,j) = .5*(p_(i-1,j) + p_(i,j-1));
-	// 	}
-	// 	else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // left and upper is fluid
-	// 	{
-	// 	}
-	// 	else // only left is fluid
-	// 	{
-	// 		p_(i,j) = p_(i-1,j);
-	// 	}
-	// }
-	// else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1) // right is fluid
-	// {
-	// 	if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // right and lower is fluid
-	// 	{
-	// 		p_(i,j) = .5*(p_(i+1,j) + p_(i,j-1));
-	// 	}
-	// 	else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // right and upper is fluid
-	// 	{
-	// 		p_(i,j) = .5*(p_(i+1,j) + p_(i,j+1));
-	// 	}
-	// 	else // only right is fluid
-	// 	{
-	// 		p_(i,j) = p_(i+1,j);
-	// 	}
-	// }
-	// else // left and right not fluid
-	// {
-	// 	if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // only lower is fluid
-	// 	{
-	// 		p_(i,j) = p_(i,j-1);
-	// 	}
-	// 	else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // only upper is fluid
-	// 	{
-	// 		p_(i,j) = p_(i,j+1);
-	// 	}
-	// 	else // no direct neighbors are fluid
-	// 	{
-	// 		p_(i,j) = std::nan("1");
-	// 	}
-	//
-	// }
 }
 
 void StaggeredGrid::setObstacleValues_T2(int i, int j)
@@ -963,57 +611,277 @@ void StaggeredGrid::setObstacleValues_T2(int i, int j)
 		T_(i,j) = std::nan("1");
 	}
 
-	// int igeom = i-pIBegin()+1; // todo: double check!!
-	// int jgeom = j-pJBegin()+1;
-	//
-	// if (geometryPVString_->operator()(igeom - 1, jgeom) == -1) // left is fluid
-	// {
-	// 	if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // left and lower is fluid //todo: correct grammar
-	// 	{
-	// 		T_(i,j) = .5*(T_(i-1,j) + T_(i,j-1));
-	// 	}
-	// 	else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // left and upper is fluid
-	// 	{
-	// 	}
-	// 	else // only left is fluid
-	// 	{
-	// 		T_(i,j) = T_(i-1,j);
-	// 	}
-	// }
-	// else if (geometryPVString_->operator()(igeom + 1, jgeom) == -1) // right is fluid
-	// {
-	// 	if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // right and lower is fluid
-	// 	{
-	// 		T_(i,j) = .5*(T_(i+1,j) + T_(i,j-1));
-	// 	}
-	// 	else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // right and upper is fluid
-	// 	{
-	// 		T_(i,j) = .5*(T_(i+1,j) + T_(i,j+1));
-	// 	}
-	// 	else // only right is fluid
-	// 	{
-	// 		T_(i,j) = T_(i+1,j);
-	// 	}
-	// }
-	// else // left and right not fluid
-	// {
-	// 	if (geometryPVString_->operator()(igeom, jgeom - 1) == -1) // only lower is fluid
-	// 	{
-	// 		T_(i,j) = T_(i,j-1);
-	// 	}
-	// 	else if (geometryPVString_->operator()(igeom, jgeom + 1) == -1) // only upper is fluid
-	// 	{
-	// 		T_(i,j) = T_(i,j+1);
-	// 	}
-	// 	else // no direct neighbors are fluid
-	// 	{
-	// 		T_(i,j) = std::nan("1");
-	// 	}
-	//
-	// }
 }
 
 
+
+void StaggeredGrid::fillIn(int uInit, int vInit, int pInit, int TInit)
+{
+	  for(int j = 0; j < u_.size()[1]; j++)
+	  {
+	    for(int i = 0; i < u_.size()[0]; i++)
+	    {
+	      u_(i,j) = uInit;
+	    }
+	  }
+
+		for(int j = 0; j < v_.size()[1]; j++)
+		{
+			for(int i = 0; i < v_.size()[0]; i++)
+			{
+				v_(i,j) = vInit;
+			}
+		}
+
+		for(int j = 0; j < p_.size()[1]; j++)
+		{
+			for(int i = 0; i < p_.size()[0]; i++)
+			{
+				p_(i,j) = pInit;
+				T_(i,j) = TInit;
+			}
+		}
+}
+
+
+//PFUSCH!!!!!!!!!!
+
+// // set obstaclesValues iff cell is solid for u and f
+// void StaggeredGrid::setObstacleValues_u_f2(int i, int j)
+// {
+// 	std::array<int , 2> locations_boundary = {-2,-2};
+// 	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
+// 	int igeom = i-uIBegin()+1; // todo: double check!!
+// 	int jgeom = j-uJBegin()+1;
+// 	if(geometryPVString_->operator()(igeom, jgeom) == 5) // proof, if cell is solid
+// 	{
+// 	int index = 0;
+// 	for(int i = 0; i < 4; i++)
+// 	{
+// 		if(index > 2)
+// 		{
+// 			std::cout << "u: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
+// 		}
+// 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
+// 		{
+// 			case 0:
+// 				if(geometryPVString_->operator()(igeom-1, jgeom) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 			case 1:
+// 				if(geometryPVString_->operator()(igeom+1, jgeom) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 			case 2:
+// 				if(geometryPVString_->operator()(igeom, jgeom-1) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 			case 3:
+// 				if(geometryPVString_->operator()(igeom, jgeom+1) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 		}
+// 	}
+//
+// 	while(index < 2)
+// 	{
+// 		locations_boundary[index] = -1;
+// 		index++;
+// 	}
+//
+// 	setObstacleValues_u_f(locations_boundary, i, j);
+// 	}
+//
+// }
+//
+// void StaggeredGrid::setObstacleValues_v_g2(int i, int j)
+// {
+// 	std::array<int , 2> locations_boundary = {-2,-2};
+// 	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
+// 	int igeom = i-vIBegin()+1; // todo: double check!!
+// 	int jgeom = j-vJBegin()+1;
+// 	if(geometryPVString_->operator()(igeom, jgeom) == 5) // proof, if cell is solid
+// 	{
+// 	int index = 0;
+// 	for(int i = 0; i < 4; i++)
+// 	{
+// 		if(index > 2)
+// 		{
+// 			std::cout << "v: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
+// 		}
+// 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
+// 		{
+// 			case 0:
+// 				if(geometryPVString_->operator()(igeom-1, jgeom) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 			case 1:
+// 				if(geometryPVString_->operator()(igeom+1, jgeom) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 			case 2:
+// 				if(geometryPVString_->operator()(igeom, jgeom-1) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 			case 3:
+// 				if(geometryPVString_->operator()(igeom, jgeom+1) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 		}
+// 	}
+//
+// 	while(index < 2)
+// 	{
+// 		locations_boundary[index] = -1;
+// 		index++;
+// 	}
+//
+// 	setObstacleValues_v_g(locations_boundary, i, j);
+// 	}
+// }
+//
+// void StaggeredGrid::setObstacleValues_p2(int i, int j)
+// {
+// 	std::array<int , 2> locations_boundary = {-2,-2};
+// 	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
+// 	int igeom = i-pIBegin()+1; // todo: double check!!
+// 	int jgeom = j-pJBegin()+1;
+// 	if(geometryPVString_->operator()(igeom, jgeom) == 5) // proof, if cell is solid
+// 	{
+// 	int index = 0;
+// 	for(int i = 0; i < 4; i++)
+// 	{
+// 		if(index > 2)
+// 		{
+// 			std::cout << "p: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
+// 		}
+// 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
+// 		{
+// 			case 0:
+// 				if(geometryPVString_->operator()(igeom-1, jgeom) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 			case 1:
+// 				if(geometryPVString_->operator()(igeom+1, jgeom) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 			case 2:
+// 				if(geometryPVString_->operator()(igeom, jgeom-1) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 			case 3:
+// 				if(geometryPVString_->operator()(igeom, jgeom+1) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 		}
+// 	}
+//
+// 	while(index < 2)
+// 	{
+// 		locations_boundary[index] = -1;
+// 		index++;
+// 	}
+//
+// 	setObstacleValues_p(locations_boundary, i, j);
+// 	}
+// }
+//
+// void StaggeredGrid::setObstacleValues_T2(int i, int j)
+// {
+// 	std::array<int , 2> locations_boundary = {-2,-2};
+// 	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
+// 	int igeom = i-pIBegin()+1; // todo: double check!!
+// 	int jgeom = j-pJBegin()+1;
+// 	if(geometryPVString_->operator()(igeom, jgeom) == 5) // proof, if cell is solid
+// 	{
+// 	int index = 0;
+// 	for(int i = 0; i < 4; i++)
+// 	{
+// 		if(index > 2)
+// 		{
+// 			std::cout << "T: boundary locations are not calculated correctly or two-cell-criterion is not fullfilled, index: " << index << std::endl;
+// 		}
+// 		switch(i) // 0: Left, 1: Right, 2: Lower, 3: Upper
+// 		{
+// 			case 0:
+// 				if(geometryPVString_->operator()(igeom-1, jgeom) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 			case 1:
+// 				if(geometryPVString_->operator()(igeom+1, jgeom) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 			case 2:
+// 				if(geometryPVString_->operator()(igeom, jgeom-1) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 			case 3:
+// 				if(geometryPVString_->operator()(igeom, jgeom+1) == -1)
+// 				{
+// 					locations_boundary[index] = i;
+// 					index++;
+// 				}
+// 				break;
+// 		}
+// 	}
+//
+// 	while(index < 2)
+// 	{
+// 		locations_boundary[index] = -1;
+// 		index++;
+// 	}
+//
+// 	setObstacleValues_T(locations_boundary, i, j);
+// 	}
+// }
+//
+//
+//
 // void StaggeredGrid::setObstacleValues_u_f(std::array<int, 2> locations_boundary, int i, int j)
 // {
 // 	// sort locations_boundary from big to small
@@ -1368,31 +1236,3 @@ void StaggeredGrid::setObstacleValues_T2(int i, int j)
 // 	}
 //
 // }
-
-void StaggeredGrid::fillIn(int uInit, int vInit, int pInit, int TInit)
-{
-	  for(int j = 0; j < u_.size()[1]; j++)
-	  {
-	    for(int i = 0; i < u_.size()[0]; i++)
-	    {
-	      u_(i,j) = uInit;
-	    }
-	  }
-
-		for(int j = 0; j < v_.size()[1]; j++)
-		{
-			for(int i = 0; i < v_.size()[0]; i++)
-			{
-				v_(i,j) = vInit;
-			}
-		}
-
-		for(int j = 0; j < p_.size()[1]; j++)
-		{
-			for(int i = 0; i < p_.size()[0]; i++)
-			{
-				p_(i,j) = pInit;
-				T_(i,j) = TInit;
-			}
-		}
-}

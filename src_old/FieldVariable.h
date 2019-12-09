@@ -11,7 +11,7 @@ public:
 	FieldVariable (std::array< int, 2 > size, std::array< double, 2 > origin, std::array< double, 2 > meshWidth);
 
 	//!get the value at the Cartesian coordinate (x,y). The value is linearly interpolated between stored points.
-	double interpolateAt(double x, double y, int type) const;
+	double interpolateAt(double x, double y) const;
 
 	FieldVariable& operator=(FieldVariable rhs);
 

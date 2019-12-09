@@ -41,9 +41,6 @@ void Computation::initialize (int argc, char *argv[])
  	outputWriterParaview_ = std::make_unique<OutputWriterParaview>(discretization_);
 	outputWriterText_ = std::make_unique<OutputWriterText>(discretization_);
 
-	// outputWriterText_->writeFile(-1);
-
-
 };
 
 void Computation::runSimulation ()
@@ -52,14 +49,11 @@ void Computation::runSimulation ()
 	double lastOutputTime = 0;
 	while(time < settings_.endTime)
 	{
-		applyObstacleValues2();
+		applyObstacleValues();
 		applyBoundaryValues();
 
 
 		// if(time == 0) outputWriterParaview_->writeFile(time);
-		// if(time == 0) outputWriterText_->writeFile(time);
-
-		// std::cout << "time alpha" << time << '\n';
 
 		// std::cout << "time" << time << std::endl;
 		// compute dt_ and time
@@ -67,21 +61,17 @@ void Computation::runSimulation ()
 		if(time+dt_>settings_.endTime) dt_ = settings_.endTime - time;
 		// std::cout << "time_step" << dt_ << std::endl;
 
-		// if (time - lastOutputTime > settings_.outputFileEveryDt - 1e-4)
+		// if (time >= nextSnapshotTime)
 		// {
-			// outputWriterParaview_->writeFile(time);
-			// outputWriterText_->writeFile(time);
-			// outputWriterText_->writePressureFile();
+		// 	// outputWriterParaview_->writeFile(time);
+		// 	// outputWriterText_->writeFile(time);
+		// 	// outputWriterText_->writePressureFile();
 		// }
-
 
 
 
 		// compute f and g
 		computePreliminaryVelocities();
-		// outputWriterText_->writeFile(time);
-
-		// outputWriterParaview_->writeFile(time);
 		// outputWriterText_->writeFile(time);
 
 		// compute T
@@ -99,7 +89,7 @@ void Computation::runSimulation ()
 		if (time - lastOutputTime > settings_.outputFileEveryDt - 1e-4)
 		{
 			outputWriterParaview_->writeFile(time);
-			// outputWriterText_->writeFile(time); // todo: disable before submission!
+			outputWriterText_->writeFile(time); // todo: disable before submission!
 			// outputWriterText_->writePressureFile();
 			lastOutputTime = time;
 		}
@@ -108,7 +98,7 @@ void Computation::runSimulation ()
 	if ( std::fabs( time - lastOutputTime ) > 1e-4 )
 	{
 		outputWriterParaview_->writeFile(time);
-		// outputWriterText_->writeFile(time); // todo: disable before submission!
+		outputWriterText_->writeFile(time); // todo: disable before submission!
 		lastOutputTime = time;
 	}
 
@@ -252,73 +242,30 @@ void Computation::applyBoundaryValues ()
 	}
 };
 
-// void Computation::applyObstacleValues()
-// {
-// 	// u and f
-// 	for(int j = discretization_->uJBegin(); j < discretization_->uJEnd(); j++)
-// 	{
-// 		for(int i = discretization_->uIBegin(); i < discretization_->uIEnd(); i++)
-// 		{
-// 			discretization_->setObstacleValues_u_f(i,j);
-// 		}
-// 	}
-// 	// v and g
-// 	for(int j = discretization_->vJBegin(); j < discretization_->vJEnd(); j++)
-// 	{
-// 		for(int i = discretization_-> vIBegin(); i < discretization_->vIEnd(); i++)
-// 		{
-// 			discretization_->setObstacleValues_v_g(i,j);
-// 		}
-// 	}
-// 	// T
-// 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
-// 	{
-// 		for(int i = discretization_-> pIBegin(); i < discretization_->pIEnd(); i++)
-// 		{
-// 			discretization_->setObstacleValues_T(i,j);
-// 		}
-// 	}
-// }
-
-void Computation::applyObstacleValues2()
+void Computation::applyObstacleValues()
 {
 	// u and f
 	for(int j = discretization_->uJBegin(); j < discretization_->uJEnd(); j++)
 	{
-		int jgeom = j-discretization_->uJBegin()+1;
 		for(int i = discretization_->uIBegin(); i < discretization_->uIEnd(); i++)
 		{
-			int igeom = i-discretization_->uIBegin()+1; // todo: double check!!
-			if (discretization_->geometryPVString(igeom, jgeom) == 5)
-			{
-				discretization_->setObstacleValues_u_f2(i,j);
-			}
+			discretization_->setObstacleValues_u_f(i,j);
 		}
 	}
 	// v and g
 	for(int j = discretization_->vJBegin(); j < discretization_->vJEnd(); j++)
 	{
-		int jgeom = j-discretization_->vJBegin()+1;
 		for(int i = discretization_-> vIBegin(); i < discretization_->vIEnd(); i++)
 		{
-			int igeom = i-discretization_->vIBegin()+1; // todo: double check!!
-			if (discretization_->geometryPVString(igeom, jgeom) == 5)
-			{
-				discretization_->setObstacleValues_v_g2(i,j);
-			}
+			discretization_->setObstacleValues_v_g(i,j);
 		}
 	}
 	// T
 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 	{
-		int jgeom = j-discretization_->pJBegin()+1;
 		for(int i = discretization_-> pIBegin(); i < discretization_->pIEnd(); i++)
 		{
-			int igeom = i-discretization_->pIBegin()+1; // todo: double check!!
-			if (discretization_->geometryPVString(igeom, jgeom) == 5)
-			{
-				discretization_->setObstacleValues_T2(i,j);
-			}
+			discretization_->setObstacleValues_T(i,j);
 		}
 	}
 }
@@ -340,7 +287,7 @@ void Computation::computePreliminaryVelocities ()
 							discretization_->f(i,j) = discretization_->u(i,j)
 								+ dt*(1/Re*(discretization_->computeD2uDx2(i,j) + discretization_->computeD2uDy2(i,j))
 									- discretization_->computeDu2Dx(i,j) - discretization_->computeDuvDy(i,j)
-									+ (1 - settings_.beta * (discretization_->T(i,j) + discretization_->T(i+1,j)) / 2) * settings_.g[0]);
+									+ (1-settings_.beta*(discretization_->T(i,j)+discretization_->T(i+1,j))/2) * settings_.g[0]);
 						}
 					};
 				};
@@ -356,7 +303,7 @@ void Computation::computePreliminaryVelocities ()
 							discretization_->g(i,j) = discretization_->v(i,j)
 								+ dt*(1/Re*(discretization_->computeD2vDx2(i,j) + discretization_->computeD2vDy2(i,j))
 									- discretization_->computeDv2Dy(i,j) - discretization_->computeDuvDx(i,j)
-									+ (1 - settings_.beta*(discretization_->T(i,j) + discretization_->T(i,j+1)) / 2) * settings_.g[1]);
+									+ (1-settings_.beta*(discretization_->T(i,j)+discretization_->T(i,j+1))/2) * settings_.g[1]);
 						}
 					};
 				};

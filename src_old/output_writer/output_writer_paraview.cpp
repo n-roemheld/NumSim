@@ -60,7 +60,7 @@ void OutputWriterParaview::writeFile(double currentTime)
       const double x = i*dx;
       const double y = j*dy;
 
-      arrayPressure->SetValue(index, discretization_->p().interpolateAt(x,y,3));
+      arrayPressure->SetValue(index, discretization_->p().interpolateAt(x,y));
     }
   }
 
@@ -93,7 +93,7 @@ void OutputWriterParaview::writeFile(double currentTime)
       const double x = i*dx;
       const double y = j*dy;
 
-      arrayTemperature->SetValue(index, discretization_->T().interpolateAt(x,y,3));
+      arrayTemperature->SetValue(index, discretization_->T().interpolateAt(x,y));
     }
   }
 
@@ -127,8 +127,8 @@ void OutputWriterParaview::writeFile(double currentTime)
       const double x = i*dx;
 
       std::array<double,3> velocityVector;
-      velocityVector[0] = discretization_->u().interpolateAt(x,y,1);
-      velocityVector[1] = discretization_->v().interpolateAt(x,y,2);
+      velocityVector[0] = discretization_->u().interpolateAt(x,y);
+      velocityVector[1] = discretization_->v().interpolateAt(x,y);
       velocityVector[2] = 0.0;    // z-direction is 0
 
       arrayVelocity->SetTuple(index, velocityVector.data());

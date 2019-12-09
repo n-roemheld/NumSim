@@ -12,15 +12,12 @@ void GaussSeidel::solve()
 	double dy = mW[1];
 
 	int it = 0;
-	setObstacleValues2();
-	setBoundaryValues();
-	res_squared = compute_res();
-	// double res_squared = 2*epsilon_*epsilon_;
+	double res_squared = 2*epsilon_*epsilon_;
 
 	while (it < maximumNumberOfIterations_ && res_squared > epsilon_*epsilon_)
 	{
 		// set boundary values for p to achieve 0-Neumann conditions
-		setObstacleValues2();
+		setObstacleValues();
 		setBoundaryValues();
 		// perform one itertaion step
 		for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
@@ -43,7 +40,7 @@ void GaussSeidel::solve()
 		res_squared = compute_res();
 		it++;
 	}
-	setObstacleValues2();
+	setObstacleValues();
 	setBoundaryValues();
 
 };
