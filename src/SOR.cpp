@@ -14,14 +14,16 @@ void SOR::solve()
 
 		int it = 0;
 		// compute_res???
-		double res_squared = compute_res();
-		// double res_squared = 2*epsilon_*epsilon_;
+		// setObstacleValues2();  // ALAAAAAAAAAAAAAAARM
+		// setBoundaryValues();
+		// double res_squared = compute_res();
+		double res_squared = 2*epsilon_*epsilon_;
 
 		while (it <= maximumNumberOfIterations_ && res_squared > epsilon_*epsilon_)
 		{
 			// set boundary values for p to achieve 0-Neumann conditions
-			setObstacleValues2();
-			setBoundaryValues();
+			// setObstacleValues2();    // ALAAAAAAAAAAAAAAARM
+			// setBoundaryValues();
 			// perform one itertaion step
 			for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 			{
@@ -39,14 +41,18 @@ void SOR::solve()
 					}
 				};
 			};
+			setObstacleValues2(); // BLAAAAAAAAAAAAAAARM
+			setBoundaryValues();
 
 			// compute and update residuum
 			// wrong sign ????
 			res_squared = compute_res();
 			it++;
 		}
+		// std::cout << "iterations " << it << '\n';
+		// std::cout << "residuum " << std::sqrt(res_squared) << '\n';
 		if(it > maximumNumberOfIterations_) std::cout << it << std::endl;
-		setObstacleValues2();
-		setBoundaryValues();
+		// setObstacleValues2();      // ALAAAAAAAAAAAAAAARM
+		// setBoundaryValues();
 
 };

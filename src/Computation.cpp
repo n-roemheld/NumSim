@@ -57,7 +57,7 @@ void Computation::runSimulation ()
 
 
 		// if(time == 0) outputWriterParaview_->writeFile(time);
-		// if(time == 0) outputWriterText_->writeFile(time);
+		if(time == 0) outputWriterText_->writeFile(time);
 
 		// std::cout << "time alpha" << time << '\n';
 
@@ -75,14 +75,17 @@ void Computation::runSimulation ()
 		// }
 
 
-
+std::cout << "time1 " << time << '\n';
+std::cout << "dt" << dt_ << '\n';
 
 		// compute f and g
 		computePreliminaryVelocities();
+
 		// outputWriterText_->writeFile(time);
 
-		// outputWriterParaview_->writeFile(time);
-		// outputWriterText_->writeFile(time);
+
+		outputWriterParaview_->writeFile(time);
+		outputWriterText_->writeFile(time);
 
 		// compute T
 		computeTemperature(); // Reihenfolge?
@@ -341,6 +344,12 @@ void Computation::computePreliminaryVelocities ()
 								+ dt*(1/Re*(discretization_->computeD2uDx2(i,j) + discretization_->computeD2uDy2(i,j))
 									- discretization_->computeDu2Dx(i,j) - discretization_->computeDuvDy(i,j)
 									+ (1 - settings_.beta * (discretization_->T(i,j) + discretization_->T(i+1,j)) / 2) * settings_.g[0]);
+									// if (i==3 && j == 3) std::cout << "f" << discretization_->f(i,j)
+									// 					<< "Du2Dx2" << discretization_->computeDu2Dx(i,j)
+									//           << "Du2Dy2" << discretization_->computeD2uDy2(i,j)
+									// 					<< "Du2Dx"  << discretization_->computeDu2Dx(i,j)
+									// 					<< "DuvDy"  << discretization_->computeDuvDy(i,j) << '\n';
+
 						}
 					};
 				};
@@ -357,6 +366,7 @@ void Computation::computePreliminaryVelocities ()
 								+ dt*(1/Re*(discretization_->computeD2vDx2(i,j) + discretization_->computeD2vDy2(i,j))
 									- discretization_->computeDv2Dy(i,j) - discretization_->computeDuvDx(i,j)
 									+ (1 - settings_.beta*(discretization_->T(i,j) + discretization_->T(i,j+1)) / 2) * settings_.g[1]);
+							// std::cout << "g" << discretization_->g(i,j) << "Ts" << discretization_->T(i,j) << " " << discretization_->T(i,j+1) << "g"<< settings_.g[1] << '\n';
 						}
 					};
 				};
@@ -402,6 +412,10 @@ void Computation::computeVelocities ()
 					if(discretization_->geometryPVString(igeom,jgeom) == -1 && discretization_->geometryPVString(igeom+1,jgeom) == -1)
 					{
 						discretization_->u(i,j) = discretization_->f(i,j) - dt*discretization_->computeDpDx(i,j);
+						if (i==3 && j==3)
+						{
+							// std::cout << " u" << discretization_->u(i,j) << " f" << discretization_->f(i,j) << " DpDx" << discretization_->computeDpDx(i,j) << '\n';
+						}
 					}
 				};
 			};
