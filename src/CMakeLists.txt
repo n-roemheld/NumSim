@@ -21,6 +21,10 @@ add_executable(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR})
 message("Including ${PROJECT_SOURCE_DIR}")
 
+# Add preCICE to project
+find_package(precice REQUIRED CONFIG)
+target_link_libraries(${PROJECT_NAME} PRIVATE precice::precice)
+
 # Search for the external package "VTK"
 find_package(VTK)
 
@@ -32,7 +36,7 @@ message("The include directory of VTK: VTK_INCLUDE_DIRS: ${VTK_INCLUDE_DIRS}")
 # If an installation of vtk was found on the system
 if (VTK_FOUND)
     include_directories(${VTK_INCLUDE_DIRS})               # add the include directory where the header files are for the compiler
-    target_link_libraries(${PROJECT_NAME} ${VTK_LIBRARIES}) # add the libraries for the linker
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${VTK_LIBRARIES}) # add the libraries for the linker
 endif(VTK_FOUND)
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${PROJECT_SOURCE_DIR}/../build)
