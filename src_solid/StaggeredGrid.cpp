@@ -397,7 +397,6 @@ void StaggeredGrid::setBoundaryValues_T(int location_boundary, int i, int j)
 	// indices of the neigboring cell (can be fluid or solid)
 	int in = i;
 	int jn = j;
-	// To do: choose neighbor cell like for the obstacle cells
 	switch (location_boundary) // 0: Left, 1: Right, 2: Lower, 3: Upper
 	{
 		case 0:	in = i+1; igeom = 0; break;
@@ -417,7 +416,7 @@ void StaggeredGrid::setBoundaryValues_T(int location_boundary, int i, int j)
 		{
 			T(i,j) = 2*geometryT1_->operator()(igeom, jgeom) - T(in,jn);
 		}
-		else if (boundary_type == 1)  // TN
+		else // TN
 		{
 			if(location_boundary <= 1)
 			{
@@ -427,18 +426,6 @@ void StaggeredGrid::setBoundaryValues_T(int location_boundary, int i, int j)
 			{
 				T(i,j) = T(in,jn) + dy*geometryT1_->operator()(igeom, jgeom);
 			}
-		}
-		else if (boundary_type == 2) // TPD
-		{
-			// To do: ...
-		} 
-		else if (boundary_type == 3) // TPN
-		{
-			// To do: ...
-		} 
-		else 
-		{
-			std::cout << "Unknow temperature boundary condition!" << std::endl;
 		}
 
 	}

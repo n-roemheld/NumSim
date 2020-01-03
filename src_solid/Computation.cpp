@@ -44,35 +44,6 @@ void Computation::initialize (int argc, char *argv[])
 	// outputWriterText_->writeFile(-1);
 
 
-	// preCICE
-
-	// Shorthand definition ofr preCICE constants
-	// Read cowid  (= co + w + i + d) as
-	// constant "write initial data"
-	static const std::string& cowid = precice::constants::actionWriteInitialData();
-	static const std::string& coric = precice::constants::actionReadIterationCheckpoint();
-	static const std::string& cowic = precice::constants::actionWriteIterationCheckpoint();
-
-	//Initialize preCICE
-	precice::SolverInterface interface( settings_.solverName, 0, 1 );
-	interface.configure( settings_.preciceConfigFile );
-
-	// Announce mesh to preCICE
-	int dimension = 2;
-	const int dim = interface.getDimensions();
-	assert( dim == dimension );
-	const int meshId = interface.getMeshID( settings_.meshName );
-	std::vector<int> vertexIds(nx, 0); // define nx
-
-  	// Announce mesh vertices to preCICE
-    const std::array<double, nx*dimension> coordinates = computeInterfaceCoordinates(); // define function
-    interface.setMeshVertices(meshId, int(vertexIds.size()), coordinates.data(), vertexIds.data() );
-
-	// Get data ids
-	// const int temperatureId = interface.getDataID( "Temperature", meshId );
-	// const int heatFluxId = interface.getDataID( "Heat-Flux", meshId );
-	const int writeDataId = interface.getDataID( settings_.writeDataName, meshId );
-	const int readDataId = interface.getDataID( settings_.readDataName, meshId );
 };
 
 void Computation::runSimulation ()
@@ -81,7 +52,7 @@ void Computation::runSimulation ()
 	double lastOutputTime = 0;
 	while(time < settings_.endTime)
 	{
-		applyObstacleValues2();
+		// applyObstacleValues2();
 		applyBoundaryValues();
 
 
@@ -108,7 +79,7 @@ std::cout << "time1 " << time << '\n';
 std::cout << "dt" << dt_ << '\n';
 
 		// compute f and g
-		computePreliminaryVelocities();
+		// computePreliminaryVelocities();
 
 		// outputWriterText_->writeFile(time);
 
@@ -122,9 +93,9 @@ std::cout << "dt" << dt_ << '\n';
 		//compute rhs
 		computeRightHandSide();
 		//compute p with SOR or GaussSeidel
-		computePressure();
+		// computePressure();
 		//compute u and v
-		computeVelocities();
+		// computeVelocities();
 
 		time += dt_;
 
@@ -152,45 +123,16 @@ void Computation::computeTimeStepWidth ()
 	double dy = meshWidth_[1];
 	double Re = settings_.re;
 	double prandtl = settings_.prandtl;
-	double u_max = 0;
-	double v_max = 0;
-
-	// compute u_max
-	for(int j = 0; j < discretization_->u().size()[1]; j++)
-		{
-			for (int i = 0; i < discretization_->u().size()[0]; i++)
-			{
-				if (fabs(discretization_->u(i,j))>u_max) u_max = fabs(discretization_->u(i,j));
-			};
-		};
-	// compute v_max
-	for(int j = 0; j < discretization_->v().size()[1]; j++)
-		{
-			for (int i = 0; i < discretization_->v().size()[0]; i++)
-			{
-				if (fabs(discretization_->v(i,j))>v_max) v_max = fabs(discretization_->v(i,j));
-			};
-		};
 
 	double max_dt= settings_.maximumDt;
 	// compute mesh dependent time step criterion
 	double lim = dx*dx*dy*dy/(dx*dx+dy*dy)*Re/2;
 	// check whether pressure diffusion criterion is restricting
-	if (lim<max_dt) max_dt= lim;
+	// if (lim<max_dt) max_dt= lim;
 
 	lim *= prandtl;
 	// check whether temperature diffusion criterion is restricting
 	if (lim<max_dt) max_dt= lim;
-
-	// check whether momentum criterions are restricting
-	if (u_max>0)
-	{
-		if(dx/u_max<max_dt) max_dt= dx/u_max;
-	}
-	if (v_max>0)
-	{
-		if(dy/v_max<max_dt) max_dt= dy/v_max;
-	}
 	// multiply with security factor
 	dt_ = max_dt*settings_.tau;
 };

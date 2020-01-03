@@ -199,26 +199,6 @@ void Settings::loadFromFile(std::string filename) {
 			{
 				outputFileEveryDt = atof(parameterValue.c_str());
 			}
-			else if (parameterName == "participantName")
-			{
-				participantName= parameterValue.c_str();
-			}
-			else if (parameterName == "meshName")
-			{
-				meshName = parameterValue.c_str();
-			}
-			else if (parameterName == "preciceConfigFile")
-			{
-				preciceConfigFile = parameterValue.c_str();
-			}
-			else if (parameterName == "readDataName")
-			{
-				readDataName = parameterValue.c_str();
-			}
-			else if (parameterName == "writeDataName")
-			{
-				writeDataName = parameterValue.c_str();
-			}
 			else
 			{
 				std::cout << "Unknown parameter name: " << parameterName
@@ -317,15 +297,7 @@ void Settings::loadGeometryFile() {
 			geometryTString_ = std::make_shared<Array2D>(nCellsGeometry);
 			geometryT1_ = std::make_shared<Array2D>(nCellsGeometry);
 		}
-		else if (parameterName == "xOrigin")
-		{
-			xOrigin = atof(parameterValue.c_str());
-		} 
-		else if (parameterName == "yOrigin")
-		{
-			yOrigin = atof(parameterValue.c_str());
-		} 
-		else if(parameterName == "Mesh")
+		 else if(parameterName == "Mesh")
 		{
 			for(int j = nCelly-1; j >= 0; j--) //(int i = nCelly-1; i >= 0; i--) // (int j = nCelly-1; j >= 0; j--)
 			{
@@ -383,35 +355,19 @@ void Settings::loadGeometryFile() {
 							std::cout << "Unknow Cell Type!" << std::endl;
 						}
 
-						// New Temperature boundary conditions. Testing required.
-						if (cellTemperature.find_first_of(",") <= cellTemperature.find_first_of(":"))
+						std::string cellTemperatureType = cellTemperature.substr(0,cellTemperature.find_first_of(":"));
+						cellTemperature.erase(0,cellTemperature.find_first_of(":")+1);
+						if(cellTemperatureType == "TD")
 						{
-							std::string cellTemperatureType = cellTemperature.substr(0,cellTemperature.find_first_of(","));
-							if (cellTemperatureType == "TPD")
-							{
-								geometryTString_->operator()(i,j) = 2;
-							}
-							else if (cellTemperatureType == "TPN")
-							{
-								geometryTString_->operator()(i,j) = 3;
-							}
-						}
-						else
+							geometryTString_->operator()(i,j) = 0;
+							std::string cellTemperature1 = cellTemperature.substr(0);
+							geometryT1_->operator()(i,j) = atof(cellTemperature1.c_str());
+						} 
+						else if(cellTemperatureType == "TN")
 						{
-							std::string cellTemperatureType = cellTemperature.substr(0,cellTemperature.find_first_of(":"));
-							cellTemperature.erase(0,cellTemperature.find_first_of(":")+1);
-							if(cellTemperatureType == "TD")
-							{
-								geometryTString_->operator()(i,j) = 0;
-								std::string cellTemperature1 = cellTemperature.substr(0);
-								geometryT1_->operator()(i,j) = atof(cellTemperature1.c_str());
-							} 
-							else if(cellTemperatureType == "TN")
-							{
-								geometryTString_->operator()(i,j) = 1;
-								std::string cellTemperature1 = cellTemperature.substr(0);
-								geometryT1_->operator()(i,j) = atof(cellTemperature1.c_str());
-							}
+							geometryTString_->operator()(i,j) = 1;
+							std::string cellTemperature1 = cellTemperature.substr(0);
+							geometryT1_->operator()(i,j) = atof(cellTemperature1.c_str());
 						}
 					}
 

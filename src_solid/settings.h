@@ -23,18 +23,9 @@ struct Settings
 
   std::array<double,2> g;    //< external forces
 
-  std::string participantName = "NumSim";
-  std::string meshName = "NumSimMesh";
-  std::string preciceConfigFile = "precice-config.xml";
-  std::string readDataName = "Heat-Flux";
-  std::string writeDataName = "Temperature";
-
   bool useDonorCell = false;         //< if the donor cell scheme schould be used
   double alpha = 0.5;                //< factor for donor-cell scheme for pressure
   double gamma = 0.5;				 //< factor for donor-cell scheme for temperature
-
-  double xOrigin = 0; // Origin for the geometry (bottom left corner)
-  double yOrigin = 0;
 
   std::array<double,2> dirichletBcBottom;  //< prescribed values of u,v at bottom of domain
   std::array<double,2> dirichletBcTop;     //< prescribed values of u,v at top of domain
