@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(numsim)
+project(numsim_fluid)
 
 add_executable(${PROJECT_NAME}
         main.cpp
