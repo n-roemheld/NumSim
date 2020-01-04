@@ -3,6 +3,10 @@
 #include "Computation.h"
 #include <math.h>
 #include <ctime>
+// not working:
+#include <precice>
+#include <SolverInterface.hpp>
+#include "SolverInterface.hpp"
 
 void Computation::initialize (int argc, char *argv[])
 {
@@ -42,10 +46,15 @@ void Computation::initialize (int argc, char *argv[])
 	outputWriterText_ = std::make_unique<OutputWriterText>(discretization_);
 
 	// outputWriterText_->writeFile(-1);
+};
 
+void Computation::runSimulation ()
+{
+	double time = 0;
+	double lastOutputTime = 0;
 
-	// preCICE
-
+	//Initialize preCICE
+	
 	// Shorthand definition ofr preCICE constants
 	// Read cowid  (= co + w + i + d) as
 	// constant "write initial data"
@@ -53,36 +62,36 @@ void Computation::initialize (int argc, char *argv[])
 	static const std::string& coric = precice::constants::actionReadIterationCheckpoint();
 	static const std::string& cowic = precice::constants::actionWriteIterationCheckpoint();
 
-	//Initialize preCICE
-	precice::SolverInterface interface( settings_.solverName, 0, 1 );
-	interface.configure( settings_.preciceConfigFile );
+	precice::SolverInterface interface( settings_.solverName, 0, 1 ); // ( String participantName, int rank, int size ), name must match xml, rank only relevant for multiple processes (must be 0), size = number of precesses (1) 
+	interface.configure( settings_.preciceConfigFile ); // reads an xml file to configure the coupling features at run-time.
 
 	// Announce mesh to preCICE
+	int vertexSize; // number of interface points (nx), get from settings
 	int dimension = 2;
-	const int dim = interface.getDimensions();
+	int dim = interface.getDimensions(); // const
 	assert( dim == dimension );
-	const int meshId = interface.getMeshID( settings_.meshName );
-	std::vector<int> vertexIds(nx, 0); // define nx
+	int meshID = interface.getmeshID( settings_.meshName ); // const
+	std::vector<int> vertexIDs(vertexSize, 0); 
 
   	// Announce mesh vertices to preCICE
-    const std::array<double, nx*dimension> coordinates = computeInterfaceCoordinates(); // define function
-    interface.setMeshVertices(meshId, int(vertexIds.size()), coordinates.data(), vertexIds.data() );
+    const std::array<double, vertexSize*dimension> coordinates = computeInterfaceCoordinates(); // replace by accessing coordinates computed in settings
+    interface.setMeshVertices(meshID, int(vertexIDs.size()), coordinates.data(), vertexIDs.data() );
 
+	// coordinates not needed any more
 	// Get data ids
-	// const int temperatureId = interface.getDataID( "Temperature", meshId );
-	// const int heatFluxId = interface.getDataID( "Heat-Flux", meshId );
-	const int writeDataId = interface.getDataID( settings_.writeDataName, meshId );
-	const int readDataId = interface.getDataID( settings_.readDataName, meshId );
-};
+	// const int temperatureId = interface.getDataID( "Temperature", meshID );
+	// const int heatFluxId = interface.getDataID( "Heat-Flux", meshID );
+	const int writeDataID = interface.getDataID( settings_.writeDataName, meshID ); // temperature?
+	const int readDataID = interface.getDataID( settings_.readDataName, meshID ); // heatFlux?
+	double precice_dt = interface.initialize();
+	std::vector<int> writeData(vertexSize, 0); 
+	std::vector<int> readData(vertexSize, 0); 
 
-void Computation::runSimulation ()
-{
-	double time = 0;
-	double lastOutputTime = 0;
 	while(time < settings_.endTime)
 	{
+		interface.readBlockVectorData(readDataID, vertexSize, vertexIDs.data(), readData.data());
 		applyObstacleValues2();
-		applyBoundaryValues();
+		applyBoundaryValues(readData);
 
 
 		// if(time == 0) outputWriterParaview_->writeFile(time);
@@ -92,7 +101,7 @@ void Computation::runSimulation ()
 
 		// std::cout << "time" << time << std::endl;
 		// compute dt_ and time
-		computeTimeStepWidth();
+		computeTimeStepWidth(precice_dt);
 		if(time+dt_>settings_.endTime) dt_ = settings_.endTime - time;
 		// std::cout << "time_step" << dt_ << std::endl;
 
@@ -104,8 +113,8 @@ void Computation::runSimulation ()
 		// }
 
 
-std::cout << "time1 " << time << '\n';
-std::cout << "dt" << dt_ << '\n';
+		std::cout << "time1 " << time << '\n';
+		std::cout << "dt" << dt_ << '\n';
 
 		// compute f and g
 		computePreliminaryVelocities();
@@ -118,6 +127,8 @@ std::cout << "dt" << dt_ << '\n';
 
 		// compute T
 		computeTemperature(); // Reihenfolge?
+		writeData = get_write_data(); // to do ...
+		interface.writeBlockVectorData(writeDataID, vertexSize, vertexIDs.data(), writeData.data());
 
 		//compute rhs
 		computeRightHandSide();
@@ -125,6 +136,8 @@ std::cout << "dt" << dt_ << '\n';
 		computePressure();
 		//compute u and v
 		computeVelocities();
+
+		precice_dt = interface.advance(dt_);
 
 		time += dt_;
 
@@ -136,6 +149,8 @@ std::cout << "dt" << dt_ << '\n';
 			lastOutputTime = time;
 		}
 	}
+	interface.finalize();
+
 	// output data using VTK if we did not do this in the last time step
 	if ( std::fabs( time - lastOutputTime ) > 1e-4 )
 	{
@@ -146,7 +161,7 @@ std::cout << "dt" << dt_ << '\n';
 
 };
 
-void Computation::computeTimeStepWidth ()
+void Computation::computeTimeStepWidth (double precice_dt)
 {
 	double dx = meshWidth_[0];
 	double dy = meshWidth_[1];
@@ -192,7 +207,7 @@ void Computation::computeTimeStepWidth ()
 		if(dy/v_max<max_dt) max_dt= dy/v_max;
 	}
 	// multiply with security factor
-	dt_ = max_dt*settings_.tau;
+	dt_ = std::min(max_dt*settings_.tau, precice_dt);
 };
 
 void Computation::applyBoundaryValues ()

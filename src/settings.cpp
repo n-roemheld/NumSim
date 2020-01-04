@@ -249,6 +249,9 @@ void Settings::loadGeometryFile() {
 	int nCellx;
 	int nCelly;
 
+	int TPD_count = 0;
+	int TPN_count = 0;
+
 	//geometry file
 	// open file
 	std::ifstream file(geometryFile.c_str(), std::ios::in);
@@ -337,7 +340,7 @@ void Settings::loadGeometryFile() {
 					if(cellAll.at(0) == 'F')
 					{
 						geometryPVString_->operator()(i,j) = -1;
-
+						geometryTString_->operator()(i,j) = -1; // to avoid confilcts between TD and unassigned. 
 					} 
 					else
 					{
@@ -390,10 +393,16 @@ void Settings::loadGeometryFile() {
 							if (cellTemperatureType == "TPD")
 							{
 								geometryTString_->operator()(i,j) = 2;
+								TPD_count += 1;
 							}
 							else if (cellTemperatureType == "TPN")
 							{
 								geometryTString_->operator()(i,j) = 3;
+								TPN_count += 1;
+							}
+							else
+							{
+								geometryTString_->operator()(i,j) = -1; // to avoid confilcts between TD and unassigned. 
 							}
 						}
 						else
@@ -402,7 +411,7 @@ void Settings::loadGeometryFile() {
 							cellTemperature.erase(0,cellTemperature.find_first_of(":")+1);
 							if(cellTemperatureType == "TD")
 							{
-								geometryTString_->operator()(i,j) = 0;
+								geometryTString_->operator()(i,j) = 0; // waring: equal unassigned
 								std::string cellTemperature1 = cellTemperature.substr(0);
 								geometryT1_->operator()(i,j) = atof(cellTemperature1.c_str());
 							} 
@@ -412,6 +421,11 @@ void Settings::loadGeometryFile() {
 								std::string cellTemperature1 = cellTemperature.substr(0);
 								geometryT1_->operator()(i,j) = atof(cellTemperature1.c_str());
 							}
+							else
+							{
+								geometryTString_->operator()(i,j) = -1; // to avoid confilcts between TD and unassigned. 
+							}
+							
 						}
 					}
 
@@ -425,6 +439,81 @@ void Settings::loadGeometryFile() {
 		// print line
 		// std::cout << "line " << lineNo << ": " << line << std::endl;
 
+	}
+
+	// new preCICE related stuff: Getting interface (vertex) coordinates etc.
+	if (TPD_count > 0 && TPN_count > 0)
+	{
+		std::cout << "This should not happen: TPD and PTN boundaries detected!" << std::endl;
+	}
+
+	//computing meshWidth
+	double dx = physicalSize[0]/nCells[0];
+	double dy = physicalSize[1]/nCells[1];
+
+	int vertexSize = std::max(TPD_count, TPN_count);
+	int vertex_index = 0;
+	std::vector<int> vertex_i(vertexSize,0);
+	std::vector<int> vertex_j(vertexSize,0);
+	std::vector<double> vertex_x(vertexSize,0);
+	std::vector<double> vertex_y(vertexSize,0);
+	std::vector<int> ortientation(vertexSize,0); // 0,1,2,3 = left,right,lower,upper
+	for (int i = 0; i < nCells[0]+2; i++)
+	{
+		for (int j = 0; j < nCells[1]+2; j++)
+		{
+			if (geometryTString_->operator()(i-1,j) == -1)
+			{
+				ortientation[i,j] = 0; // left is no temperature boundary
+			} 
+			else if (geometryTString_->operator()(i+1,j) == -1)
+			{
+				ortientation[i,j] = 1; // right is no temperature boundary
+			} 
+			else if (geometryTString_->operator()(i,j-1) == -1)
+			{
+				ortientation[i,j] = 2; // lower is no temperature boundary
+			} 
+			else if (geometryTString_->operator()(i,j+1) == -1)
+			{
+				ortientation[i,j] = 3; // upper is no temperature boundary
+			} 
+			else
+			{
+				std::cout << "Couldn't determine temperature interface orientation!" << std::endl;
+			}
+			
+
+			if (geometryTString_->operator()(i,j) == 2 || geometryTString_->operator()(i,j) == 3)
+			{
+				vertex_i.at(vertex_index) = i;
+				vertex_j.at(vertex_index) = j;
+				vertex_x.at(vertex_index) = xOrigin + i*dx; // + .5*dx depending on the orientation of the boundary
+				vertex_y.at(vertex_index) = yOrigin + j*dy; // + .5*dy depending on the orientation of the boundary
+				if (ortientation[i,j] == 0)
+				{
+					vertex_x.at(vertex_index) -= .5*dx;
+				}
+				else if (ortientation[i,j] == 1)
+				{
+					vertex_x.at(vertex_index) += .5*dx;
+				}
+				else if (ortientation[i,j] == 2)
+				{
+					vertex_y.at(vertex_index) -= .5*dy;
+				}
+				else if (ortientation[i,j] == 3)
+				{
+					vertex_y.at(vertex_index) += .5*dy;
+				}
+				else
+				{
+					std::cout << "This shouldn't happen (unknown orientation)." << std::endl;
+				}
+				
+			}
+			vertex_index += 1;
+		}
 	}
 }
 

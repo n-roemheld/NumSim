@@ -15,7 +15,7 @@ public:
 	void initialize (int argc, char *argv[]);
 	void runSimulation ();
 private:
-	void computeTimeStepWidth ();
+	void computeTimeStepWidth (double precice_dt);
 	void applyBoundaryValues ();
 	void computePreliminaryVelocities ();
 	void computeRightHandSide ();
