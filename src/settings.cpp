@@ -19,7 +19,7 @@ void Settings::loadFromFile(std::string filename) {
 		// read line
 		std::string line;
 		getline(file, line);
-//    while(line[0] == ' ' || line[0]== '\t')
+//    while(line[0] == ' '  || line[0]== '\t')
 //    {
 //    	line.erase(0,1);
 //    }
@@ -453,10 +453,11 @@ void Settings::loadGeometryFile() {
 
 	vertexSize = std::max(TPD_count, TPN_count);
 	int vertex_index = 0;
-	std::vector<int> vertex_i(vertexSize,0);
-	std::vector<int> vertex_j(vertexSize,0);
+	vertex_i = std::vector<int> (vertexSize,0);
+	vertex_j = std::vector<int> (vertexSize,0);
 	std::vector<double> vertex_x(vertexSize,0);
 	std::vector<double> vertex_y(vertexSize,0);
+    coords = new double[vertexSize*2]; 
 	std::vector<int> ortientation(vertexSize,0); // 0,1,2,3 = left,right,lower,upper
 	for (int i = 0; i < nCells[0]+2; i++)
 	{
@@ -510,6 +511,9 @@ void Settings::loadGeometryFile() {
 				{
 					std::cout << "This shouldn't happen (unknown orientation)." << std::endl;
 				}
+
+				coords[2*vertex_index] = vertex_x.at(vertex_index);
+				coords[2*vertex_index+1] =vertex_y.at(vertex_index);
 				
 			}
 			vertex_index += 1;

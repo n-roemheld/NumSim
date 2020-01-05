@@ -30,12 +30,12 @@ class Adapter
         precice.configure(preciceConfigFile);
     }
 
-    void initialize(std::string participantMesh)
+    void initialize(std::string participantMesh, double *coords)
     {
         dim = precice.getDimensions();
         assert( dim == 2 );
         meshID = precice.getMeshID(participantMesh);
-        coords = new double[vertexSize*dim];
+        // coords = new double[vertexSize*dim]; // get from settings
         vertexIDs = new int[vertexSize];
         precice.setMeshVertices(meshID,vertexSize,coords,vertexIDs);
         delete[] coords;

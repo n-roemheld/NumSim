@@ -30,6 +30,9 @@ struct Settings
   std::string writeDataName = "Temperature";
 
   int vertexSize = 0;
+	std::vector<int> vertex_i;
+	std::vector<int> vertex_j;
+  double * coords; 
 
   bool useDonorCell = false;         //< if the donor cell scheme schould be used
   double alpha = 0.5;                //< factor for donor-cell scheme for pressure

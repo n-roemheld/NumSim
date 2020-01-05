@@ -57,7 +57,7 @@ void Computation::runSimulation ()
 
 	// Initialize preCICE
 
-	discretization_->adapter.initialize(settings_.meshName);
+	discretization_->adapter.initialize(settings_.meshName, settings_.coords);
 	int vertexSize = discretization_->adapter.getVertexSize();
 	double *readData = new double[vertexSize];
 	double *writeData = new double[vertexSize];
