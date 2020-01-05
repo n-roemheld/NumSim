@@ -3,10 +3,7 @@
 #include "Computation.h"
 #include <math.h>
 #include <ctime>
-// not working:
-#include <precice>
-#include <SolverInterface.hpp>
-#include "SolverInterface.hpp"
+#include <precice/SolverInterface.hpp>
 
 void Computation::initialize (int argc, char *argv[])
 {
@@ -18,14 +15,19 @@ void Computation::initialize (int argc, char *argv[])
 	double dy = settings_.physicalSize[1]/settings_.nCells[1];
 	meshWidth_ = {dx, dy};
 
+	// preCICE Adapter
+	int rank = 0;
+	int size = 1;
+	Adapter adapter(settings_.participantName, settings_.preciceConfigFile, rank, size, settings_.vertexSize, settings_.readDataName, settings_.writeDataName);
+
 	//select DonorCell or CentralDifferences
 	if (settings_.useDonorCell == true)
 	{
-		discretization_ = std::make_shared<DonorCell>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, settings_.alpha, settings_.gamma);
+		discretization_ = std::make_shared<DonorCell>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, settings_.alpha, settings_.gamma, adapter);
 	}
 	else
 	{
-		discretization_ = std::make_shared<CentralDifferences>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_);
+		discretization_ = std::make_shared<CentralDifferences>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, adapter);
 	}
 	discretization_->fillIn(settings_.uInit_, settings_.vInit_, settings_.pInit_, settings_.TInit_);
 
@@ -53,43 +55,16 @@ void Computation::runSimulation ()
 	double time = 0;
 	double lastOutputTime = 0;
 
-	//Initialize preCICE
-	
-	// Shorthand definition ofr preCICE constants
-	// Read cowid  (= co + w + i + d) as
-	// constant "write initial data"
-	static const std::string& cowid = precice::constants::actionWriteInitialData();
-	static const std::string& coric = precice::constants::actionReadIterationCheckpoint();
-	static const std::string& cowic = precice::constants::actionWriteIterationCheckpoint();
+	// Initialize preCICE
 
-	precice::SolverInterface interface( settings_.solverName, 0, 1 ); // ( String participantName, int rank, int size ), name must match xml, rank only relevant for multiple processes (must be 0), size = number of precesses (1) 
-	interface.configure( settings_.preciceConfigFile ); // reads an xml file to configure the coupling features at run-time.
-
-	// Announce mesh to preCICE
-	int vertexSize; // number of interface points (nx), get from settings
-	int dimension = 2;
-	int dim = interface.getDimensions(); // const
-	assert( dim == dimension );
-	int meshID = interface.getmeshID( settings_.meshName ); // const
-	std::vector<int> vertexIDs(vertexSize, 0); 
-
-  	// Announce mesh vertices to preCICE
-    const std::array<double, vertexSize*dimension> coordinates = computeInterfaceCoordinates(); // replace by accessing coordinates computed in settings
-    interface.setMeshVertices(meshID, int(vertexIDs.size()), coordinates.data(), vertexIDs.data() );
-
-	// coordinates not needed any more
-	// Get data ids
-	// const int temperatureId = interface.getDataID( "Temperature", meshID );
-	// const int heatFluxId = interface.getDataID( "Heat-Flux", meshID );
-	const int writeDataID = interface.getDataID( settings_.writeDataName, meshID ); // temperature?
-	const int readDataID = interface.getDataID( settings_.readDataName, meshID ); // heatFlux?
-	double precice_dt = interface.initialize();
-	std::vector<int> writeData(vertexSize, 0); 
-	std::vector<int> readData(vertexSize, 0); 
+	discretization_->adapter.initialize(settings_.meshName);
+	int vertexSize = discretization_->adapter.getVertexSize();
+	double *readData = new double[vertexSize];
+	double *writeData = new double[vertexSize];
 
 	while(time < settings_.endTime)
 	{
-		interface.readBlockVectorData(readDataID, vertexSize, vertexIDs.data(), readData.data());
+		discretization_->adapter.readData(readData);
 		applyObstacleValues2();
 		applyBoundaryValues(readData);
 
@@ -101,7 +76,8 @@ void Computation::runSimulation ()
 
 		// std::cout << "time" << time << std::endl;
 		// compute dt_ and time
-		computeTimeStepWidth(precice_dt);
+		computeTimeStepWidth();
+		dt_ = discretization_->adapter.get_dt(dt_);
 		if(time+dt_>settings_.endTime) dt_ = settings_.endTime - time;
 		// std::cout << "time_step" << dt_ << std::endl;
 
@@ -126,9 +102,8 @@ void Computation::runSimulation ()
 		outputWriterText_->writeFile(time);
 
 		// compute T
-		computeTemperature(); // Reihenfolge?
-		writeData = get_write_data(); // to do ...
-		interface.writeBlockVectorData(writeDataID, vertexSize, vertexIDs.data(), writeData.data());
+		computeTemperature(writeData); // Reihenfolge?
+		discretization_->adapter.writeData(writeData);
 
 		//compute rhs
 		computeRightHandSide();
@@ -137,7 +112,7 @@ void Computation::runSimulation ()
 		//compute u and v
 		computeVelocities();
 
-		precice_dt = interface.advance(dt_);
+		discretization_->adapter.advance();
 
 		time += dt_;
 
@@ -149,7 +124,7 @@ void Computation::runSimulation ()
 			lastOutputTime = time;
 		}
 	}
-	interface.finalize();
+	discretization_->adapter.finalize();
 
 	// output data using VTK if we did not do this in the last time step
 	if ( std::fabs( time - lastOutputTime ) > 1e-4 )
@@ -161,7 +136,7 @@ void Computation::runSimulation ()
 
 };
 
-void Computation::computeTimeStepWidth (double precice_dt)
+void Computation::computeTimeStepWidth ()
 {
 	double dx = meshWidth_[0];
 	double dy = meshWidth_[1];
@@ -207,10 +182,12 @@ void Computation::computeTimeStepWidth (double precice_dt)
 		if(dy/v_max<max_dt) max_dt= dy/v_max;
 	}
 	// multiply with security factor
-	dt_ = std::min(max_dt*settings_.tau, precice_dt);
+	dt_ = max_dt*settings_.tau;
+
+	// dt_ = std::min(max_dt*settings_.tau, precice_dt);
 };
 
-void Computation::applyBoundaryValues ()
+void Computation::applyBoundaryValues (double * readData)
 {
 	// todo: double check indices
 
@@ -478,7 +455,7 @@ void Computation::computeVelocities ()
 			};
 };
 
-void Computation::computeTemperature()
+void Computation::computeTemperature(double * writeData)
 {
 	double dt = dt_;
 	FieldVariable T_copy( {settings_.nCells[0]+2, settings_.nCells[1]+2},  {-0.5*meshWidth_[0], -0.5*meshWidth_[1]}, meshWidth_);

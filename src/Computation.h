@@ -15,13 +15,13 @@ public:
 	void initialize (int argc, char *argv[]);
 	void runSimulation ();
 private:
-	void computeTimeStepWidth (double precice_dt);
-	void applyBoundaryValues ();
+	void computeTimeStepWidth ();
+	void applyBoundaryValues (double * readData);
 	void computePreliminaryVelocities ();
 	void computeRightHandSide ();
 	void computePressure ();
 	void computeVelocities ();
-	void computeTemperature();
+	void computeTemperature(double * writeData);
 	// void applyObstacleValues();
 	void applyObstacleValues2();
 

@@ -1,15 +1,5 @@
 todo:
 
--RedBlack implementieren
--Heat implementieren
---CHECK staggered Grid: T anlegen 
---CHECK computation: timestepcriterion ergänzen
---CHECK discretization: d2Tdx2 und d2Tdy2 implemtentieren, duTdx und dvTdy virtual definieren
---CHECK DonorCell/CentrallDifferences: duTdx und dvTdy implementieren
---CHECK computation: preliminary velocities anpassen
---CHECK settings: Pr und beta anlegen 
---CHECK computation: T berechnen
---CHECK computation: berechnung von T in rumsimulation
---CHECK gamma und alpha unterscheiden
-
--boundaries implementieren
+- Ecken TPD/TPN kontrollieren
+- applyBoundaryValues 
+- Solid: Temperature boundary iteration update

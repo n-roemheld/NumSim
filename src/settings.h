@@ -29,6 +29,8 @@ struct Settings
   std::string readDataName = "Heat-Flux";
   std::string writeDataName = "Temperature";
 
+  int vertexSize = 0;
+
   bool useDonorCell = false;         //< if the donor cell scheme schould be used
   double alpha = 0.5;                //< factor for donor-cell scheme for pressure
   double gamma = 0.5;				 //< factor for donor-cell scheme for temperature

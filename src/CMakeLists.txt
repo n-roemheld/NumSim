@@ -3,8 +3,8 @@ project(numsim_fluid)
 
 add_executable(${PROJECT_NAME}
         main.cpp
-        Computation.cpp
-        settings.cpp
+        Computation.cpp Computation.h
+        settings.cpp settings.h
         StaggeredGrid.h StaggeredGrid.cpp
         Discretization.cpp Discretization.h
         DonorCell.cpp DonorCell.h
@@ -16,7 +16,9 @@ add_executable(${PROJECT_NAME}
         output_writer/output_writer_text.cpp output_writer/output_writer_text.h
         output_writer/output_writer.cpp output_writer/output_writer.h
         Array2D.cpp Array2D.h
-        FieldVariable.cpp FieldVariable.h)
+        FieldVariable.cpp FieldVariable.h
+        Adapter.h Adapter.cpp
+)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR})
 message("Including ${PROJECT_SOURCE_DIR}")

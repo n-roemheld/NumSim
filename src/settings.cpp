@@ -451,7 +451,7 @@ void Settings::loadGeometryFile() {
 	double dx = physicalSize[0]/nCells[0];
 	double dy = physicalSize[1]/nCells[1];
 
-	int vertexSize = std::max(TPD_count, TPN_count);
+	vertexSize = std::max(TPD_count, TPN_count);
 	int vertex_index = 0;
 	std::vector<int> vertex_i(vertexSize,0);
 	std::vector<int> vertex_j(vertexSize,0);
@@ -483,7 +483,7 @@ void Settings::loadGeometryFile() {
 				std::cout << "Couldn't determine temperature interface orientation!" << std::endl;
 			}
 			
-
+			// ecken?
 			if (geometryTString_->operator()(i,j) == 2 || geometryTString_->operator()(i,j) == 3)
 			{
 				vertex_i.at(vertex_index) = i;
