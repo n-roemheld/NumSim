@@ -344,6 +344,67 @@ void Settings::loadGeometryFile() {
 					} 
 					else
 					{
+						// determining the orientation of the boundary: (1,2,3,4 = left, right, lower, upper; 5,6,7,8 = lower-left, upper-left, lower-right, upper-right) 
+						// domain boundary cells
+						if (i == 0 && geometryPVString_->operator()(i+1,j) == -1)
+						{
+							geometryPVOrientation_->operator()(i,j) = 2;
+						} 
+						else if (i == nCellx-1 && geometryPVString_->operator()(i-1,j) == -1)
+						{
+							geometryPVOrientation_->operator()(i,j) = 1;
+						}
+						else if (j == 0 && geometryPVString_->operator()(i,j+1) == -1)
+						{
+							geometryPVOrientation_->operator()(i,j) = 4;
+						}
+						else if (j == nCelly-1 && geometryPVString_->operator()(i,j-1) == -1)
+						{
+							geometryPVOrientation_->operator()(i,j) = 3;
+						}
+						else // inner cells
+						{
+							if (geometryPVString_->operator()(i-1,j) == -1) // left is fluid
+							{
+								geometryPVOrientation_->operator()(i,j) = 1;
+							}
+							if (geometryPVString_->operator()(i+1,j) == -1) // right
+							{
+								geometryPVOrientation_->operator()(i,j) = 2;
+							}
+							if (geometryPVString_->operator()(i,j-1) == -1) // lower
+							{
+								if (geometryPVOrientation_->operator()(i,j) == 1) // lower-left
+								{
+									geometryPVOrientation_->operator()(i,j) = 5;
+								}
+								else if (geometryPVOrientation_->operator()(i,j) == 2) // lower-right
+								{
+									geometryPVOrientation_->operator()(i,j) = 7;
+								}
+								else
+								{
+									geometryPVOrientation_->operator()(i,j) = 3;
+								}
+							}
+							if (geometryPVString_->operator()(i,j+1) == -1) // upper
+							{
+								if (geometryPVOrientation_->operator()(i,j) == 1) // upper-left
+								{
+									geometryPVOrientation_->operator()(i,j) = 6;
+								}
+								else if (geometryPVOrientation_->operator()(i,j) == 2) // upper-right
+								{
+									geometryPVOrientation_->operator()(i,j) = 8;
+								}
+								else
+								{
+									geometryPVOrientation_->operator()(i,j) = 4;
+								}
+							}
+						}
+
+
 						std::string cellPressure = cellAll.substr(0,cellAll.find_first_of(";"));
 						cellAll.erase(0, cellAll.find_first_of(";")+1);
 						std::string cellTemperature = cellAll.substr(0);

@@ -21,9 +21,10 @@ private:
 	void computeRightHandSide ();
 	void computePressure ();
 	void computeVelocities ();
-	void computeTemperature(double * writeData);
+	void computeTemperature();
 	// void applyObstacleValues();
 	void applyObstacleValues2();
+	void set_writeData(double* writeData);
 
 	Settings settings_;
 	std::shared_ptr< Discretization > discretization_;
