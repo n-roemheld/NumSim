@@ -1,11 +1,11 @@
 #include "GaussSeidel.h"
 
 GaussSeidel::GaussSeidel (std::shared_ptr< Discretization > discretization, double epsilon, int maximumNumberOfIterations) :
-	PressureSolver(discretization, epsilon, maximumNumberOfIterations)
+	TemperatureSolver(discretization, epsilon, maximumNumberOfIterations)
 {};
 
 
-void GaussSeidel::solve()
+void GaussSeidel::solve(double dt, double heatDiffusivity)
 {
 	std::array<double,2> mW = discretization_->meshWidth();
 	double dx = mW[0];
@@ -14,7 +14,7 @@ void GaussSeidel::solve()
 	int it = 0;
 	setObstacleValues2();
 	setBoundaryValues();
-	double res_squared = compute_res();
+	double res_squared = compute_res(dt, heatDiffusivity);
 	// double res_squared = 2*epsilon_*epsilon_;
 
 	while (it < maximumNumberOfIterations_ && res_squared > epsilon_*epsilon_)
@@ -32,15 +32,15 @@ void GaussSeidel::solve()
 				int jgeom = j-discretization_-> pJBegin()+1;
 				if(discretization_->geometryPVString(igeom, jgeom) == -1)
 				{
-					discretization_->p(i,j) = (dx*dx*dy*dy)/(2*(dx*dx+dy*dy))
-					* ( (discretization_->p(i-1,j) + discretization_->p(i+1,j)) / (dx*dx)
-					+ (discretization_->p(i,j-1) + discretization_->p(i,j+1)) / (dy*dy)
-					- discretization_->rhs(i,j) );
+					discretization_->T(i,j) = 1./(1 + dt * heatDiffusivity * (2./(dx * dx) + 2./(dy * dy))) 
+												* (discretization_->rhs(i,j) + dt * heatDiffusivity 
+												* ((discretization_->T(i+1,j) + discretization_->T(i-1,j))/(dx*dx) 
+												+ (discretization_->T(i,j+1) + discretization_->T(i,j-1))/(dy*dy)));
 				}
 			};
 		};
 		// compute and update residuum
-		res_squared = compute_res();
+		res_squared = compute_res(dt, heatDiffusivity);
 		it++;
 	}
 	setObstacleValues2();

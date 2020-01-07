@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PressureSolver.h"
+#include "TemperatureSolver.h"
 #include "DonorCell.h"
 #include "CentralDifferences.h"
 #include "SOR.h"
@@ -17,10 +17,7 @@ public:
 private:
 	void computeTimeStepWidth ();
 	void applyBoundaryValues (double * readData);
-	void computePreliminaryVelocities ();
 	void computeRightHandSide ();
-	void computePressure ();
-	void computeVelocities ();
 	void computeTemperature();
 	// void applyObstacleValues();
 	void applyObstacleValues2();
@@ -28,7 +25,7 @@ private:
 
 	Settings settings_;
 	std::shared_ptr< Discretization > discretization_;
-	std::unique_ptr< PressureSolver > pressureSolver_;
+	std::unique_ptr< TemperatureSolver > temperatureSolver_;
 	std::unique_ptr< OutputWriterParaview > outputWriterParaview_;
 	std::unique_ptr< OutputWriterText > outputWriterText_;
 	std::array< double, 2 > meshWidth_;

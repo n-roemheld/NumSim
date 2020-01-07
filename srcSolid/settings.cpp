@@ -159,9 +159,9 @@ void Settings::loadFromFile(std::string filename) {
 			{
 				maximumDt = atof(parameterValue.c_str());
 			}
-			else if (parameterName == "pressureSolver")
+			else if (parameterName == "temperatureSolver")
 			{
-				pressureSolver = parameterValue.c_str();
+				temperatureSolver = parameterValue.c_str();
 			}
 			else if (parameterName == "omega")
 			{
@@ -218,6 +218,10 @@ void Settings::loadFromFile(std::string filename) {
 			else if (parameterName == "writeDataName")
 			{
 				writeDataName = parameterValue.c_str();
+			}
+			else if (parameterName == "heatDiffusivity")
+			{
+				heatDiffusivity = atof(parameterValue.c_str());
 			}
 			else
 			{
@@ -593,5 +597,5 @@ void Settings::printSettings()
 	<< ", left: (" << dirichletBcLeft[0] << "," << dirichletBcLeft[1] << ")"
 	<< ", right: (" << dirichletBcRight[0] << "," << dirichletBcRight[1] << ")" << std::endl
 	<< "  useDonorCell: " << std::boolalpha << useDonorCell << ", alpha: " << alpha << std::endl
-	<< "  pressureSolver: " << pressureSolver << ", omega: " << omega << ", epsilon: " << epsilon << ", maximumNumberOfIterations: " << maximumNumberOfIterations << std::endl;
+	<< "  temperatureSolver: " << temperatureSolver << ", omega: " << omega << ", epsilon: " << epsilon << ", maximumNumberOfIterations: " << maximumNumberOfIterations << std::endl;
 }

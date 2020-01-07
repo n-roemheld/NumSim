@@ -1,23 +1,23 @@
 
-#include "PressureSolver.h"
+#include "TemperatureSolver.h"
 #include <math.h>
 #include <memory>
 #include <iostream>
 
 
-PressureSolver::PressureSolver (std::shared_ptr< Discretization > discretization, double epsilon, int maximumNumberOfIterations) :
+TemperatureSolver::TemperatureSolver (std::shared_ptr< Discretization > discretization, double epsilon, int maximumNumberOfIterations) :
 	discretization_(discretization), epsilon_(epsilon), maximumNumberOfIterations_(maximumNumberOfIterations)
 {};
 
 //!	set the boundary values to account for homogenous Neumann boundary conditions, this has to be called after every iteration
-void PressureSolver::setBoundaryValues ()
+void TemperatureSolver::setBoundaryValues ()
 {
-	discretization_->setBoundaryValues_p();
+	discretization_->setBoundaryValues_p(); 
 };
 
 // setObstacleValues is used, setObstacleValues2 not
 // Marc
-// void PressureSolver::setObstacleValues()
+// void TemperatureSolver::setObstacleValues()
 // {
 // 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 // 	{
@@ -29,7 +29,7 @@ void PressureSolver::setBoundaryValues ()
 // }
 
 // Nathanael
-void PressureSolver::setObstacleValues2()
+void TemperatureSolver::setObstacleValues2()
 {
 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 	{
@@ -41,15 +41,15 @@ void PressureSolver::setObstacleValues2()
 	}
 }
 
-double PressureSolver::compute_res()
+double TemperatureSolver::compute_res(double dt, double heatDiffusivity)
 {
 	//Array2D res_vec = Array2D(discretization_->nCells());
 	double res = 0;
-	FieldVariable p = discretization_->p();
+	FieldVariable T = discretization_->T();
 	std::array<double,2> mW = discretization_->meshWidth();
 	double dx = mW[0];
 	double dy = mW[1];
-	int fluidCellCount = 0;
+	int cellCount = 0;
 	//igeom and jgeom are identical to the indices of the pressure cell (?)
 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 	{
@@ -57,13 +57,13 @@ double PressureSolver::compute_res()
 		{
 			if(discretization_->geometryPVString(i,j) == -1) // proof, if cell is fluid cell
 			{
-				res += pow((p(i+1,j)-2*p(i,j)+p(i-1,j))/(dx*dx) + (p(i,j+1)-2*p(i,j)+p(i,j-1))/(dy*dy) - discretization_->rhs(i,j),2);
-				fluidCellCount++;
+				res += pow(T(i,j) - dt * heatDiffusivity * ((T(i+1,j)-2*T(i,j)+T(i-1,j))/(dx*dx) + (T(i,j+1)-2*T(i,j)+T(i,j-1))/(dy*dy)) - discretization_->rhs(i,j),2);
+				cellCount++;
 			}
 		};
 	};
 	// average residuum with respect to number of cells
-	res /= fluidCellCount;
+	res /= cellCount;
 
 	return res;
 };

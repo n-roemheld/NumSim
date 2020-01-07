@@ -18,6 +18,7 @@ struct Settings
   double endTime = 10.0;             //< end time of the simulation
   double tau = 0.5;                  //< safety factor for time step width
   double maximumDt = 0.1;            //< maximum time step width
+  double heatDiffusivity;
 
   double outputFileEveryDt = 0;        //< call ouput writers only every dt (or at every iteration if provided value is too small)
 
@@ -46,7 +47,7 @@ struct Settings
   std::array<double,2> dirichletBcLeft;    //< prescribed values of u,v at left of domain
   std::array<double,2> dirichletBcRight;   //< prescribed values of u,v at right of domain
 
-  std::string pressureSolver = "SOR";      //< which pressure solver to use, "GaussSeidel" or "SOR"
+  std::string temperatureSolver = "SOR";      //< which pressure solver to use, "GaussSeidel" or "SOR"
   double omega = 1.0;                //< overrelaxation factor
   double epsilon = 1e-5;             //< tolerance for the residual in the pressure solver
   int maximumNumberOfIterations = 1e5;    //< maximum number of iterations in the solver

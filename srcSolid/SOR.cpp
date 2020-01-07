@@ -2,7 +2,7 @@
 #include <iostream>
 
 SOR::SOR (std::shared_ptr< Discretization > discretization, double epsilon, int maximumNumberOfIterations, double omega) :
-PressureSolver(discretization, epsilon, maximumNumberOfIterations), omega_(omega)
+TemperatureSolver(discretization, epsilon, maximumNumberOfIterations), omega_(omega)
 {};
 
 void SOR::solve()
@@ -46,7 +46,7 @@ void SOR::solve()
 
 			// compute and update residuum
 			// wrong sign ????
-			res_squared = compute_res();
+			res_squared = compute_res(1,1);
 			it++;
 		}
 		// std::cout << "iterations " << it << '\n';

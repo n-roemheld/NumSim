@@ -31,15 +31,16 @@ void Computation::initialize (int argc, char *argv[])
 	}
 	discretization_->fillIn(settings_.uInit_, settings_.vInit_, settings_.pInit_, settings_.TInit_);
 
-	//select SOR or GaussSeidel
-	if (settings_.pressureSolver == "SOR")
+// always select GaussSeidel
+//	//select SOR or GaussSeidel
+//	if (settings_.temperatureSolver == "SOR")
+//	{
+//		temperatureSolver_ = std::make_unique<SOR>(discretization_, settings_.epsilon,
+//		 settings_.maximumNumberOfIterations, settings_.omega);
+//	}
+//	else
 	{
-		pressureSolver_ = std::make_unique<SOR>(discretization_, settings_.epsilon,
-		 settings_.maximumNumberOfIterations, settings_.omega);
-	}
-	else
-	{
-		pressureSolver_ = std::make_unique<GaussSeidel>(discretization_, settings_.epsilon,
+		temperatureSolver_ = std::make_unique<GaussSeidel>(discretization_, settings_.epsilon,
 		 settings_.maximumNumberOfIterations);
 	}
 
@@ -92,26 +93,19 @@ void Computation::runSimulation ()
 		std::cout << "time1 " << time << '\n';
 		std::cout << "dt" << dt_ << '\n';
 
-		// compute f and g
-		computePreliminaryVelocities();
-
 		// outputWriterText_->writeFile(time);
 
 
 		outputWriterParaview_->writeFile(time);
 		outputWriterText_->writeFile(time);
 
-		// compute T
+		//compute rhs
+		computeRightHandSide();
+
+		// compute T with GaussSeidel
 		computeTemperature(); // Reihenfolge?
 		set_writeData(writeData);
 		discretization_->adapter.writeData(writeData);
-
-		//compute rhs
-		computeRightHandSide();
-		//compute p with SOR or GaussSeidel
-		computePressure();
-		//compute u and v
-		computeVelocities();
 
 		discretization_->adapter.advance();
 
@@ -151,45 +145,16 @@ void Computation::computeTimeStepWidth ()
 	double dy = meshWidth_[1];
 	double Re = settings_.re;
 	double prandtl = settings_.prandtl;
-	double u_max = 0;
-	double v_max = 0;
-
-	// compute u_max
-	for(int j = 0; j < discretization_->u().size()[1]; j++)
-		{
-			for (int i = 0; i < discretization_->u().size()[0]; i++)
-			{
-				if (fabs(discretization_->u(i,j))>u_max) u_max = fabs(discretization_->u(i,j));
-			};
-		};
-	// compute v_max
-	for(int j = 0; j < discretization_->v().size()[1]; j++)
-		{
-			for (int i = 0; i < discretization_->v().size()[0]; i++)
-			{
-				if (fabs(discretization_->v(i,j))>v_max) v_max = fabs(discretization_->v(i,j));
-			};
-		};
 
 	double max_dt= settings_.maximumDt;
 	// compute mesh dependent time step criterion
 	double lim = dx*dx*dy*dy/(dx*dx+dy*dy)*Re/2;
-	// check whether pressure diffusion criterion is restricting
-	if (lim<max_dt) max_dt= lim;
+
 
 	lim *= prandtl;
 	// check whether temperature diffusion criterion is restricting
 	if (lim<max_dt) max_dt= lim;
 
-	// check whether momentum criterions are restricting
-	if (u_max>0)
-	{
-		if(dx/u_max<max_dt) max_dt= dx/u_max;
-	}
-	if (v_max>0)
-	{
-		if(dy/v_max<max_dt) max_dt= dy/v_max;
-	}
 	// multiply with security factor
 	dt_ = max_dt*settings_.tau;
 
@@ -200,12 +165,6 @@ void Computation::applyBoundaryValues (double * readData)
 {
 	// setting T boundaries without corners
 	discretization_->setBoundaryValues_T(readData, settings_.vertexSize, settings_.vertex_i, settings_.vertex_j);
-
-	// u,f setting
-	discretization_->setBoundaryValues_u_f();
-
-	// v,g setting
-	discretization_->setBoundaryValues_v_g();
 };
 
 // void Computation::applyObstacleValues()
@@ -238,32 +197,6 @@ void Computation::applyBoundaryValues (double * readData)
 
 void Computation::applyObstacleValues2()
 {
-	// u and f
-	for(int j = discretization_->uJBegin(); j < discretization_->uJEnd(); j++)
-	{
-		int jgeom = j-discretization_->uJBegin()+1;
-		for(int i = discretization_->uIBegin(); i < discretization_->uIEnd(); i++)
-		{
-			int igeom = i-discretization_->uIBegin()+1; // todo: double check!!
-			if (discretization_->geometryPVString(igeom, jgeom) == 5)
-			{
-				discretization_->setObstacleValues_u_f2(i,j);
-			}
-		}
-	}
-	// v and g
-	for(int j = discretization_->vJBegin(); j < discretization_->vJEnd(); j++)
-	{
-		int jgeom = j-discretization_->vJBegin()+1;
-		for(int i = discretization_-> vIBegin(); i < discretization_->vIEnd(); i++)
-		{
-			int igeom = i-discretization_->vIBegin()+1; // todo: double check!!
-			if (discretization_->geometryPVString(igeom, jgeom) == 5)
-			{
-				discretization_->setObstacleValues_v_g2(i,j);
-			}
-		}
-	}
 	// T
 	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 	{
@@ -279,52 +212,6 @@ void Computation::applyObstacleValues2()
 	}
 }
 
-// only for not boundary values
-void Computation::computePreliminaryVelocities ()
-{
-	double dt = dt_;
-	double Re = settings_.re;
-	for(int j = discretization_->uJBegin(); j < discretization_->uJEnd(); j++)
-	{
-		for (int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
-		{
-			// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-			int igeom = i-discretization_-> uIBegin()+1; // todo: double check!!
-			int jgeom = j-discretization_-> uJBegin()+1;
-			if(discretization_->geometryPVString(igeom,jgeom) == -1 && discretization_->geometryPVString(igeom+1,jgeom) == -1)
-			{
-				discretization_->f(i,j) = discretization_->u(i,j)
-					+ dt*(1/Re*(discretization_->computeD2uDx2(i,j) + discretization_->computeD2uDy2(i,j))
-						- discretization_->computeDu2Dx(i,j) - discretization_->computeDuvDy(i,j)
-						+ (1 - settings_.beta * (discretization_->T(i,j) + discretization_->T(i+1,j)) / 2) * settings_.g[0]);
-						// if (i==3 && j == 3) std::cout << "f" << discretization_->f(i,j)
-						// 					<< "Du2Dx2" << discretization_->computeDu2Dx(i,j)
-						//           << "Du2Dy2" << discretization_->computeD2uDy2(i,j)
-						// 					<< "Du2Dx"  << discretization_->computeDu2Dx(i,j)
-						// 					<< "DuvDy"  << discretization_->computeDuvDy(i,j) << '\n';
-
-			}
-		};
-	};
-	for(int j = discretization_->vJBegin(); j < discretization_->vJEnd()-1; j++)
-	{
-		for (int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
-		{
-			// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-			int igeom = i-discretization_-> vIBegin()+1; // todo: double check!!
-			int jgeom = j-discretization_-> vJBegin()+1;
-			if(discretization_->geometryPVString(igeom, jgeom) == -1 && discretization_->geometryPVString(igeom, jgeom+1) == -1)
-			{
-				discretization_->g(i,j) = discretization_->v(i,j)
-					+ dt*(1/Re*(discretization_->computeD2vDx2(i,j) + discretization_->computeD2vDy2(i,j))
-						- discretization_->computeDv2Dy(i,j) - discretization_->computeDuvDx(i,j)
-						+ (1 - settings_.beta*(discretization_->T(i,j) + discretization_->T(i,j+1)) / 2) * settings_.g[1]);
-				// std::cout << "g" << discretization_->g(i,j) << "Ts" << discretization_->T(i,j) << " " << discretization_->T(i,j+1) << "g"<< settings_.g[1] << '\n';
-			}
-		};
-	};
-};
-
 void Computation::computeRightHandSide ()
 {
 	double dt = dt_;
@@ -337,83 +224,14 @@ void Computation::computeRightHandSide ()
 			int jgeom = j-discretization_-> pJBegin()+1;
 			if(discretization_->geometryPVString(igeom, jgeom) == -1)
 			{
-				discretization_->rhs(i,j) = 1/dt*((discretization_->f(i,j)-discretization_->f(i-1,j))/meshWidth_[0]
-												+(discretization_->g(i,j)-discretization_->g(i,j-1))/meshWidth_[1]);
+				discretization_->rhs(i,j) = discretization_->T(i,j);
 			}
 		};
 	};
 };
 
-void Computation::computePressure ()
+void Computation::computeTemperature ()
 {
-	pressureSolver_->solve();
+	temperatureSolver_->solve(dt_, settings_.heatDiffusivity);
 };
 
-// only for non boundary nodes;
-// for boundary nodes the boundary condition would not change anything
-//    due to the Neumann boundary condition in p
-void Computation::computeVelocities ()
-{
-	double dt = dt_;
-	for(int j = discretization_->uJBegin(); j < discretization_->uJEnd(); j++)
-	{
-		for (int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
-		{
-			// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-			int igeom = i-discretization_-> uIBegin()+1; // todo: double check!!
-			int jgeom = j-discretization_-> uJBegin()+1;
-			if(discretization_->geometryPVString(igeom,jgeom) == -1 && discretization_->geometryPVString(igeom+1,jgeom) == -1)
-			{
-				discretization_->u(i,j) = discretization_->f(i,j) - dt*discretization_->computeDpDx(i,j);
-				if (i==3 && j==3)
-				{
-					// std::cout << " u" << discretization_->u(i,j) << " f" << discretization_->f(i,j) << " DpDx" << discretization_->computeDpDx(i,j) << '\n';
-				}
-			}
-		};
-	};
-	for(int j = discretization_->vJBegin(); j < discretization_->vJEnd()-1; j++)
-	{
-		for (int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
-		{
-			// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-			int igeom = i-discretization_-> vIBegin()+1; // todo: double check!!
-			int jgeom = j-discretization_-> vJBegin()+1;
-			if(discretization_->geometryPVString(igeom, jgeom) == -1 && discretization_->geometryPVString(igeom, jgeom+1) == -1)
-			{
-				discretization_->v(i,j) = discretization_->g(i,j) - dt*discretization_->computeDpDy(i,j);
-			}
-		};
-	};
-};
-
-void Computation::computeTemperature()
-{
-	double dt = dt_;
-	FieldVariable T_copy( {settings_.nCells[0]+2, settings_.nCells[1]+2},  {-0.5*meshWidth_[0], -0.5*meshWidth_[1]}, meshWidth_);
-	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
-	{
-		for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
-		{
-			// discretization_->T(i,j) = discretization_->T(i,j)
-			T_copy(i,j) = discretization_->T(i,j)
-				+ dt*(1/(settings_.re * settings_.prandtl) * ( discretization_->computeD2TDx2(i,j) + discretization_->computeD2TDy2(i,j) )
-				- discretization_->computeDuTDx(i,j) - discretization_->computeDvTDy(i,j));
-		};
-	};
-
-	for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
-	{
-		for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
-		{
-			// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-			int igeom = i-discretization_-> pIBegin()+1; // todo: double check!!
-			int jgeom = j-discretization_-> pJBegin()+1;
-			if(discretization_->geometryPVString(igeom, jgeom) == -1)
-			{
-				discretization_->T(i,j) = T_copy(i,j);
-			}
-		};
-	};
-
-};
