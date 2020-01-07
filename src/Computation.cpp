@@ -63,7 +63,13 @@ void Computation::runSimulation ()
 	double *writeData = new double[vertexSize];
 
 	while(time < settings_.endTime)
+	// while (discretization_->adapter.isCouplingOngoing()) // implicit
 	{
+		// if (discretization_->adapter.isActionRequired(discretization_->adapter.cowic))
+		// {
+		// 	saveOldState();
+		// 	discretization_->adapter.fulfilledAction(cowic);
+		// }
 		discretization_->adapter.readData(readData);
 		applyObstacleValues2();
 		applyBoundaryValues(readData);
@@ -115,14 +121,22 @@ void Computation::runSimulation ()
 
 		discretization_->adapter.advance();
 
-		time += dt_;
-
-		if (time - lastOutputTime > settings_.outputFileEveryDt - 1e-4)
+		// if (discretization_->adapter.isActionRequired(coric))
+		// {
+		// 	reloadOldState();
+		// 	discretization_->adapter.fulfilledAction(coric);
+		// }
+		// else
 		{
-			outputWriterParaview_->writeFile(time);
-			// outputWriterText_->writeFile(time); // todo: disable before submission!
-			// outputWriterText_->writePressureFile();
-			lastOutputTime = time;
+			time += dt_;
+
+			if (time - lastOutputTime > settings_.outputFileEveryDt - 1e-4)
+			{
+				outputWriterParaview_->writeFile(time);
+				// outputWriterText_->writeFile(time); // todo: disable before submission!
+				// outputWriterText_->writePressureFile();
+				lastOutputTime = time;
+			}
 		}
 	}
 	discretization_->adapter.finalize();
@@ -134,8 +148,18 @@ void Computation::runSimulation ()
 		// outputWriterText_->writeFile(time); // todo: disable before submission!
 		lastOutputTime = time;
 	}
-
 };
+
+void Computation::saveOldState()
+{
+	discretization_->saveOldStateT();
+}
+
+void Computation::reloadOldState()
+{
+	discretization_->reloadOldStateT();
+}
+
 
 void Computation::set_writeData(double* writeData)
 {

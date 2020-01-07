@@ -24,6 +24,8 @@ private:
 	void computeTemperature();
 	// void applyObstacleValues();
 	void applyObstacleValues2();
+	void saveOldState();
+	void reloadOldState();
 	void set_writeData(double* writeData);
 
 	Settings settings_;
