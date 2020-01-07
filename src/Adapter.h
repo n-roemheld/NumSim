@@ -34,18 +34,22 @@ class Adapter
         precice.configure(preciceConfigFile);
     }
 
-    void initialize(std::string participantMesh, double *coords)
+    void initialize(std::string participantMesh, double* coords)
     {
-        dim = precice.getDimensions();
-        std::cout << dim << std::endl;
-        // assert( dim == 2 );
+	    std::cout << "initialize: start" << std::endl;
         meshID = precice.getMeshID(participantMesh);
+	    std::cout << meshID << std::endl;
+        writeDataID = precice.getDataID(writeDataName, meshID); 
+	    std::cout << writeDataID << std::endl;
+        readDataID = precice.getDataID(readDataName, meshID); 
+	    std::cout << readDataID << std::endl;
+        std::cout << precice.getDimensions() << std::endl;
+        dim = precice.getDimensions();
+        // assert( dim == 2 );
         // coords = new double[vertexSize*2]; // input from settings
         vertexIDs = new int[vertexSize];
         precice.setMeshVertices(meshID,vertexSize,coords,vertexIDs);
         delete[] coords;
-        writeDataID = precice.getDataID(writeDataName, meshID); 
-        readDataID = precice.getDataID(readDataName, meshID); 
         // writeData = new double[vertexSize];
         // readData = new double[vertexSize];
         precice_dt = precice.initialize();
