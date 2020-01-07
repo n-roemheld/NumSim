@@ -315,6 +315,7 @@ void Settings::loadGeometryFile() {
 			nCelly = nCells[1] + 2;
 			std::array<int,2> nCellsGeometry = {nCellx, nCelly};
 			geometryPVString_ = std::make_shared<Array2D>(nCellsGeometry); //nur Parameter, Rest egal
+			geometryPVOrientation_ = std::make_shared<Array2D>(nCellsGeometry);
 			geometryPV1_ = std::make_shared<Array2D>(nCellsGeometry);
 			geometryPV2_ = std::make_shared<Array2D>(nCellsGeometry);
 			geometryTString_ = std::make_shared<Array2D>(nCellsGeometry);
@@ -346,19 +347,41 @@ void Settings::loadGeometryFile() {
 					{
 						// determining the orientation of the boundary: (1,2,3,4 = left, right, lower, upper; 5,6,7,8 = lower-left, upper-left, lower-right, upper-right) 
 						// domain boundary cells
-						if (i == 0 && geometryPVString_->operator()(i+1,j) == -1)
+						if (i == 0) // && (j == 0 || geometryPVString_->operator()(i+1,j) == -1))
 						{
-							geometryPVOrientation_->operator()(i,j) = 2;
+							if (j == 0)
+							{
+								geometryPVOrientation_->operator()(i,j) = 8;
+							}
+							else if (j == nCelly-1)
+							{
+								geometryPVOrientation_->operator()(i,j) = 7;
+							}
+							else
+							{
+								geometryPVOrientation_->operator()(i,j) = 2;
+							}
 						} 
-						else if (i == nCellx-1 && geometryPVString_->operator()(i-1,j) == -1)
+						else if (i == nCellx-1) // && geometryPVString_->operator()(i-1,j) == -1)
 						{
-							geometryPVOrientation_->operator()(i,j) = 1;
+							if (j == 0)
+							{
+								geometryPVOrientation_->operator()(i,j) = 6;
+							}
+							else if (j == nCelly-1)
+							{
+								geometryPVOrientation_->operator()(i,j) = 5;
+							}
+							else
+							{
+								geometryPVOrientation_->operator()(i,j) = 1;
+							}
 						}
-						else if (j == 0 && geometryPVString_->operator()(i,j+1) == -1)
+						else if (j == 0) // && geometryPVString_->operator()(i,j+1) == -1)
 						{
 							geometryPVOrientation_->operator()(i,j) = 4;
 						}
-						else if (j == nCelly-1 && geometryPVString_->operator()(i,j-1) == -1)
+						else if (j == nCelly-1) // && geometryPVString_->operator()(i,j-1) == -1)
 						{
 							geometryPVOrientation_->operator()(i,j) = 3;
 						}
@@ -403,7 +426,6 @@ void Settings::loadGeometryFile() {
 								}
 							}
 						}
-
 
 						std::string cellPressure = cellAll.substr(0,cellAll.find_first_of(";"));
 						cellAll.erase(0, cellAll.find_first_of(";")+1);
@@ -513,72 +535,41 @@ void Settings::loadGeometryFile() {
 	double dy = physicalSize[1]/nCells[1];
 
 	vertexSize = std::max(TPD_count, TPN_count);
-	int vertex_index = 0;
 	vertex_i = std::vector<int> (vertexSize,0);
 	vertex_j = std::vector<int> (vertexSize,0);
 	std::vector<double> vertex_x(vertexSize,0);
 	std::vector<double> vertex_y(vertexSize,0);
     coords = new double[vertexSize*2]; 
 	std::vector<int> ortientation(vertexSize,0); // 0,1,2,3 = left,right,lower,upper
+	int vertex_index = 0;
 	for (int i = 0; i < nCells[0]+2; i++)
 	{
 		for (int j = 0; j < nCells[1]+2; j++)
 		{
-			if (geometryTString_->operator()(i-1,j) == -1)
-			{
-				ortientation[i,j] = 0; // left is no temperature boundary
-			} 
-			else if (geometryTString_->operator()(i+1,j) == -1)
-			{
-				ortientation[i,j] = 1; // right is no temperature boundary
-			} 
-			else if (geometryTString_->operator()(i,j-1) == -1)
-			{
-				ortientation[i,j] = 2; // lower is no temperature boundary
-			} 
-			else if (geometryTString_->operator()(i,j+1) == -1)
-			{
-				ortientation[i,j] = 3; // upper is no temperature boundary
-			} 
-			else
-			{
-				std::cout << "Couldn't determine temperature interface orientation!" << std::endl;
-			}
-			
-			// ecken?
 			if (geometryTString_->operator()(i,j) == 2 || geometryTString_->operator()(i,j) == 3)
 			{
 				vertex_i.at(vertex_index) = i;
 				vertex_j.at(vertex_index) = j;
 				vertex_x.at(vertex_index) = xOrigin + i*dx; // + .5*dx depending on the orientation of the boundary
 				vertex_y.at(vertex_index) = yOrigin + j*dy; // + .5*dy depending on the orientation of the boundary
-				if (ortientation[i,j] == 0)
-				{
-					vertex_x.at(vertex_index) -= .5*dx;
-				}
-				else if (ortientation[i,j] == 1)
-				{
-					vertex_x.at(vertex_index) += .5*dx;
-				}
-				else if (ortientation[i,j] == 2)
-				{
-					vertex_y.at(vertex_index) -= .5*dy;
-				}
-				else if (ortientation[i,j] == 3)
-				{
-					vertex_y.at(vertex_index) += .5*dy;
-				}
-				else
-				{
-					std::cout << "This shouldn't happen (unknown orientation)." << std::endl;
-				}
-
-				coords[2*vertex_index] = vertex_x.at(vertex_index);
-				coords[2*vertex_index+1] =vertex_y.at(vertex_index);
-				
+				vertex_index++ ;
 			}
-			vertex_index += 1;
 		}
+	}
+	for (int v = 0; v < vertexSize; v++)
+	{
+		ortientation[v] = geometryPVOrientation_->operator()(vertex_i.at(v), vertex_j.at(v));
+		switch (ortientation[v])
+		{
+			case 0: vertex_x.at(v) -= .5*dx; break;
+			case 1: vertex_x.at(v) += .5*dx; break;
+			case 2: vertex_y.at(v) -= .5*dy; break;
+			case 3:	vertex_y.at(v) += .5*dy; break;
+			default: std::cout << "This shouldn't happen (unknown orientation): " << ortientation[v] << vertex_i.at(v) << vertex_j.at(v) <<std::endl; break;
+		}
+		coords[2*v] = vertex_x.at(v);
+		coords[2*v+1] =vertex_y.at(v);
+		
 	}
 }
 

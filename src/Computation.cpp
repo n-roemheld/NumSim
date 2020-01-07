@@ -7,7 +7,9 @@
 
 void Computation::initialize (int argc, char *argv[])
 {
+	std::cout << "initialize: start" << std::endl;
 	settings_.loadFromFile(argv[1]);
+	std::cout << "initialize: post load from file" << std::endl;
 	settings_.printSettings();
 
 	//computing meshWidth
@@ -18,7 +20,9 @@ void Computation::initialize (int argc, char *argv[])
 	// preCICE Adapter
 	int rank = 0;
 	int size = 1;
+	std::cout << "initialize: pre adapter" << std::endl;
 	Adapter adapter(settings_.participantName, settings_.preciceConfigFile, rank, size, settings_.vertexSize, settings_.readDataName, settings_.writeDataName);
+	std::cout << "initialize: post adapter" << std::endl;
 
 	//select DonorCell or CentralDifferences
 	if (settings_.useDonorCell == true)

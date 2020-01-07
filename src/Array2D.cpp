@@ -43,8 +43,10 @@ double &Array2D::operator()(int i, int j)
   // {
   //   std::cout << i << " " << j << "; size: " << size_[0] << " " << size_[1] <<  std::endl;
   // }
-  assert(0 <= i && i < size_[0]);
-  assert(0 <= j && j < size_[1]);
+  assert(0 <= i);
+  assert(i < size_[0]);
+  assert(0 <= j);
+  assert(j < size_[1]);
   assert(j*size_[0] + i < (int)data_.size());
 
   return data_[index];

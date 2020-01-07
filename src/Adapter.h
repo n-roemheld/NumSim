@@ -1,5 +1,7 @@
 #include <precice/SolverInterface.hpp>
 #include <assert.h>
+#include <iostream>
+
 // #include <vector>
 
 class Adapter
@@ -13,7 +15,8 @@ class Adapter
     // double* readData; // sync with staggered grid
     // double* writeData; // 
     std::string readDataName, writeDataName;
-    std::string participantName, preciceConfigFile; // not needed?
+    std::string participantName;
+    // std::string preciceConfigFile; // not needed?
     // ...
 
     // Shorthand definition ofr preCICE constants
@@ -25,17 +28,19 @@ class Adapter
 
     public:
     Adapter(std::string participantName, std::string preciceConfigFile, int rank, int size, int vertexSize, std::string readDataName, std::string writeDataName)
-    : participantName(participantName), preciceConfigFile(preciceConfigFile), rank(rank), size(size), vertexSize(vertexSize), readDataName(readDataName), writeDataName(writeDataName), precice(participantName, rank, size)
+    : participantName(participantName), rank(rank), size(size), vertexSize(vertexSize), readDataName(readDataName), writeDataName(writeDataName), precice(participantName, rank, size) // preciceConfigFile(preciceConfigFile)
     {
+	    std::cout << "Adapter Constructor" << std::endl;
         precice.configure(preciceConfigFile);
     }
 
     void initialize(std::string participantMesh, double *coords)
     {
         dim = precice.getDimensions();
-        assert( dim == 2 );
+        std::cout << dim << std::endl;
+        // assert( dim == 2 );
         meshID = precice.getMeshID(participantMesh);
-        // coords = new double[vertexSize*dim]; // get from settings
+        // coords = new double[vertexSize*2]; // input from settings
         vertexIDs = new int[vertexSize];
         precice.setMeshVertices(meshID,vertexSize,coords,vertexIDs);
         delete[] coords;
