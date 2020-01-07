@@ -13,7 +13,7 @@ public:
   //!constructor
   // StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth);
   // StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1);
-  StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1, Adapter& adapter);
+  StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPVOrientation, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1, Adapter& adapter);
 
   Adapter& adapter;
 
@@ -87,10 +87,14 @@ public:
   void saveOldStateT();
   void reloadOldStateT();
 
-	void setBoundaryValues_u_f(int location_boundary, int i, int j);
-	void setBoundaryValues_v_g(int location_boundary, int i, int j);
-	void setBoundaryValues_p(int location_boundary, int i, int j);
-	void setBoundaryValues_T(int location_boundary, int i, int j);
+	// void setBoundaryValues_u_f(int location_boundary, int i, int j);
+	// void setBoundaryValues_v_g(int location_boundary, int i, int j);
+	// void setBoundaryValues_p(int location_boundary, int i, int j);
+	// void setBoundaryValues_T(int location_boundary, int i, int j);
+	void setBoundaryValues_u_f();
+	void setBoundaryValues_v_g();
+	void setBoundaryValues_p();
+	void setBoundaryValues_T(double* readData, int vertexSize, 	std::vector<int> &vertex_i, 	std::vector<int> &vertex_j);
 
   // void setObstacleValues_u_f(int i, int j);
   // void setObstacleValues_v_g(int i, int j);
@@ -131,6 +135,7 @@ protected:
   FieldVariable   T_old_;
 
   std::shared_ptr<Array2D> geometryPVString_; //< describes typ of cell for pressure
+  std::shared_ptr<Array2D> geometryPVOrientation_; //< describes typ of cell for pressure
   std::shared_ptr<Array2D> geometryPV1_;
   std::shared_ptr<Array2D> geometryPV2_;
 
