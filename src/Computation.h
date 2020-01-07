@@ -24,12 +24,9 @@ private:
 	void computeTemperature();
 	// void applyObstacleValues();
 	void applyObstacleValues2();
-<<<<<<< HEAD
 	void saveOldState();
 	void reloadOldState();
-=======
 	void set_writeData(double* writeData);
->>>>>>> 1333946885ea520f1b612c61bbc836680821a385
 
 	Settings settings_;
 	std::shared_ptr< Discretization > discretization_;

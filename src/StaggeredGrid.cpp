@@ -32,6 +32,7 @@ StaggeredGrid::StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 
 	g_( {nCells[0]+2, nCells[1]+1},  {-0.5*meshWidth[0], 0*meshWidth[1]}, meshWidth ),
 	rhs_( {nCells[0]+2, nCells[1]+2},{-0.5*meshWidth[0], -0.5*meshWidth[1]}, meshWidth),
 	T_( {nCells[0]+2, nCells[1]+2},  {-0.5*meshWidth[0], -0.5*meshWidth[1]}, meshWidth),
+	T_old_( {nCells[0]+2, nCells[1]+2},  {-0.5*meshWidth[0], -0.5*meshWidth[1]}, meshWidth),
 	geometryPVString_(geometryPVString), geometryPVOrientation_(geometryPVOrientation), geometryPV1_(geometryPV1), geometryPV2_(geometryPV2), geometryTString_(geometryTString), geometryT1_(geometryT1),
 	adapter(adapter)
 {};
@@ -211,7 +212,6 @@ int StaggeredGrid::pJEnd() const
 	return nCells_[1] + 1;
 };
 
-<<<<<<< HEAD
 void StaggeredGrid::saveOldStateT()
 {
 	for (int i = 0; i < T_.size().at(0); i++)
@@ -234,10 +234,7 @@ void StaggeredGrid::reloadOldStateT()
 	}
 }
 
-void StaggeredGrid::setBoundaryValues_u_f(int location_boundary, int i, int j)
-=======
 void StaggeredGrid::setBoundaryValues_u_f()
->>>>>>> 1333946885ea520f1b612c61bbc836680821a385
 {
 	for (int i = uIBegin(); i < uIEnd(); i++) // double check!
 	{
