@@ -126,6 +126,16 @@ double StaggeredGrid::T(int i, int j) const
   return StaggeredGrid::T_(i,j);
 };
 
+double& StaggeredGrid::T_old(int i, int j)
+{
+  return StaggeredGrid::T_old_(i,j);
+};
+
+double StaggeredGrid::T_old(int i, int j) const
+{
+  return StaggeredGrid::T_old_(i,j);
+};
+
 double StaggeredGrid::geometryPVString(int i, int j) const
 {
 	return StaggeredGrid::geometryPVString_->operator()(i, j);
@@ -201,6 +211,27 @@ int StaggeredGrid::pJEnd() const
 	return nCells_[1] + 1;
 };
 
+void StaggeredGrid::saveOldStateT()
+{
+	for (int i = 0; i < T_.size().at(0); i++)
+	{
+		for (int j = 0; j < T_.size().at(1); j++)
+		{
+			T_old(i,j) = T(i,j);
+		}
+	}
+}
+
+void StaggeredGrid::reloadOldStateT()
+{
+	for (int i = 0; i < T_.size().at(0); i++)
+	{
+		for (int j = 0; j < T_.size().at(1); j++)
+		{
+			T(i,j) = T_old(i,j);
+		}
+	}
+}
 
 void StaggeredGrid::setBoundaryValues_u_f(int location_boundary, int i, int j)
 {
