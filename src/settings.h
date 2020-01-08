@@ -57,7 +57,7 @@ struct Settings
   double TInit_; //< initial value for temperature T
 
   std::shared_ptr<Array2D> geometryPVString_; //< describes typ of cell for pressure
-  std::shared_ptr<Array2D> geometryPVOrientation_; //< describes direction of fluid cells; 1,2,3,4 = left,right,lower,upper; 5,6,7,8 = lower-left, upper-left, lower-right, upper-right
+  std::shared_ptr<Array2D> geometryPVOrientation_; //< describes direction of fluid cells; 1,2,3,4 = left,right,lower,upper;5,6,7,8 = lower-left, upper-left, lower-right, upper-right
   std::shared_ptr<Array2D> geometryPV1_;
   std::shared_ptr<Array2D> geometryPV2_;
 

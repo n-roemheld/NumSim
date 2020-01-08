@@ -16,7 +16,7 @@ public:
 	void runSimulation ();
 private:
 	void computeTimeStepWidth ();
-	void applyBoundaryValues (std::vector<double> & readData);
+	void applyBoundaryValues (std::vector<double> readData);
 	void computePreliminaryVelocities ();
 	void computeRightHandSide ();
 	void computePressure ();
@@ -26,8 +26,9 @@ private:
 	void applyObstacleValues2();
 	void saveOldState();
 	void reloadOldState();
-	void set_writeData(std::vector<double> & writeData);
+	void set_writeData(std::vector<double> writeData);
 
+  std::unique_ptr<Adapter> adapter_;
 	Settings settings_;
 	std::shared_ptr< Discretization > discretization_;
 	std::unique_ptr< PressureSolver > pressureSolver_;

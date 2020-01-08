@@ -477,11 +477,15 @@ void Settings::loadGeometryFile() {
 							{
 								geometryTString_->operator()(i,j) = 2;
 								TPD_count += 1;
+								std::cout << "TPD count " << TPD_count << std::endl;
+
 							}
 							else if (cellTemperatureType == "TPN")
 							{
 								geometryTString_->operator()(i,j) = 3;
 								TPN_count += 1;
+								std::cout << "TPN count " << TPN_count << std::endl;
+
 							}
 							else
 							{
@@ -535,6 +539,8 @@ void Settings::loadGeometryFile() {
 	double dy = physicalSize[1]/nCells[1];
 
 	vertexSize = std::max(TPD_count, TPN_count);
+	std::cout << "vertexSize" << vertexSize << std::endl;
+
 	vertex_i = std::vector<int> (vertexSize,0);
 	vertex_j = std::vector<int> (vertexSize,0);
 	std::vector<double> vertex_x(vertexSize,0);

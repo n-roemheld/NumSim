@@ -9,7 +9,7 @@ class Adapter
     private:
     precice::SolverInterface precice;
     int dim, meshID, vertexSize, readDataID, writeDataID, rank, size;
-    int* vertexIDs;
+    std::vector<int> vertexIDs;
     double dt, precice_dt;
     // double* coords;
     std::vector<double> coords;
@@ -30,10 +30,12 @@ class Adapter
     public:
     Adapter(std::string participantName, std::string preciceConfigFile, int rank, int size, int vertexSize, std::string readDataName, std::string writeDataName);
 
-    void initialize(std::string participantMesh, std::vector<double> & coords);
+    void initialize(std::string participantMesh, std::vector<double> coords);
     double get_dt(double dt_in);
-    void readData(std::vector<double> & readData);
-    void writeData(std::vector<double> & writeData);
+    void readData(std::vector<double> readData);
+    // void readData();
+
+    void writeData(std::vector<double> writeData);
     void advance();
     void finalize();
     int getVertexSize();
