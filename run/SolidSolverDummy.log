@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 (0) 17:31:31 [impl::SolverInterfaceImpl]:107 in configure: [0mThis is preCICE version 1.6.1
 (0) 17:31:31 [impl::SolverInterfaceImpl]:107 in configure: [0mThis is preCICE version 1.6.1
 (0) 17:31:31 [impl::SolverInterfaceImpl]:108 in configure: [0mRevision info: v1.6.1
@@ -6,6 +7,16 @@
 (0) 17:31:31 [impl::SolverInterfaceImpl]:109 in configure: [0mConfiguring preCICE with configuration: "precice-config.xml"
 (0) 17:31:31 [impl::SolverInterfaceImpl]:152 in configure: [0mRun in coupling mode
 (0) 17:31:31 [impl::SolverInterfaceImpl]:152 in configure: [0mRun in coupling mode
+=======
+(0) 17:23:50 [impl::SolverInterfaceImpl]:107 in configure: [0mThis is preCICE version 1.6.1
+(0) 17:23:50 [impl::SolverInterfaceImpl]:107 in configure: [0mThis is preCICE version 1.6.1
+(0) 17:23:50 [impl::SolverInterfaceImpl]:108 in configure: [0mRevision info: v1.6.1
+(0) 17:23:50 [impl::SolverInterfaceImpl]:108 in configure: [0mRevision info: v1.6.1
+(0) 17:23:50 [impl::SolverInterfaceImpl]:109 in configure: [0mConfiguring preCICE with configuration: "precice-config.xml"
+(0) 17:23:50 [impl::SolverInterfaceImpl]:109 in configure: [0mConfiguring preCICE with configuration: "precice-config.xml"
+(0) 17:23:50 [impl::SolverInterfaceImpl]:152 in configure: [0mRun in coupling mode
+(0) 17:23:50 [impl::SolverInterfaceImpl]:152 in configure: [0mRun in coupling mode
+>>>>>>> af74d50846500bb431409955da823a910931ae59
 Compute coupling point 0 at (x,y) = (0.025, 1)
 Compute coupling point 1 at (x,y) = (0.075, 1)
 Compute coupling point 2 at (x,y) = (0.125, 1)
@@ -28,6 +39,7 @@ Compute coupling point 18 at (x,y) = (0.925, 1)
 Compute coupling point 19 at (x,y) = (0.975, 1)
 Data Id temperature: 2
 Data Id heat flux: 3
+<<<<<<< HEAD
 (0) 17:31:31 [impl::SolverInterfaceImpl]:220 in initialize: [0mSetting up master communication to coupling partner/s
 (0) 17:31:31 [impl::SolverInterfaceImpl]:220 in initialize: [0mSetting up master communication to coupling partner/s
 (0) 17:31:31 [impl::SolverInterfaceImpl]:228 in initialize: [0mMasters are connected
@@ -42,6 +54,22 @@ Data Id heat flux: 3
 (0) 17:31:31 [impl::SolverInterfaceImpl]:240 in initialize: [0mSlaves are connected
 (0) 17:31:31 [impl::SolverInterfaceImpl]:266 in initialize: [0mit 1 of 1 | dt# 1 | t 0 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete no | write-initial-data | 
 (0) 17:31:31 [impl::SolverInterfaceImpl]:266 in initialize: [0mit 1 of 1 | dt# 1 | t 0 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete no | write-initial-data | 
+=======
+(0) 17:23:50 [impl::SolverInterfaceImpl]:220 in initialize: [0mSetting up master communication to coupling partner/s
+(0) 17:23:50 [impl::SolverInterfaceImpl]:220 in initialize: [0mSetting up master communication to coupling partner/s
+(0) 17:23:50 [impl::SolverInterfaceImpl]:228 in initialize: [0mMasters are connected
+(0) 17:23:50 [impl::SolverInterfaceImpl]:228 in initialize: [0mMasters are connected
+(0) 17:23:50 [partition::ReceivedPartition]:35 in communicate: [0mReceive global mesh NumSimMesh
+(0) 17:23:50 [partition::ReceivedPartition]:35 in communicate: [0mReceive global mesh NumSimMesh
+(0) 17:23:50 [partition::ProvidedPartition]:79 in compute: [0mCompute partition for mesh SolidSolverDummyMesh
+(0) 17:23:50 [partition::ProvidedPartition]:79 in compute: [0mCompute partition for mesh SolidSolverDummyMesh
+(0) 17:23:50 [impl::SolverInterfaceImpl]:232 in initialize: [0mSetting up slaves communication to coupling partner/s
+(0) 17:23:50 [impl::SolverInterfaceImpl]:232 in initialize: [0mSetting up slaves communication to coupling partner/s
+(0) 17:23:50 [impl::SolverInterfaceImpl]:240 in initialize: [0mSlaves are connected
+(0) 17:23:50 [impl::SolverInterfaceImpl]:240 in initialize: [0mSlaves are connected
+(0) 17:23:50 [impl::SolverInterfaceImpl]:266 in initialize: [0mit 1 of 1 | dt# 1 | t 0 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete no | write-initial-data | 
+(0) 17:23:50 [impl::SolverInterfaceImpl]:266 in initialize: [0mit 1 of 1 | dt# 1 | t 0 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete no | write-initial-data | 
+>>>>>>> af74d50846500bb431409955da823a910931ae59
 Heatflux written q[0] = 0.178285
 Heatflux written q[1] = 0.178285
 Heatflux written q[2] = 0.178285
@@ -62,7 +90,14 @@ Heatflux written q[16] = 0.178285
 Heatflux written q[17] = 0.178285
 Heatflux written q[18] = 0.178285
 Heatflux written q[19] = 0.178285
+<<<<<<< HEAD
 (0) 17:31:31 [impl::SolverInterfaceImpl]:1418 in mapWrittenData: [0mCompute write mapping from mesh "SolidSolverDummyMesh" to mesh "NumSimMesh".
 (0) 17:31:31 [impl::SolverInterfaceImpl]:1418 in mapWrittenData: [0mCompute write mapping from mesh "SolidSolverDummyMesh" to mesh "NumSimMesh".
 (0) 17:31:31 [com::SocketCommunication]:548 in receive: [31mERROR: [0mReceive failed: read: End of file
 (0) 17:31:31 [com::SocketCommunication]:548 in receive: [31mERROR: [0mReceive failed: read: End of file
+=======
+(0) 17:23:50 [impl::SolverInterfaceImpl]:1418 in mapWrittenData: [0mCompute write mapping from mesh "SolidSolverDummyMesh" to mesh "NumSimMesh".
+(0) 17:23:50 [impl::SolverInterfaceImpl]:1418 in mapWrittenData: [0mCompute write mapping from mesh "SolidSolverDummyMesh" to mesh "NumSimMesh".
+(0) 17:23:51 [com::SocketCommunication]:548 in receive: [31mERROR: [0mReceive failed: read: End of file
+(0) 17:23:51 [com::SocketCommunication]:548 in receive: [31mERROR: [0mReceive failed: read: End of file
+>>>>>>> af74d50846500bb431409955da823a910931ae59

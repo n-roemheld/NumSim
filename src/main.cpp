@@ -17,15 +17,12 @@ int main(int argc, char *argv[])
 
   Computation comp;
   comp.initialize(argc, argv);
-  time_t startTime;
-  time_t endTime;
-  std::cout << "StartTime: " << time(&startTime) << std::endl;
+  // time_t startTime;
+  // time_t endTime;
+  // std::cout << "StartTime: " << time(&startTime) << std::endl;
   comp.runSimulation();
-  std::cout << "EndTime: "<< time(&endTime) << std::endl;
-  std::cout << "Difference: " << -(startTime-endTime) << std::endl;
-
-
-
+  // std::cout << "EndTime: "<< time(&endTime) << std::endl;
+  // std::cout << "Difference: " << -(startTime-endTime) << std::endl;
 
   return EXIT_SUCCESS;
 }

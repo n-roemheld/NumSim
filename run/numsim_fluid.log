@@ -1,13 +1,15 @@
-initialize: start
-initialize: post load from file
 Settings: 
   physicalSize: 1 x 1, nCells: 20 x 20
   endTime: 10 s, re: 316, prandtl: 0.71, beta: 1.01937, g: (0,-9.81), tau: 0.5, maximum dt: 0.01
+<<<<<<< HEAD
   dirichletBC: bottom: (6.9193e-310,-nan), top: (7.90505e-323,9.88131e-324), left: (0,0), right: (1.97346e-312,2.52517e-312)
+=======
+  dirichletBC: bottom: (6.95332e-310,6.95332e-310), top: (6.95071e-310,9.88131e-324), left: (6.95332e-310,0), right: (6.91692e-323,6.95332e-310)
+>>>>>>> af74d50846500bb431409955da823a910931ae59
   useDonorCell: true, alpha: 0.5
   pressureSolver: SOR, omega: 1.6, epsilon: 1e-05, maximumNumberOfIterations: 10000
-initialize: pre adapter
 Adapter Constructor
+<<<<<<< HEAD
 (0) 17:31:31 [impl::SolverInterfaceImpl]:107 in configure: [0mThis is preCICE version 1.6.1
 (0) 17:31:31 [impl::SolverInterfaceImpl]:107 in configure: [0mThis is preCICE version 1.6.1
 (0) 17:31:31 [impl::SolverInterfaceImpl]:108 in configure: [0mRevision info: v1.6.1
@@ -16,6 +18,16 @@ Adapter Constructor
 (0) 17:31:31 [impl::SolverInterfaceImpl]:109 in configure: [0mConfiguring preCICE with configuration: "precice-config.xml"
 (0) 17:31:31 [impl::SolverInterfaceImpl]:152 in configure: [0mRun in coupling mode
 (0) 17:31:31 [impl::SolverInterfaceImpl]:152 in configure: [0mRun in coupling mode
+=======
+(0) 17:23:50 [impl::SolverInterfaceImpl]:107 in configure: [0mThis is preCICE version 1.6.1
+(0) 17:23:50 [impl::SolverInterfaceImpl]:107 in configure: [0mThis is preCICE version 1.6.1
+(0) 17:23:50 [impl::SolverInterfaceImpl]:108 in configure: [0mRevision info: v1.6.1
+(0) 17:23:50 [impl::SolverInterfaceImpl]:108 in configure: [0mRevision info: v1.6.1
+(0) 17:23:50 [impl::SolverInterfaceImpl]:109 in configure: [0mConfiguring preCICE with configuration: "precice-config.xml"
+(0) 17:23:50 [impl::SolverInterfaceImpl]:109 in configure: [0mConfiguring preCICE with configuration: "precice-config.xml"
+(0) 17:23:50 [impl::SolverInterfaceImpl]:152 in configure: [0mRun in coupling mode
+(0) 17:23:50 [impl::SolverInterfaceImpl]:152 in configure: [0mRun in coupling mode
+>>>>>>> af74d50846500bb431409955da823a910931ae59
 2
 initialize: post adapter
 initialize: start
@@ -24,6 +36,7 @@ initialize: start
 0
 1
 2
+<<<<<<< HEAD
 (0) 17:31:31 [impl::SolverInterfaceImpl]:220 in initialize: [0mSetting up master communication to coupling partner/s
 (0) 17:31:31 [impl::SolverInterfaceImpl]:220 in initialize: [0mSetting up master communication to coupling partner/s
 (0) 17:31:31 [impl::SolverInterfaceImpl]:228 in initialize: [0mMasters are connected
@@ -53,3 +66,42 @@ StartTime: 1578501091
 [henrik-Lenovo-Z50-70:28851] [ 5] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xeb)[0x7f5f83ab6b6b]
 [henrik-Lenovo-Z50-70:28851] [ 6] ./numsim_fluid(+0x463a)[0x556c4f09563a]
 [henrik-Lenovo-Z50-70:28851] *** End of error message ***
+=======
+(0) 17:23:50 [impl::SolverInterfaceImpl]:220 in initialize: [0mSetting up master communication to coupling partner/s
+(0) 17:23:50 [impl::SolverInterfaceImpl]:220 in initialize: [0mSetting up master communication to coupling partner/s
+(0) 17:23:50 [impl::SolverInterfaceImpl]:228 in initialize: [0mMasters are connected
+(0) 17:23:50 [impl::SolverInterfaceImpl]:228 in initialize: [0mMasters are connected
+(0) 17:23:50 [partition::ProvidedPartition]:36 in communicate: [0mGather mesh NumSimMesh
+(0) 17:23:50 [partition::ProvidedPartition]:36 in communicate: [0mGather mesh NumSimMesh
+(0) 17:23:50 [partition::ProvidedPartition]:62 in communicate: [0mSend global mesh NumSimMesh
+(0) 17:23:50 [partition::ProvidedPartition]:62 in communicate: [0mSend global mesh NumSimMesh
+(0) 17:23:50 [partition::ProvidedPartition]:79 in compute: [0mCompute partition for mesh NumSimMesh
+(0) 17:23:50 [partition::ProvidedPartition]:79 in compute: [0mCompute partition for mesh NumSimMesh
+(0) 17:23:50 [impl::SolverInterfaceImpl]:232 in initialize: [0mSetting up slaves communication to coupling partner/s
+(0) 17:23:50 [impl::SolverInterfaceImpl]:232 in initialize: [0mSetting up slaves communication to coupling partner/s
+(0) 17:23:50 [impl::SolverInterfaceImpl]:240 in initialize: [0mSlaves are connected
+(0) 17:23:50 [impl::SolverInterfaceImpl]:240 in initialize: [0mSlaves are connected
+(0) 17:23:50 [impl::SolverInterfaceImpl]:266 in initialize: [0mit 1 of 1 | dt# 1 | t 0 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete no | 
+(0) 17:23:50 [impl::SolverInterfaceImpl]:266 in initialize: [0mit 1 of 1 | dt# 1 | t 0 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete no | 
+20
+run: pre read, readData size:20, vertexSize: 0
+terminate called after throwing an instance of 'std::bad_array_new_length'
+  what():  std::bad_array_new_length
+[DESKTOP-RJK1NR5:03932] *** Process received signal ***
+[DESKTOP-RJK1NR5:03932] Signal: Aborted (6)
+[DESKTOP-RJK1NR5:03932] Signal code:  (-6)
+[DESKTOP-RJK1NR5:03932] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x3ef20)[0x7ff385e3ef20]
+[DESKTOP-RJK1NR5:03932] [ 1] /lib/x86_64-linux-gnu/libc.so.6(gsignal+0xc7)[0x7ff385e3ee97]
+[DESKTOP-RJK1NR5:03932] [ 2] /lib/x86_64-linux-gnu/libc.so.6(abort+0x141)[0x7ff385e40801]
+[DESKTOP-RJK1NR5:03932] [ 3] /usr/lib/x86_64-linux-gnu/libstdc++.so.6(+0x8c957)[0x7ff3864ac957]
+[DESKTOP-RJK1NR5:03932] [ 4] /usr/lib/x86_64-linux-gnu/libstdc++.so.6(+0x92ab6)[0x7ff3864b2ab6]
+[DESKTOP-RJK1NR5:03932] [ 5] /usr/lib/x86_64-linux-gnu/libstdc++.so.6(+0x92af1)[0x7ff3864b2af1]
+[DESKTOP-RJK1NR5:03932] [ 6] /usr/lib/x86_64-linux-gnu/libstdc++.so.6(+0x92d24)[0x7ff3864b2d24]
+[DESKTOP-RJK1NR5:03932] [ 7] /usr/lib/x86_64-linux-gnu/libstdc++.so.6(+0x91ad2)[0x7ff3864b1ad2]
+[DESKTOP-RJK1NR5:03932] [ 8] ./numsim_fluid(+0x8f75)[0x7ff388a08f75]
+[DESKTOP-RJK1NR5:03932] [ 9] ./numsim_fluid(+0x66c8)[0x7ff388a066c8]
+[DESKTOP-RJK1NR5:03932] [10] ./numsim_fluid(+0x4663)[0x7ff388a04663]
+[DESKTOP-RJK1NR5:03932] [11] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7)[0x7ff385e21b97]
+[DESKTOP-RJK1NR5:03932] [12] ./numsim_fluid(+0x441a)[0x7ff388a0441a]
+[DESKTOP-RJK1NR5:03932] *** End of error message ***
+>>>>>>> af74d50846500bb431409955da823a910931ae59
