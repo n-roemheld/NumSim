@@ -32,9 +32,7 @@ class Adapter
     Adapter(std::string participantName, std::string preciceConfigFile, int rank, int size, int vertexSize, std::string readDataName, std::string writeDataName)
     : participantName(participantName), rank(rank), size(size), vertexSize(vertexSize), readDataName(readDataName), writeDataName(writeDataName), precice(participantName, rank, size) // preciceConfigFile(preciceConfigFile)
     {
-	    std::cout << "Adapter Constructor" << std::endl;
         precice.configure(preciceConfigFile);
-        std::cout << precice.getDimensions() << std::endl;
     }
 
     void initialize(std::string participantMesh, std::vector<double> & coords)

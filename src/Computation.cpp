@@ -15,26 +15,24 @@ void Computation::initialize (int argc, char *argv[])
 	double dy = settings_.physicalSize[1]/settings_.nCells[1];
 	meshWidth_ = {dx, dy};
 
-	// preCICE Adapter
+	// Initialize preCICE
 	int rank = 0;
 	int size = 1;
-	Adapter adapter(settings_.participantName, settings_.preciceConfigFile, rank, size, settings_.vertexSize, settings_.readDataName, settings_.writeDataName);
-	std::cout << "initialize: post adapter" << std::endl;
+	// Adapter adapter(settings_.participantName, settings_.preciceConfigFile, rank, size, settings_.vertexSize, settings_.readDataName, settings_.writeDataName);
+	// discretization_->adapter.initialize(settings_.meshName, settings_.coords);
 
 	//select DonorCell or CentralDifferences
 	if (settings_.useDonorCell == true)
 	{
-		discretization_ = std::make_shared<DonorCell>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPVOrientation_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, settings_.alpha, settings_.gamma, adapter);
+		discretization_ = std::make_shared<DonorCell>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPVOrientation_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, settings_.alpha, settings_.gamma);
 	}
 	else
 	{
-		discretization_ = std::make_shared<CentralDifferences>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPVOrientation_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, adapter);
+		discretization_ = std::make_shared<CentralDifferences>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPVOrientation_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_);
 	}
 	discretization_->fillIn(settings_.uInit_, settings_.vInit_, settings_.pInit_, settings_.TInit_);
 	
-	// Initialize preCICE
-	discretization_->adapter.initialize(settings_.meshName, settings_.coords);
-
+	
 	//select SOR or GaussSeidel
 	if (settings_.pressureSolver == "SOR")
 	{
@@ -60,13 +58,23 @@ void Computation::runSimulation ()
 	double lastOutputTime = 0;
 
 	// Initialize preCICE
-	//discretization_->adapter.initialize(settings_.meshName, settings_.coords);
-
-	int vertexSize = discretization_->adapter.getVertexSize();
+	// creating interface
+	precice::SolverInterface precice(settings_.participantName, 0, 1);
+	// basic configuration
+	precice.configure(settings_.preciceConfigFile);
+	// initialization
+    int meshID = precice.getMeshID(settings_.meshName);
+    std::vector<int> vertexIDs (settings_.vertexSize,0);
+	// set Vertex IDs
+	precice.setMeshVertices(meshID,settings_.vertexSize,settings_.coords.data(),vertexIDs.data());
+	// initialize precice interface
+    double precice_dt = precice.initialize();
+	precice.initializeData();
+	int writeDataID = precice.getDataID(settings_.writeDataName, meshID);
+	int readDataID = precice.getDataID(settings_.readDataName, meshID);
+	std::cout << "vs settings: " << settings_.vertexSize << ", vs precice: " << precice.getMeshVertexSize(meshID) << std::endl;
 	std::vector<double> readData(settings_.vertexSize,0);
-	// double *readData = new double[vertexSize];
 	std::vector<double> writeData(settings_.vertexSize,0);
-	// double *writeData = new double[vertexSize];
 
 	while(time < settings_.endTime)
 	// while (discretization_->adapter.isCouplingOngoing()) // implicit
@@ -77,7 +85,7 @@ void Computation::runSimulation ()
 		// 	discretization_->adapter.fulfilledAction(cowic);
 		// }
 
-		discretization_->adapter.readData(readData);
+		precice.readBlockScalarData(readDataID, settings_.vertexSize, vertexIDs.data(), readData.data());
 		std::cout << "run: post read" << std::endl;
 		applyObstacleValues2();
 		applyBoundaryValues(readData);
@@ -91,7 +99,7 @@ void Computation::runSimulation ()
 		// std::cout << "time" << time << std::endl;
 		// compute dt_ and time
 		computeTimeStepWidth();
-		dt_ = discretization_->adapter.get_dt(dt_);
+		dt_ = std::min(dt_, precice_dt);
 		if(time+dt_>settings_.endTime) dt_ = settings_.endTime - time;
 		// std::cout << "time_step" << dt_ << std::endl;
 
@@ -118,7 +126,7 @@ void Computation::runSimulation ()
 		// compute T
 		computeTemperature(); // Reihenfolge?
 		set_writeData(writeData);
-		// discretization_->adapter.writeData(writeData);
+		precice.writeBlockScalarData(writeDataID, settings_.vertexSize, vertexIDs.data(), writeData.data());
 
 		//compute rhs
 		computeRightHandSide();
@@ -127,7 +135,7 @@ void Computation::runSimulation ()
 		//compute u and v
 		computeVelocities();
 
-		discretization_->adapter.advance();
+		precice_dt = precice.advance(dt_);
 
 		// if (discretization_->adapter.isActionRequired(coric))
 		// {
@@ -147,7 +155,7 @@ void Computation::runSimulation ()
 			}
 		}
 	}
-	discretization_->adapter.finalize();
+	precice.finalize();
 
 	// output data using VTK if we did not do this in the last time step
 	if ( std::fabs( time - lastOutputTime ) > 1e-4 )
