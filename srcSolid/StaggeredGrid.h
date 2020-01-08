@@ -52,6 +52,7 @@ public:
 
   double&   T(int i, int j);
 
+
   double geometryPVString(int i, int j) const;
 
 
@@ -83,6 +84,8 @@ public:
 
   int 	pJEnd() const;
 
+  void saveOldState();
+  void reloadOldState();
 
 	// void setBoundaryValues_u_f(int location_boundary, int i, int j);
 	// void setBoundaryValues_v_g(int location_boundary, int i, int j);
@@ -91,7 +94,7 @@ public:
 	void setBoundaryValues_u_f();
 	void setBoundaryValues_v_g();
 	void setBoundaryValues_p();
-	void setBoundaryValues_T(double* readData, int vertexSize, 	std::vector<int> &vertex_i, 	std::vector<int> &vertex_j);
+	void setBoundaryValues_T(std::vector<double> & readData, int vertexSize, 	std::vector<int> &vertex_i, 	std::vector<int> &vertex_j);
 
   // void setObstacleValues_u_f(int i, int j);
   // void setObstacleValues_v_g(int i, int j);
@@ -114,6 +117,12 @@ public:
 
 
 protected:
+
+  double   T_old(int i, int j) const;
+
+  double&   T_old(int i, int j);
+
+
 	const std::array< int, 2 > nCells_;
 	const std::array< double, 2 > meshWidth_;
 	FieldVariable 	u_;
@@ -123,6 +132,7 @@ protected:
 	FieldVariable 	f_;
 	FieldVariable 	g_;
   FieldVariable   T_;
+  FieldVariable   T_old_;
 
   std::shared_ptr<Array2D> geometryPVString_; //< describes typ of cell for pressure
   std::shared_ptr<Array2D> geometryPVOrientation_; //< describes typ of cell for pressure
