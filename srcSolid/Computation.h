@@ -16,12 +16,15 @@ public:
 	void runSimulation ();
 private:
 	void computeTimeStepWidth ();
-	void applyBoundaryValues (double * readData);
+	void applyBoundaryValues (std::vector<double> & readData);
 	void computeRightHandSide ();
 	void computeTemperature();
 	// void applyObstacleValues();
 	void applyObstacleValues2();
-	void set_writeData(double* writeData);
+	void set_writeData(std::vector<double> & writeData);
+
+	void saveOldState();
+	void reloadOldState();
 
 	Settings settings_;
 	std::shared_ptr< Discretization > discretization_;

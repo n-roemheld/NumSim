@@ -1,6 +1,8 @@
 #include <precice/SolverInterface.hpp>
 #include <assert.h>
-// #include <vector>
+#include <iostream>
+
+#include <vector>
 
 class Adapter
 {
@@ -9,14 +11,16 @@ class Adapter
     int dim, meshID, vertexSize, readDataID, writeDataID, rank, size;
     int* vertexIDs;
     double dt, precice_dt;
-    double* coords;
+    // double* coords;
+    std::vector<double> coords;
     // double* readData; // sync with staggered grid
-    // double* writeData; // 
+    // double* writeData; //
     std::string readDataName, writeDataName;
-    std::string participantName, preciceConfigFile; // not needed?
+    std::string participantName;
+    // std::string preciceConfigFile; // not needed?
     // ...
 
-    // Shorthand definition ofr preCICE constants
+    // Shorthand definition for preCICE constants
 	// Read cowid  (= co + w + i + d) as
 	// constant "write initial data"
 	const std::string& cowid = precice::constants::actionWriteInitialData();
@@ -25,22 +29,29 @@ class Adapter
 
     public:
     Adapter(std::string participantName, std::string preciceConfigFile, int rank, int size, int vertexSize, std::string readDataName, std::string writeDataName)
-    : participantName(participantName), preciceConfigFile(preciceConfigFile), rank(rank), size(size), vertexSize(vertexSize), readDataName(readDataName), writeDataName(writeDataName), precice(participantName, rank, size)
+    : participantName(participantName), rank(rank), size(size), vertexSize(vertexSize), readDataName(readDataName), writeDataName(writeDataName), precice(participantName, rank, size) // preciceConfigFile(preciceConfigFile)
     {
+	    std::cout << "Adapter Constructor" << std::endl;
         precice.configure(preciceConfigFile);
     }
 
-    void initialize(std::string participantMesh, double *coords)
+    void initialize(std::string participantMesh, std::vector<double> & coords)
     {
-        dim = precice.getDimensions();
-        assert( dim == 2 );
+	    std::cout << "initialize: start" << std::endl;
         meshID = precice.getMeshID(participantMesh);
-        // coords = new double[vertexSize*dim]; // get from settings
+	    std::cout << meshID << std::endl;
+        writeDataID = precice.getDataID(writeDataName, meshID);
+	    std::cout << writeDataID << std::endl;
+        readDataID = precice.getDataID(readDataName, meshID);
+	    std::cout << readDataID << std::endl;
+        std::cout << precice.getDimensions() << std::endl;
+        dim = precice.getDimensions();
+        // assert( dim == 2 );
+        // coords = new double[vertexSize*2]; // input from settings
+        // double* coords2 = &coords[];
         vertexIDs = new int[vertexSize];
-        precice.setMeshVertices(meshID,vertexSize,coords,vertexIDs);
-        delete[] coords;
-        writeDataID = precice.getDataID(writeDataName, meshID); 
-        readDataID = precice.getDataID(readDataName, meshID); 
+        precice.setMeshVertices(meshID,vertexSize,coords.data(),vertexIDs);
+        // delete[] coords; // wofür? by HENRIK
         // writeData = new double[vertexSize];
         // readData = new double[vertexSize];
         precice_dt = precice.initialize();
@@ -52,14 +63,14 @@ class Adapter
         return dt;
     }
 
-    void readData(double *readData)
+    void readData(std::vector<double> & readData)
     {
-        precice.readBlockVectorData(readDataID, vertexSize, vertexIDs, readData);
+        precice.readBlockVectorData(readDataID, vertexSize, vertexIDs, readData.data());
     }
 
-    void writeData(double *writeData)
+    void writeData(std::vector<double> & writeData)
     {
-        precice.writeBlockVectorData(writeDataID, vertexSize, vertexIDs, writeData);
+        precice.writeBlockVectorData(writeDataID, vertexSize, vertexIDs, writeData.data());
     }
 
     void advance()

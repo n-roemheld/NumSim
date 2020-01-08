@@ -5,6 +5,7 @@
 #include <iostream>
 #include <array>
 #include <memory>
+#include <vector>
 
 /** All settings that parametrize a simulation run.
  */
@@ -33,7 +34,8 @@ struct Settings
   int vertexSize = 0;
 	std::vector<int> vertex_i;
 	std::vector<int> vertex_j;
-  double * coords; 
+  // double * coords;
+  std::vector<double> coords;
 
   bool useDonorCell = false;         //< if the donor cell scheme schould be used
   double alpha = 0.5;                //< factor for donor-cell scheme for pressure
@@ -66,6 +68,7 @@ struct Settings
   std::shared_ptr<Array2D> geometryT1_;
 
   std::string geometryFile = "";
+  std::vector<int> orientation_; // 0,1,2,3 = left,right,lower,upper
 
 
 

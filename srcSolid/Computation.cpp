@@ -60,8 +60,10 @@ void Computation::runSimulation ()
 
 	discretization_->adapter.initialize(settings_.meshName, settings_.coords);
 	int vertexSize = discretization_->adapter.getVertexSize();
-	double *readData = new double[vertexSize];
-	double *writeData = new double[vertexSize];
+	// double *readData = new double[vertexSize];
+	std::vector<double> readData;
+	// double *writeData = new double[vertexSize];
+	std::vector<double> writeData; //warum ohne Größe? by HENRIK
 
 	while(time < settings_.endTime)
 	{
@@ -131,11 +133,21 @@ void Computation::runSimulation ()
 
 };
 
-void Computation::set_writeData(double* writeData)
+void Computation::saveOldState()
+{
+	discretization_->saveOldState();
+}
+
+void Computation::reloadOldState()
+{
+	discretization_->reloadOldState();
+}
+
+void Computation::set_writeData(std::vector<double> & writeData)
 {
 	for (int v = 0; v < settings_.vertexSize; v++)
 	{
-		writeData[v] = discretization_->T(settings_.vertex_i.at(v),settings_.vertex_j.at(v));
+		writeData.at(v) = discretization_->T(settings_.vertex_i.at(v),settings_.vertex_j.at(v));
 	}
 }
 
@@ -161,7 +173,7 @@ void Computation::computeTimeStepWidth ()
 	// dt_ = std::min(max_dt*settings_.tau, precice_dt);
 };
 
-void Computation::applyBoundaryValues (double * readData)
+void Computation::applyBoundaryValues (std::vector<double> & readData)
 {
 	// setting T boundaries without corners
 	discretization_->setBoundaryValues_T(readData, settings_.vertexSize, settings_.vertex_i, settings_.vertex_j);
@@ -234,4 +246,3 @@ void Computation::computeTemperature ()
 {
 	temperatureSolver_->solve(dt_, settings_.heatDiffusivity);
 };
-
