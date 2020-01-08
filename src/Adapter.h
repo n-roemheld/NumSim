@@ -13,6 +13,7 @@ class Adapter
     double dt, precice_dt;
     // double* coords;
     std::vector<double> coords;
+    std::vector<int> vertexIDs2;
     // double* readData; // sync with staggered grid
     // double* writeData; //
     std::string readDataName, writeDataName;
@@ -51,8 +52,13 @@ class Adapter
         // assert( dim == 2 );
         // coords = new double[vertexSize*2]; // input from settings
         // double* coords2 = &coords[];
-        vertexIDs = new int[vertexSize];
-        precice.setMeshVertices(meshID,vertexSize,coords.data(),vertexIDs);
+        // vertexIDs = new int[vertexSize];
+        int vertexIDs_[vertexSize] = {0};
+        vertexIDs = vertexIDs;
+        vertexIDs2 = std::vector<int>(vertexSize,0);
+        std::cout << "vertexSize: " << vertexSize << " sizeof(vertexIDs): " << sizeof(vertexIDs)/sizeof(int) << "Coords: " << coords.size() << ", vs2: " << vertexIDs2.size() << std::endl;
+        precice.setMeshVertices(meshID,vertexSize,coords.data(),vertexIDs2.data());
+        std::cout << "vertexSize: " << vertexSize << " sizeof(vertexIDs): " << sizeof(vertexIDs)/sizeof(int) << std::endl;
         // delete[] coords; // wofür? by HENRIK
         // writeData = new double[vertexSize];
         // readData = new double[vertexSize];
@@ -69,9 +75,8 @@ class Adapter
 
     void readData(std::vector<double> & readData)
     {
-		std::cout << "run: pre read, readData size:" << readData.size() << ", vertexSize: " << vertexSize << std::endl;
-        double *rd = new double[vertexSize];
-        precice.readBlockVectorData(readDataID, vertexSize, vertexIDs, rd); //readData.data());
+		std::cout << "run: pre read, readData size:" << readData.size() << ", vertexSize: " << vertexSize << ", readDataID: " << readDataID << ", vertexIDs: " << sizeof(vertexIDs)/sizeof(int) <<  std::endl;
+        precice.readBlockVectorData(readDataID, vertexSize, vertexIDs2.data(), readData.data());
     }
 
     void writeData(std::vector<double> & writeData)
