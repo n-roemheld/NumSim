@@ -100,5 +100,6 @@ out/
 *.vti
 *.txt
 \!todo!.txt
+\!CMakeLists!.txt
 
 src_old
