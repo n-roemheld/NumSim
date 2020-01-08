@@ -57,6 +57,8 @@ class Adapter
         // writeData = new double[vertexSize];
         // readData = new double[vertexSize];
         precice_dt = precice.initialize();
+
+        std::cout << precice.getMeshVertexSize(meshID) << std::endl;
     }
 
     double get_dt(double dt_in)
@@ -67,7 +69,9 @@ class Adapter
 
     void readData(std::vector<double> & readData)
     {
-        precice.readBlockVectorData(readDataID, vertexSize, vertexIDs, readData.data());
+		std::cout << "run: pre read, readData size:" << readData.size() << ", vertexSize: " << vertexSize << std::endl;
+        double* rd = new double[vertexSize];
+        precice.readBlockVectorData(readDataID, vertexSize, vertexIDs, rd); //readData.data());
     }
 
     void writeData(std::vector<double> & writeData)

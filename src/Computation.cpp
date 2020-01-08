@@ -7,9 +7,7 @@
 
 void Computation::initialize (int argc, char *argv[])
 {
-	std::cout << "initialize: start" << std::endl;
 	settings_.loadFromFile(argv[1]);
-	std::cout << "initialize: post load from file" << std::endl;
 	settings_.printSettings();
 
 	//computing meshWidth
@@ -20,7 +18,6 @@ void Computation::initialize (int argc, char *argv[])
 	// preCICE Adapter
 	int rank = 0;
 	int size = 1;
-	std::cout << "initialize: pre adapter" << std::endl;
 	Adapter adapter(settings_.participantName, settings_.preciceConfigFile, rank, size, settings_.vertexSize, settings_.readDataName, settings_.writeDataName);
 	std::cout << "initialize: post adapter" << std::endl;
 
@@ -66,9 +63,9 @@ void Computation::runSimulation ()
 	//discretization_->adapter.initialize(settings_.meshName, settings_.coords);
 
 	int vertexSize = discretization_->adapter.getVertexSize();
-	std::vector<double> readData;
+	std::vector<double> readData(settings_.vertexSize,0);
 	// double *readData = new double[vertexSize];
-	std::vector<double> writeData;
+	std::vector<double> writeData(settings_.vertexSize,0);
 	// double *writeData = new double[vertexSize];
 
 	while(time < settings_.endTime)
@@ -79,7 +76,9 @@ void Computation::runSimulation ()
 		// 	saveOldState();
 		// 	discretization_->adapter.fulfilledAction(cowic);
 		// }
+
 		discretization_->adapter.readData(readData);
+		std::cout << "run: post read" << std::endl;
 		applyObstacleValues2();
 		applyBoundaryValues(readData);
 
@@ -119,7 +118,7 @@ void Computation::runSimulation ()
 		// compute T
 		computeTemperature(); // Reihenfolge?
 		set_writeData(writeData);
-		discretization_->adapter.writeData(writeData);
+		// discretization_->adapter.writeData(writeData);
 
 		//compute rhs
 		computeRightHandSide();

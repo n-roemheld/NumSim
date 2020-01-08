@@ -31,8 +31,6 @@ then
     ./Allclean.sh
     cp ../build/src/numsim_fluid .
 
-    #! /usr/bin/env bash
-
     fluid_input="ldchp.input"
     solid_input="precice-config.xml"
 
@@ -40,6 +38,7 @@ then
     solid_solver="SolidSolverDummy"
 
     rm -rf "precice-run/"
+    
     ./${fluid_solver} ${fluid_input} > ${fluid_solver}.log 2>&1 &
     PIDFluid=$!
     ./${solid_solver} ${solid_input} > ${solid_solver}.log 2>&1 &
