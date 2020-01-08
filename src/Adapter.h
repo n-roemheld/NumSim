@@ -70,7 +70,7 @@ class Adapter
     void readData(std::vector<double> & readData)
     {
 		std::cout << "run: pre read, readData size:" << readData.size() << ", vertexSize: " << vertexSize << std::endl;
-        double* rd = new double[vertexSize];
+        double *rd = new double[vertexSize];
         precice.readBlockVectorData(readDataID, vertexSize, vertexIDs, rd); //readData.data());
     }
 
