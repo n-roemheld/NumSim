@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<precice-configuration>
+
+ <log>
+    <sink type="stream" output="stdout"  filter= "(%Severity% > debug) or (%Severity% >= trace and %Module% contains SolverInterfaceImpl)"  enabled="false" /> 
+    <sink type="stream" output="stdout"  enabled="false" /> 
+  </log>
+
+  <solver-interface dimensions="2">
+  
+    <data:scalar name="Temperature"/>
+    <data:scalar name="Heat-Flux"/>
+  
+    <mesh name="FluidSolverMesh"> 
+      <use-data name="Temperature"/> 
+      <use-data name="Heat-Flux"/> 
+    </mesh>
+    
+    <mesh name="SolidSolverMesh">
+      <use-data name="Temperature" />
+      <use-data name="Heat-Flux" />
+    </mesh>
+
+    <participant name="FluidSolver"> 
+      <use-mesh name="FluidSolverMesh" provide="yes"/> 
+      
+      <read-data name="Heat-Flux" mesh="FluidSolverMesh"/> 
+      <write-data name="Temperature" mesh="FluidSolverMesh"/> 
+    </participant>
+    
+    <participant name="SolidSolver"> 
+      <use-mesh name="SolidSolverMesh" provide="yes"/> 
+      <use-mesh name="FluidSolverMesh" from="FluidSolver"/> 
+      
+      <read-data name="Temperature" mesh="SolidSolverMesh"/> 
+      <write-data name="Heat-Flux" mesh="SolidSolverMesh"/> 
+      
+      <mapping:nearest-neighbor direction="read" from="FluidSolverMesh" to="SolidSolverMesh" constraint="consistent"/>
+      <mapping:nearest-neighbor direction="write" from="SolidSolverMesh" to="FluidSolverMesh" constraint="consistent"/>  
+    </participant>
+  
+    <m2n:sockets from="FluidSolver" to="SolidSolver" distribution-type="gather-scatter"/>
+
+    <coupling-scheme:parallel-implicit> 
+      <participants first="SolidSolver" second="FluidSolver"/> 
+      <max-time value="0.2"/> 
+      <timestep-length value="0.001"/> 
+      
+      <exchange data="Heat-Flux" mesh="FluidSolverMesh" from="SolidSolver" to="FluidSolver" />
+      <exchange data="Temperature" mesh="FluidSolverMesh" from="FluidSolver" to="SolidSolver" initialize="yes"/>
+      
+      <max-iterations value="100"/>
+      <relative-convergence-measure limit="1e-3" data="Heat-Flux" mesh="FluidSolverMesh"/>
+      <relative-convergence-measure limit="1e-3" data="Temperature" mesh="FluidSolverMesh"/>
+      
+      <post-processing:IQN-ILS>
+        <data name="Heat-Flux" mesh="FluidSolverMesh"/>
+        <data name="Temperature" mesh="FluidSolverMesh"/>
+        <preconditioner type="residual-sum"/>
+        <filter type="QR2" limit="1e-2"/>
+        <initial-relaxation value="0.1"/>
+        <max-used-iterations value="20"/>
+        <timesteps-reused value="20"/>
+      </post-processing:IQN-ILS>
+      
+    </coupling-scheme:parallel-implicit>
+
+  </solver-interface>
+</precice-configuration>

@@ -1,7 +1,6 @@
 todo:
 
 - Ecken TPD/TPN kontrollieren
-- applyBoundaryValues 
 - Solid: Temperature boundary iteration update
 
 
@@ -9,3 +8,4 @@ synchro-stuff:
 - solid: change arrays to vectors
 
 -fluid: add settings.orientation_
+

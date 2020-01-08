@@ -33,11 +33,13 @@ class Adapter
     {
 	    std::cout << "Adapter Constructor" << std::endl;
         precice.configure(preciceConfigFile);
+        std::cout << precice.getDimensions() << std::endl;
     }
 
     void initialize(std::string participantMesh, std::vector<double> & coords)
     {
 	    std::cout << "initialize: start" << std::endl;
+        std::cout << precice.getDimensions() << std::endl;
         meshID = precice.getMeshID(participantMesh);
 	    std::cout << meshID << std::endl;
         writeDataID = precice.getDataID(writeDataName, meshID);
