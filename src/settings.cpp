@@ -294,7 +294,7 @@ void Settings::loadGeometryFile() {
 		// {
 		// 	parameterValue.erase(parameterValue.find_first_of(" \t"));
 		// }
-		
+
 		if (parameterName == "physicalSizeX")
 		{
 			physicalSize[0] = atof(parameterValue.c_str());
@@ -324,11 +324,11 @@ void Settings::loadGeometryFile() {
 		else if (parameterName == "xOrigin")
 		{
 			xOrigin = atof(parameterValue.c_str());
-		} 
+		}
 		else if (parameterName == "yOrigin")
 		{
 			yOrigin = atof(parameterValue.c_str());
-		} 
+		}
 		else if(parameterName == "Mesh")
 		{
 			for(int j = nCelly-1; j >= 0; j--) //(int i = nCelly-1; i >= 0; i--) // (int j = nCelly-1; j >= 0; j--)
@@ -341,11 +341,11 @@ void Settings::loadGeometryFile() {
 					if(cellAll.at(0) == 'F')
 					{
 						geometryPVString_->operator()(i,j) = -1;
-						geometryTString_->operator()(i,j) = -1; // to avoid confilcts between TD and unassigned. 
-					} 
+						geometryTString_->operator()(i,j) = -1; // to avoid confilcts between TD and unassigned.
+					}
 					else
 					{
-						// determining the orientation of the boundary: (1,2,3,4 = left, right, lower, upper; 5,6,7,8 = lower-left, upper-left, lower-right, upper-right) 
+						// determining the orientation of the boundary: (1,2,3,4 = left, right, lower, upper; 5,6,7,8 = lower-left, upper-left, lower-right, upper-right)
 						// domain boundary cells
 						if (i == 0) // && (j == 0 || geometryPVString_->operator()(i+1,j) == -1))
 						{
@@ -361,7 +361,7 @@ void Settings::loadGeometryFile() {
 							{
 								geometryPVOrientation_->operator()(i,j) = 2;
 							}
-						} 
+						}
 						else if (i == nCellx-1) // && geometryPVString_->operator()(i-1,j) == -1)
 						{
 							if (j == 0)
@@ -464,7 +464,7 @@ void Settings::loadGeometryFile() {
 						{
 							geometryPVString_->operator()(i,j) = 5;
 						}
-						else 
+						else
 						{
 							std::cout << "Unknow Cell Type!" << std::endl;
 						}
@@ -485,7 +485,7 @@ void Settings::loadGeometryFile() {
 							}
 							else
 							{
-								geometryTString_->operator()(i,j) = -1; // to avoid confilcts between TD and unassigned. 
+								geometryTString_->operator()(i,j) = -1; // to avoid confilcts between TD and unassigned.
 							}
 						}
 						else
@@ -497,7 +497,7 @@ void Settings::loadGeometryFile() {
 								geometryTString_->operator()(i,j) = 0; // waring: equal unassigned
 								std::string cellTemperature1 = cellTemperature.substr(0);
 								geometryT1_->operator()(i,j) = atof(cellTemperature1.c_str());
-							} 
+							}
 							else if(cellTemperatureType == "TN")
 							{
 								geometryTString_->operator()(i,j) = 1;
@@ -506,9 +506,9 @@ void Settings::loadGeometryFile() {
 							}
 							else
 							{
-								geometryTString_->operator()(i,j) = -1; // to avoid confilcts between TD and unassigned. 
+								geometryTString_->operator()(i,j) = -1; // to avoid confilcts between TD and unassigned.
 							}
-							
+
 						}
 					}
 
@@ -539,7 +539,9 @@ void Settings::loadGeometryFile() {
 	vertex_j = std::vector<int> (vertexSize,0);
 	std::vector<double> vertex_x(vertexSize,0);
 	std::vector<double> vertex_y(vertexSize,0);
-    coords = new double[vertexSize*2]; 
+    // coords = new double[vertexSize*2];
+	coords.resize(vertexSize*2);
+
 	std::vector<int> ortientation(vertexSize,0); // 0,1,2,3 = left,right,lower,upper
 	int vertex_index = 0;
 	for (int i = 0; i < nCells[0]+2; i++)
@@ -567,9 +569,9 @@ void Settings::loadGeometryFile() {
 			case 3:	vertex_y.at(v) += .5*dy; break;
 			default: std::cout << "This shouldn't happen (unknown orientation): " << ortientation[v] << vertex_i.at(v) << vertex_j.at(v) <<std::endl; break;
 		}
-		coords[2*v] = vertex_x.at(v);
-		coords[2*v+1] =vertex_y.at(v);
-		
+		coords.at(2*v) = vertex_x.at(v);
+		coords.at(2*v+1) =vertex_y.at(v);
+
 	}
 }
 

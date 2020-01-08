@@ -16,7 +16,7 @@ public:
 	void runSimulation ();
 private:
 	void computeTimeStepWidth ();
-	void applyBoundaryValues (double * readData);
+	void applyBoundaryValues (std::vector<double> & readData);
 	void computePreliminaryVelocities ();
 	void computeRightHandSide ();
 	void computePressure ();
@@ -26,7 +26,7 @@ private:
 	void applyObstacleValues2();
 	void saveOldState();
 	void reloadOldState();
-	void set_writeData(double* writeData);
+	void set_writeData(std::vector<double> & writeData);
 
 	Settings settings_;
 	std::shared_ptr< Discretization > discretization_;

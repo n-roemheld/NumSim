@@ -241,13 +241,13 @@ void StaggeredGrid::setBoundaryValues_u_f()
 		for (int j = uJBegin()-1; j < uJEnd()+1; j++)
 		{
 			// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-			int igeom = i-uIBegin()+1; 
+			int igeom = i-uIBegin()+1;
 			int jgeom = j-uJBegin()+1;
 
 			int boundary_type = geometryPVString_->operator()(igeom, jgeom);
 
 			if (boundary_type != -1)
-			{ 
+			{
 				// indices of the neigboring cell (can be fluid or solid)
 				int in = i;
 				int jn = j;
@@ -298,7 +298,7 @@ void StaggeredGrid::setBoundaryValues_u_f()
 							break;
 						case 5: case 6: case 7: case 8:
 							u(i,j) = .5*u(i,jn);
-							break;					
+							break;
 						}
 						f(i,j) = u(i,j);
 						break;
@@ -351,13 +351,13 @@ void StaggeredGrid::setBoundaryValues_v_g()
 		for (int j = vJBegin()-1; j < vJEnd(); j++)
 		{
 			// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-			int igeom = i-vIBegin()+1; 
+			int igeom = i-vIBegin()+1;
 			int jgeom = j-vJBegin()+1;
 
 			int boundary_type = geometryPVString_->operator()(igeom, jgeom);
 
 			if (boundary_type != -1)
-			{ 
+			{
 				// indices of the neigboring cell (can be fluid or solid)
 				int in = i;
 				int jn = j;
@@ -408,7 +408,7 @@ void StaggeredGrid::setBoundaryValues_v_g()
 							break;
 						case 5: case 6: case 7: case 8:
 							v(i,j) = .5*v(in,j);
-							break;					
+							break;
 						}
 						g(i,j) = v(i,j);
 						break;
@@ -461,13 +461,13 @@ void StaggeredGrid::setBoundaryValues_p()
 		for (int j = pJBegin()-1; j < pJEnd()+1; j++)
 		{
 			// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-			int igeom = i-pIBegin()+1; 
+			int igeom = i-pIBegin()+1;
 			int jgeom = j-pJBegin()+1;
 
 			int boundary_type = geometryPVString_->operator()(igeom, jgeom);
 
 			if (boundary_type != -1)
-			{ 
+			{
 				// indices of the neigboring cell (can be fluid or solid)
 				int in = i;
 				int jn = j;
@@ -511,26 +511,26 @@ void StaggeredGrid::setBoundaryValues_p()
 							break;
 					}
 				}
-				
+
 			}
 		}
 	}
 }
 
-void StaggeredGrid::setBoundaryValues_T(double* readData, int vertexSize, std::vector<int> &vertex_i, std::vector<int> &vertex_j)
+void StaggeredGrid::setBoundaryValues_T(std::vector<double> & readData, int vertexSize, std::vector<int> &vertex_i, std::vector<int> &vertex_j)
 {
 	for (int i = pIBegin(); i < pIEnd()+1; i++) // double check!
 	{
 		for (int j = pJBegin()-1; j < pJEnd()+1; j++)
 		{
 			// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-			int igeom = i-pIBegin()+1; 
+			int igeom = i-pIBegin()+1;
 			int jgeom = j-pJBegin()+1;
 
 			int boundary_type = geometryPVString_->operator()(igeom, jgeom);
 
 			if (boundary_type != -1)
-			{ 
+			{
 				// indices of the neigboring cell (can be fluid or solid)
 				int in = i;
 				int jn = j;
@@ -560,7 +560,7 @@ void StaggeredGrid::setBoundaryValues_T(double* readData, int vertexSize, std::v
 							case 1: case 2: case 3: case 4:
 								T(i,j) = 2*geometryT1_->operator()(igeom, jgeom) - T(in,jn);
 								break;
-							case 5: case 6: case 7: case 8: 
+							case 5: case 6: case 7: case 8:
 								T(i,j) = 2*geometryT1_->operator()(igeom, jgeom) - .5*(T(i,jn) + T(in,j));
 								break;
 						}
@@ -568,7 +568,7 @@ void StaggeredGrid::setBoundaryValues_T(double* readData, int vertexSize, std::v
 					case 1: // TN
 						switch (orientation)
 						{
-							case 1: case 2: 
+							case 1: case 2:
 								T(i,j) = T(in,jn) + dx()*geometryT1_->operator()(igeom, jgeom);
 								break;
 							case 3: case 4:
@@ -589,14 +589,14 @@ void StaggeredGrid::setBoundaryValues_T(double* readData, int vertexSize, std::v
 	// TPD/TPN
 	for (int v = 0; v < vertexSize; v++)
 	{
-		T(vertex_i.at(v),vertex_j.at(v)) = readData[v];
+		T(vertex_i.at(v),vertex_j.at(v)) = readData.at(v);
 	}
 }
 
 // void StaggeredGrid::setBoundaryValues_u_f(int location_boundary, int i, int j)
 // {
 // 	// indices in geometry file (shifted by uIBegin and increased by one at the right (u) and upper(v) boundaries)
-// 	int igeom = i-uIBegin()+1; 
+// 	int igeom = i-uIBegin()+1;
 // 	int jgeom = j-uJBegin()+1;
 // 	// indices of the neigboring cell (can be fluid or solid)
 // 	int in = i;
@@ -835,12 +835,12 @@ void StaggeredGrid::setBoundaryValues_T(double* readData, int vertexSize, std::v
 // 		else if (boundary_type == 2) // TPD
 // 		{
 // 			// To do: ...
-// 		} 
+// 		}
 // 		else if (boundary_type == 3) // TPN
 // 		{
 // 			// To do: ...
-// 		} 
-// 		else 
+// 		}
+// 		else
 // 		{
 // 			std::cout << "Unknow temperature boundary condition!" << std::endl;
 // 		}
