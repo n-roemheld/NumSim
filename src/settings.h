@@ -32,7 +32,7 @@ struct Settings
   int vertexSize = 0;
 	std::vector<int> vertex_i;
 	std::vector<int> vertex_j;
-  std::vector<double> coords; 
+  std::vector<double> coords;
 
   bool useDonorCell = false;         //< if the donor cell scheme schould be used
   double alpha = 0.5;                //< factor for donor-cell scheme for pressure
@@ -65,7 +65,7 @@ struct Settings
   std::shared_ptr<Array2D> geometryT1_;
 
   std::string geometryFile = "";
-
+  std::vector<int> orientation_;
 
 
   //! parse a text file with settings, each line contains "<parameterName> = <value>"

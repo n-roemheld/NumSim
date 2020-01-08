@@ -5,7 +5,6 @@
 #include <iostream>
 #include <array>
 #include <memory>
-#include <vector>
 
 /** All settings that parametrize a simulation run.
  */
@@ -28,13 +27,12 @@ struct Settings
   std::string participantName = "NumSim";
   std::string meshName = "NumSimMesh";
   std::string preciceConfigFile = "precice-config.xml";
-  std::string readDataName = "Heat-Flux";
-  std::string writeDataName = "Temperature";
+  std::string readDataName = "Temperature";
+  std::string writeDataName = "Heat-Flux";
 
   int vertexSize = 0;
 	std::vector<int> vertex_i;
 	std::vector<int> vertex_j;
-  // double * coords;
   std::vector<double> coords;
 
   bool useDonorCell = false;         //< if the donor cell scheme schould be used
@@ -49,7 +47,7 @@ struct Settings
   std::array<double,2> dirichletBcLeft;    //< prescribed values of u,v at left of domain
   std::array<double,2> dirichletBcRight;   //< prescribed values of u,v at right of domain
 
-  std::string temperatureSolver = "SOR";      //< which pressure solver to use, "GaussSeidel" or "SOR"
+  std::string pressureSolver = "SOR";      //< which pressure solver to use, "GaussSeidel" or "SOR"
   double omega = 1.0;                //< overrelaxation factor
   double epsilon = 1e-5;             //< tolerance for the residual in the pressure solver
   int maximumNumberOfIterations = 1e5;    //< maximum number of iterations in the solver
@@ -68,8 +66,7 @@ struct Settings
   std::shared_ptr<Array2D> geometryT1_;
 
   std::string geometryFile = "";
-  std::vector<int> orientation_; // 0,1,2,3 = left,right,lower,upper
-
+  std::vector<int> orientation_;
 
 
   //! parse a text file with settings, each line contains "<parameterName> = <value>"

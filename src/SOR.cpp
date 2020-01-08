@@ -41,7 +41,7 @@ void SOR::solve()
 					}
 				};
 			};
-			setObstacleValues2(); // BLAAAAAAAAAAAAAAARM
+			// setObstacleValues2(); // BLAAAAAAAAAAAAAAARM
 			setBoundaryValues();
 
 			// compute and update residuum

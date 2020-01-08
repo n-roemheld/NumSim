@@ -542,7 +542,7 @@ void Settings::loadGeometryFile() {
     // coords = new double[vertexSize*2];
 	coords.resize(vertexSize*2);
 
-	std::vector<int> ortientation(vertexSize,0); // 0,1,2,3 = left,right,lower,upper
+	orientation_.resize(vertexSize); // 0,1,2,3 = left,right,lower,upper
 	int vertex_index = 0;
 	for (int i = 0; i < nCells[0]+2; i++)
 	{
@@ -560,14 +560,14 @@ void Settings::loadGeometryFile() {
 	}
 	for (int v = 0; v < vertexSize; v++)
 	{
-		ortientation[v] = geometryPVOrientation_->operator()(vertex_i.at(v), vertex_j.at(v));
-		switch (ortientation[v])
+		orientation_[v] = int(geometryPVOrientation_->operator()(vertex_i.at(v), vertex_j.at(v)));
+		switch (orientation_[v])
 		{
 			case 0: vertex_x.at(v) -= .5*dx; break;
 			case 1: vertex_x.at(v) += .5*dx; break;
 			case 2: vertex_y.at(v) -= .5*dy; break;
 			case 3:	vertex_y.at(v) += .5*dy; break;
-			default: std::cout << "This shouldn't happen (unknown orientation): " << ortientation[v] << vertex_i.at(v) << vertex_j.at(v) <<std::endl; break;
+			default: std::cout << "This shouldn't happen (unknown orientation): " << orientation_[v] << vertex_i.at(v) << vertex_j.at(v) <<std::endl; break;
 		}
 		coords.at(2*v) = vertex_x.at(v);
 		coords.at(2*v+1) =vertex_y.at(v);

@@ -13,9 +13,7 @@ public:
   //!constructor
   // StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth);
   // StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1);
-  StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPVOrientation, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1, Adapter& adapter);
-
-  Adapter& adapter;
+  StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPVOrientation, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1);
 
   const std::array< double, 2 > 	meshWidth() const;
 
@@ -87,14 +85,14 @@ public:
   void saveOldState();
   void reloadOldState();
 
-	// void setBoundaryValues_u_f(int location_boundary, int i, int j);
-	// void setBoundaryValues_v_g(int location_boundary, int i, int j);
-	// void setBoundaryValues_p(int location_boundary, int i, int j);
-	// void setBoundaryValues_T(int location_boundary, int i, int j);
-	void setBoundaryValues_u_f();
-	void setBoundaryValues_v_g();
-	void setBoundaryValues_p();
-	void setBoundaryValues_T(std::vector<double> & readData, int vertexSize, 	std::vector<int> &vertex_i, 	std::vector<int> &vertex_j);
+	void setBoundaryValues_u_f(int location_boundary, int i, int j);
+	void setBoundaryValues_v_g(int location_boundary, int i, int j);
+	void setBoundaryValues_p(int location_boundary, int i, int j);
+	void setBoundaryValues_T(int location_boundary, int i, int j);
+	// void setBoundaryValues_u_f();
+	// void setBoundaryValues_v_g();
+	// void setBoundaryValues_p();
+	// void setBoundaryValues_T(std::vector<double> & readData, int vertexSize, 	std::vector<int> &vertex_i, 	std::vector<int> &vertex_j);
 
   // void setObstacleValues_u_f(int i, int j);
   // void setObstacleValues_v_g(int i, int j);
@@ -118,16 +116,30 @@ public:
 
 protected:
 
+  double   u_old(int i, int j) const;
+
+  double&   u_old(int i, int j);
+
+  double   v_old(int i, int j) const;
+
+  double&   v_old(int i, int j);
+
+  double   p_old(int i, int j) const;
+
+  double&   p_old(int i, int j);
+
   double   T_old(int i, int j) const;
 
   double&   T_old(int i, int j);
 
-
 	const std::array< int, 2 > nCells_;
 	const std::array< double, 2 > meshWidth_;
 	FieldVariable 	u_;
+  FieldVariable   u_old_;
 	FieldVariable 	v_;
+  FieldVariable   v_old_;
 	FieldVariable 	p_;
+  FieldVariable   p_old_;
 	FieldVariable 	rhs_;
 	FieldVariable 	f_;
 	FieldVariable 	g_;

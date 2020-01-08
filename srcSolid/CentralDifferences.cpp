@@ -9,8 +9,8 @@
 // 	Discretization(nCells, meshWidth, geometryPVString, geometryPV1, geometryPV2, geometryTString, geometryT1)
 // {};
 
-CentralDifferences::CentralDifferences(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPVOrientation, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1, Adapter& adapter) :
-	Discretization(nCells, meshWidth, geometryPVString, geometryPVOrientation, geometryPV1, geometryPV2, geometryTString, geometryT1, adapter)
+CentralDifferences::CentralDifferences(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPVOrientation, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1) :
+	Discretization(nCells, meshWidth, geometryPVString, geometryPVOrientation, geometryPV1, geometryPV2, geometryTString, geometryT1)
 {};
 
 

@@ -1,0 +1,26 @@
+# Settings file for numsim program
+# Run ./numsim driven_cavity.txt
+
+# Problem description
+geometryFile = naturalconvection_solid_35x35.geom
+endTime = 10.0        # duration of the simulation
+participantName = SolidSolver
+meshName = SolidSolverMesh
+preciceConfigFile = precice-config-naturalconvection-implicit.xml
+readDataName = Heat-Flux
+writeDataName = Temperature
+
+heatDiffusivity = 1.0
+tInit = 303
+
+# Discretization parameters
+maximumDt = 1.0       # maximum values for time step width
+
+# Solver parameters
+#temperatureSolver = GaussSeidel
+temperatureSolver = SOR
+omega = 1.5
+epsilon = 1e-5        # tolerance for 2-norm of residual
+maximumNumberOfIterations = 1e4    # maximum number of iterations in the solver
+
+outputFileEveryDt = 0.01

@@ -31,8 +31,8 @@ void Computation::initialize (int argc, char *argv[])
 		discretization_ = std::make_shared<CentralDifferences>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPVOrientation_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_);
 	}
 	discretization_->fillIn(settings_.uInit_, settings_.vInit_, settings_.pInit_, settings_.TInit_);
-	
-	
+
+
 	//select SOR or GaussSeidel
 	if (settings_.pressureSolver == "SOR")
 	{
@@ -87,7 +87,7 @@ void Computation::runSimulation ()
 
 		precice.readBlockScalarData(readDataID, settings_.vertexSize, vertexIDs.data(), readData.data());
 		std::cout << "run: post read" << std::endl;
-		applyObstacleValues2();
+		// applyObstacleValues2();
 		applyBoundaryValues(readData);
 
 
@@ -143,6 +143,8 @@ void Computation::runSimulation ()
 		// 	discretization_->adapter.fulfilledAction(coric);
 		// }
 		// else
+		std::cout << "time1 " << time << '\n';
+		std::cout << "dt" << dt_ << '\n';
 		{
 			time += dt_;
 
@@ -153,6 +155,9 @@ void Computation::runSimulation ()
 				// outputWriterText_->writePressureFile();
 				lastOutputTime = time;
 			}
+
+			std::cout << "time1 " << time << '\n';
+			std::cout << "dt" << dt_ << '\n';
 		}
 	}
 	precice.finalize();
@@ -179,9 +184,45 @@ void Computation::reloadOldState()
 
 void Computation::set_writeData(std::vector<double> & writeData)
 {
-	for (int v = 0; v < settings_.vertexSize; v++)
+	for(int v = 0; v < settings_.vertexSize; v++)
 	{
-		writeData.at(v) = discretization_->T(settings_.vertex_i.at(v),settings_.vertex_j.at(v));
+		int i = settings_.vertex_i.at(v);
+		int j = settings_.vertex_j.at(v);
+
+		// std::cout << "here!" << std::endl;
+
+		// neighbour indices
+		int in = i;
+		int jn = j;
+		double h = 0;
+		double dx = meshWidth_[0];
+		double dy = meshWidth_[1];
+
+		// std::cout << "c" << std::endl;
+		// std::cout << "osize" << settings_.orientation_.size() << std::endl;
+
+
+		int orientation = settings_.orientation_.at(v);
+
+		// std::cout << "here2" << std::endl;
+
+		switch (orientation)
+		{
+			case 0: std::cout << "no orientation assigned!" << std::endl; break;
+			case 1: in = i-1; h = dx; break;
+			case 2: in = i+1; h = dx; break;
+			case 3: jn = j-1; h = dy; break;
+			case 4: jn = j+1; h = dy; break;
+			case 5:
+			case 6:
+			case 7:
+			case 8: h = 0; break;
+			default: std::cout << "unknown orientation" << std::endl; break;
+		}
+
+		// std::cout << "here3!" << std::endl;
+
+		writeData.at(v) = (discretization_->T(i,j)+discretization_->T(in,jn))/2;
 	}
 }
 
@@ -238,15 +279,148 @@ void Computation::computeTimeStepWidth ()
 
 void Computation::applyBoundaryValues (std::vector<double> & readData)
 {
-	// setting T boundaries without corners
-	discretization_->setBoundaryValues_T(readData, settings_.vertexSize, settings_.vertex_i, settings_.vertex_j);
+	// todo: double check indices
+
+	// locations:
+	int left = 0;
+	int right = 1;
+	int lower = 2;
+	int upper = 3;
+
+	// setting T boundaries without corners (p grid, all ghost cells)
+	// lower T
+	int j = discretization_->pJBegin()-1;
+	for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+	{
+		discretization_->setBoundaryValues_T(lower,i,j);
+	};
+	// upper T
+	j = discretization_->pJEnd();
+	for(int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+	{
+		discretization_->setBoundaryValues_T(upper,i,j);
+	};
+	// left T
+	int i = discretization_->pIBegin()-1;
+	for(int j = discretization_->pJBegin()-1; j < discretization_->pJEnd()+1; j++)
+	{
+		discretization_->setBoundaryValues_T(left,i,j);
+	}
+	// right T
+	i = discretization_->pIEnd();
+	for(int j = discretization_->pJBegin()-1; j < discretization_->pJEnd()+1; j++)
+	{
+		discretization_->setBoundaryValues_T(right,i,j);
+	}
 
 	// u,f setting
-	discretization_->setBoundaryValues_u_f();
+	// lower u ghost layer without corners
+	j = discretization_->uJBegin()-1;
+	for(int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
+	{
+		discretization_->setBoundaryValues_u_f(lower,i,j);
+	};
+	// upper u ghost layer without corners
+	j = discretization_->uJEnd();
+	for(int i = discretization_->uIBegin(); i < discretization_->uIEnd()-1; i++)
+	{
+		discretization_->setBoundaryValues_u_f(upper,i,j);
+	};
+	// left u ghost layer with corners
+	i = discretization_->uIBegin()-1;
+	for(int j = discretization_->uJBegin()-1; j < discretization_->uJEnd()+1; j++)
+	{
+		discretization_->setBoundaryValues_u_f(left,i,j);
+	}
+	// right u Nathi-not ghost layer with corners
+	i = discretization_->uIEnd()-1;
+	for(int j = discretization_->uJBegin()-1; j < discretization_->uJEnd()+1; j++)
+	{
+		discretization_->setBoundaryValues_u_f(right,i,j);
+	}
 
 	// v,g setting
-	discretization_->setBoundaryValues_v_g();
+	// lower v ghost layer without corners
+	j = discretization_->vJBegin()-1;
+	for(int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
+	{
+		discretization_->setBoundaryValues_v_g(lower,i,j);
+	};
+	// upper v  Nathi-not ghost layer without corners
+	j = discretization_->vJEnd()-1;
+	for(int i = discretization_->vIBegin(); i < discretization_->vIEnd(); i++)
+	{
+		discretization_->setBoundaryValues_v_g(upper,i,j);
+	};
+	// left v ghost layer with corners
+	i = discretization_->vIBegin()-1;
+	for(int j = discretization_->vJBegin()-1; j < discretization_->vJEnd(); j++)
+	{
+		discretization_->setBoundaryValues_v_g(left,i,j);
+	}
+	// right v ghost layer with corners
+	i = discretization_->vIEnd();
+	for(int j = discretization_->vJBegin()-1; j < discretization_->vJEnd(); j++)
+	{
+		discretization_->setBoundaryValues_v_g(right,i,j);
+	}
+
+	for(int v = 0; v < settings_.vertexSize; v++)
+	{
+		int i = settings_.vertex_i.at(v);
+		int j = settings_.vertex_j.at(v);
+
+		// std::cout << "here!" << std::endl;
+
+		// neighbour indices
+		int in = i;
+		int jn = j;
+		double h = 0;
+		double dx = meshWidth_[0];
+		double dy = meshWidth_[1];
+
+		// std::cout << "c" << std::endl;
+		// std::cout << "osize" << settings_.orientation_.size() << std::endl;
+
+
+		int orientation = settings_.orientation_.at(v);
+
+		// std::cout << "here2" << std::endl;
+
+		switch (orientation)
+		{
+			case 0: std::cout << "no orientation assigned!" << std::endl; break;
+			case 1: in = i-1; h = dx; break;
+			case 2: in = i+1; h = dx; break;
+			case 3: jn = j-1; h = dy; break;
+			case 4: jn = j+1; h = dy; break;
+			case 5:
+			case 6:
+			case 7:
+			case 8: h = 0; break;
+			default: std::cout << "unknown orientation" << std::endl; break;
+		}
+
+		// std::cout << "here3!" << std::endl;
+
+
+		discretization_->T(i,j) = h*readData.at(v)*settings_.re*settings_.prandtl
+		                        + discretization_->T(in,jn);
+	}
 };
+
+
+// void Computation::applyBoundaryValues (std::vector<double> & readData)
+// {
+// 	// setting T boundaries without corners
+// 	discretization_->setBoundaryValues_T(readData, settings_.vertexSize, settings_.vertex_i, settings_.vertex_j);
+//
+// 	// u,f setting
+// 	discretization_->setBoundaryValues_u_f();
+//
+// 	// v,g setting
+// 	discretization_->setBoundaryValues_v_g();
+// };
 
 // void Computation::applyObstacleValues()
 // {

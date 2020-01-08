@@ -85,14 +85,14 @@ public:
   void saveOldState();
   void reloadOldState();
 
-	// void setBoundaryValues_u_f(int location_boundary, int i, int j);
-	// void setBoundaryValues_v_g(int location_boundary, int i, int j);
-	// void setBoundaryValues_p(int location_boundary, int i, int j);
-	// void setBoundaryValues_T(int location_boundary, int i, int j);
-	void setBoundaryValues_u_f();
-	void setBoundaryValues_v_g();
-	void setBoundaryValues_p();
-	void setBoundaryValues_T(std::vector<double> & readData, int vertexSize, 	std::vector<int> &vertex_i, 	std::vector<int> &vertex_j);
+	void setBoundaryValues_u_f(int location_boundary, int i, int j);
+	void setBoundaryValues_v_g(int location_boundary, int i, int j);
+	void setBoundaryValues_p(int location_boundary, int i, int j);
+	void setBoundaryValues_T(int location_boundary, int i, int j);
+	// void setBoundaryValues_u_f();
+	// void setBoundaryValues_v_g();
+	// void setBoundaryValues_p();
+	// void setBoundaryValues_T(std::vector<double> & readData, int vertexSize, 	std::vector<int> &vertex_i, 	std::vector<int> &vertex_j);
 
   // void setObstacleValues_u_f(int i, int j);
   // void setObstacleValues_v_g(int i, int j);
