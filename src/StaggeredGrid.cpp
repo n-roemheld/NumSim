@@ -28,6 +28,9 @@ StaggeredGrid::StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 
 	u_( {nCells[0]+1, nCells[1]+2},  {0*meshWidth[0],    -0.5*meshWidth[1]}, meshWidth ),
 	v_( {nCells[0]+2, nCells[1]+1},  {-0.5*meshWidth[0], 0*meshWidth[1]}, meshWidth ),
 	p_( {nCells[0]+2, nCells[1]+2},  {-0.5*meshWidth[0], -0.5*meshWidth[1]}, meshWidth),
+	u_old_( {nCells[0]+1, nCells[1]+2},  {0*meshWidth[0],    -0.5*meshWidth[1]}, meshWidth ),
+	v_old_( {nCells[0]+2, nCells[1]+1},  {-0.5*meshWidth[0], 0*meshWidth[1]}, meshWidth ),
+	p_old_( {nCells[0]+2, nCells[1]+2},  {-0.5*meshWidth[0], -0.5*meshWidth[1]}, meshWidth),
 	f_( {nCells[0]+1, nCells[1]+2},  {0*meshWidth[0],    -0.5*meshWidth[1]}, meshWidth ),
 	g_( {nCells[0]+2, nCells[1]+1},  {-0.5*meshWidth[0], 0*meshWidth[1]}, meshWidth ),
 	rhs_( {nCells[0]+2, nCells[1]+2},{-0.5*meshWidth[0], -0.5*meshWidth[1]}, meshWidth),
@@ -100,6 +103,36 @@ double& StaggeredGrid::v(int i, int j)
 double& StaggeredGrid::p(int i, int j)
 {
   return StaggeredGrid::p_(i,j);
+};
+
+double& StaggeredGrid::u_old(int i, int j)
+{
+  return StaggeredGrid::u_old_(i,j);
+};
+
+double StaggeredGrid::u_old(int i, int j) const
+{
+  return StaggeredGrid::u_old_(i,j);
+};
+
+double& StaggeredGrid::v_old(int i, int j)
+{
+  return StaggeredGrid::v_old_(i,j);
+};
+
+double StaggeredGrid::v_old(int i, int j) const
+{
+  return StaggeredGrid::v_old_(i,j);
+};
+
+double& StaggeredGrid::p_old(int i, int j)
+{
+  return StaggeredGrid::p_old_(i,j);
+};
+
+double StaggeredGrid::p_old(int i, int j) const
+{
+  return StaggeredGrid::p_old_(i,j);
 };
 
 double& StaggeredGrid::rhs(int i, int j)
@@ -212,8 +245,33 @@ int StaggeredGrid::pJEnd() const
 	return nCells_[1] + 1;
 };
 
-void StaggeredGrid::saveOldStateT()
+void StaggeredGrid::saveOldState()
 {
+	// u
+	for (int i = 0; i < u_.size().at(0); i++)
+	{
+		for (int j = 0; j < u_.size().at(1); j++)
+		{
+			u_old(i,j) = u(i,j);
+		}
+	}
+	// v
+	for (int i = 0; i < v_.size().at(0); i++)
+	{
+		for (int j = 0; j < v_.size().at(1); j++)
+		{
+			v_old(i,j) = v(i,j);
+		}
+	}
+	// p
+	for (int i = 0; i < p_.size().at(0); i++)
+	{
+		for (int j = 0; j < p_.size().at(1); j++)
+		{
+			p_old(i,j) = p(i,j);
+		}
+	}
+	// T
 	for (int i = 0; i < T_.size().at(0); i++)
 	{
 		for (int j = 0; j < T_.size().at(1); j++)
@@ -223,8 +281,33 @@ void StaggeredGrid::saveOldStateT()
 	}
 }
 
-void StaggeredGrid::reloadOldStateT()
+void StaggeredGrid::reloadOldState()
 {
+	// u
+	for (int i = 0; i < u_.size().at(0); i++)
+	{
+		for (int j = 0; j < u_.size().at(1); j++)
+		{
+			u(i,j) = u_old(i,j);
+		}
+	}
+	// v
+	for (int i = 0; i < v_.size().at(0); i++)
+	{
+		for (int j = 0; j < v_.size().at(1); j++)
+		{
+			v(i,j) = v_old(i,j);
+		}
+	}
+	// p
+	for (int i = 0; i < p_.size().at(0); i++)
+	{
+		for (int j = 0; j < p_.size().at(1); j++)
+		{
+			p(i,j) = p_old(i,j);
+		}
+	}
+	// T
 	for (int i = 0; i < T_.size().at(0); i++)
 	{
 		for (int j = 0; j < T_.size().at(1); j++)
