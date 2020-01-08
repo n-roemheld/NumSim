@@ -32,7 +32,7 @@ struct Settings
   int vertexSize = 0;
 	std::vector<int> vertex_i;
 	std::vector<int> vertex_j;
-  std::vector<double> coords; 
+  std::vector<double> coords;
 
   bool useDonorCell = false;         //< if the donor cell scheme schould be used
   double alpha = 0.5;                //< factor for donor-cell scheme for pressure
@@ -57,7 +57,7 @@ struct Settings
   double TInit_; //< initial value for temperature T
 
   std::shared_ptr<Array2D> geometryPVString_; //< describes typ of cell for pressure
-  std::shared_ptr<Array2D> geometryPVOrientation_; //< describes direction of fluid cells; 1,2,3,4 = left,right,lower,upper
+  std::shared_ptr<Array2D> geometryPVOrientation_; //< describes direction of fluid cells; 1,2,3,4 = left,right,lower,upper; 5,6,7,8 = lower-left, upper-left, lower-right, upper-right
   std::shared_ptr<Array2D> geometryPV1_;
   std::shared_ptr<Array2D> geometryPV2_;
 
@@ -65,6 +65,7 @@ struct Settings
   std::shared_ptr<Array2D> geometryT1_;
 
   std::string geometryFile = "";
+  std::vector<int> orientation_;
 
 
 

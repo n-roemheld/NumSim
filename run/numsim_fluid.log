@@ -3,19 +3,19 @@ initialize: post load from file
 Settings: 
   physicalSize: 1 x 1, nCells: 20 x 20
   endTime: 10 s, re: 316, prandtl: 0.71, beta: 1.01937, g: (0,-9.81), tau: 0.5, maximum dt: 0.01
-  dirichletBC: bottom: (6.95334e-310,6.95334e-310), top: (6.94338e-310,9.88131e-324), left: (6.95334e-310,0), right: (6.91692e-323,6.95334e-310)
+  dirichletBC: bottom: (6.9193e-310,-nan), top: (7.90505e-323,9.88131e-324), left: (0,0), right: (1.97346e-312,2.52517e-312)
   useDonorCell: true, alpha: 0.5
   pressureSolver: SOR, omega: 1.6, epsilon: 1e-05, maximumNumberOfIterations: 10000
 initialize: pre adapter
 Adapter Constructor
-(0) 14:03:26 [impl::SolverInterfaceImpl]:107 in configure: [0mThis is preCICE version 1.6.1
-(0) 14:03:26 [impl::SolverInterfaceImpl]:107 in configure: [0mThis is preCICE version 1.6.1
-(0) 14:03:26 [impl::SolverInterfaceImpl]:108 in configure: [0mRevision info: v1.6.1
-(0) 14:03:26 [impl::SolverInterfaceImpl]:108 in configure: [0mRevision info: v1.6.1
-(0) 14:03:26 [impl::SolverInterfaceImpl]:109 in configure: [0mConfiguring preCICE with configuration: "precice-config.xml"
-(0) 14:03:26 [impl::SolverInterfaceImpl]:109 in configure: [0mConfiguring preCICE with configuration: "precice-config.xml"
-(0) 14:03:26 [impl::SolverInterfaceImpl]:152 in configure: [0mRun in coupling mode
-(0) 14:03:26 [impl::SolverInterfaceImpl]:152 in configure: [0mRun in coupling mode
+(0) 17:31:31 [impl::SolverInterfaceImpl]:107 in configure: [0mThis is preCICE version 1.6.1
+(0) 17:31:31 [impl::SolverInterfaceImpl]:107 in configure: [0mThis is preCICE version 1.6.1
+(0) 17:31:31 [impl::SolverInterfaceImpl]:108 in configure: [0mRevision info: v1.6.1
+(0) 17:31:31 [impl::SolverInterfaceImpl]:108 in configure: [0mRevision info: v1.6.1
+(0) 17:31:31 [impl::SolverInterfaceImpl]:109 in configure: [0mConfiguring preCICE with configuration: "precice-config.xml"
+(0) 17:31:31 [impl::SolverInterfaceImpl]:109 in configure: [0mConfiguring preCICE with configuration: "precice-config.xml"
+(0) 17:31:31 [impl::SolverInterfaceImpl]:152 in configure: [0mRun in coupling mode
+(0) 17:31:31 [impl::SolverInterfaceImpl]:152 in configure: [0mRun in coupling mode
 2
 initialize: post adapter
 initialize: start
@@ -24,32 +24,32 @@ initialize: start
 0
 1
 2
-(0) 14:03:26 [impl::SolverInterfaceImpl]:220 in initialize: [0mSetting up master communication to coupling partner/s
-(0) 14:03:26 [impl::SolverInterfaceImpl]:220 in initialize: [0mSetting up master communication to coupling partner/s
-(0) 14:03:26 [impl::SolverInterfaceImpl]:228 in initialize: [0mMasters are connected
-(0) 14:03:26 [impl::SolverInterfaceImpl]:228 in initialize: [0mMasters are connected
-(0) 14:03:26 [partition::ProvidedPartition]:36 in communicate: [0mGather mesh NumSimMesh
-(0) 14:03:26 [partition::ProvidedPartition]:36 in communicate: [0mGather mesh NumSimMesh
-(0) 14:03:26 [partition::ProvidedPartition]:62 in communicate: [0mSend global mesh NumSimMesh
-(0) 14:03:26 [partition::ProvidedPartition]:62 in communicate: [0mSend global mesh NumSimMesh
-(0) 14:03:26 [partition::ProvidedPartition]:79 in compute: [0mCompute partition for mesh NumSimMesh
-(0) 14:03:26 [partition::ProvidedPartition]:79 in compute: [0mCompute partition for mesh NumSimMesh
-(0) 14:03:26 [impl::SolverInterfaceImpl]:232 in initialize: [0mSetting up slaves communication to coupling partner/s
-(0) 14:03:26 [impl::SolverInterfaceImpl]:232 in initialize: [0mSetting up slaves communication to coupling partner/s
-(0) 14:03:26 [impl::SolverInterfaceImpl]:240 in initialize: [0mSlaves are connected
-(0) 14:03:26 [impl::SolverInterfaceImpl]:240 in initialize: [0mSlaves are connected
-(0) 14:03:26 [impl::SolverInterfaceImpl]:266 in initialize: [0mit 1 of 1 | dt# 1 | t 0 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete no | 
-(0) 14:03:26 [impl::SolverInterfaceImpl]:266 in initialize: [0mit 1 of 1 | dt# 1 | t 0 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete no | 
-StartTime: 1578488606
-[DESKTOP-RJK1NR5:00248] *** Process received signal ***
-[DESKTOP-RJK1NR5:00248] Signal: Segmentation fault (11)
-[DESKTOP-RJK1NR5:00248] Signal code: Address not mapped (1)
-[DESKTOP-RJK1NR5:00248] Failing at address: 0xcb
-[DESKTOP-RJK1NR5:00248] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x3ef20)[0x7fd0fce3ef20]
-[DESKTOP-RJK1NR5:00248] [ 1] /usr/lib/libprecice.so.1.6.1(_ZNK7precice4impl19SolverInterfaceImpl19readBlockVectorDataEiiPKiPd+0x1d)[0x7fd0ff331a9d]
-[DESKTOP-RJK1NR5:00248] [ 2] ./numsim_fluid(+0x8ff1)[0x7fd0ffc08ff1]
-[DESKTOP-RJK1NR5:00248] [ 3] ./numsim_fluid(+0x67fc)[0x7fd0ffc067fc]
-[DESKTOP-RJK1NR5:00248] [ 4] ./numsim_fluid(+0x46fb)[0x7fd0ffc046fb]
-[DESKTOP-RJK1NR5:00248] [ 5] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7)[0x7fd0fce21b97]
-[DESKTOP-RJK1NR5:00248] [ 6] ./numsim_fluid(+0x446a)[0x7fd0ffc0446a]
-[DESKTOP-RJK1NR5:00248] *** End of error message ***
+(0) 17:31:31 [impl::SolverInterfaceImpl]:220 in initialize: [0mSetting up master communication to coupling partner/s
+(0) 17:31:31 [impl::SolverInterfaceImpl]:220 in initialize: [0mSetting up master communication to coupling partner/s
+(0) 17:31:31 [impl::SolverInterfaceImpl]:228 in initialize: [0mMasters are connected
+(0) 17:31:31 [impl::SolverInterfaceImpl]:228 in initialize: [0mMasters are connected
+(0) 17:31:31 [partition::ProvidedPartition]:36 in communicate: [0mGather mesh NumSimMesh
+(0) 17:31:31 [partition::ProvidedPartition]:36 in communicate: [0mGather mesh NumSimMesh
+(0) 17:31:31 [partition::ProvidedPartition]:62 in communicate: [0mSend global mesh NumSimMesh
+(0) 17:31:31 [partition::ProvidedPartition]:62 in communicate: [0mSend global mesh NumSimMesh
+(0) 17:31:31 [partition::ProvidedPartition]:79 in compute: [0mCompute partition for mesh NumSimMesh
+(0) 17:31:31 [partition::ProvidedPartition]:79 in compute: [0mCompute partition for mesh NumSimMesh
+(0) 17:31:31 [impl::SolverInterfaceImpl]:232 in initialize: [0mSetting up slaves communication to coupling partner/s
+(0) 17:31:31 [impl::SolverInterfaceImpl]:232 in initialize: [0mSetting up slaves communication to coupling partner/s
+(0) 17:31:31 [impl::SolverInterfaceImpl]:240 in initialize: [0mSlaves are connected
+(0) 17:31:31 [impl::SolverInterfaceImpl]:240 in initialize: [0mSlaves are connected
+(0) 17:31:31 [impl::SolverInterfaceImpl]:266 in initialize: [0mit 1 of 1 | dt# 1 | t 0 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete no | 
+(0) 17:31:31 [impl::SolverInterfaceImpl]:266 in initialize: [0mit 1 of 1 | dt# 1 | t 0 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete no | 
+StartTime: 1578501091
+[henrik-Lenovo-Z50-70:28851] *** Process received signal ***
+[henrik-Lenovo-Z50-70:28851] Signal: Segmentation fault (11)
+[henrik-Lenovo-Z50-70:28851] Signal code: Address not mapped (1)
+[henrik-Lenovo-Z50-70:28851] Failing at address: 0xcb
+[henrik-Lenovo-Z50-70:28851] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x43f60)[0x7f5f83ad3f60]
+[henrik-Lenovo-Z50-70:28851] [ 1] /lib/libprecice.so.1.6.1(_ZNK7precice4impl19SolverInterfaceImpl19readBlockVectorDataEiiPKiPd+0x25)[0x7f5f850083c5]
+[henrik-Lenovo-Z50-70:28851] [ 2] ./numsim_fluid(+0x21861)[0x556c4f0b2861]
+[henrik-Lenovo-Z50-70:28851] [ 3] ./numsim_fluid(+0x68ca)[0x556c4f0978ca]
+[henrik-Lenovo-Z50-70:28851] [ 4] ./numsim_fluid(+0x4800)[0x556c4f095800]
+[henrik-Lenovo-Z50-70:28851] [ 5] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xeb)[0x7f5f83ab6b6b]
+[henrik-Lenovo-Z50-70:28851] [ 6] ./numsim_fluid(+0x463a)[0x556c4f09563a]
+[henrik-Lenovo-Z50-70:28851] *** End of error message ***

@@ -27,16 +27,16 @@ void Computation::initialize (int argc, char *argv[])
 	//select DonorCell or CentralDifferences
 	if (settings_.useDonorCell == true)
 	{
-		discretization_ = std::make_shared<DonorCell>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPVOrientation_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, settings_.alpha, settings_.gamma, adapter);
+		discretization_ = std::make_shared<DonorCell>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPVOrientation_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, settings_.alpha, settings_.gamma, adapter, settings_);
 	}
 	else
 	{
-		discretization_ = std::make_shared<CentralDifferences>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPVOrientation_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, adapter);
+		discretization_ = std::make_shared<CentralDifferences>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPVOrientation_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, adapter, settings_);
 	}
 	discretization_->fillIn(settings_.uInit_, settings_.vInit_, settings_.pInit_, settings_.TInit_);
-	
+
 	// Initialize preCICE
-	discretization_->adapter.initialize(settings_.meshName, settings_.coords);
+	discretization_->adapter_.initialize(settings_.meshName, settings_.coords);
 
 	//select SOR or GaussSeidel
 	if (settings_.pressureSolver == "SOR")
@@ -63,23 +63,23 @@ void Computation::runSimulation ()
 	double lastOutputTime = 0;
 
 	// Initialize preCICE
-	//discretization_->adapter.initialize(settings_.meshName, settings_.coords);
+	//discretization_->adapter_.initialize(settings_.meshName, settings_.coords);
 
-	int vertexSize = discretization_->adapter.getVertexSize();
+	int vertexSize = discretization_->adapter_.getVertexSize();
 	std::vector<double> readData;
 	// double *readData = new double[vertexSize];
 	std::vector<double> writeData;
 	// double *writeData = new double[vertexSize];
 
 	while(time < settings_.endTime)
-	// while (discretization_->adapter.isCouplingOngoing()) // implicit
+	// while (discretization_->adapter_.isCouplingOngoing()) // implicit
 	{
-		// if (discretization_->adapter.isActionRequired(discretization_->adapter.cowic))
+		// if (discretization_->adapter_.isActionRequired(discretization_->adapter_.cowic))
 		// {
 		// 	saveOldState();
-		// 	discretization_->adapter.fulfilledAction(cowic);
+		// 	discretization_->adapter_.fulfilledAction(cowic);
 		// }
-		discretization_->adapter.readData(readData);
+		discretization_->adapter_.readData(readData);
 		applyObstacleValues2();
 		applyBoundaryValues(readData);
 
@@ -92,7 +92,7 @@ void Computation::runSimulation ()
 		// std::cout << "time" << time << std::endl;
 		// compute dt_ and time
 		computeTimeStepWidth();
-		dt_ = discretization_->adapter.get_dt(dt_);
+		dt_ = discretization_->adapter_.get_dt(dt_);
 		if(time+dt_>settings_.endTime) dt_ = settings_.endTime - time;
 		// std::cout << "time_step" << dt_ << std::endl;
 
@@ -119,7 +119,7 @@ void Computation::runSimulation ()
 		// compute T
 		computeTemperature(); // Reihenfolge?
 		set_writeData(writeData);
-		discretization_->adapter.writeData(writeData);
+		discretization_->adapter_.writeData(writeData);
 
 		//compute rhs
 		computeRightHandSide();
@@ -128,12 +128,12 @@ void Computation::runSimulation ()
 		//compute u and v
 		computeVelocities();
 
-		discretization_->adapter.advance();
+		discretization_->adapter_.advance();
 
-		// if (discretization_->adapter.isActionRequired(coric))
+		// if (discretization_->adapter_.isActionRequired(coric))
 		// {
 		// 	reloadOldState();
-		// 	discretization_->adapter.fulfilledAction(coric);
+		// 	discretization_->adapter_.fulfilledAction(coric);
 		// }
 		// else
 		{
@@ -148,7 +148,7 @@ void Computation::runSimulation ()
 			}
 		}
 	}
-	discretization_->adapter.finalize();
+	discretization_->adapter_.finalize();
 
 	// output data using VTK if we did not do this in the last time step
 	if ( std::fabs( time - lastOutputTime ) > 1e-4 )

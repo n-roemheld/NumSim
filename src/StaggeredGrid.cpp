@@ -23,7 +23,7 @@
 // 	geometryPVString_(geometryPVString), geometryPV1_(geometryPV1), geometryPV2_(geometryPV2), geometryTString_(geometryTString), geometryT1_(geometryT1)
 // {};
 
-StaggeredGrid::StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPVOrientation, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1, Adapter& adapter) :
+StaggeredGrid::StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPVOrientation, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1, Adapter& adapter, Settings& settings) :
 	nCells_(nCells), meshWidth_(meshWidth),
 	u_( {nCells[0]+1, nCells[1]+2},  {0*meshWidth[0],    -0.5*meshWidth[1]}, meshWidth ),
 	v_( {nCells[0]+2, nCells[1]+1},  {-0.5*meshWidth[0], 0*meshWidth[1]}, meshWidth ),
@@ -37,7 +37,8 @@ StaggeredGrid::StaggeredGrid(std::array< int, 2 > nCells, std::array< double, 2 
 	T_( {nCells[0]+2, nCells[1]+2},  {-0.5*meshWidth[0], -0.5*meshWidth[1]}, meshWidth),
 	T_old_( {nCells[0]+2, nCells[1]+2},  {-0.5*meshWidth[0], -0.5*meshWidth[1]}, meshWidth),
 	geometryPVString_(geometryPVString), geometryPVOrientation_(geometryPVOrientation), geometryPV1_(geometryPV1), geometryPV2_(geometryPV2), geometryTString_(geometryTString), geometryT1_(geometryT1),
-	adapter(adapter)
+	adapter_(adapter),
+	settings_(settings)
 {};
 
 
@@ -670,8 +671,31 @@ void StaggeredGrid::setBoundaryValues_T(std::vector<double> & readData, int vert
 		}
 	}
 	// TPD/TPN
+	// Neumann
 	for (int v = 0; v < vertexSize; v++)
 	{
+		igeom = settings_.vertix_i(v);
+		jgeom = settings_.vertex_j(v);
+
+		int in = igeom; // neighbour values
+		int jn = jgeom;
+
+		int orientation = int(geometryPVOrientation_->operator()(igeom,jgeom));
+		switch (orientation)
+		{
+			case 0: std::cout << "No orientation assigned!" << std::endl; break;
+			case 1: in = i-1; break; // left is fluid
+			case 2: in = i+1; break; // right
+			case 3: jn = j-1; break; // lower
+			case 4: jn = j+1; break; // upper
+			case 5: in = i-1; jn = j-1; break; // lower-left
+			case 6: in = i-1; jn = j+1; break; // upper-left
+			case 7: in = i+1; jn = j-1; break; // lower-right
+			case 8: in = i+1; jn = j+1; break; // upper-right
+			default: std::cout << "Unkown orientation!" << std::endl; break;
+		}
+
+
 		T(vertex_i.at(v),vertex_j.at(v)) = readData.at(v);
 	}
 }

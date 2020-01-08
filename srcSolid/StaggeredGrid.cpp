@@ -519,7 +519,7 @@ void StaggeredGrid::setBoundaryValues_p()
 
 void StaggeredGrid::setBoundaryValues_T(std::vector<double> & readData, int vertexSize, std::vector<int> &vertex_i, std::vector<int> &vertex_j)
 {
-	for (int i = pIBegin(); i < pIEnd()+1; i++) // double check!
+	for (int i = pIBegin()-1; i < pIEnd()+1; i++) // double check!        
 	{
 		for (int j = pJBegin()-1; j < pJEnd()+1; j++)
 		{
