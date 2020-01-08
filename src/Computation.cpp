@@ -161,12 +161,12 @@ void Computation::runSimulation ()
 
 void Computation::saveOldState()
 {
-	discretization_->saveOldStateT();
+	discretization_->saveOldState();
 }
 
 void Computation::reloadOldState()
 {
-	discretization_->reloadOldStateT();
+	discretization_->reloadOldState();
 }
 
 
