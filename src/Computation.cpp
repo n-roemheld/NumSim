@@ -34,6 +34,9 @@ void Computation::initialize (int argc, char *argv[])
 		discretization_ = std::make_shared<CentralDifferences>(settings_.nCells, meshWidth_, settings_.geometryPVString_, settings_.geometryPVOrientation_, settings_.geometryPV1_, settings_.geometryPV2_, settings_.geometryTString_, settings_.geometryT1_, adapter);
 	}
 	discretization_->fillIn(settings_.uInit_, settings_.vInit_, settings_.pInit_, settings_.TInit_);
+	
+	// Initialize preCICE
+	discretization_->adapter.initialize(settings_.meshName, settings_.coords);
 
 	//select SOR or GaussSeidel
 	if (settings_.pressureSolver == "SOR")
@@ -60,8 +63,8 @@ void Computation::runSimulation ()
 	double lastOutputTime = 0;
 
 	// Initialize preCICE
+	//discretization_->adapter.initialize(settings_.meshName, settings_.coords);
 
-	discretization_->adapter.initialize(settings_.meshName, settings_.coords);
 	int vertexSize = discretization_->adapter.getVertexSize();
 	std::vector<double> readData;
 	// double *readData = new double[vertexSize];

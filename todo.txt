@@ -1,5 +1,5 @@
 todo:
 
 - Ecken TPD/TPN kontrollieren
-- applyBoundaryValues 
 - Solid: Temperature boundary iteration update
+
