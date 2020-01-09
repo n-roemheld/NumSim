@@ -374,10 +374,22 @@ void Computation::applyBoundaryValues (std::vector<double> & readData)
 		switch (orientation)
 		{
 			case 0: std::cout << "no orientation assigned!" << std::endl; break;
-			case 1: in = i-1; h = dx; break;
-			case 2: in = i+1; h = dx; break;
-			case 3: jn = j-1; h = dy; break;
-			case 4: jn = j+1; h = dy; break;
+			case 1: in = i-1; h = dx;
+			discretization_->setBoundaryValues_u_f(right,i,j);
+			discretization_->setBoundaryValues_v_g(right,i,j);
+			break;
+			case 2: in = i+1; h = dx;
+			discretization_->setBoundaryValues_u_f(left,i,j);
+			discretization_->setBoundaryValues_v_g(left,i,j);
+			break;
+			case 3: jn = j-1; h = dy;
+			discretization_->setBoundaryValues_u_f(upper,i,j);
+			discretization_->setBoundaryValues_v_g(upper,i,j);
+			break;
+			case 4: jn = j+1; h = dy;
+			discretization_->setBoundaryValues_u_f(lower,i,j);
+			discretization_->setBoundaryValues_v_g(lower,i,j); 
+			break;
 			case 5:
 			case 6:
 			case 7:
