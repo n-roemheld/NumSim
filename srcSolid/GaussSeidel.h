@@ -9,6 +9,6 @@ public:
 	GaussSeidel (std::shared_ptr< Discretization > discretization, double epsilon, int maximumNumberOfIterations);
 
 
-	void solve (double dt, double heatDiffusivity);
+	void solve (double dt, double heatDiffusivity, std::vector<double> readData);
 
 };

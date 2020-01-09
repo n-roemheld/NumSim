@@ -10,8 +10,8 @@
 // 	Discretization(nCells, meshWidth, geometryPVString, geometryPV1, geometryPV2, geometryTString, geometryT1), alpha_(alpha), gamma_(gamma)
 // {};
 
-DonorCell::DonorCell(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPVOrientation, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1, double alpha, double gamma) :
-	Discretization(nCells, meshWidth, geometryPVString, geometryPVOrientation, geometryPV1, geometryPV2, geometryTString, geometryT1), alpha_(alpha), gamma_(gamma)
+DonorCell::DonorCell(std::array< int, 2 > nCells, std::array< double, 2 > meshWidth, std::shared_ptr<Array2D> geometryPVString, std::shared_ptr<Array2D> geometryPVOrientation, std::shared_ptr<Array2D> geometryPV1, std::shared_ptr<Array2D> geometryPV2, std::shared_ptr<Array2D> geometryTString, std::shared_ptr<Array2D> geometryT1, std::shared_ptr<Settings> settings, double alpha, double gamma) :
+	Discretization(nCells, meshWidth, geometryPVString, geometryPVOrientation, geometryPV1, geometryPV2, geometryTString, geometryT1, settings), alpha_(alpha), gamma_(gamma)
 {};
 
 // alpha parameterized donor cell /centrall difference scheme

@@ -18,16 +18,16 @@ private:
 	void computeTimeStepWidth ();
 	void applyBoundaryValues (std::vector<double> & readData);
 	void computeRightHandSide ();
-	void computeTemperature();
+	void computeTemperature(std::vector<double> readData);
 	// void applyObstacleValues();
 	void applyObstacleValues2();
 	void saveOldState();
 	void reloadOldState();
 	void set_writeData(std::vector<double> & writeData);
 
-	Settings settings_;
+	std::shared_ptr<Settings> settings_;
 	std::shared_ptr< Discretization > discretization_;
-	std::unique_ptr< TemperatureSolver > TemperatureSolver_;
+	std::unique_ptr< TemperatureSolver > temperatureSolver_;
 	std::unique_ptr< OutputWriterParaview > outputWriterParaview_;
 	std::unique_ptr< OutputWriterText > outputWriterText_;
 	std::array< double, 2 > meshWidth_;

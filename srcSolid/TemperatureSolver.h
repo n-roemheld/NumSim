@@ -9,11 +9,11 @@ public:
 	TemperatureSolver (std::shared_ptr<Discretization> discretization, double epsilon, int maximumNumberOfIterations);
 
 	//!solve the Poisson problem for the pressure, using the rhs and p field variables in the staggeredGrid
-	virtual void solve (double dt, double heatDiffusivity) = 0;
+	virtual void solve (double dt, double heatDiffusivity, std::vector<double> readData) = 0;
 
 protected:
 	//!	set the boundary values to account for homogenous Neumann boundary conditions, this has to be called after every iteration
-	void setBoundaryValues ();
+	void setBoundaryValues (std::vector<double> readData);
 
 	// void setObstacleValues();
 	void setObstacleValues2();

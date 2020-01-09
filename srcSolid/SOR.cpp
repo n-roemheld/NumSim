@@ -5,7 +5,7 @@ SOR::SOR (std::shared_ptr< Discretization > discretization, double epsilon, int 
 TemperatureSolver(discretization, epsilon, maximumNumberOfIterations), omega_(omega)
 {};
 
-void SOR::solve()
+void SOR::solve(std::vector<double> readData)
 {
 	// change i,j for speed?
 		std::array<double,2> mW = discretization_->meshWidth();
@@ -42,7 +42,7 @@ void SOR::solve()
 				};
 			};
 			setObstacleValues2(); // BLAAAAAAAAAAAAAAARM
-			setBoundaryValues();
+			// setBoundaryValues();
 
 			// compute and update residuum
 			// wrong sign ????

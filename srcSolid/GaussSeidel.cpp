@@ -5,7 +5,7 @@ GaussSeidel::GaussSeidel (std::shared_ptr< Discretization > discretization, doub
 {};
 
 
-void GaussSeidel::solve(double dt, double heatDiffusivity)
+void GaussSeidel::solve(double dt, double heatDiffusivity, std::vector<double> readData)
 {
 	std::array<double,2> mW = discretization_->meshWidth();
 	double dx = mW[0];
@@ -13,15 +13,15 @@ void GaussSeidel::solve(double dt, double heatDiffusivity)
 
 	int it = 0;
 	setObstacleValues2();
-	setBoundaryValues();
+	setBoundaryValues(readData);
 	double res_squared = compute_res(dt, heatDiffusivity);
 	// double res_squared = 2*epsilon_*epsilon_;
 
 	while (it < maximumNumberOfIterations_ && res_squared > epsilon_*epsilon_)
 	{
 		// set boundary values for p to achieve 0-Neumann conditions
-		setObstacleValues2();
-		setBoundaryValues();
+		// setObstacleValues2();
+		setBoundaryValues(readData);
 		// perform one itertaion step
 		for(int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
 		{
@@ -43,7 +43,7 @@ void GaussSeidel::solve(double dt, double heatDiffusivity)
 		res_squared = compute_res(dt, heatDiffusivity);
 		it++;
 	}
-	setObstacleValues2();
-	setBoundaryValues();
+	// setObstacleValues2();
+	setBoundaryValues(readData);
 
 };
