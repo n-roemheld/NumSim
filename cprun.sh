@@ -1,7 +1,7 @@
 
 #testcase="naturalconvection"
-testcase="heatedbar"
-#testcase="dummy"
+#testcase="heatedbar"
+testcase="dummy"
 
 
 mkdir -p run

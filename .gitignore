@@ -97,6 +97,7 @@ out
 # Experiments
 build/
 out/
+run/
 *.vti
 *.txt
 \!todo!.txt
