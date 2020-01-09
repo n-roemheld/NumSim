@@ -3,7 +3,7 @@
 
 # Problem description
 geometryFile = naturalconvection_solid_35x35.geom
-endTime = 10.0        # duration of the simulation
+endTime = 1.0        # duration of the simulation
 participantName = SolidSolver
 meshName = SolidSolverMesh
 preciceConfigFile = precice-config-naturalconvection-implicit.xml

@@ -567,7 +567,9 @@ void Settings::loadGeometryFile() {
 			case 1: vertex_x.at(v) += .5*dx; break;
 			case 2: vertex_y.at(v) -= .5*dy; break;
 			case 3:	vertex_y.at(v) += .5*dy; break;
-			default: std::cout << "This shouldn't happen (unknown orientation): " << orientation_[v] << vertex_i.at(v) << vertex_j.at(v) <<std::endl; break;
+			default:
+			// std::cout << "This shouldn't happen (unknown orientation): " << orientation_[v] << vertex_i.at(v) << vertex_j.at(v) <<std::endl; 
+			break;
 		}
 		coords.at(2*v) = vertex_x.at(v);
 		coords.at(2*v+1) =vertex_y.at(v);

@@ -3,7 +3,7 @@
 
 # Problem description
 geometryFile = naturalconvection_fluid_25x25.geom
-endTime = 10.0        # duration of the simulation
+endTime = 1.0        # duration of the simulation
 re = 1000             # Reynolds number
 prandtl = 0.01 # Prandtl number
 beta = 0.2 # Volumetric expansion coefficient beta = Ri / (g * Re^2)

@@ -1,14 +1,20 @@
 
+<<<<<<< HEAD
 #testcase="naturalconvection"
 #testcase="heatedbar"
 testcase="dummy"
+=======
+testcase="naturalconvection"
+#testcase="forcedconvection"
+#testcase="dummy"
+>>>>>>> eec7f0540a76770cfe0825c9b33eb8f6d29ef159
 
 
 mkdir -p run
 
-if [ "$testcase" == "heatedbar" ]
+if [ "$testcase" == "forcedconvection" ]
 then 
-    cp -a ./heatedbar/. ./run
+    cp -a ./forcedconvection/. ./run
     cd run 
     ./Allclean.sh
     cp ../build/src/numsim_fluid .
