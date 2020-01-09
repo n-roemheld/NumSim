@@ -101,5 +101,7 @@ out/
 *.txt
 \!todo!.txt
 \!CMakeLists!.txt
+*.log
+\!run!.sh
 
 src_old
