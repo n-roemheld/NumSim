@@ -205,7 +205,7 @@ void Computation::set_writeData(std::vector<double> & writeData)
 
 		// std::cout << "here3!" << std::endl;
 
-		writeData.at(v) = (discretization_->T(i,j)+discretization_->T(in,jn))/2;         // gkkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+		writeData.at(v) = settings_->heatDiffusivity * (discretization_->T(in, jn) - discretization_->T(i,j))/2;         // oder andersherum???
 	}
 }
 
@@ -309,8 +309,7 @@ void Computation::applyBoundaryValues (std::vector<double> & readData)
 		// std::cout << "here3!" << std::endl;
 
 
-		discretization_->T(i,j) = h*readData.at(v)*settings_->re*settings_->prandtl        //lkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-		                        + discretization_->T(in,jn);
+		discretization_->T(i,j) = readData.at(v); 									// kdsjafkllllllllllll
 	}
 };
 

@@ -6,7 +6,7 @@
 #include <cmath>
 #include <iostream>
 #include "Adapter.h"
-#include "Settings.h"
+#include "settings.h"
 
 class StaggeredGrid
 {
