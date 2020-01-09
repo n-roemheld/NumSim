@@ -1,7 +1,7 @@
 
 #testcase="naturalconvection"
-#testcase="heatedbar"
-testcase="dummy"
+testcase="heatedbar"
+#testcase="dummy"
 
 
 mkdir -p run
@@ -12,6 +12,7 @@ then
     cd run 
     ./Allclean.sh
     cp ../build/src/numsim_fluid .
+    cp ../build/srcSolid/numsim_solid .
     ./Allrun.sh
 fi
 if [ "$testcase" == "naturalconvection" ]
@@ -20,7 +21,9 @@ then
     cd run 
     ./Allclean.sh
     cp ../build/src/numsim_fluid .
+    cp ../build/srcSolid/numsim_solid .
     ./Allrun.sh
+
 
 fi
 if [ "$testcase" == "dummy" ]
