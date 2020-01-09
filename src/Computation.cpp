@@ -189,8 +189,6 @@ void Computation::set_writeData(std::vector<double> & writeData)
 		int i = settings_.vertex_i.at(v);
 		int j = settings_.vertex_j.at(v);
 
-		// std::cout << "here!" << std::endl;
-
 		// neighbour indices
 		int in = i;
 		int jn = j;
@@ -198,13 +196,7 @@ void Computation::set_writeData(std::vector<double> & writeData)
 		double dx = meshWidth_[0];
 		double dy = meshWidth_[1];
 
-		// std::cout << "c" << std::endl;
-		// std::cout << "osize" << settings_.orientation_.size() << std::endl;
-
-
 		int orientation = settings_.orientation_.at(v);
-
-		// std::cout << "here2" << std::endl;
 
 		switch (orientation)
 		{
@@ -370,8 +362,6 @@ void Computation::applyBoundaryValues (std::vector<double> & readData)
 		int i = settings_.vertex_i.at(v);
 		int j = settings_.vertex_j.at(v);
 
-		// std::cout << "here!" << std::endl;
-
 		// neighbour indices
 		int in = i;
 		int jn = j;
@@ -379,30 +369,33 @@ void Computation::applyBoundaryValues (std::vector<double> & readData)
 		double dx = meshWidth_[0];
 		double dy = meshWidth_[1];
 
-		// std::cout << "c" << std::endl;
-		// std::cout << "osize" << settings_.orientation_.size() << std::endl;
-
-
 		int orientation = settings_.orientation_.at(v);
-
-		// std::cout << "here2" << std::endl;
 
 		switch (orientation)
 		{
 			case 0: std::cout << "no orientation assigned!" << std::endl; break;
-			case 1: in = i-1; h = dx; break;
-			case 2: in = i+1; h = dx; break;
-			case 3: jn = j-1; h = dy; break;
-			case 4: jn = j+1; h = dy; break;
+			case 1: in = i-1; h = dx;
+			discretization_->setBoundaryValues_u_f(right,i,j);
+			discretization_->setBoundaryValues_v_g(right,i,j);
+			break;
+			case 2: in = i+1; h = dx;
+			discretization_->setBoundaryValues_u_f(left,i,j);
+			discretization_->setBoundaryValues_v_g(left,i,j);
+			break;
+			case 3: jn = j-1; h = dy;
+			discretization_->setBoundaryValues_u_f(upper,i,j);
+			discretization_->setBoundaryValues_v_g(upper,i,j);
+			break;
+			case 4: jn = j+1; h = dy;
+			discretization_->setBoundaryValues_u_f(lower,i,j);
+			discretization_->setBoundaryValues_v_g(lower,i,j); 
+			break;
 			case 5:
 			case 6:
 			case 7:
 			case 8: h = 0; break;
 			default: std::cout << "unknown orientation" << std::endl; break;
 		}
-
-		// std::cout << "here3!" << std::endl;
-
 
 		discretization_->T(i,j) = h*readData.at(v)*settings_.re*settings_.prandtl
 		                        + discretization_->T(in,jn);
