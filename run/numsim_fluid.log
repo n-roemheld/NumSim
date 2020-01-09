@@ -13404,3 +13404,2388 @@ dt0.000281148
 time1 2.51991
 dt0.000281148
 run: post read
+time1 2.51991
+dt9.14312e-05
+(0) 11:55:22 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+(0) 11:55:22 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+time1 2.51991
+dt9.14312e-05
+time1 2.52
+dt9.14312e-05
+run: post read
+time1 2.52
+dt0.000267101
+(0) 11:55:23 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52027 of 10 | dt 0.01 | max dt 0.0097329 | ongoing yes | dt complete no | 
+(0) 11:55:23 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52027 of 10 | dt 0.01 | max dt 0.0097329 | ongoing yes | dt complete no | 
+time1 2.52
+dt0.000267101
+time1 2.52027
+dt0.000267101
+run: post read
+time1 2.52027
+dt0.000262285
+(0) 11:55:23 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52053 of 10 | dt 0.01 | max dt 0.00947061 | ongoing yes | dt complete no | 
+(0) 11:55:23 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52053 of 10 | dt 0.01 | max dt 0.00947061 | ongoing yes | dt complete no | 
+time1 2.52027
+dt0.000262285
+time1 2.52053
+dt0.000262285
+run: post read
+time1 2.52053
+dt0.000255081
+(0) 11:55:23 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52078 of 10 | dt 0.01 | max dt 0.00921553 | ongoing yes | dt complete no | 
+(0) 11:55:23 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52078 of 10 | dt 0.01 | max dt 0.00921553 | ongoing yes | dt complete no | 
+time1 2.52053
+dt0.000255081
+time1 2.52078
+dt0.000255081
+run: post read
+time1 2.52078
+dt0.000254491
+(0) 11:55:24 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52104 of 10 | dt 0.01 | max dt 0.00896104 | ongoing yes | dt complete no | 
+(0) 11:55:24 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52104 of 10 | dt 0.01 | max dt 0.00896104 | ongoing yes | dt complete no | 
+time1 2.52078
+dt0.000254491
+time1 2.52104
+dt0.000254491
+run: post read
+time1 2.52104
+dt0.000254479
+(0) 11:55:24 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52129 of 10 | dt 0.01 | max dt 0.00870656 | ongoing yes | dt complete no | 
+(0) 11:55:24 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52129 of 10 | dt 0.01 | max dt 0.00870656 | ongoing yes | dt complete no | 
+time1 2.52104
+dt0.000254479
+time1 2.52129
+dt0.000254479
+run: post read
+time1 2.52129
+dt0.000254404
+(0) 11:55:25 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52155 of 10 | dt 0.01 | max dt 0.00845216 | ongoing yes | dt complete no | 
+(0) 11:55:25 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52155 of 10 | dt 0.01 | max dt 0.00845216 | ongoing yes | dt complete no | 
+time1 2.52129
+dt0.000254404
+time1 2.52155
+dt0.000254404
+run: post read
+time1 2.52155
+dt0.000260817
+(0) 11:55:25 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52181 of 10 | dt 0.01 | max dt 0.00819134 | ongoing yes | dt complete no | 
+(0) 11:55:25 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52181 of 10 | dt 0.01 | max dt 0.00819134 | ongoing yes | dt complete no | 
+time1 2.52155
+dt0.000260817
+time1 2.52181
+dt0.000260817
+run: post read
+time1 2.52181
+dt0.000266022
+(0) 11:55:25 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52207 of 10 | dt 0.01 | max dt 0.00792532 | ongoing yes | dt complete no | 
+(0) 11:55:25 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52207 of 10 | dt 0.01 | max dt 0.00792532 | ongoing yes | dt complete no | 
+time1 2.52181
+dt0.000266022
+time1 2.52207
+dt0.000266022
+run: post read
+time1 2.52207
+dt0.000273196
+(0) 11:55:26 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52235 of 10 | dt 0.01 | max dt 0.00765212 | ongoing yes | dt complete no | 
+(0) 11:55:26 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52235 of 10 | dt 0.01 | max dt 0.00765212 | ongoing yes | dt complete no | 
+time1 2.52207
+dt0.000273196
+time1 2.52235
+dt0.000273196
+run: post read
+time1 2.52235
+dt0.000289041
+(0) 11:55:26 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52264 of 10 | dt 0.01 | max dt 0.00736308 | ongoing yes | dt complete no | 
+(0) 11:55:26 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52264 of 10 | dt 0.01 | max dt 0.00736308 | ongoing yes | dt complete no | 
+time1 2.52235
+dt0.000289041
+time1 2.52264
+dt0.000289041
+run: post read
+time1 2.52264
+dt0.000299555
+(0) 11:55:27 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52294 of 10 | dt 0.01 | max dt 0.00706353 | ongoing yes | dt complete no | 
+(0) 11:55:27 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52294 of 10 | dt 0.01 | max dt 0.00706353 | ongoing yes | dt complete no | 
+time1 2.52264
+dt0.000299555
+time1 2.52294
+dt0.000299555
+run: post read
+time1 2.52294
+dt0.000319192
+(0) 11:55:27 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52326 of 10 | dt 0.01 | max dt 0.00674434 | ongoing yes | dt complete no | 
+(0) 11:55:27 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52326 of 10 | dt 0.01 | max dt 0.00674434 | ongoing yes | dt complete no | 
+time1 2.52294
+dt0.000319192
+time1 2.52326
+dt0.000319192
+run: post read
+time1 2.52326
+dt0.000350315
+(0) 11:55:28 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52361 of 10 | dt 0.01 | max dt 0.00639402 | ongoing yes | dt complete no | 
+(0) 11:55:28 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52361 of 10 | dt 0.01 | max dt 0.00639402 | ongoing yes | dt complete no | 
+time1 2.52326
+dt0.000350315
+time1 2.52361
+dt0.000350315
+run: post read
+time1 2.52361
+dt0.000376587
+(0) 11:55:28 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52398 of 10 | dt 0.01 | max dt 0.00601743 | ongoing yes | dt complete no | 
+(0) 11:55:28 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52398 of 10 | dt 0.01 | max dt 0.00601743 | ongoing yes | dt complete no | 
+time1 2.52361
+dt0.000376587
+time1 2.52398
+dt0.000376587
+run: post read
+time1 2.52398
+dt0.000401772
+(0) 11:55:28 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52438 of 10 | dt 0.01 | max dt 0.00561566 | ongoing yes | dt complete no | 
+(0) 11:55:28 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52438 of 10 | dt 0.01 | max dt 0.00561566 | ongoing yes | dt complete no | 
+time1 2.52398
+dt0.000401772
+time1 2.52438
+dt0.000401772
+run: post read
+time1 2.52438
+dt0.000419083
+(0) 11:55:29 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.5248 of 10 | dt 0.01 | max dt 0.00519658 | ongoing yes | dt complete no | 
+(0) 11:55:29 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.5248 of 10 | dt 0.01 | max dt 0.00519658 | ongoing yes | dt complete no | 
+time1 2.52438
+dt0.000419083
+time1 2.5248
+dt0.000419083
+run: post read
+time1 2.5248
+dt0.000462169
+(0) 11:55:29 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52527 of 10 | dt 0.01 | max dt 0.00473441 | ongoing yes | dt complete no | 
+(0) 11:55:29 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52527 of 10 | dt 0.01 | max dt 0.00473441 | ongoing yes | dt complete no | 
+time1 2.5248
+dt0.000462169
+time1 2.52527
+dt0.000462169
+run: post read
+time1 2.52527
+dt0.000548928
+(0) 11:55:30 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52581 of 10 | dt 0.01 | max dt 0.00418548 | ongoing yes | dt complete no | 
+(0) 11:55:30 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52581 of 10 | dt 0.01 | max dt 0.00418548 | ongoing yes | dt complete no | 
+time1 2.52527
+dt0.000548928
+time1 2.52581
+dt0.000548928
+run: post read
+time1 2.52581
+dt0.000720216
+(0) 11:55:30 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52653 of 10 | dt 0.01 | max dt 0.00346526 | ongoing yes | dt complete no | 
+(0) 11:55:30 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52653 of 10 | dt 0.01 | max dt 0.00346526 | ongoing yes | dt complete no | 
+time1 2.52581
+dt0.000720216
+time1 2.52653
+dt0.000720216
+run: post read
+time1 2.52653
+dt0.000795061
+(0) 11:55:31 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52733 of 10 | dt 0.01 | max dt 0.0026702 | ongoing yes | dt complete no | 
+(0) 11:55:31 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52733 of 10 | dt 0.01 | max dt 0.0026702 | ongoing yes | dt complete no | 
+time1 2.52653
+dt0.000795061
+time1 2.52733
+dt0.000795061
+run: post read
+time1 2.52733
+dt0.000485544
+(0) 11:55:31 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52782 of 10 | dt 0.01 | max dt 0.00218466 | ongoing yes | dt complete no | 
+(0) 11:55:31 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52782 of 10 | dt 0.01 | max dt 0.00218466 | ongoing yes | dt complete no | 
+time1 2.52733
+dt0.000485544
+time1 2.52782
+dt0.000485544
+run: post read
+time1 2.52782
+dt0.000398473
+(0) 11:55:31 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52821 of 10 | dt 0.01 | max dt 0.00178619 | ongoing yes | dt complete no | 
+(0) 11:55:31 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52821 of 10 | dt 0.01 | max dt 0.00178619 | ongoing yes | dt complete no | 
+time1 2.52782
+dt0.000398473
+time1 2.52821
+dt0.000398473
+run: post read
+time1 2.52821
+dt0.000364646
+(0) 11:55:32 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52858 of 10 | dt 0.01 | max dt 0.00142154 | ongoing yes | dt complete no | 
+(0) 11:55:32 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52858 of 10 | dt 0.01 | max dt 0.00142154 | ongoing yes | dt complete no | 
+time1 2.52821
+dt0.000364646
+time1 2.52858
+dt0.000364646
+run: post read
+time1 2.52858
+dt0.000355121
+(0) 11:55:32 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52893 of 10 | dt 0.01 | max dt 0.00106642 | ongoing yes | dt complete no | 
+(0) 11:55:32 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52893 of 10 | dt 0.01 | max dt 0.00106642 | ongoing yes | dt complete no | 
+time1 2.52858
+dt0.000355121
+time1 2.52893
+dt0.000355121
+run: post read
+time1 2.52893
+dt0.000363757
+(0) 11:55:32 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.5293 of 10 | dt 0.01 | max dt 0.000702662 | ongoing yes | dt complete no | 
+(0) 11:55:32 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.5293 of 10 | dt 0.01 | max dt 0.000702662 | ongoing yes | dt complete no | 
+time1 2.52893
+dt0.000363757
+time1 2.5293
+dt0.000363757
+run: post read
+time1 2.5293
+dt0.000370797
+(0) 11:55:33 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52967 of 10 | dt 0.01 | max dt 0.000331865 | ongoing yes | dt complete no | 
+(0) 11:55:33 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 253 | t 2.52967 of 10 | dt 0.01 | max dt 0.000331865 | ongoing yes | dt complete no | 
+time1 2.5293
+dt0.000370797
+time1 2.52967
+dt0.000370797
+run: post read
+time1 2.52967
+dt0.000331865
+(0) 11:55:33 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+(0) 11:55:33 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+time1 2.52967
+dt0.000331865
+time1 2.53
+dt0.000331865
+run: post read
+time1 2.53
+dt0.00033309
+(0) 11:55:34 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53033 of 10 | dt 0.01 | max dt 0.00966691 | ongoing yes | dt complete no | 
+(0) 11:55:34 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53033 of 10 | dt 0.01 | max dt 0.00966691 | ongoing yes | dt complete no | 
+time1 2.53
+dt0.00033309
+time1 2.53033
+dt0.00033309
+run: post read
+time1 2.53033
+dt0.000316072
+(0) 11:55:34 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53065 of 10 | dt 0.01 | max dt 0.00935084 | ongoing yes | dt complete no | 
+(0) 11:55:34 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53065 of 10 | dt 0.01 | max dt 0.00935084 | ongoing yes | dt complete no | 
+time1 2.53033
+dt0.000316072
+time1 2.53065
+dt0.000316072
+run: post read
+time1 2.53065
+dt0.000305107
+(0) 11:55:35 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53095 of 10 | dt 0.01 | max dt 0.00904573 | ongoing yes | dt complete no | 
+(0) 11:55:35 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53095 of 10 | dt 0.01 | max dt 0.00904573 | ongoing yes | dt complete no | 
+time1 2.53065
+dt0.000305107
+time1 2.53095
+dt0.000305107
+run: post read
+time1 2.53095
+dt0.000299315
+(0) 11:55:35 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53125 of 10 | dt 0.01 | max dt 0.00874642 | ongoing yes | dt complete no | 
+(0) 11:55:35 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53125 of 10 | dt 0.01 | max dt 0.00874642 | ongoing yes | dt complete no | 
+time1 2.53095
+dt0.000299315
+time1 2.53125
+dt0.000299315
+run: post read
+time1 2.53125
+dt0.000294896
+(0) 11:55:35 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53155 of 10 | dt 0.01 | max dt 0.00845152 | ongoing yes | dt complete no | 
+(0) 11:55:35 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53155 of 10 | dt 0.01 | max dt 0.00845152 | ongoing yes | dt complete no | 
+time1 2.53125
+dt0.000294896
+time1 2.53155
+dt0.000294896
+run: post read
+time1 2.53155
+dt0.000290794
+(0) 11:55:36 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53184 of 10 | dt 0.01 | max dt 0.00816073 | ongoing yes | dt complete no | 
+(0) 11:55:36 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53184 of 10 | dt 0.01 | max dt 0.00816073 | ongoing yes | dt complete no | 
+time1 2.53155
+dt0.000290794
+time1 2.53184
+dt0.000290794
+run: post read
+time1 2.53184
+dt0.000290693
+(0) 11:55:36 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53213 of 10 | dt 0.01 | max dt 0.00787003 | ongoing yes | dt complete no | 
+(0) 11:55:36 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53213 of 10 | dt 0.01 | max dt 0.00787003 | ongoing yes | dt complete no | 
+time1 2.53184
+dt0.000290693
+time1 2.53213
+dt0.000290693
+run: post read
+time1 2.53213
+dt0.000291625
+(0) 11:55:36 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53242 of 10 | dt 0.01 | max dt 0.00757841 | ongoing yes | dt complete no | 
+(0) 11:55:36 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53242 of 10 | dt 0.01 | max dt 0.00757841 | ongoing yes | dt complete no | 
+time1 2.53213
+dt0.000291625
+time1 2.53242
+dt0.000291625
+run: post read
+time1 2.53242
+dt0.000293586
+(0) 11:55:37 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53272 of 10 | dt 0.01 | max dt 0.00728482 | ongoing yes | dt complete no | 
+(0) 11:55:37 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53272 of 10 | dt 0.01 | max dt 0.00728482 | ongoing yes | dt complete no | 
+time1 2.53242
+dt0.000293586
+time1 2.53272
+dt0.000293586
+run: post read
+time1 2.53272
+dt0.0002997
+(0) 11:55:37 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53301 of 10 | dt 0.01 | max dt 0.00698512 | ongoing yes | dt complete no | 
+(0) 11:55:37 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53301 of 10 | dt 0.01 | max dt 0.00698512 | ongoing yes | dt complete no | 
+time1 2.53272
+dt0.0002997
+time1 2.53301
+dt0.0002997
+run: post read
+time1 2.53301
+dt0.000309768
+(0) 11:55:38 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53332 of 10 | dt 0.01 | max dt 0.00667535 | ongoing yes | dt complete no | 
+(0) 11:55:38 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53332 of 10 | dt 0.01 | max dt 0.00667535 | ongoing yes | dt complete no | 
+time1 2.53301
+dt0.000309768
+time1 2.53332
+dt0.000309768
+run: post read
+time1 2.53332
+dt0.000321652
+(0) 11:55:38 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53365 of 10 | dt 0.01 | max dt 0.0063537 | ongoing yes | dt complete no | 
+(0) 11:55:38 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53365 of 10 | dt 0.01 | max dt 0.0063537 | ongoing yes | dt complete no | 
+time1 2.53332
+dt0.000321652
+time1 2.53365
+dt0.000321652
+run: post read
+time1 2.53365
+dt0.000339912
+(0) 11:55:38 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53399 of 10 | dt 0.01 | max dt 0.00601379 | ongoing yes | dt complete no | 
+(0) 11:55:38 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53399 of 10 | dt 0.01 | max dt 0.00601379 | ongoing yes | dt complete no | 
+time1 2.53365
+dt0.000339912
+time1 2.53399
+dt0.000339912
+run: post read
+time1 2.53399
+dt0.000345543
+(0) 11:55:39 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53433 of 10 | dt 0.01 | max dt 0.00566825 | ongoing yes | dt complete no | 
+(0) 11:55:39 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53433 of 10 | dt 0.01 | max dt 0.00566825 | ongoing yes | dt complete no | 
+time1 2.53399
+dt0.000345543
+time1 2.53433
+dt0.000345543
+run: post read
+time1 2.53433
+dt0.00036366
+(0) 11:55:39 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.5347 of 10 | dt 0.01 | max dt 0.00530459 | ongoing yes | dt complete no | 
+(0) 11:55:39 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.5347 of 10 | dt 0.01 | max dt 0.00530459 | ongoing yes | dt complete no | 
+time1 2.53433
+dt0.00036366
+time1 2.5347
+dt0.00036366
+run: post read
+time1 2.5347
+dt0.000403018
+(0) 11:55:40 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.5351 of 10 | dt 0.01 | max dt 0.00490157 | ongoing yes | dt complete no | 
+(0) 11:55:40 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.5351 of 10 | dt 0.01 | max dt 0.00490157 | ongoing yes | dt complete no | 
+time1 2.5347
+dt0.000403018
+time1 2.5351
+dt0.000403018
+run: post read
+time1 2.5351
+dt0.000466685
+(0) 11:55:40 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53557 of 10 | dt 0.01 | max dt 0.00443488 | ongoing yes | dt complete no | 
+(0) 11:55:40 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53557 of 10 | dt 0.01 | max dt 0.00443488 | ongoing yes | dt complete no | 
+time1 2.5351
+dt0.000466685
+time1 2.53557
+dt0.000466685
+run: post read
+time1 2.53557
+dt0.000572399
+(0) 11:55:40 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53614 of 10 | dt 0.01 | max dt 0.00386248 | ongoing yes | dt complete no | 
+(0) 11:55:40 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53614 of 10 | dt 0.01 | max dt 0.00386248 | ongoing yes | dt complete no | 
+time1 2.53557
+dt0.000572399
+time1 2.53614
+dt0.000572399
+run: post read
+time1 2.53614
+dt0.000605649
+(0) 11:55:41 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53674 of 10 | dt 0.01 | max dt 0.00325683 | ongoing yes | dt complete no | 
+(0) 11:55:41 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53674 of 10 | dt 0.01 | max dt 0.00325683 | ongoing yes | dt complete no | 
+time1 2.53614
+dt0.000605649
+time1 2.53674
+dt0.000605649
+run: post read
+time1 2.53674
+dt0.000557704
+(0) 11:55:41 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.5373 of 10 | dt 0.01 | max dt 0.00269913 | ongoing yes | dt complete no | 
+(0) 11:55:41 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.5373 of 10 | dt 0.01 | max dt 0.00269913 | ongoing yes | dt complete no | 
+time1 2.53674
+dt0.000557704
+time1 2.5373
+dt0.000557704
+run: post read
+time1 2.5373
+dt0.00047519
+(0) 11:55:41 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53778 of 10 | dt 0.01 | max dt 0.00222394 | ongoing yes | dt complete no | 
+(0) 11:55:41 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53778 of 10 | dt 0.01 | max dt 0.00222394 | ongoing yes | dt complete no | 
+time1 2.5373
+dt0.00047519
+time1 2.53778
+dt0.00047519
+run: post read
+time1 2.53778
+dt0.000466918
+(0) 11:55:42 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53824 of 10 | dt 0.01 | max dt 0.00175702 | ongoing yes | dt complete no | 
+(0) 11:55:42 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53824 of 10 | dt 0.01 | max dt 0.00175702 | ongoing yes | dt complete no | 
+time1 2.53778
+dt0.000466918
+time1 2.53824
+dt0.000466918
+run: post read
+time1 2.53824
+dt0.000401138
+(0) 11:55:43 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53864 of 10 | dt 0.01 | max dt 0.00135589 | ongoing yes | dt complete no | 
+(0) 11:55:43 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53864 of 10 | dt 0.01 | max dt 0.00135589 | ongoing yes | dt complete no | 
+time1 2.53824
+dt0.000401138
+time1 2.53864
+dt0.000401138
+run: post read
+time1 2.53864
+dt0.000371024
+(0) 11:55:43 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53902 of 10 | dt 0.01 | max dt 0.000984861 | ongoing yes | dt complete no | 
+(0) 11:55:43 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53902 of 10 | dt 0.01 | max dt 0.000984861 | ongoing yes | dt complete no | 
+time1 2.53864
+dt0.000371024
+time1 2.53902
+dt0.000371024
+run: post read
+time1 2.53902
+dt0.000358108
+(0) 11:55:44 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53937 of 10 | dt 0.01 | max dt 0.000626754 | ongoing yes | dt complete no | 
+(0) 11:55:44 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53937 of 10 | dt 0.01 | max dt 0.000626754 | ongoing yes | dt complete no | 
+time1 2.53902
+dt0.000358108
+time1 2.53937
+dt0.000358108
+run: post read
+time1 2.53937
+dt0.000342699
+(0) 11:55:44 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53972 of 10 | dt 0.01 | max dt 0.000284055 | ongoing yes | dt complete no | 
+(0) 11:55:44 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 254 | t 2.53972 of 10 | dt 0.01 | max dt 0.000284055 | ongoing yes | dt complete no | 
+time1 2.53937
+dt0.000342699
+time1 2.53972
+dt0.000342699
+run: post read
+time1 2.53972
+dt0.000284055
+(0) 11:55:45 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+(0) 11:55:45 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+time1 2.53972
+dt0.000284055
+time1 2.54
+dt0.000284055
+run: post read
+time1 2.54
+dt0.000309572
+(0) 11:55:45 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54031 of 10 | dt 0.01 | max dt 0.00969043 | ongoing yes | dt complete no | 
+(0) 11:55:45 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54031 of 10 | dt 0.01 | max dt 0.00969043 | ongoing yes | dt complete no | 
+time1 2.54
+dt0.000309572
+time1 2.54031
+dt0.000309572
+run: post read
+time1 2.54031
+dt0.000300124
+(0) 11:55:45 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54061 of 10 | dt 0.01 | max dt 0.0093903 | ongoing yes | dt complete no | 
+(0) 11:55:45 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54061 of 10 | dt 0.01 | max dt 0.0093903 | ongoing yes | dt complete no | 
+time1 2.54031
+dt0.000300124
+time1 2.54061
+dt0.000300124
+run: post read
+time1 2.54061
+dt0.00028521
+(0) 11:55:46 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54089 of 10 | dt 0.01 | max dt 0.00910509 | ongoing yes | dt complete no | 
+(0) 11:55:46 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54089 of 10 | dt 0.01 | max dt 0.00910509 | ongoing yes | dt complete no | 
+time1 2.54061
+dt0.00028521
+time1 2.54089
+dt0.00028521
+run: post read
+time1 2.54089
+dt0.000284251
+(0) 11:55:46 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54118 of 10 | dt 0.01 | max dt 0.00882084 | ongoing yes | dt complete no | 
+(0) 11:55:46 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54118 of 10 | dt 0.01 | max dt 0.00882084 | ongoing yes | dt complete no | 
+time1 2.54089
+dt0.000284251
+time1 2.54118
+dt0.000284251
+run: post read
+time1 2.54118
+dt0.000273465
+(0) 11:55:47 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54145 of 10 | dt 0.01 | max dt 0.00854738 | ongoing yes | dt complete no | 
+(0) 11:55:47 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54145 of 10 | dt 0.01 | max dt 0.00854738 | ongoing yes | dt complete no | 
+time1 2.54118
+dt0.000273465
+time1 2.54145
+dt0.000273465
+run: post read
+time1 2.54145
+dt0.000268306
+(0) 11:55:47 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54172 of 10 | dt 0.01 | max dt 0.00827907 | ongoing yes | dt complete no | 
+(0) 11:55:47 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54172 of 10 | dt 0.01 | max dt 0.00827907 | ongoing yes | dt complete no | 
+time1 2.54145
+dt0.000268306
+time1 2.54172
+dt0.000268306
+run: post read
+time1 2.54172
+dt0.000274048
+(0) 11:55:47 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54199 of 10 | dt 0.01 | max dt 0.00800502 | ongoing yes | dt complete no | 
+(0) 11:55:47 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54199 of 10 | dt 0.01 | max dt 0.00800502 | ongoing yes | dt complete no | 
+time1 2.54172
+dt0.000274048
+time1 2.54199
+dt0.000274048
+run: post read
+time1 2.54199
+dt0.000265199
+(0) 11:55:48 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54226 of 10 | dt 0.01 | max dt 0.00773982 | ongoing yes | dt complete no | 
+(0) 11:55:48 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54226 of 10 | dt 0.01 | max dt 0.00773982 | ongoing yes | dt complete no | 
+time1 2.54199
+dt0.000265199
+time1 2.54226
+dt0.000265199
+run: post read
+time1 2.54226
+dt0.000267037
+(0) 11:55:48 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54253 of 10 | dt 0.01 | max dt 0.00747279 | ongoing yes | dt complete no | 
+(0) 11:55:48 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54253 of 10 | dt 0.01 | max dt 0.00747279 | ongoing yes | dt complete no | 
+time1 2.54226
+dt0.000267037
+time1 2.54253
+dt0.000267037
+run: post read
+time1 2.54253
+dt0.000276279
+(0) 11:55:49 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.5428 of 10 | dt 0.01 | max dt 0.00719651 | ongoing yes | dt complete no | 
+(0) 11:55:49 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.5428 of 10 | dt 0.01 | max dt 0.00719651 | ongoing yes | dt complete no | 
+time1 2.54253
+dt0.000276279
+time1 2.5428
+dt0.000276279
+run: post read
+time1 2.5428
+dt0.000273139
+(0) 11:55:49 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54308 of 10 | dt 0.01 | max dt 0.00692337 | ongoing yes | dt complete no | 
+(0) 11:55:49 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54308 of 10 | dt 0.01 | max dt 0.00692337 | ongoing yes | dt complete no | 
+time1 2.5428
+dt0.000273139
+time1 2.54308
+dt0.000273139
+run: post read
+time1 2.54308
+dt0.000281185
+(0) 11:55:49 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54336 of 10 | dt 0.01 | max dt 0.00664218 | ongoing yes | dt complete no | 
+(0) 11:55:49 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54336 of 10 | dt 0.01 | max dt 0.00664218 | ongoing yes | dt complete no | 
+time1 2.54308
+dt0.000281185
+time1 2.54336
+dt0.000281185
+run: post read
+time1 2.54336
+dt0.000296387
+(0) 11:55:50 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54365 of 10 | dt 0.01 | max dt 0.0063458 | ongoing yes | dt complete no | 
+(0) 11:55:50 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54365 of 10 | dt 0.01 | max dt 0.0063458 | ongoing yes | dt complete no | 
+time1 2.54336
+dt0.000296387
+time1 2.54365
+dt0.000296387
+run: post read
+time1 2.54365
+dt0.0002967
+(0) 11:55:50 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54395 of 10 | dt 0.01 | max dt 0.0060491 | ongoing yes | dt complete no | 
+(0) 11:55:50 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54395 of 10 | dt 0.01 | max dt 0.0060491 | ongoing yes | dt complete no | 
+time1 2.54365
+dt0.0002967
+time1 2.54395
+dt0.0002967
+run: post read
+time1 2.54395
+dt0.000311331
+(0) 11:55:51 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54426 of 10 | dt 0.01 | max dt 0.00573776 | ongoing yes | dt complete no | 
+(0) 11:55:51 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54426 of 10 | dt 0.01 | max dt 0.00573776 | ongoing yes | dt complete no | 
+time1 2.54395
+dt0.000311331
+time1 2.54426
+dt0.000311331
+run: post read
+time1 2.54426
+dt0.000336736
+(0) 11:55:51 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.5446 of 10 | dt 0.01 | max dt 0.00540103 | ongoing yes | dt complete no | 
+(0) 11:55:51 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.5446 of 10 | dt 0.01 | max dt 0.00540103 | ongoing yes | dt complete no | 
+time1 2.54426
+dt0.000336736
+time1 2.5446
+dt0.000336736
+run: post read
+time1 2.5446
+dt0.00034201
+(0) 11:55:51 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54494 of 10 | dt 0.01 | max dt 0.00505902 | ongoing yes | dt complete no | 
+(0) 11:55:51 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54494 of 10 | dt 0.01 | max dt 0.00505902 | ongoing yes | dt complete no | 
+time1 2.5446
+dt0.00034201
+time1 2.54494
+dt0.00034201
+run: post read
+time1 2.54494
+dt0.000369564
+(0) 11:55:52 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54531 of 10 | dt 0.01 | max dt 0.00468946 | ongoing yes | dt complete no | 
+(0) 11:55:52 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54531 of 10 | dt 0.01 | max dt 0.00468946 | ongoing yes | dt complete no | 
+time1 2.54494
+dt0.000369564
+time1 2.54531
+dt0.000369564
+run: post read
+time1 2.54531
+dt0.000418469
+(0) 11:55:52 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54573 of 10 | dt 0.01 | max dt 0.00427099 | ongoing yes | dt complete no | 
+(0) 11:55:52 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54573 of 10 | dt 0.01 | max dt 0.00427099 | ongoing yes | dt complete no | 
+time1 2.54531
+dt0.000418469
+time1 2.54573
+dt0.000418469
+run: post read
+time1 2.54573
+dt0.000409884
+(0) 11:55:53 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54614 of 10 | dt 0.01 | max dt 0.0038611 | ongoing yes | dt complete no | 
+(0) 11:55:53 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54614 of 10 | dt 0.01 | max dt 0.0038611 | ongoing yes | dt complete no | 
+time1 2.54573
+dt0.000409884
+time1 2.54614
+dt0.000409884
+run: post read
+time1 2.54614
+dt0.000387283
+(0) 11:55:53 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54653 of 10 | dt 0.01 | max dt 0.00347382 | ongoing yes | dt complete no | 
+(0) 11:55:53 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54653 of 10 | dt 0.01 | max dt 0.00347382 | ongoing yes | dt complete no | 
+time1 2.54614
+dt0.000387283
+time1 2.54653
+dt0.000387283
+run: post read
+time1 2.54653
+dt0.000363073
+(0) 11:55:53 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54689 of 10 | dt 0.01 | max dt 0.00311075 | ongoing yes | dt complete no | 
+(0) 11:55:53 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54689 of 10 | dt 0.01 | max dt 0.00311075 | ongoing yes | dt complete no | 
+time1 2.54653
+dt0.000363073
+time1 2.54689
+dt0.000363073
+run: post read
+time1 2.54689
+dt0.000356772
+(0) 11:55:54 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54725 of 10 | dt 0.01 | max dt 0.00275397 | ongoing yes | dt complete no | 
+(0) 11:55:54 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54725 of 10 | dt 0.01 | max dt 0.00275397 | ongoing yes | dt complete no | 
+time1 2.54689
+dt0.000356772
+time1 2.54725
+dt0.000356772
+run: post read
+time1 2.54725
+dt0.000343991
+(0) 11:55:54 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54759 of 10 | dt 0.01 | max dt 0.00240998 | ongoing yes | dt complete no | 
+(0) 11:55:54 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54759 of 10 | dt 0.01 | max dt 0.00240998 | ongoing yes | dt complete no | 
+time1 2.54725
+dt0.000343991
+time1 2.54759
+dt0.000343991
+run: post read
+time1 2.54759
+dt0.000332629
+(0) 11:55:55 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54792 of 10 | dt 0.01 | max dt 0.00207735 | ongoing yes | dt complete no | 
+(0) 11:55:55 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54792 of 10 | dt 0.01 | max dt 0.00207735 | ongoing yes | dt complete no | 
+time1 2.54759
+dt0.000332629
+time1 2.54792
+dt0.000332629
+run: post read
+time1 2.54792
+dt0.000315903
+(0) 11:55:55 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54824 of 10 | dt 0.01 | max dt 0.00176145 | ongoing yes | dt complete no | 
+(0) 11:55:55 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54824 of 10 | dt 0.01 | max dt 0.00176145 | ongoing yes | dt complete no | 
+time1 2.54792
+dt0.000315903
+time1 2.54824
+dt0.000315903
+run: post read
+time1 2.54824
+dt0.00030449
+(0) 11:55:56 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54854 of 10 | dt 0.01 | max dt 0.00145696 | ongoing yes | dt complete no | 
+(0) 11:55:56 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54854 of 10 | dt 0.01 | max dt 0.00145696 | ongoing yes | dt complete no | 
+time1 2.54824
+dt0.00030449
+time1 2.54854
+dt0.00030449
+run: post read
+time1 2.54854
+dt0.000295954
+(0) 11:55:56 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54884 of 10 | dt 0.01 | max dt 0.00116101 | ongoing yes | dt complete no | 
+(0) 11:55:56 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54884 of 10 | dt 0.01 | max dt 0.00116101 | ongoing yes | dt complete no | 
+time1 2.54854
+dt0.000295954
+time1 2.54884
+dt0.000295954
+run: post read
+time1 2.54884
+dt0.000288676
+(0) 11:55:56 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54913 of 10 | dt 0.01 | max dt 0.000872331 | ongoing yes | dt complete no | 
+(0) 11:55:56 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54913 of 10 | dt 0.01 | max dt 0.000872331 | ongoing yes | dt complete no | 
+time1 2.54884
+dt0.000288676
+time1 2.54913
+dt0.000288676
+run: post read
+time1 2.54913
+dt0.000282788
+(0) 11:55:57 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54941 of 10 | dt 0.01 | max dt 0.000589543 | ongoing yes | dt complete no | 
+(0) 11:55:57 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54941 of 10 | dt 0.01 | max dt 0.000589543 | ongoing yes | dt complete no | 
+time1 2.54913
+dt0.000282788
+time1 2.54941
+dt0.000282788
+run: post read
+time1 2.54941
+dt0.00027846
+(0) 11:55:57 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54969 of 10 | dt 0.01 | max dt 0.000311083 | ongoing yes | dt complete no | 
+(0) 11:55:57 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54969 of 10 | dt 0.01 | max dt 0.000311083 | ongoing yes | dt complete no | 
+time1 2.54941
+dt0.00027846
+time1 2.54969
+dt0.00027846
+run: post read
+time1 2.54969
+dt0.000281841
+(0) 11:55:58 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54997 of 10 | dt 0.01 | max dt 2.92423e-05 | ongoing yes | dt complete no | 
+(0) 11:55:58 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 255 | t 2.54997 of 10 | dt 0.01 | max dt 2.92423e-05 | ongoing yes | dt complete no | 
+time1 2.54969
+dt0.000281841
+time1 2.54997
+dt0.000281841
+run: post read
+time1 2.54997
+dt2.92423e-05
+(0) 11:55:58 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+(0) 11:55:58 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+time1 2.54997
+dt2.92423e-05
+time1 2.55
+dt2.92423e-05
+run: post read
+time1 2.55
+dt0.000278389
+(0) 11:55:58 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55028 of 10 | dt 0.01 | max dt 0.00972161 | ongoing yes | dt complete no | 
+(0) 11:55:58 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55028 of 10 | dt 0.01 | max dt 0.00972161 | ongoing yes | dt complete no | 
+time1 2.55
+dt0.000278389
+time1 2.55028
+dt0.000278389
+run: post read
+time1 2.55028
+dt0.00028419
+(0) 11:55:59 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55056 of 10 | dt 0.01 | max dt 0.00943742 | ongoing yes | dt complete no | 
+(0) 11:55:59 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55056 of 10 | dt 0.01 | max dt 0.00943742 | ongoing yes | dt complete no | 
+time1 2.55028
+dt0.00028419
+time1 2.55056
+dt0.00028419
+run: post read
+time1 2.55056
+dt0.000287281
+(0) 11:56:00 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55085 of 10 | dt 0.01 | max dt 0.00915014 | ongoing yes | dt complete no | 
+(0) 11:56:00 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55085 of 10 | dt 0.01 | max dt 0.00915014 | ongoing yes | dt complete no | 
+time1 2.55056
+dt0.000287281
+time1 2.55085
+dt0.000287281
+run: post read
+time1 2.55085
+dt0.000292297
+(0) 11:56:00 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55114 of 10 | dt 0.01 | max dt 0.00885784 | ongoing yes | dt complete no | 
+(0) 11:56:00 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55114 of 10 | dt 0.01 | max dt 0.00885784 | ongoing yes | dt complete no | 
+time1 2.55085
+dt0.000292297
+time1 2.55114
+dt0.000292297
+run: post read
+time1 2.55114
+dt0.000306729
+(0) 11:56:00 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55145 of 10 | dt 0.01 | max dt 0.00855111 | ongoing yes | dt complete no | 
+(0) 11:56:00 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55145 of 10 | dt 0.01 | max dt 0.00855111 | ongoing yes | dt complete no | 
+time1 2.55114
+dt0.000306729
+time1 2.55145
+dt0.000306729
+run: post read
+time1 2.55145
+dt0.000309173
+(0) 11:56:01 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55176 of 10 | dt 0.01 | max dt 0.00824194 | ongoing yes | dt complete no | 
+(0) 11:56:01 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55176 of 10 | dt 0.01 | max dt 0.00824194 | ongoing yes | dt complete no | 
+time1 2.55145
+dt0.000309173
+time1 2.55176
+dt0.000309173
+run: post read
+time1 2.55176
+dt0.000326388
+(0) 11:56:01 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55208 of 10 | dt 0.01 | max dt 0.00791555 | ongoing yes | dt complete no | 
+(0) 11:56:01 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55208 of 10 | dt 0.01 | max dt 0.00791555 | ongoing yes | dt complete no | 
+time1 2.55176
+dt0.000326388
+time1 2.55208
+dt0.000326388
+run: post read
+time1 2.55208
+dt0.0003371
+(0) 11:56:02 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55242 of 10 | dt 0.01 | max dt 0.00757845 | ongoing yes | dt complete no | 
+(0) 11:56:02 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55242 of 10 | dt 0.01 | max dt 0.00757845 | ongoing yes | dt complete no | 
+time1 2.55208
+dt0.0003371
+time1 2.55242
+dt0.0003371
+run: post read
+time1 2.55242
+dt0.000353447
+(0) 11:56:02 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55277 of 10 | dt 0.01 | max dt 0.00722501 | ongoing yes | dt complete no | 
+(0) 11:56:02 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55277 of 10 | dt 0.01 | max dt 0.00722501 | ongoing yes | dt complete no | 
+time1 2.55242
+dt0.000353447
+time1 2.55277
+dt0.000353447
+run: post read
+time1 2.55277
+dt0.000372642
+(0) 11:56:02 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55315 of 10 | dt 0.01 | max dt 0.00685236 | ongoing yes | dt complete no | 
+(0) 11:56:02 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55315 of 10 | dt 0.01 | max dt 0.00685236 | ongoing yes | dt complete no | 
+time1 2.55277
+dt0.000372642
+time1 2.55315
+dt0.000372642
+run: post read
+time1 2.55315
+dt0.000386894
+(0) 11:56:03 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55353 of 10 | dt 0.01 | max dt 0.00646547 | ongoing yes | dt complete no | 
+(0) 11:56:03 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55353 of 10 | dt 0.01 | max dt 0.00646547 | ongoing yes | dt complete no | 
+time1 2.55315
+dt0.000386894
+time1 2.55353
+dt0.000386894
+run: post read
+time1 2.55353
+dt0.00038296
+(0) 11:56:03 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55392 of 10 | dt 0.01 | max dt 0.00608251 | ongoing yes | dt complete no | 
+(0) 11:56:03 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55392 of 10 | dt 0.01 | max dt 0.00608251 | ongoing yes | dt complete no | 
+time1 2.55353
+dt0.00038296
+time1 2.55392
+dt0.00038296
+run: post read
+time1 2.55392
+dt0.000387539
+(0) 11:56:04 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55431 of 10 | dt 0.01 | max dt 0.00569497 | ongoing yes | dt complete no | 
+(0) 11:56:04 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55431 of 10 | dt 0.01 | max dt 0.00569497 | ongoing yes | dt complete no | 
+time1 2.55392
+dt0.000387539
+time1 2.55431
+dt0.000387539
+run: post read
+time1 2.55431
+dt0.000395671
+(0) 11:56:04 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.5547 of 10 | dt 0.01 | max dt 0.0052993 | ongoing yes | dt complete no | 
+(0) 11:56:04 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.5547 of 10 | dt 0.01 | max dt 0.0052993 | ongoing yes | dt complete no | 
+time1 2.55431
+dt0.000395671
+time1 2.5547
+dt0.000395671
+run: post read
+time1 2.5547
+dt0.000389788
+(0) 11:56:04 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55509 of 10 | dt 0.01 | max dt 0.00490951 | ongoing yes | dt complete no | 
+(0) 11:56:04 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55509 of 10 | dt 0.01 | max dt 0.00490951 | ongoing yes | dt complete no | 
+time1 2.5547
+dt0.000389788
+time1 2.55509
+dt0.000389788
+run: post read
+time1 2.55509
+dt0.0004014
+(0) 11:56:05 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55549 of 10 | dt 0.01 | max dt 0.00450811 | ongoing yes | dt complete no | 
+(0) 11:56:05 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55549 of 10 | dt 0.01 | max dt 0.00450811 | ongoing yes | dt complete no | 
+time1 2.55509
+dt0.0004014
+time1 2.55549
+dt0.0004014
+run: post read
+time1 2.55549
+dt0.000404538
+(0) 11:56:05 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.5559 of 10 | dt 0.01 | max dt 0.00410357 | ongoing yes | dt complete no | 
+(0) 11:56:05 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.5559 of 10 | dt 0.01 | max dt 0.00410357 | ongoing yes | dt complete no | 
+time1 2.55549
+dt0.000404538
+time1 2.5559
+dt0.000404538
+run: post read
+time1 2.5559
+dt0.000392217
+(0) 11:56:06 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55629 of 10 | dt 0.01 | max dt 0.00371136 | ongoing yes | dt complete no | 
+(0) 11:56:06 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55629 of 10 | dt 0.01 | max dt 0.00371136 | ongoing yes | dt complete no | 
+time1 2.5559
+dt0.000392217
+time1 2.55629
+dt0.000392217
+run: post read
+time1 2.55629
+dt0.000404802
+(0) 11:56:06 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55669 of 10 | dt 0.01 | max dt 0.00330656 | ongoing yes | dt complete no | 
+(0) 11:56:06 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55669 of 10 | dt 0.01 | max dt 0.00330656 | ongoing yes | dt complete no | 
+time1 2.55629
+dt0.000404802
+time1 2.55669
+dt0.000404802
+run: post read
+time1 2.55669
+dt0.000387688
+(0) 11:56:06 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55708 of 10 | dt 0.01 | max dt 0.00291887 | ongoing yes | dt complete no | 
+(0) 11:56:06 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55708 of 10 | dt 0.01 | max dt 0.00291887 | ongoing yes | dt complete no | 
+time1 2.55669
+dt0.000387688
+time1 2.55708
+dt0.000387688
+run: post read
+time1 2.55708
+dt0.000377404
+(0) 11:56:07 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55746 of 10 | dt 0.01 | max dt 0.00254146 | ongoing yes | dt complete no | 
+(0) 11:56:07 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55746 of 10 | dt 0.01 | max dt 0.00254146 | ongoing yes | dt complete no | 
+time1 2.55708
+dt0.000377404
+time1 2.55746
+dt0.000377404
+run: post read
+time1 2.55746
+dt0.000395994
+(0) 11:56:07 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55785 of 10 | dt 0.01 | max dt 0.00214547 | ongoing yes | dt complete no | 
+(0) 11:56:07 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55785 of 10 | dt 0.01 | max dt 0.00214547 | ongoing yes | dt complete no | 
+time1 2.55746
+dt0.000395994
+time1 2.55785
+dt0.000395994
+run: post read
+time1 2.55785
+dt0.000381565
+(0) 11:56:07 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55824 of 10 | dt 0.01 | max dt 0.0017639 | ongoing yes | dt complete no | 
+(0) 11:56:07 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55824 of 10 | dt 0.01 | max dt 0.0017639 | ongoing yes | dt complete no | 
+time1 2.55785
+dt0.000381565
+time1 2.55824
+dt0.000381565
+run: post read
+time1 2.55824
+dt0.00038869
+(0) 11:56:08 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55862 of 10 | dt 0.01 | max dt 0.00137521 | ongoing yes | dt complete no | 
+(0) 11:56:08 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55862 of 10 | dt 0.01 | max dt 0.00137521 | ongoing yes | dt complete no | 
+time1 2.55824
+dt0.00038869
+time1 2.55862
+dt0.00038869
+run: post read
+time1 2.55862
+dt0.00038191
+(0) 11:56:08 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55901 of 10 | dt 0.01 | max dt 0.000993304 | ongoing yes | dt complete no | 
+(0) 11:56:08 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55901 of 10 | dt 0.01 | max dt 0.000993304 | ongoing yes | dt complete no | 
+time1 2.55862
+dt0.00038191
+time1 2.55901
+dt0.00038191
+run: post read
+time1 2.55901
+dt0.00035376
+(0) 11:56:08 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55936 of 10 | dt 0.01 | max dt 0.000639544 | ongoing yes | dt complete no | 
+(0) 11:56:08 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55936 of 10 | dt 0.01 | max dt 0.000639544 | ongoing yes | dt complete no | 
+time1 2.55901
+dt0.00035376
+time1 2.55936
+dt0.00035376
+run: post read
+time1 2.55936
+dt0.000356636
+(0) 11:56:09 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55972 of 10 | dt 0.01 | max dt 0.000282908 | ongoing yes | dt complete no | 
+(0) 11:56:09 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 256 | t 2.55972 of 10 | dt 0.01 | max dt 0.000282908 | ongoing yes | dt complete no | 
+time1 2.55936
+dt0.000356636
+time1 2.55972
+dt0.000356636
+run: post read
+time1 2.55972
+dt0.000282908
+(0) 11:56:09 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+(0) 11:56:09 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+time1 2.55972
+dt0.000282908
+time1 2.56
+dt0.000282908
+run: post read
+time1 2.56
+dt0.000325112
+(0) 11:56:10 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56033 of 10 | dt 0.01 | max dt 0.00967489 | ongoing yes | dt complete no | 
+(0) 11:56:10 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56033 of 10 | dt 0.01 | max dt 0.00967489 | ongoing yes | dt complete no | 
+time1 2.56
+dt0.000325112
+time1 2.56033
+dt0.000325112
+run: post read
+time1 2.56033
+dt0.000328994
+(0) 11:56:10 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56065 of 10 | dt 0.01 | max dt 0.00934589 | ongoing yes | dt complete no | 
+(0) 11:56:10 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56065 of 10 | dt 0.01 | max dt 0.00934589 | ongoing yes | dt complete no | 
+time1 2.56033
+dt0.000328994
+time1 2.56065
+dt0.000328994
+run: post read
+time1 2.56065
+dt0.0003355
+(0) 11:56:10 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56099 of 10 | dt 0.01 | max dt 0.00901039 | ongoing yes | dt complete no | 
+(0) 11:56:10 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56099 of 10 | dt 0.01 | max dt 0.00901039 | ongoing yes | dt complete no | 
+time1 2.56065
+dt0.0003355
+time1 2.56099
+dt0.0003355
+run: post read
+time1 2.56099
+dt0.000327008
+(0) 11:56:11 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56132 of 10 | dt 0.01 | max dt 0.00868339 | ongoing yes | dt complete no | 
+(0) 11:56:11 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56132 of 10 | dt 0.01 | max dt 0.00868339 | ongoing yes | dt complete no | 
+time1 2.56099
+dt0.000327008
+time1 2.56132
+dt0.000327008
+run: post read
+time1 2.56132
+dt0.000341709
+(0) 11:56:11 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56166 of 10 | dt 0.01 | max dt 0.00834168 | ongoing yes | dt complete no | 
+(0) 11:56:11 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56166 of 10 | dt 0.01 | max dt 0.00834168 | ongoing yes | dt complete no | 
+time1 2.56132
+dt0.000341709
+time1 2.56166
+dt0.000341709
+run: post read
+time1 2.56166
+dt0.000369807
+(0) 11:56:12 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56203 of 10 | dt 0.01 | max dt 0.00797187 | ongoing yes | dt complete no | 
+(0) 11:56:12 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56203 of 10 | dt 0.01 | max dt 0.00797187 | ongoing yes | dt complete no | 
+time1 2.56166
+dt0.000369807
+time1 2.56203
+dt0.000369807
+run: post read
+time1 2.56203
+dt0.000354803
+(0) 11:56:12 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56238 of 10 | dt 0.01 | max dt 0.00761707 | ongoing yes | dt complete no | 
+(0) 11:56:12 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56238 of 10 | dt 0.01 | max dt 0.00761707 | ongoing yes | dt complete no | 
+time1 2.56203
+dt0.000354803
+time1 2.56238
+dt0.000354803
+run: post read
+time1 2.56238
+dt0.000361317
+(0) 11:56:12 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56274 of 10 | dt 0.01 | max dt 0.00725575 | ongoing yes | dt complete no | 
+(0) 11:56:12 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56274 of 10 | dt 0.01 | max dt 0.00725575 | ongoing yes | dt complete no | 
+time1 2.56238
+dt0.000361317
+time1 2.56274
+dt0.000361317
+run: post read
+time1 2.56274
+dt0.000366674
+(0) 11:56:13 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56311 of 10 | dt 0.01 | max dt 0.00688908 | ongoing yes | dt complete no | 
+(0) 11:56:13 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56311 of 10 | dt 0.01 | max dt 0.00688908 | ongoing yes | dt complete no | 
+time1 2.56274
+dt0.000366674
+time1 2.56311
+dt0.000366674
+run: post read
+time1 2.56311
+dt0.000375789
+(0) 11:56:13 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56349 of 10 | dt 0.01 | max dt 0.00651329 | ongoing yes | dt complete no | 
+(0) 11:56:13 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56349 of 10 | dt 0.01 | max dt 0.00651329 | ongoing yes | dt complete no | 
+time1 2.56311
+dt0.000375789
+time1 2.56349
+dt0.000375789
+run: post read
+time1 2.56349
+dt0.000394188
+(0) 11:56:14 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56388 of 10 | dt 0.01 | max dt 0.0061191 | ongoing yes | dt complete no | 
+(0) 11:56:14 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56388 of 10 | dt 0.01 | max dt 0.0061191 | ongoing yes | dt complete no | 
+time1 2.56349
+dt0.000394188
+time1 2.56388
+dt0.000394188
+run: post read
+time1 2.56388
+dt0.00039113
+(0) 11:56:14 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56427 of 10 | dt 0.01 | max dt 0.00572797 | ongoing yes | dt complete no | 
+(0) 11:56:14 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56427 of 10 | dt 0.01 | max dt 0.00572797 | ongoing yes | dt complete no | 
+time1 2.56388
+dt0.00039113
+time1 2.56427
+dt0.00039113
+run: post read
+time1 2.56427
+dt0.000366421
+(0) 11:56:15 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56464 of 10 | dt 0.01 | max dt 0.00536155 | ongoing yes | dt complete no | 
+(0) 11:56:15 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56464 of 10 | dt 0.01 | max dt 0.00536155 | ongoing yes | dt complete no | 
+time1 2.56427
+dt0.000366421
+time1 2.56464
+dt0.000366421
+run: post read
+time1 2.56464
+dt0.000356961
+(0) 11:56:15 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.565 of 10 | dt 0.01 | max dt 0.00500459 | ongoing yes | dt complete no | 
+(0) 11:56:15 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.565 of 10 | dt 0.01 | max dt 0.00500459 | ongoing yes | dt complete no | 
+time1 2.56464
+dt0.000356961
+time1 2.565
+dt0.000356961
+run: post read
+time1 2.565
+dt0.000343264
+(0) 11:56:15 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56534 of 10 | dt 0.01 | max dt 0.00466132 | ongoing yes | dt complete no | 
+(0) 11:56:15 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56534 of 10 | dt 0.01 | max dt 0.00466132 | ongoing yes | dt complete no | 
+time1 2.565
+dt0.000343264
+time1 2.56534
+dt0.000343264
+run: post read
+time1 2.56534
+dt0.000331415
+(0) 11:56:16 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56567 of 10 | dt 0.01 | max dt 0.00432991 | ongoing yes | dt complete no | 
+(0) 11:56:16 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56567 of 10 | dt 0.01 | max dt 0.00432991 | ongoing yes | dt complete no | 
+time1 2.56534
+dt0.000331415
+time1 2.56567
+dt0.000331415
+run: post read
+time1 2.56567
+dt0.00032255
+(0) 11:56:16 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56599 of 10 | dt 0.01 | max dt 0.00400736 | ongoing yes | dt complete no | 
+(0) 11:56:16 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56599 of 10 | dt 0.01 | max dt 0.00400736 | ongoing yes | dt complete no | 
+time1 2.56567
+dt0.00032255
+time1 2.56599
+dt0.00032255
+run: post read
+time1 2.56599
+dt0.000318885
+(0) 11:56:17 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56631 of 10 | dt 0.01 | max dt 0.00368847 | ongoing yes | dt complete no | 
+(0) 11:56:17 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56631 of 10 | dt 0.01 | max dt 0.00368847 | ongoing yes | dt complete no | 
+time1 2.56599
+dt0.000318885
+time1 2.56631
+dt0.000318885
+run: post read
+time1 2.56631
+dt0.000316279
+(0) 11:56:17 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56663 of 10 | dt 0.01 | max dt 0.00337219 | ongoing yes | dt complete no | 
+(0) 11:56:17 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56663 of 10 | dt 0.01 | max dt 0.00337219 | ongoing yes | dt complete no | 
+time1 2.56631
+dt0.000316279
+time1 2.56663
+dt0.000316279
+run: post read
+time1 2.56663
+dt0.000314496
+(0) 11:56:17 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56694 of 10 | dt 0.01 | max dt 0.0030577 | ongoing yes | dt complete no | 
+(0) 11:56:17 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56694 of 10 | dt 0.01 | max dt 0.0030577 | ongoing yes | dt complete no | 
+time1 2.56663
+dt0.000314496
+time1 2.56694
+dt0.000314496
+run: post read
+time1 2.56694
+dt0.000313382
+(0) 11:56:18 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56726 of 10 | dt 0.01 | max dt 0.00274432 | ongoing yes | dt complete no | 
+(0) 11:56:18 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56726 of 10 | dt 0.01 | max dt 0.00274432 | ongoing yes | dt complete no | 
+time1 2.56694
+dt0.000313382
+time1 2.56726
+dt0.000313382
+run: post read
+time1 2.56726
+dt0.000312657
+(0) 11:56:18 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56757 of 10 | dt 0.01 | max dt 0.00243166 | ongoing yes | dt complete no | 
+(0) 11:56:18 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56757 of 10 | dt 0.01 | max dt 0.00243166 | ongoing yes | dt complete no | 
+time1 2.56726
+dt0.000312657
+time1 2.56757
+dt0.000312657
+run: post read
+time1 2.56757
+dt0.00031421
+(0) 11:56:19 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56788 of 10 | dt 0.01 | max dt 0.00211745 | ongoing yes | dt complete no | 
+(0) 11:56:19 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56788 of 10 | dt 0.01 | max dt 0.00211745 | ongoing yes | dt complete no | 
+time1 2.56757
+dt0.00031421
+time1 2.56788
+dt0.00031421
+run: post read
+time1 2.56788
+dt0.00031456
+(0) 11:56:19 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.5682 of 10 | dt 0.01 | max dt 0.00180289 | ongoing yes | dt complete no | 
+(0) 11:56:19 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.5682 of 10 | dt 0.01 | max dt 0.00180289 | ongoing yes | dt complete no | 
+time1 2.56788
+dt0.00031456
+time1 2.5682
+dt0.00031456
+run: post read
+time1 2.5682
+dt0.000320205
+(0) 11:56:19 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56852 of 10 | dt 0.01 | max dt 0.00148269 | ongoing yes | dt complete no | 
+(0) 11:56:19 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56852 of 10 | dt 0.01 | max dt 0.00148269 | ongoing yes | dt complete no | 
+time1 2.5682
+dt0.000320205
+time1 2.56852
+dt0.000320205
+run: post read
+time1 2.56852
+dt0.000323229
+(0) 11:56:20 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56884 of 10 | dt 0.01 | max dt 0.00115946 | ongoing yes | dt complete no | 
+(0) 11:56:20 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56884 of 10 | dt 0.01 | max dt 0.00115946 | ongoing yes | dt complete no | 
+time1 2.56852
+dt0.000323229
+time1 2.56884
+dt0.000323229
+run: post read
+time1 2.56884
+dt0.000331131
+(0) 11:56:20 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56917 of 10 | dt 0.01 | max dt 0.000828325 | ongoing yes | dt complete no | 
+(0) 11:56:20 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56917 of 10 | dt 0.01 | max dt 0.000828325 | ongoing yes | dt complete no | 
+time1 2.56884
+dt0.000331131
+time1 2.56917
+dt0.000331131
+run: post read
+time1 2.56917
+dt0.000345776
+(0) 11:56:21 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56952 of 10 | dt 0.01 | max dt 0.00048255 | ongoing yes | dt complete no | 
+(0) 11:56:21 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56952 of 10 | dt 0.01 | max dt 0.00048255 | ongoing yes | dt complete no | 
+time1 2.56917
+dt0.000345776
+time1 2.56952
+dt0.000345776
+run: post read
+time1 2.56952
+dt0.000359593
+(0) 11:56:21 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56988 of 10 | dt 0.01 | max dt 0.000122957 | ongoing yes | dt complete no | 
+(0) 11:56:21 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 257 | t 2.56988 of 10 | dt 0.01 | max dt 0.000122957 | ongoing yes | dt complete no | 
+time1 2.56952
+dt0.000359593
+time1 2.56988
+dt0.000359593
+run: post read
+time1 2.56988
+dt0.000122957
+(0) 11:56:21 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+(0) 11:56:21 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+time1 2.56988
+dt0.000122957
+time1 2.57
+dt0.000122957
+run: post read
+time1 2.57
+dt0.000396894
+(0) 11:56:22 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.5704 of 10 | dt 0.01 | max dt 0.00960311 | ongoing yes | dt complete no | 
+(0) 11:56:22 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.5704 of 10 | dt 0.01 | max dt 0.00960311 | ongoing yes | dt complete no | 
+time1 2.57
+dt0.000396894
+time1 2.5704
+dt0.000396894
+run: post read
+time1 2.5704
+dt0.000429333
+(0) 11:56:22 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57083 of 10 | dt 0.01 | max dt 0.00917377 | ongoing yes | dt complete no | 
+(0) 11:56:22 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57083 of 10 | dt 0.01 | max dt 0.00917377 | ongoing yes | dt complete no | 
+time1 2.5704
+dt0.000429333
+time1 2.57083
+dt0.000429333
+run: post read
+time1 2.57083
+dt0.000441868
+(0) 11:56:23 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57127 of 10 | dt 0.01 | max dt 0.00873191 | ongoing yes | dt complete no | 
+(0) 11:56:23 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57127 of 10 | dt 0.01 | max dt 0.00873191 | ongoing yes | dt complete no | 
+time1 2.57083
+dt0.000441868
+time1 2.57127
+dt0.000441868
+run: post read
+time1 2.57127
+dt0.000461993
+(0) 11:56:23 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57173 of 10 | dt 0.01 | max dt 0.00826991 | ongoing yes | dt complete no | 
+(0) 11:56:23 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57173 of 10 | dt 0.01 | max dt 0.00826991 | ongoing yes | dt complete no | 
+time1 2.57127
+dt0.000461993
+time1 2.57173
+dt0.000461993
+run: post read
+time1 2.57173
+dt0.000491472
+(0) 11:56:24 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57222 of 10 | dt 0.01 | max dt 0.00777844 | ongoing yes | dt complete no | 
+(0) 11:56:24 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57222 of 10 | dt 0.01 | max dt 0.00777844 | ongoing yes | dt complete no | 
+time1 2.57173
+dt0.000491472
+time1 2.57222
+dt0.000491472
+run: post read
+time1 2.57222
+dt0.000511958
+(0) 11:56:24 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57273 of 10 | dt 0.01 | max dt 0.00726648 | ongoing yes | dt complete no | 
+(0) 11:56:24 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57273 of 10 | dt 0.01 | max dt 0.00726648 | ongoing yes | dt complete no | 
+time1 2.57222
+dt0.000511958
+time1 2.57273
+dt0.000511958
+run: post read
+time1 2.57273
+dt0.000439899
+(0) 11:56:25 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57317 of 10 | dt 0.01 | max dt 0.00682658 | ongoing yes | dt complete no | 
+(0) 11:56:25 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57317 of 10 | dt 0.01 | max dt 0.00682658 | ongoing yes | dt complete no | 
+time1 2.57273
+dt0.000439899
+time1 2.57317
+dt0.000439899
+run: post read
+time1 2.57317
+dt0.000386487
+(0) 11:56:25 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57356 of 10 | dt 0.01 | max dt 0.0064401 | ongoing yes | dt complete no | 
+(0) 11:56:25 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57356 of 10 | dt 0.01 | max dt 0.0064401 | ongoing yes | dt complete no | 
+time1 2.57317
+dt0.000386487
+time1 2.57356
+dt0.000386487
+run: post read
+time1 2.57356
+dt0.000386952
+(0) 11:56:26 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57395 of 10 | dt 0.01 | max dt 0.00605314 | ongoing yes | dt complete no | 
+(0) 11:56:26 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57395 of 10 | dt 0.01 | max dt 0.00605314 | ongoing yes | dt complete no | 
+time1 2.57356
+dt0.000386952
+time1 2.57395
+dt0.000386952
+run: post read
+time1 2.57395
+dt0.0003568
+(0) 11:56:26 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.5743 of 10 | dt 0.01 | max dt 0.00569634 | ongoing yes | dt complete no | 
+(0) 11:56:26 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.5743 of 10 | dt 0.01 | max dt 0.00569634 | ongoing yes | dt complete no | 
+time1 2.57395
+dt0.0003568
+time1 2.5743
+dt0.0003568
+run: post read
+time1 2.5743
+dt0.00032731
+(0) 11:56:26 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57463 of 10 | dt 0.01 | max dt 0.00536903 | ongoing yes | dt complete no | 
+(0) 11:56:26 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57463 of 10 | dt 0.01 | max dt 0.00536903 | ongoing yes | dt complete no | 
+time1 2.5743
+dt0.00032731
+time1 2.57463
+dt0.00032731
+run: post read
+time1 2.57463
+dt0.000321968
+(0) 11:56:27 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57495 of 10 | dt 0.01 | max dt 0.00504707 | ongoing yes | dt complete no | 
+(0) 11:56:27 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57495 of 10 | dt 0.01 | max dt 0.00504707 | ongoing yes | dt complete no | 
+time1 2.57463
+dt0.000321968
+time1 2.57495
+dt0.000321968
+run: post read
+time1 2.57495
+dt0.000292364
+(0) 11:56:27 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57525 of 10 | dt 0.01 | max dt 0.0047547 | ongoing yes | dt complete no | 
+(0) 11:56:27 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57525 of 10 | dt 0.01 | max dt 0.0047547 | ongoing yes | dt complete no | 
+time1 2.57495
+dt0.000292364
+time1 2.57525
+dt0.000292364
+run: post read
+time1 2.57525
+dt0.000286692
+(0) 11:56:27 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57553 of 10 | dt 0.01 | max dt 0.00446801 | ongoing yes | dt complete no | 
+(0) 11:56:27 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57553 of 10 | dt 0.01 | max dt 0.00446801 | ongoing yes | dt complete no | 
+time1 2.57525
+dt0.000286692
+time1 2.57553
+dt0.000286692
+run: post read
+time1 2.57553
+dt0.000266481
+(0) 11:56:28 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.5758 of 10 | dt 0.01 | max dt 0.00420153 | ongoing yes | dt complete no | 
+(0) 11:56:28 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.5758 of 10 | dt 0.01 | max dt 0.00420153 | ongoing yes | dt complete no | 
+time1 2.57553
+dt0.000266481
+time1 2.5758
+dt0.000266481
+run: post read
+time1 2.5758
+dt0.000258055
+(0) 11:56:28 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57606 of 10 | dt 0.01 | max dt 0.00394347 | ongoing yes | dt complete no | 
+(0) 11:56:28 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57606 of 10 | dt 0.01 | max dt 0.00394347 | ongoing yes | dt complete no | 
+time1 2.5758
+dt0.000258055
+time1 2.57606
+dt0.000258055
+run: post read
+time1 2.57606
+dt0.000249005
+(0) 11:56:28 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57631 of 10 | dt 0.01 | max dt 0.00369447 | ongoing yes | dt complete no | 
+(0) 11:56:28 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57631 of 10 | dt 0.01 | max dt 0.00369447 | ongoing yes | dt complete no | 
+time1 2.57606
+dt0.000249005
+time1 2.57631
+dt0.000249005
+run: post read
+time1 2.57631
+dt0.000239943
+(0) 11:56:29 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57655 of 10 | dt 0.01 | max dt 0.00345453 | ongoing yes | dt complete no | 
+(0) 11:56:29 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57655 of 10 | dt 0.01 | max dt 0.00345453 | ongoing yes | dt complete no | 
+time1 2.57631
+dt0.000239943
+time1 2.57655
+dt0.000239943
+run: post read
+time1 2.57655
+dt0.000237525
+(0) 11:56:29 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57678 of 10 | dt 0.01 | max dt 0.003217 | ongoing yes | dt complete no | 
+(0) 11:56:29 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57678 of 10 | dt 0.01 | max dt 0.003217 | ongoing yes | dt complete no | 
+time1 2.57655
+dt0.000237525
+time1 2.57678
+dt0.000237525
+run: post read
+time1 2.57678
+dt0.00022821
+(0) 11:56:29 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57701 of 10 | dt 0.01 | max dt 0.00298879 | ongoing yes | dt complete no | 
+(0) 11:56:29 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57701 of 10 | dt 0.01 | max dt 0.00298879 | ongoing yes | dt complete no | 
+time1 2.57678
+dt0.00022821
+time1 2.57701
+dt0.00022821
+run: post read
+time1 2.57701
+dt0.000227328
+(0) 11:56:30 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57724 of 10 | dt 0.01 | max dt 0.00276146 | ongoing yes | dt complete no | 
+(0) 11:56:30 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57724 of 10 | dt 0.01 | max dt 0.00276146 | ongoing yes | dt complete no | 
+time1 2.57701
+dt0.000227328
+time1 2.57724
+dt0.000227328
+run: post read
+time1 2.57724
+dt0.000221809
+(0) 11:56:30 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57746 of 10 | dt 0.01 | max dt 0.00253966 | ongoing yes | dt complete no | 
+(0) 11:56:30 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57746 of 10 | dt 0.01 | max dt 0.00253966 | ongoing yes | dt complete no | 
+time1 2.57724
+dt0.000221809
+time1 2.57746
+dt0.000221809
+run: post read
+time1 2.57746
+dt0.000219562
+(0) 11:56:30 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57768 of 10 | dt 0.01 | max dt 0.00232009 | ongoing yes | dt complete no | 
+(0) 11:56:30 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57768 of 10 | dt 0.01 | max dt 0.00232009 | ongoing yes | dt complete no | 
+time1 2.57746
+dt0.000219562
+time1 2.57768
+dt0.000219562
+run: post read
+time1 2.57768
+dt0.000221853
+(0) 11:56:31 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.5779 of 10 | dt 0.01 | max dt 0.00209824 | ongoing yes | dt complete no | 
+(0) 11:56:31 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.5779 of 10 | dt 0.01 | max dt 0.00209824 | ongoing yes | dt complete no | 
+time1 2.57768
+dt0.000221853
+time1 2.5779
+dt0.000221853
+run: post read
+time1 2.5779
+dt0.000218327
+(0) 11:56:31 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57812 of 10 | dt 0.01 | max dt 0.00187991 | ongoing yes | dt complete no | 
+(0) 11:56:31 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57812 of 10 | dt 0.01 | max dt 0.00187991 | ongoing yes | dt complete no | 
+time1 2.5779
+dt0.000218327
+time1 2.57812
+dt0.000218327
+run: post read
+time1 2.57812
+dt0.000221393
+(0) 11:56:31 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57834 of 10 | dt 0.01 | max dt 0.00165852 | ongoing yes | dt complete no | 
+(0) 11:56:31 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57834 of 10 | dt 0.01 | max dt 0.00165852 | ongoing yes | dt complete no | 
+time1 2.57812
+dt0.000221393
+time1 2.57834
+dt0.000221393
+run: post read
+time1 2.57834
+dt0.000225119
+(0) 11:56:32 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57857 of 10 | dt 0.01 | max dt 0.0014334 | ongoing yes | dt complete no | 
+(0) 11:56:32 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57857 of 10 | dt 0.01 | max dt 0.0014334 | ongoing yes | dt complete no | 
+time1 2.57834
+dt0.000225119
+time1 2.57857
+dt0.000225119
+run: post read
+time1 2.57857
+dt0.000226668
+(0) 11:56:32 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57879 of 10 | dt 0.01 | max dt 0.00120673 | ongoing yes | dt complete no | 
+(0) 11:56:32 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57879 of 10 | dt 0.01 | max dt 0.00120673 | ongoing yes | dt complete no | 
+time1 2.57857
+dt0.000226668
+time1 2.57879
+dt0.000226668
+run: post read
+time1 2.57879
+dt0.000235377
+(0) 11:56:32 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57903 of 10 | dt 0.01 | max dt 0.000971356 | ongoing yes | dt complete no | 
+(0) 11:56:32 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57903 of 10 | dt 0.01 | max dt 0.000971356 | ongoing yes | dt complete no | 
+time1 2.57879
+dt0.000235377
+time1 2.57903
+dt0.000235377
+run: post read
+time1 2.57903
+dt0.000242315
+(0) 11:56:33 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57927 of 10 | dt 0.01 | max dt 0.000729041 | ongoing yes | dt complete no | 
+(0) 11:56:33 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57927 of 10 | dt 0.01 | max dt 0.000729041 | ongoing yes | dt complete no | 
+time1 2.57903
+dt0.000242315
+time1 2.57927
+dt0.000242315
+run: post read
+time1 2.57927
+dt0.00025013
+(0) 11:56:33 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57952 of 10 | dt 0.01 | max dt 0.000478911 | ongoing yes | dt complete no | 
+(0) 11:56:33 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57952 of 10 | dt 0.01 | max dt 0.000478911 | ongoing yes | dt complete no | 
+time1 2.57927
+dt0.00025013
+time1 2.57952
+dt0.00025013
+run: post read
+time1 2.57952
+dt0.00026802
+(0) 11:56:34 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57979 of 10 | dt 0.01 | max dt 0.000210891 | ongoing yes | dt complete no | 
+(0) 11:56:34 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 258 | t 2.57979 of 10 | dt 0.01 | max dt 0.000210891 | ongoing yes | dt complete no | 
+time1 2.57952
+dt0.00026802
+time1 2.57979
+dt0.00026802
+run: post read
+time1 2.57979
+dt0.000210891
+(0) 11:56:34 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+(0) 11:56:34 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+time1 2.57979
+dt0.000210891
+time1 2.58
+dt0.000210891
+run: post read
+time1 2.58
+dt0.000300299
+(0) 11:56:34 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.5803 of 10 | dt 0.01 | max dt 0.0096997 | ongoing yes | dt complete no | 
+(0) 11:56:34 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.5803 of 10 | dt 0.01 | max dt 0.0096997 | ongoing yes | dt complete no | 
+time1 2.58
+dt0.000300299
+time1 2.5803
+dt0.000300299
+run: post read
+time1 2.5803
+dt0.000317084
+(0) 11:56:35 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58062 of 10 | dt 0.01 | max dt 0.00938262 | ongoing yes | dt complete no | 
+(0) 11:56:35 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58062 of 10 | dt 0.01 | max dt 0.00938262 | ongoing yes | dt complete no | 
+time1 2.5803
+dt0.000317084
+time1 2.58062
+dt0.000317084
+run: post read
+time1 2.58062
+dt0.000317997
+(0) 11:56:35 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58094 of 10 | dt 0.01 | max dt 0.00906462 | ongoing yes | dt complete no | 
+(0) 11:56:35 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58094 of 10 | dt 0.01 | max dt 0.00906462 | ongoing yes | dt complete no | 
+time1 2.58062
+dt0.000317997
+time1 2.58094
+dt0.000317997
+run: post read
+time1 2.58094
+dt0.00033864
+(0) 11:56:36 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58127 of 10 | dt 0.01 | max dt 0.00872598 | ongoing yes | dt complete no | 
+(0) 11:56:36 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58127 of 10 | dt 0.01 | max dt 0.00872598 | ongoing yes | dt complete no | 
+time1 2.58094
+dt0.00033864
+time1 2.58127
+dt0.00033864
+run: post read
+time1 2.58127
+dt0.000364553
+(0) 11:56:36 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58164 of 10 | dt 0.01 | max dt 0.00836143 | ongoing yes | dt complete no | 
+(0) 11:56:36 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58164 of 10 | dt 0.01 | max dt 0.00836143 | ongoing yes | dt complete no | 
+time1 2.58127
+dt0.000364553
+time1 2.58164
+dt0.000364553
+run: post read
+time1 2.58164
+dt0.000411555
+(0) 11:56:36 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58205 of 10 | dt 0.01 | max dt 0.00794987 | ongoing yes | dt complete no | 
+(0) 11:56:36 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58205 of 10 | dt 0.01 | max dt 0.00794987 | ongoing yes | dt complete no | 
+time1 2.58164
+dt0.000411555
+time1 2.58205
+dt0.000411555
+run: post read
+time1 2.58205
+dt0.000523438
+(0) 11:56:37 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58257 of 10 | dt 0.01 | max dt 0.00742643 | ongoing yes | dt complete no | 
+(0) 11:56:37 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58257 of 10 | dt 0.01 | max dt 0.00742643 | ongoing yes | dt complete no | 
+time1 2.58205
+dt0.000523438
+time1 2.58257
+dt0.000523438
+run: post read
+time1 2.58257
+dt0.00065712
+(0) 11:56:37 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58323 of 10 | dt 0.01 | max dt 0.00676931 | ongoing yes | dt complete no | 
+(0) 11:56:37 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58323 of 10 | dt 0.01 | max dt 0.00676931 | ongoing yes | dt complete no | 
+time1 2.58257
+dt0.00065712
+time1 2.58323
+dt0.00065712
+run: post read
+time1 2.58323
+dt0.000527213
+(0) 11:56:38 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58376 of 10 | dt 0.01 | max dt 0.0062421 | ongoing yes | dt complete no | 
+(0) 11:56:38 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58376 of 10 | dt 0.01 | max dt 0.0062421 | ongoing yes | dt complete no | 
+time1 2.58323
+dt0.000527213
+time1 2.58376
+dt0.000527213
+run: post read
+time1 2.58376
+dt0.000541636
+(0) 11:56:38 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.5843 of 10 | dt 0.01 | max dt 0.00570046 | ongoing yes | dt complete no | 
+(0) 11:56:38 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.5843 of 10 | dt 0.01 | max dt 0.00570046 | ongoing yes | dt complete no | 
+time1 2.58376
+dt0.000541636
+time1 2.5843
+dt0.000541636
+run: post read
+time1 2.5843
+dt0.000461292
+(0) 11:56:38 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58476 of 10 | dt 0.01 | max dt 0.00523917 | ongoing yes | dt complete no | 
+(0) 11:56:38 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58476 of 10 | dt 0.01 | max dt 0.00523917 | ongoing yes | dt complete no | 
+time1 2.5843
+dt0.000461292
+time1 2.58476
+dt0.000461292
+run: post read
+time1 2.58476
+dt0.000396663
+(0) 11:56:39 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58516 of 10 | dt 0.01 | max dt 0.00484251 | ongoing yes | dt complete no | 
+(0) 11:56:39 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58516 of 10 | dt 0.01 | max dt 0.00484251 | ongoing yes | dt complete no | 
+time1 2.58476
+dt0.000396663
+time1 2.58516
+dt0.000396663
+run: post read
+time1 2.58516
+dt0.000361291
+(0) 11:56:39 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58552 of 10 | dt 0.01 | max dt 0.00448122 | ongoing yes | dt complete no | 
+(0) 11:56:39 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58552 of 10 | dt 0.01 | max dt 0.00448122 | ongoing yes | dt complete no | 
+time1 2.58516
+dt0.000361291
+time1 2.58552
+dt0.000361291
+run: post read
+time1 2.58552
+dt0.000331493
+(0) 11:56:40 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58585 of 10 | dt 0.01 | max dt 0.00414973 | ongoing yes | dt complete no | 
+(0) 11:56:40 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58585 of 10 | dt 0.01 | max dt 0.00414973 | ongoing yes | dt complete no | 
+time1 2.58552
+dt0.000331493
+time1 2.58585
+dt0.000331493
+run: post read
+time1 2.58585
+dt0.000305611
+(0) 11:56:40 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58616 of 10 | dt 0.01 | max dt 0.00384412 | ongoing yes | dt complete no | 
+(0) 11:56:40 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58616 of 10 | dt 0.01 | max dt 0.00384412 | ongoing yes | dt complete no | 
+time1 2.58585
+dt0.000305611
+time1 2.58616
+dt0.000305611
+run: post read
+time1 2.58616
+dt0.000290547
+(0) 11:56:40 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58645 of 10 | dt 0.01 | max dt 0.00355357 | ongoing yes | dt complete no | 
+(0) 11:56:40 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58645 of 10 | dt 0.01 | max dt 0.00355357 | ongoing yes | dt complete no | 
+time1 2.58616
+dt0.000290547
+time1 2.58645
+dt0.000290547
+run: post read
+time1 2.58645
+dt0.000282861
+(0) 11:56:41 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58673 of 10 | dt 0.01 | max dt 0.00327071 | ongoing yes | dt complete no | 
+(0) 11:56:41 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58673 of 10 | dt 0.01 | max dt 0.00327071 | ongoing yes | dt complete no | 
+time1 2.58645
+dt0.000282861
+time1 2.58673
+dt0.000282861
+run: post read
+time1 2.58673
+dt0.000270196
+(0) 11:56:41 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.587 of 10 | dt 0.01 | max dt 0.00300051 | ongoing yes | dt complete no | 
+(0) 11:56:41 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.587 of 10 | dt 0.01 | max dt 0.00300051 | ongoing yes | dt complete no | 
+time1 2.58673
+dt0.000270196
+time1 2.587
+dt0.000270196
+run: post read
+time1 2.587
+dt0.000263919
+(0) 11:56:42 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58726 of 10 | dt 0.01 | max dt 0.00273659 | ongoing yes | dt complete no | 
+(0) 11:56:42 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58726 of 10 | dt 0.01 | max dt 0.00273659 | ongoing yes | dt complete no | 
+time1 2.587
+dt0.000263919
+time1 2.58726
+dt0.000263919
+run: post read
+time1 2.58726
+dt0.000262034
+(0) 11:56:42 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58753 of 10 | dt 0.01 | max dt 0.00247456 | ongoing yes | dt complete no | 
+(0) 11:56:42 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58753 of 10 | dt 0.01 | max dt 0.00247456 | ongoing yes | dt complete no | 
+time1 2.58726
+dt0.000262034
+time1 2.58753
+dt0.000262034
+run: post read
+time1 2.58753
+dt0.000255879
+(0) 11:56:43 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58778 of 10 | dt 0.01 | max dt 0.00221868 | ongoing yes | dt complete no | 
+(0) 11:56:43 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58778 of 10 | dt 0.01 | max dt 0.00221868 | ongoing yes | dt complete no | 
+time1 2.58753
+dt0.000255879
+time1 2.58778
+dt0.000255879
+run: post read
+time1 2.58778
+dt0.000254616
+(0) 11:56:43 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58804 of 10 | dt 0.01 | max dt 0.00196406 | ongoing yes | dt complete no | 
+(0) 11:56:43 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58804 of 10 | dt 0.01 | max dt 0.00196406 | ongoing yes | dt complete no | 
+time1 2.58778
+dt0.000254616
+time1 2.58804
+dt0.000254616
+run: post read
+time1 2.58804
+dt0.000255596
+(0) 11:56:43 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58829 of 10 | dt 0.01 | max dt 0.00170847 | ongoing yes | dt complete no | 
+(0) 11:56:43 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58829 of 10 | dt 0.01 | max dt 0.00170847 | ongoing yes | dt complete no | 
+time1 2.58804
+dt0.000255596
+time1 2.58829
+dt0.000255596
+run: post read
+time1 2.58829
+dt0.000253785
+(0) 11:56:44 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58855 of 10 | dt 0.01 | max dt 0.00145468 | ongoing yes | dt complete no | 
+(0) 11:56:44 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58855 of 10 | dt 0.01 | max dt 0.00145468 | ongoing yes | dt complete no | 
+time1 2.58829
+dt0.000253785
+time1 2.58855
+dt0.000253785
+run: post read
+time1 2.58855
+dt0.000256685
+(0) 11:56:44 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.5888 of 10 | dt 0.01 | max dt 0.001198 | ongoing yes | dt complete no | 
+(0) 11:56:44 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.5888 of 10 | dt 0.01 | max dt 0.001198 | ongoing yes | dt complete no | 
+time1 2.58855
+dt0.000256685
+time1 2.5888
+dt0.000256685
+run: post read
+time1 2.5888
+dt0.000259631
+(0) 11:56:45 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58906 of 10 | dt 0.01 | max dt 0.000938367 | ongoing yes | dt complete no | 
+(0) 11:56:45 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58906 of 10 | dt 0.01 | max dt 0.000938367 | ongoing yes | dt complete no | 
+time1 2.5888
+dt0.000259631
+time1 2.58906
+dt0.000259631
+run: post read
+time1 2.58906
+dt0.000262105
+(0) 11:56:45 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58932 of 10 | dt 0.01 | max dt 0.000676261 | ongoing yes | dt complete no | 
+(0) 11:56:45 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58932 of 10 | dt 0.01 | max dt 0.000676261 | ongoing yes | dt complete no | 
+time1 2.58906
+dt0.000262105
+time1 2.58932
+dt0.000262105
+run: post read
+time1 2.58932
+dt0.000270013
+(0) 11:56:45 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58959 of 10 | dt 0.01 | max dt 0.000406249 | ongoing yes | dt complete no | 
+(0) 11:56:45 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58959 of 10 | dt 0.01 | max dt 0.000406249 | ongoing yes | dt complete no | 
+time1 2.58932
+dt0.000270013
+time1 2.58959
+dt0.000270013
+run: post read
+time1 2.58959
+dt0.000276664
+(0) 11:56:46 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58987 of 10 | dt 0.01 | max dt 0.000129585 | ongoing yes | dt complete no | 
+(0) 11:56:46 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 259 | t 2.58987 of 10 | dt 0.01 | max dt 0.000129585 | ongoing yes | dt complete no | 
+time1 2.58959
+dt0.000276664
+time1 2.58987
+dt0.000276664
+run: post read
+time1 2.58987
+dt0.000129585
+(0) 11:56:46 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+(0) 11:56:46 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+time1 2.58987
+dt0.000129585
+time1 2.59
+dt0.000129585
+run: post read
+time1 2.59
+dt0.000292516
+(0) 11:56:47 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59029 of 10 | dt 0.01 | max dt 0.00970748 | ongoing yes | dt complete no | 
+(0) 11:56:47 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59029 of 10 | dt 0.01 | max dt 0.00970748 | ongoing yes | dt complete no | 
+time1 2.59
+dt0.000292516
+time1 2.59029
+dt0.000292516
+run: post read
+time1 2.59029
+dt0.000312658
+(0) 11:56:47 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59061 of 10 | dt 0.01 | max dt 0.00939483 | ongoing yes | dt complete no | 
+(0) 11:56:47 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59061 of 10 | dt 0.01 | max dt 0.00939483 | ongoing yes | dt complete no | 
+time1 2.59029
+dt0.000312658
+time1 2.59061
+dt0.000312658
+run: post read
+time1 2.59061
+dt0.000333122
+(0) 11:56:47 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59094 of 10 | dt 0.01 | max dt 0.0090617 | ongoing yes | dt complete no | 
+(0) 11:56:47 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59094 of 10 | dt 0.01 | max dt 0.0090617 | ongoing yes | dt complete no | 
+time1 2.59061
+dt0.000333122
+time1 2.59094
+dt0.000333122
+run: post read
+time1 2.59094
+dt0.000363217
+(0) 11:56:48 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.5913 of 10 | dt 0.01 | max dt 0.00869849 | ongoing yes | dt complete no | 
+(0) 11:56:48 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.5913 of 10 | dt 0.01 | max dt 0.00869849 | ongoing yes | dt complete no | 
+time1 2.59094
+dt0.000363217
+time1 2.5913
+dt0.000363217
+run: post read
+time1 2.5913
+dt0.000414847
+(0) 11:56:48 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59172 of 10 | dt 0.01 | max dt 0.00828364 | ongoing yes | dt complete no | 
+(0) 11:56:48 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59172 of 10 | dt 0.01 | max dt 0.00828364 | ongoing yes | dt complete no | 
+time1 2.5913
+dt0.000414847
+time1 2.59172
+dt0.000414847
+run: post read
+time1 2.59172
+dt0.000505946
+(0) 11:56:48 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59222 of 10 | dt 0.01 | max dt 0.00777769 | ongoing yes | dt complete no | 
+(0) 11:56:48 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59222 of 10 | dt 0.01 | max dt 0.00777769 | ongoing yes | dt complete no | 
+time1 2.59172
+dt0.000505946
+time1 2.59222
+dt0.000505946
+run: post read
+time1 2.59222
+dt0.0005523
+(0) 11:56:49 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59277 of 10 | dt 0.01 | max dt 0.00722539 | ongoing yes | dt complete no | 
+(0) 11:56:49 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59277 of 10 | dt 0.01 | max dt 0.00722539 | ongoing yes | dt complete no | 
+time1 2.59222
+dt0.0005523
+time1 2.59277
+dt0.0005523
+run: post read
+time1 2.59277
+dt0.000562499
+(0) 11:56:49 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59334 of 10 | dt 0.01 | max dt 0.0066629 | ongoing yes | dt complete no | 
+(0) 11:56:49 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59334 of 10 | dt 0.01 | max dt 0.0066629 | ongoing yes | dt complete no | 
+time1 2.59277
+dt0.000562499
+time1 2.59334
+dt0.000562499
+run: post read
+time1 2.59334
+dt0.000539991
+(0) 11:56:50 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59388 of 10 | dt 0.01 | max dt 0.0061229 | ongoing yes | dt complete no | 
+(0) 11:56:50 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59388 of 10 | dt 0.01 | max dt 0.0061229 | ongoing yes | dt complete no | 
+time1 2.59334
+dt0.000539991
+time1 2.59388
+dt0.000539991
+run: post read
+time1 2.59388
+dt0.000532334
+(0) 11:56:50 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59441 of 10 | dt 0.01 | max dt 0.00559057 | ongoing yes | dt complete no | 
+(0) 11:56:50 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59441 of 10 | dt 0.01 | max dt 0.00559057 | ongoing yes | dt complete no | 
+time1 2.59388
+dt0.000532334
+time1 2.59441
+dt0.000532334
+run: post read
+time1 2.59441
+dt0.000466937
+(0) 11:56:51 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59488 of 10 | dt 0.01 | max dt 0.00512363 | ongoing yes | dt complete no | 
+(0) 11:56:51 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59488 of 10 | dt 0.01 | max dt 0.00512363 | ongoing yes | dt complete no | 
+time1 2.59441
+dt0.000466937
+time1 2.59488
+dt0.000466937
+run: post read
+time1 2.59488
+dt0.000396027
+(0) 11:56:51 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59527 of 10 | dt 0.01 | max dt 0.00472761 | ongoing yes | dt complete no | 
+(0) 11:56:51 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59527 of 10 | dt 0.01 | max dt 0.00472761 | ongoing yes | dt complete no | 
+time1 2.59488
+dt0.000396027
+time1 2.59527
+dt0.000396027
+run: post read
+time1 2.59527
+dt0.00037474
+(0) 11:56:51 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59565 of 10 | dt 0.01 | max dt 0.00435287 | ongoing yes | dt complete no | 
+(0) 11:56:51 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59565 of 10 | dt 0.01 | max dt 0.00435287 | ongoing yes | dt complete no | 
+time1 2.59527
+dt0.00037474
+time1 2.59565
+dt0.00037474
+run: post read
+time1 2.59565
+dt0.000334859
+(0) 11:56:52 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59598 of 10 | dt 0.01 | max dt 0.00401801 | ongoing yes | dt complete no | 
+(0) 11:56:52 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59598 of 10 | dt 0.01 | max dt 0.00401801 | ongoing yes | dt complete no | 
+time1 2.59565
+dt0.000334859
+time1 2.59598
+dt0.000334859
+run: post read
+time1 2.59598
+dt0.000306705
+(0) 11:56:52 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59629 of 10 | dt 0.01 | max dt 0.0037113 | ongoing yes | dt complete no | 
+(0) 11:56:52 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59629 of 10 | dt 0.01 | max dt 0.0037113 | ongoing yes | dt complete no | 
+time1 2.59598
+dt0.000306705
+time1 2.59629
+dt0.000306705
+run: post read
+time1 2.59629
+dt0.000298669
+(0) 11:56:53 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59659 of 10 | dt 0.01 | max dt 0.00341263 | ongoing yes | dt complete no | 
+(0) 11:56:53 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59659 of 10 | dt 0.01 | max dt 0.00341263 | ongoing yes | dt complete no | 
+time1 2.59629
+dt0.000298669
+time1 2.59659
+dt0.000298669
+run: post read
+time1 2.59659
+dt0.000280487
+(0) 11:56:53 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59687 of 10 | dt 0.01 | max dt 0.00313215 | ongoing yes | dt complete no | 
+(0) 11:56:53 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59687 of 10 | dt 0.01 | max dt 0.00313215 | ongoing yes | dt complete no | 
+time1 2.59659
+dt0.000280487
+time1 2.59687
+dt0.000280487
+run: post read
+time1 2.59687
+dt0.000270155
+(0) 11:56:54 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59714 of 10 | dt 0.01 | max dt 0.00286199 | ongoing yes | dt complete no | 
+(0) 11:56:54 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59714 of 10 | dt 0.01 | max dt 0.00286199 | ongoing yes | dt complete no | 
+time1 2.59687
+dt0.000270155
+time1 2.59714
+dt0.000270155
+run: post read
+time1 2.59714
+dt0.000266438
+(0) 11:56:54 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.5974 of 10 | dt 0.01 | max dt 0.00259555 | ongoing yes | dt complete no | 
+(0) 11:56:54 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.5974 of 10 | dt 0.01 | max dt 0.00259555 | ongoing yes | dt complete no | 
+time1 2.59714
+dt0.000266438
+time1 2.5974
+dt0.000266438
+run: post read
+time1 2.5974
+dt0.000254368
+(0) 11:56:54 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59766 of 10 | dt 0.01 | max dt 0.00234119 | ongoing yes | dt complete no | 
+(0) 11:56:54 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59766 of 10 | dt 0.01 | max dt 0.00234119 | ongoing yes | dt complete no | 
+time1 2.5974
+dt0.000254368
+time1 2.59766
+dt0.000254368
+run: post read
+time1 2.59766
+dt0.000252092
+(0) 11:56:55 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59791 of 10 | dt 0.01 | max dt 0.00208909 | ongoing yes | dt complete no | 
+(0) 11:56:55 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59791 of 10 | dt 0.01 | max dt 0.00208909 | ongoing yes | dt complete no | 
+time1 2.59766
+dt0.000252092
+time1 2.59791
+dt0.000252092
+run: post read
+time1 2.59791
+dt0.000245821
+(0) 11:56:55 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59816 of 10 | dt 0.01 | max dt 0.00184327 | ongoing yes | dt complete no | 
+(0) 11:56:55 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59816 of 10 | dt 0.01 | max dt 0.00184327 | ongoing yes | dt complete no | 
+time1 2.59791
+dt0.000245821
+time1 2.59816
+dt0.000245821
+run: post read
+time1 2.59816
+dt0.000242
+(0) 11:56:55 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.5984 of 10 | dt 0.01 | max dt 0.00160127 | ongoing yes | dt complete no | 
+(0) 11:56:55 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.5984 of 10 | dt 0.01 | max dt 0.00160127 | ongoing yes | dt complete no | 
+time1 2.59816
+dt0.000242
+time1 2.5984
+dt0.000242
+run: post read
+time1 2.5984
+dt0.000244647
+(0) 11:56:56 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59864 of 10 | dt 0.01 | max dt 0.00135663 | ongoing yes | dt complete no | 
+(0) 11:56:56 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59864 of 10 | dt 0.01 | max dt 0.00135663 | ongoing yes | dt complete no | 
+time1 2.5984
+dt0.000244647
+time1 2.59864
+dt0.000244647
+run: post read
+time1 2.59864
+dt0.000239245
+(0) 11:56:56 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59888 of 10 | dt 0.01 | max dt 0.00111738 | ongoing yes | dt complete no | 
+(0) 11:56:56 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59888 of 10 | dt 0.01 | max dt 0.00111738 | ongoing yes | dt complete no | 
+time1 2.59864
+dt0.000239245
+time1 2.59888
+dt0.000239245
+run: post read
+time1 2.59888
+dt0.000241407
+(0) 11:56:57 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59912 of 10 | dt 0.01 | max dt 0.000875975 | ongoing yes | dt complete no | 
+(0) 11:56:57 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59912 of 10 | dt 0.01 | max dt 0.000875975 | ongoing yes | dt complete no | 
+time1 2.59888
+dt0.000241407
+time1 2.59912
+dt0.000241407
+run: post read
+time1 2.59912
+dt0.000243661
+(0) 11:56:57 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59937 of 10 | dt 0.01 | max dt 0.000632314 | ongoing yes | dt complete no | 
+(0) 11:56:57 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59937 of 10 | dt 0.01 | max dt 0.000632314 | ongoing yes | dt complete no | 
+time1 2.59912
+dt0.000243661
+time1 2.59937
+dt0.000243661
+run: post read
+time1 2.59937
+dt0.000243556
+(0) 11:56:58 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59961 of 10 | dt 0.01 | max dt 0.000388758 | ongoing yes | dt complete no | 
+(0) 11:56:58 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59961 of 10 | dt 0.01 | max dt 0.000388758 | ongoing yes | dt complete no | 
+time1 2.59937
+dt0.000243556
+time1 2.59961
+dt0.000243556
+run: post read
+time1 2.59961
+dt0.000250961
+(0) 11:56:58 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59986 of 10 | dt 0.01 | max dt 0.000137797 | ongoing yes | dt complete no | 
+(0) 11:56:58 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 260 | t 2.59986 of 10 | dt 0.01 | max dt 0.000137797 | ongoing yes | dt complete no | 
+time1 2.59961
+dt0.000250961
+time1 2.59986
+dt0.000250961
+run: post read
+time1 2.59986
+dt0.000137797
+(0) 11:56:58 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.6 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+(0) 11:56:58 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.6 of 10 | dt 0.01 | max dt 0.01 | ongoing yes | dt complete yes | 
+time1 2.59986
+dt0.000137797
+time1 2.6
+dt0.000137797
+run: post read
+time1 2.6
+dt0.000253664
+(0) 11:56:59 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60025 of 10 | dt 0.01 | max dt 0.00974634 | ongoing yes | dt complete no | 
+(0) 11:56:59 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60025 of 10 | dt 0.01 | max dt 0.00974634 | ongoing yes | dt complete no | 
+time1 2.6
+dt0.000253664
+time1 2.60025
+dt0.000253664
+run: post read
+time1 2.60025
+dt0.000262428
+(0) 11:56:59 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60052 of 10 | dt 0.01 | max dt 0.00948391 | ongoing yes | dt complete no | 
+(0) 11:56:59 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60052 of 10 | dt 0.01 | max dt 0.00948391 | ongoing yes | dt complete no | 
+time1 2.60025
+dt0.000262428
+time1 2.60052
+dt0.000262428
+run: post read
+time1 2.60052
+dt0.000266271
+(0) 11:57:00 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60078 of 10 | dt 0.01 | max dt 0.00921764 | ongoing yes | dt complete no | 
+(0) 11:57:00 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60078 of 10 | dt 0.01 | max dt 0.00921764 | ongoing yes | dt complete no | 
+time1 2.60052
+dt0.000266271
+time1 2.60078
+dt0.000266271
+run: post read
+time1 2.60078
+dt0.000270301
+(0) 11:57:00 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60105 of 10 | dt 0.01 | max dt 0.00894734 | ongoing yes | dt complete no | 
+(0) 11:57:00 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60105 of 10 | dt 0.01 | max dt 0.00894734 | ongoing yes | dt complete no | 
+time1 2.60078
+dt0.000270301
+time1 2.60105
+dt0.000270301
+run: post read
+time1 2.60105
+dt0.000284818
+(0) 11:57:00 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60134 of 10 | dt 0.01 | max dt 0.00866252 | ongoing yes | dt complete no | 
+(0) 11:57:00 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60134 of 10 | dt 0.01 | max dt 0.00866252 | ongoing yes | dt complete no | 
+time1 2.60105
+dt0.000284818
+time1 2.60134
+dt0.000284818
+run: post read
+time1 2.60134
+dt0.000282078
+(0) 11:57:01 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60162 of 10 | dt 0.01 | max dt 0.00838044 | ongoing yes | dt complete no | 
+(0) 11:57:01 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60162 of 10 | dt 0.01 | max dt 0.00838044 | ongoing yes | dt complete no | 
+time1 2.60134
+dt0.000282078
+time1 2.60162
+dt0.000282078
+run: post read
+time1 2.60162
+dt0.000275887
+(0) 11:57:01 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.6019 of 10 | dt 0.01 | max dt 0.00810455 | ongoing yes | dt complete no | 
+(0) 11:57:01 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.6019 of 10 | dt 0.01 | max dt 0.00810455 | ongoing yes | dt complete no | 
+time1 2.60162
+dt0.000275887
+time1 2.6019
+dt0.000275887
+run: post read
+time1 2.6019
+dt0.000271202
+(0) 11:57:01 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60217 of 10 | dt 0.01 | max dt 0.00783335 | ongoing yes | dt complete no | 
+(0) 11:57:01 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60217 of 10 | dt 0.01 | max dt 0.00783335 | ongoing yes | dt complete no | 
+time1 2.6019
+dt0.000271202
+time1 2.60217
+dt0.000271202
+run: post read
+time1 2.60217
+dt0.000267971
+(0) 11:57:02 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60243 of 10 | dt 0.01 | max dt 0.00756538 | ongoing yes | dt complete no | 
+(0) 11:57:02 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60243 of 10 | dt 0.01 | max dt 0.00756538 | ongoing yes | dt complete no | 
+time1 2.60217
+dt0.000267971
+time1 2.60243
+dt0.000267971
+run: post read
+time1 2.60243
+dt0.000270521
+(0) 11:57:02 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60271 of 10 | dt 0.01 | max dt 0.00729486 | ongoing yes | dt complete no | 
+(0) 11:57:02 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60271 of 10 | dt 0.01 | max dt 0.00729486 | ongoing yes | dt complete no | 
+time1 2.60243
+dt0.000270521
+time1 2.60271
+dt0.000270521
+run: post read
+time1 2.60271
+dt0.000269894
+(0) 11:57:03 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60298 of 10 | dt 0.01 | max dt 0.00702496 | ongoing yes | dt complete no | 
+(0) 11:57:03 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60298 of 10 | dt 0.01 | max dt 0.00702496 | ongoing yes | dt complete no | 
+time1 2.60271
+dt0.000269894
+time1 2.60298
+dt0.000269894
+run: post read
+time1 2.60298
+dt0.000275041
+(0) 11:57:03 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60325 of 10 | dt 0.01 | max dt 0.00674992 | ongoing yes | dt complete no | 
+(0) 11:57:03 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60325 of 10 | dt 0.01 | max dt 0.00674992 | ongoing yes | dt complete no | 
+time1 2.60298
+dt0.000275041
+time1 2.60325
+dt0.000275041
+run: post read
+time1 2.60325
+dt0.000279775
+(0) 11:57:03 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60353 of 10 | dt 0.01 | max dt 0.00647015 | ongoing yes | dt complete no | 
+(0) 11:57:03 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60353 of 10 | dt 0.01 | max dt 0.00647015 | ongoing yes | dt complete no | 
+time1 2.60325
+dt0.000279775
+time1 2.60353
+dt0.000279775
+run: post read
+time1 2.60353
+dt0.000287963
+(0) 11:57:04 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60382 of 10 | dt 0.01 | max dt 0.00618219 | ongoing yes | dt complete no | 
+(0) 11:57:04 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60382 of 10 | dt 0.01 | max dt 0.00618219 | ongoing yes | dt complete no | 
+time1 2.60353
+dt0.000287963
+time1 2.60382
+dt0.000287963
+run: post read
+time1 2.60382
+dt0.00029817
+(0) 11:57:04 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60412 of 10 | dt 0.01 | max dt 0.00588402 | ongoing yes | dt complete no | 
+(0) 11:57:04 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60412 of 10 | dt 0.01 | max dt 0.00588402 | ongoing yes | dt complete no | 
+time1 2.60382
+dt0.00029817
+time1 2.60412
+dt0.00029817
+run: post read
+time1 2.60412
+dt0.000310399
+(0) 11:57:05 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60443 of 10 | dt 0.01 | max dt 0.00557362 | ongoing yes | dt complete no | 
+(0) 11:57:05 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60443 of 10 | dt 0.01 | max dt 0.00557362 | ongoing yes | dt complete no | 
+time1 2.60412
+dt0.000310399
+time1 2.60443
+dt0.000310399
+run: post read
+time1 2.60443
+dt0.000326487
+(0) 11:57:05 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60475 of 10 | dt 0.01 | max dt 0.00524713 | ongoing yes | dt complete no | 
+(0) 11:57:05 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60475 of 10 | dt 0.01 | max dt 0.00524713 | ongoing yes | dt complete no | 
+time1 2.60443
+dt0.000326487
+time1 2.60475
+dt0.000326487
+run: post read
+time1 2.60475
+dt0.000345054
+(0) 11:57:06 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.6051 of 10 | dt 0.01 | max dt 0.00490208 | ongoing yes | dt complete no | 
+(0) 11:57:06 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.6051 of 10 | dt 0.01 | max dt 0.00490208 | ongoing yes | dt complete no | 
+time1 2.60475
+dt0.000345054
+time1 2.6051
+dt0.000345054
+run: post read
+time1 2.6051
+dt0.00036677
+(0) 11:57:06 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60546 of 10 | dt 0.01 | max dt 0.00453531 | ongoing yes | dt complete no | 
+(0) 11:57:06 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60546 of 10 | dt 0.01 | max dt 0.00453531 | ongoing yes | dt complete no | 
+time1 2.6051
+dt0.00036677
+time1 2.60546
+dt0.00036677
+run: post read
+time1 2.60546
+dt0.000395152
+(0) 11:57:06 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60586 of 10 | dt 0.01 | max dt 0.00414015 | ongoing yes | dt complete no | 
+(0) 11:57:06 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60586 of 10 | dt 0.01 | max dt 0.00414015 | ongoing yes | dt complete no | 
+time1 2.60546
+dt0.000395152
+time1 2.60586
+dt0.000395152
+run: post read
+time1 2.60586
+dt0.000425427
+(0) 11:57:07 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60629 of 10 | dt 0.01 | max dt 0.00371473 | ongoing yes | dt complete no | 
+(0) 11:57:07 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60629 of 10 | dt 0.01 | max dt 0.00371473 | ongoing yes | dt complete no | 
+time1 2.60586
+dt0.000425427
+time1 2.60629
+dt0.000425427
+run: post read
+time1 2.60629
+dt0.000463321
+(0) 11:57:07 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60675 of 10 | dt 0.01 | max dt 0.00325141 | ongoing yes | dt complete no | 
+(0) 11:57:07 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60675 of 10 | dt 0.01 | max dt 0.00325141 | ongoing yes | dt complete no | 
+time1 2.60629
+dt0.000463321
+time1 2.60675
+dt0.000463321
+run: post read
+time1 2.60675
+dt0.00051828
+(0) 11:57:08 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60727 of 10 | dt 0.01 | max dt 0.00273313 | ongoing yes | dt complete no | 
+(0) 11:57:08 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60727 of 10 | dt 0.01 | max dt 0.00273313 | ongoing yes | dt complete no | 
+time1 2.60675
+dt0.00051828
+time1 2.60727
+dt0.00051828
+run: post read
+time1 2.60727
+dt0.000596581
+(0) 11:57:08 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60786 of 10 | dt 0.01 | max dt 0.00213654 | ongoing yes | dt complete no | 
+(0) 11:57:08 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60786 of 10 | dt 0.01 | max dt 0.00213654 | ongoing yes | dt complete no | 
+time1 2.60727
+dt0.000596581
+time1 2.60786
+dt0.000596581
+run: post read
+time1 2.60786
+dt0.000499047
+(0) 11:57:09 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60836 of 10 | dt 0.01 | max dt 0.0016375 | ongoing yes | dt complete no | 
+(0) 11:57:09 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60836 of 10 | dt 0.01 | max dt 0.0016375 | ongoing yes | dt complete no | 
+time1 2.60786
+dt0.000499047
+time1 2.60836
+dt0.000499047
+run: post read
+time1 2.60836
+dt0.000431884
+(0) 11:57:09 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60879 of 10 | dt 0.01 | max dt 0.00120561 | ongoing yes | dt complete no | 
+(0) 11:57:09 [impl::SolverInterfaceImpl]:390 in advance: [0mit 1 of 1 | dt# 261 | t 2.60879 of 10 | dt 0.01 | max dt 0.00120561 | ongoing yes | dt complete no | 
+time1 2.60836
+dt0.000431884
+time1 2.60879
+dt0.000431884
+run: post read
