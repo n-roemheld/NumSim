@@ -189,8 +189,6 @@ void Computation::set_writeData(std::vector<double> & writeData)
 		int i = settings_.vertex_i.at(v);
 		int j = settings_.vertex_j.at(v);
 
-		// std::cout << "here!" << std::endl;
-
 		// neighbour indices
 		int in = i;
 		int jn = j;
@@ -198,13 +196,7 @@ void Computation::set_writeData(std::vector<double> & writeData)
 		double dx = meshWidth_[0];
 		double dy = meshWidth_[1];
 
-		// std::cout << "c" << std::endl;
-		// std::cout << "osize" << settings_.orientation_.size() << std::endl;
-
-
 		int orientation = settings_.orientation_.at(v);
-
-		// std::cout << "here2" << std::endl;
 
 		switch (orientation)
 		{
@@ -370,8 +362,6 @@ void Computation::applyBoundaryValues (std::vector<double> & readData)
 		int i = settings_.vertex_i.at(v);
 		int j = settings_.vertex_j.at(v);
 
-		// std::cout << "here!" << std::endl;
-
 		// neighbour indices
 		int in = i;
 		int jn = j;
@@ -379,13 +369,7 @@ void Computation::applyBoundaryValues (std::vector<double> & readData)
 		double dx = meshWidth_[0];
 		double dy = meshWidth_[1];
 
-		// std::cout << "c" << std::endl;
-		// std::cout << "osize" << settings_.orientation_.size() << std::endl;
-
-
 		int orientation = settings_.orientation_.at(v);
-
-		// std::cout << "here2" << std::endl;
 
 		switch (orientation)
 		{
@@ -400,9 +384,6 @@ void Computation::applyBoundaryValues (std::vector<double> & readData)
 			case 8: h = 0; break;
 			default: std::cout << "unknown orientation" << std::endl; break;
 		}
-
-		// std::cout << "here3!" << std::endl;
-
 
 		discretization_->T(i,j) = h*readData.at(v)*settings_.re*settings_.prandtl
 		                        + discretization_->T(in,jn);
