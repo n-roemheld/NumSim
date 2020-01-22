@@ -4,7 +4,11 @@
 class Jacobi : public Smoother
 {
 public: 
-    Jacobi(int numberOfIterations);
+    Jacobi(int numberOfIterationsPre, int numberOfIterationsPost);
 
-    void smooth(MGGrid);
+    // presmooths the mgg with numberOfIterationsPre times Jacobi 
+    void presmooth(std::shared_ptr<MGGrid> mgg);
+
+    // postsmooths the mgg with numberOfIterationsPost times Jacobi 
+    void postsmooth(std::shared_ptr<MGGrid> mgg);
 };

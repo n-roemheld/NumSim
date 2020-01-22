@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "Smoother.h"
+#include "Coarser.h"
 #include "MGGrid.h"
 #include "PressureSolver.h"
 #include "Discretization.h"
@@ -19,12 +20,12 @@ public:
     void solve();
 
     // recursive method to perform multigrid
-    FieldVariable MGCycle(int level, std::shared_ptr<MGGrid> mgg); 
+    void MGCycle(int level, std::shared_ptr<MGGrid> mgg); 
 
 protected:
     
     // computes residual vector
-    FieldVariable computeResVec();
+    void computeResVec(std::shared_ptr<MGGrid> mgg);
 
     // set boundary values on MGGrid
     void setBoundaryValuesMGGrid (std::shared_ptr<MGGrid> mgg);
@@ -32,7 +33,7 @@ protected:
 private:
     std::unique_ptr<Smoother> sm_; // smoother
     std::unique_ptr<Coarser> coa_; //coarsening operator
-    std::unique_ptr<PressureSolver> es_; //endSolver at coarsest level
+    std::unique_ptr<EndSolver> es_; //endSolver at coarsest level
     Cycle cycle_; // defines cycle structure
 
 };

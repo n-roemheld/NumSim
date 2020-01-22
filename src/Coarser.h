@@ -10,7 +10,9 @@ public:
 
     Coarser();
 
-    virtual std::vector<double> restrict(std::vector<double> fineResVec, std::shared_ptr<MGGrid> mgg) = 0;
+    // restricts the current MGGrid to the coarser MGGrid and sets also nCells and meshWidth 
+    virtual std::shared_ptr<MGGrid> restrict(std::shared_ptr<MGGrid> mgg) = 0;
 
-    virtual std::vector<double> interpolate(std::vector<double> coaDefVec, std::shared_ptr<MGGrid> mgg) = 0;
+    // interpolates the coarse MGGrid to the finer MGGrid in p
+    virtual std::shared_ptr<FieldVariable> interpolate(std::shared_ptr<MGGrid> mggCoarse) = 0;
 };

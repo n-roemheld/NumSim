@@ -10,14 +10,14 @@ public:
     Smoother (int numberOfIterationsPre, int numberOfIterationsPost);
 
     // performs whole presmoothing depending on numberOfIterationsPre_
-    virtual void presmooth(MGGrid mgg) = 0;
+    virtual void presmooth(std::shared_ptr<MGGrid> mgg) = 0;
 
     // performs whole postsmoothing depending on numberOfIterationsPost_
-    virtual void postsmooth(MGGrid mgg) = 0;
+    virtual void postsmooth(std::shared_ptr<MGGrid> mgg) = 0;
 
 protected:
 
-    int numberOfIterationsPre_;
+    int numberOfIterationsPre_; // number of Iterations for presmoothing
 
-    int numberOfIterationsPost_;
+    int numberOfIterationsPost_; // number of iterations for postsmoothing
 };
