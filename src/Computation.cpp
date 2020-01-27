@@ -1,4 +1,3 @@
-#pragma once
 
 #include "Computation.h"
 #include <math.h>
