@@ -39,7 +39,7 @@ public:
 
 protected:
     const std::array< int, 2 > nCells_;
-    const std::array< int, 2 > meshWidth_;
+    const std::array< double, 2 > meshWidth_;
     FieldVariable p_;
     FieldVariable rhs_;
     FieldVariable resVec_;

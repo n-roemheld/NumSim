@@ -6,6 +6,18 @@
   FieldVariable::FieldVariable(std::array< int, 2 > size, std::array< double, 2 > origin, std::array< double, 2 > meshWidth) :
     Array2D(size), origin_(origin), meshWidth_(meshWidth)
     {};
+  
+  FieldVariable::FieldVariable(std::shared_ptr<FieldVariable> fv)
+  : Array2D(fv->size_), origin_(fv->origin_), meshWidth_(meshWidth_)
+	{
+    for (int j = 0; j < fv->size_[1]; j++)
+    {
+      for (int i = 0; i < fv->size_[0]; i++)
+      {
+        operator()(i,j) = fv->operator()(i,j);
+      }
+    }
+  };
 
   //!get the value at the Cartesian coordinate (x,y). The value is linearly interpolated between stored points.
   // works only for points within the domain
