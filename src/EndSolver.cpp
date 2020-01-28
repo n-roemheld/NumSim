@@ -1,10 +1,8 @@
-# pragma once 
-
 #include "EndSolver.h"
 #include <math.h>
 
 EndSolver::EndSolver(double epsilon, int maximumNumberOfIterations) : 
-    epsilon_(epsilon), maximumNumberOfIterations_(maximumNumberOfIterations)#
+    epsilon_(epsilon), maximumNumberOfIterations_(maximumNumberOfIterations)
 {};
 
 void EndSolver::setBoundaryValues(std::shared_ptr<MGGrid> mgg)

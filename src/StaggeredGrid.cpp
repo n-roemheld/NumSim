@@ -38,6 +38,11 @@ const FieldVariable& StaggeredGrid::p() const
   return p_;
 };
 
+const FieldVariable& StaggeredGrid::rhs() const
+{
+	return rhs_;
+};
+
 double StaggeredGrid::u(int i, int j) const
 {
   return StaggeredGrid::u_(i,j);

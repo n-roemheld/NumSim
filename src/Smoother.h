@@ -17,6 +17,8 @@ public:
 
 protected:
 
+    void setBoundaryValues(std::shared_ptr<MGGrid> mgg);
+
     int numberOfIterationsPre_; // number of Iterations for presmoothing
 
     int numberOfIterationsPost_; // number of iterations for postsmoothing

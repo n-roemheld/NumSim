@@ -9,6 +9,13 @@
 #include "output_writer/output_writer_text.h"
 #include "settings.h"
 
+#include "Smoother.h"
+#include "SmootherJacobi.h"
+#include "EndSolver.h"
+#include "Coarser.h"
+#include "CoarserDefault.h"
+#include "Multigrid.h"
+
 class Computation
 {
 public:

@@ -19,6 +19,8 @@ public:
 
   const FieldVariable & 	p() const;
 
+  const FieldVariable &   rhs() const;
+
   double 	u(int i, int j) const;
 
   double& 	u(int i, int j);

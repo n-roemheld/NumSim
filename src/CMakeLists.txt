@@ -3,8 +3,8 @@ project(numsim)
 
 add_executable(${PROJECT_NAME}
         main.cpp
-        Computation.cpp
-        settings.cpp
+        Computation.h Computation.cpp
+        settings.h settings.cpp
         StaggeredGrid.h StaggeredGrid.cpp
         Discretization.cpp Discretization.h
         DonorCell.cpp DonorCell.h
@@ -16,7 +16,16 @@ add_executable(${PROJECT_NAME}
         output_writer/output_writer_text.cpp output_writer/output_writer_text.h
         output_writer/output_writer.cpp output_writer/output_writer.h
         Array2D.cpp Array2D.h
-        FieldVariable.cpp FieldVariable.h)
+        FieldVariable.cpp FieldVariable.h
+	Smoother.h Smoother.cpp
+	SmootherJacobi.h SmootherJacobi.cpp
+	Coarser.h Coarser.cpp
+	CoarserDefault.h CoarserDefault.cpp
+	EndSolver.h EndSolver.cpp
+	Multigrid.h Multigrid.cpp
+	MGGrid.h MGGrid.cpp
+	Cycle.h
+)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR})
 message("Including ${PROJECT_SOURCE_DIR}")

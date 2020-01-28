@@ -1,10 +1,10 @@
 #pragma once
 #include "Smoother.h"
 
-class Jacobi : public Smoother
+class SmootherJacobi : public Smoother
 {
 public: 
-    Jacobi(int numberOfIterationsPre, int numberOfIterationsPost);
+    SmootherJacobi(int numberOfIterationsPre, int numberOfIterationsPost);
 
     // presmooths the mgg with numberOfIterationsPre times Jacobi 
     void presmooth(std::shared_ptr<MGGrid> mgg);

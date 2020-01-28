@@ -9,4 +9,4 @@ struct Cycle
     int maxLevel; // maxLevel for multigrid
 
     std::vector<int> gamma; // v.at(level) defines times to perform multigrid on special level
-}
+};

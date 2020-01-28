@@ -23,4 +23,4 @@ protected:
     int maximumNumberOfIterations_;
 
     double compute_res(std::shared_ptr<MGGrid> mgg);
-}
+};
