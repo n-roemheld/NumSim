@@ -8,12 +8,13 @@ Multigrid::Multigrid (std::shared_ptr<Discretization> discretization, double eps
 
 void Multigrid::solve()
 {
-    std::shared_ptr<FieldVariable> p = std::make_shared<FieldVariable>(discretization_->p());
-    std::shared_ptr<FieldVariable> rhs = std::make_shared<FieldVariable>(discretization_->rhs());
+    std::shared_ptr<FieldVariable> p = std::make_shared<FieldVariable>(discretization_->p()); // wird eine Kopie erstellt??
+    std::shared_ptr<FieldVariable> rhs = std::make_shared<FieldVariable>(discretization_->rhs()); // wird eine Kopie erstellt??
     std::shared_ptr<MGGrid> mgg = std::make_shared<MGGrid>(discretization_->nCells(), discretization_->meshWidth(), p, rhs);
     if(cycle_.recursive)
     {
         MGCycle(cycle_.maxLevel, mgg);
+        //neue Werte von mgg in discretization_ schreiben??
     }
     else
     {
