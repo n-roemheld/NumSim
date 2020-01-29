@@ -22,6 +22,9 @@ public:
     // recursive method to perform multigrid
     void MGCycle(int level, std::shared_ptr<MGGrid> mgg); 
 
+    // loop method to perform multigrid
+    void MGLoop(int maxLevel, std::shared_ptr<MGGrid> mgg);
+
 protected:
     
     // computes residual vector
