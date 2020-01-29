@@ -1,36 +1,39 @@
 #include "Multigrid.h"
 
-Multigrid::Multigrid (std::shared_ptr<Discretization> discretization, Settings settings_, std::string smoother_name, std::string coarser_name, std::string endSolver_name, Cycle cycle) :
-    PressureSolver(discretization, settings_.epsilon, settings_.maximumNumberOfIterations), cycle_(cycle)
-{
-    if (smoother_name == "Jacobi")
-    {
-        smoother_obj = SmootherJacobi(settings_.numberOfIterationsPre, settings_.numberOfIterationsPre);
-    }
-    else 
-    {
-        std::cout << "Unknown smoother!" << std::endl;
-    }
+// Multigrid::Multigrid (std::shared_ptr<Discretization> discretization, Settings settings_, std::string smoother_name, std::string coarser_name, std::string endSolver_name, Cycle cycle) :
+//     PressureSolver(discretization, settings_.epsilon, settings_.maximumNumberOfIterations), cycle_(cycle)
+// {
+//     if (smoother_name == "Jacobi")
+//     {
+//         smoother_obj = SmootherJacobi(settings_.numberOfIterationsPre, settings_.numberOfIterationsPre);
+//     }
+//     else 
+//     {
+//         std::cout << "Unknown smoother!" << std::endl;
+//     }
 
-    if (coarser_name == "Default")
-    {
-        coarser_obj = CoarserDefault();
-    }
-    else
-    {
-        std::cout << "Unknown coarser!" << std::endl;
-    }
+//     if (coarser_name == "Default")
+//     {
+//         coarser_obj = CoarserDefault();
+//     }
+//     else
+//     {
+//         std::cout << "Unknown coarser!" << std::endl;
+//     }
 
-    if (endSolver_name == "None")
-    {
-        endSolver_obj = EndSolver(settings_.epsilon, settings_.maximumNumberOfIterations);
-    }
-    else
-    {
-        std::cout << "Unknown Endsolver" << std::endl;
-    }
-};
+//     if (endSolver_name == "None")
+//     {
+//         endSolver_obj = EndSolver(settings_.epsilon, settings_.maximumNumberOfIterations);
+//     }
+//     else
+//     {
+//         std::cout << "Unknown Endsolver" << std::endl;
+//     }
+// };
 
+Multigrid:: Multigrid(std::shared_ptr<Discretization> discretization, std::shared_ptr<Smoother> sm, std::shared_ptr<Coarser> coa, std::shared_ptr<EndSolver> es, Cycle cycle) :
+    PressureSolver(discretization, 0, 0), smoother_(sm), coarser_(coa), endSolver_(es) // epsilon und maximumNumberOfIterations einfach auf 0 gesetzt, da nicht gebraucht
+{};
 
 void Multigrid::solve()
 {

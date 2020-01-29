@@ -36,7 +36,11 @@ void Computation::initialize (int argc, char *argv[])
 	}
 	else if (settings_.pressureSolver == "multigrid")
 	{
-		pressureSolver_ = std::make_unique<Multigrid>(discretization_, settings_, settings_.smoother_name, settings_.coarser_name, settings_.endSolver_name, settings_.cycle)
+		// TODO: Fallunterscheidungen einfügen
+		std::shared_ptr<Smoother> smoother = std::make_shared<SmootherJacobi>(settings_.numberOfiterationsPre, settings_.numberOfIterationsPost);
+		std::shared_ptr<Coarser> coarser = std::make_shared<CoarserDefault>();
+		std::shared_ptr<EndSolver> endSolver = std::make_shared<EndSolver>(settings_.epsilon, settings_.maximumNumberOfIterations);
+		pressureSolver_ = std::make_unique<Multigrid>(discretization_, smoother, coarser, endSolver);
 	}
 	else
 	{
