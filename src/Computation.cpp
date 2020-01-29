@@ -29,11 +29,20 @@ void Computation::initialize (int argc, char *argv[])
 		pressureSolver_ = std::make_unique<SOR>(discretization_, settings_.epsilon,
 		 settings_.maximumNumberOfIterations, settings_.omega);
 	}
-	else
+	else if (settings_.pressureSolver == "GaussSeidel")
 	{
 		pressureSolver_ = std::make_unique<GaussSeidel>(discretization_, settings_.epsilon,
 		 settings_.maximumNumberOfIterations);
 	}
+	else if (settings_.pressureSolver == "multigrid")
+	{
+		pressureSolver_ = std::make_unique<Multigrid>(discretization_, settings_, settings_.smoother_name, settings_.coarser_name, settings_.endSolver_name, settings_.cycle)
+	}
+	else
+	{
+		std::cout << "Unknown pressure solver!" << std::endl;
+	}
+	
 
 	//initialize outputWriters
  	outputWriterParaview_ = std::make_unique<OutputWriterParaview>(discretization_);

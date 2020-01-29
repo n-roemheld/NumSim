@@ -1,7 +1,6 @@
 
 #include "settings.h"
-#include <fstream>   // for file operations
-#include <iostream>  // for cout
+
 
 void Settings::loadFromFile(std::string filename)
 {
@@ -161,9 +160,41 @@ void Settings::loadFromFile(std::string filename)
     	{
     		maximumNumberOfIterations = int(atof(parameterValue.c_str()));
     	}
+		else if (parameterName == "Smoother")
+		{
+			smoother_name = parameterValue.c_str();
+		}
+		else if (parameterName == "Coarser")
+		{
+			coarser_name = parameterValue.c_str();
+		}
+		else if (parameterName == "EndSolver")
+		{
+			endSolver_name = parameterValue.c_str();
+		}
+		else if (parameterName == "Cycle")
+		{
+			cycle_name = parameterValue.c_str();
+		}
+		else if (parameterName == "NumberOfIterationsPre")
+		{
+			numberOfIterationsPre = int(atof(parameterValue.c_str()));
+		}
+		else if (parameterName == "NumberOfIterationsPost")
+		{
+			numberOfIterationsPost = int(atof(parameterValue.c_str()));
+		}
+		else if (parameterName == "Recursive")
+		{
+			recursive = bool(int(atof(parameterValue.c_str)));
+		}
+		else if (parameterName == "MaxLevel")
+		{
+			maxLevel = int(atof(parameterValue.c_str));
+		}
     	else
     	{
-    		std::cout << "also wirklich gar nichts funktioniert" << std::endl;
+    		std::cout << "Unknown parameter!" << std::endl;
     	}
 
     }
@@ -185,6 +216,14 @@ void Settings::loadFromFile(std::string filename)
     // print line
     std::cout << "line " << lineNo << ": " << line << std::endl;
   }
+
+
+  
+
+  cycle.recursive = recursive;
+  cycle.maxLevel = maxLevel;
+//   cycle.gamma = ?;
+  	
 }
 
 void Settings::printSettings()
@@ -198,4 +237,5 @@ void Settings::printSettings()
     << ", right: ("  << dirichletBcRight[0] << "," << dirichletBcRight[1] << ")" << std::endl
     << "  useDonorCell: " << std::boolalpha << useDonorCell << ", alpha: " << alpha << std::endl
     << "  pressureSolver: " << pressureSolver << ", omega: " << omega << ", epsilon: " << epsilon << ", maximumNumberOfIterations: " << maximumNumberOfIterations << std::endl;
+	// todo: add new parameters
 }

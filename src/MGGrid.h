@@ -19,7 +19,7 @@ public:
 
     const FieldVariable &   rhs() const;
 
-    const FieldVariable &   resVec() const;
+    const FieldVariable &   resVec() const; 
 
     double 	p(int i, int j) const;
 

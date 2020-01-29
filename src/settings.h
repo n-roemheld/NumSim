@@ -3,6 +3,11 @@
 
 #include <iostream>
 #include <array>
+#include "PressureSolver.h"
+#include "Discretization.h"
+#include "Cycle.h"
+#include <fstream>   // for file operations
+#include <iostream>  // for cout
 
 /** All settings that parametrize a simulation run.
  */
@@ -25,10 +30,29 @@ struct Settings
   std::array<double,2> dirichletBcLeft;    //< prescribed values of u,v at left of domain
   std::array<double,2> dirichletBcRight;   //< prescribed values of u,v at right of domain
 
-  std::string pressureSolver = "SOR";      //< which pressure solver to use, "GaussSeidel" or "SOR"
+  std::string pressureSolver = "SOR";      //< which pressure solver to use, "GaussSeidel" or "SOR" or "multigrid"
   double omega = 1.0;                //< overrelaxation factor
   double epsilon = 1e-5;             //< tolerance for the residual in the pressure solver
   int maximumNumberOfIterations = 1e5;    //< maximum number of iterations in the solver
+
+  // multigrid parameters
+  std::string smoother_name;
+  std::string coarser_name;
+  std::string endSolver_name;
+  std::string cycle_name;
+
+  // Not working:
+  Smoother smoother;
+  Coarser coarser;
+  EndSolver endSolver;
+  Cycle cycle;
+
+  int numberOfIterationsPre;
+  int numberOfIterationsPost;
+
+  bool recursive;
+  int maxLevel;
+  std::vector<int> gamma; // todo: add to load from file
 
   //! parse a text file with settings, each line contains "<parameterName> = <value>"
   void loadFromFile(std::string filename);

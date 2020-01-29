@@ -1,9 +1,35 @@
 #include "Multigrid.h"
-#include <array>
 
-Multigrid::Multigrid (std::shared_ptr<Discretization> discretization, double epsilon, int maximumNumberOfIterations, std::shared_ptr<Smoother> sm, std::shared_ptr<Coarser> coa, std::shared_ptr<EndSolver> es, Cycle cycle) :
-    PressureSolver(discretization, epsilon, maximumNumberOfIterations), sm_(sm), coa_(coa), es_(es), cycle_(cycle)
-{};
+Multigrid::Multigrid (std::shared_ptr<Discretization> discretization, Settings settings_, std::string smoother_name, std::string coarser_name, std::string endSolver_name, Cycle cycle) :
+    PressureSolver(discretization, settings_.epsilon, settings_.maximumNumberOfIterations), cycle_(cycle)
+{
+    if (smoother_name == "Jacobi")
+    {
+        smoother_obj = SmootherJacobi(settings_.numberOfIterationsPre, settings_.numberOfIterationsPre);
+    }
+    else 
+    {
+        std::cout << "Unknown smoother!" << std::endl;
+    }
+
+    if (coarser_name == "Default")
+    {
+        coarser_obj = CoarserDefault();
+    }
+    else
+    {
+        std::cout << "Unknown coarser!" << std::endl;
+    }
+
+    if (endSolver_name == "None")
+    {
+        endSolver_obj = EndSolver(settings_.epsilon, settings_.maximumNumberOfIterations);
+    }
+    else
+    {
+        std::cout << "Unknown Endsolver" << std::endl;
+    }
+};
 
 
 void Multigrid::solve()
@@ -28,19 +54,19 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
 {
     if(level == 0)
     {
-        es_->solve(mgg);
+        endSolver_->solve(mgg);
     }
     else 
     {
-        sm_->presmooth(mgg);
+        smoother_->presmooth(mgg);
         computeResVec(mgg);
         std::shared_ptr<MGGrid> mggc = std::make_shared<MGGrid>(mgg->nCells(), mgg->meshWidth());
-        coa_->restrict(mgg, mggc); // mggCoarse is set complete, also p
+        coarser_->restrict(mgg, mggc); // mggCoarse is set complete, also p
         for(int i = 0; i < cycle_.gamma[level]; i++)
         {
             MGCycle(level-1, mggc);
         }
-        coa_->interpolate(mggc, mgg);
+        coarser_->interpolate(mggc, mgg);
         for(int j = mgg->pJBegin(); j < mgg->pJEnd(); j++)
         {
             for(int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
@@ -48,27 +74,26 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
                 mgg->p(i,j) = mgg->p(i,j) + mgg->resVec(i,j); // adding theta ???
             }
         }
-        sm_->postsmooth(mgg);
+        smoother_->postsmooth(mgg);
     }
 };
 
 void Multigrid::MGLoop(int maxLevel, std::shared_ptr<MGGrid> mgg)
 {
-    // todo: store mgg-s in arrays
     std::vector<std::shared_ptr<MGGrid>> grids;
     grids.push_back(mgg);
     for (int l = 0; l < maxLevel-1; l++)
     {
-        sm_->presmooth(grids.at(l));
+        smoother_->presmooth(grids.at(l));
         computeResVec(grids.at(l));
         std::shared_ptr<MGGrid> mggc = std::make_shared<MGGrid>(grids.at(l)->nCells(), grids.at(l)->meshWidth());
-        coa_->restrict(mgg, mggc); // mggCoarse is set complete, also p
+        coarser_->restrict(mgg, mggc); // mggCoarse is set complete, also p
         grids.push_back(mggc);
     }
-    es_->solve(mgg);
+    endSolver_->solve(mgg);
     for (int l = maxLevel-2; l >= 0; l--)
     {
-        coa_->interpolate(grids.at(l-1), grids.at(l));
+        coarser_->interpolate(grids.at(l-1), grids.at(l));
         for(int j = grids.at(l)->pJBegin(); j < grids.at(l)->pJEnd(); j++)
         {
             for(int i = grids.at(l)->pIBegin(); i < grids.at(l)->pIEnd(); i++)
@@ -76,7 +101,7 @@ void Multigrid::MGLoop(int maxLevel, std::shared_ptr<MGGrid> mgg)
                 grids.at(l)->p(i,j) = grids.at(l)->p(i,j) + grids.at(l)->resVec(i,j); // adding theta ???
             }
         }
-        sm_->postsmooth(grids.at(l));
+        smoother_->postsmooth(grids.at(l));
     }
 }
 
