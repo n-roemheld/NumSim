@@ -11,8 +11,8 @@ public:
     Coarser();
 
     // restricts the current MGGrid to the coarser MGGrid and sets also nCells and meshWidth 
-    virtual std::shared_ptr<MGGrid> restrict(std::shared_ptr<MGGrid> mgg) = 0;
+    virtual void restrict(std::shared_ptr<MGGrid> mggf, std::shared_ptr<MGGrid> mggc) = 0;
 
     // interpolates the coarse MGGrid to the finer MGGrid in p
-    virtual std::shared_ptr<FieldVariable> interpolate(std::shared_ptr<MGGrid> mggCoarse) = 0;
+    virtual void interpolate(std::shared_ptr<MGGrid> mggc, std::shared_ptr<MGGrid> mggf) = 0;
 };

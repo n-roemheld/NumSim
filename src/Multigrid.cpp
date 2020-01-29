@@ -33,18 +33,19 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
     {
         sm_->presmooth(mgg);
         computeResVec(mgg);
-        std::shared_ptr<MGGrid> mggCoarse = coa_->restrict(mgg); // mggCoarse is set complete, also p
+        MGGrid mggc_obj = MGGrid(mgg->nCells(), mgg->meshWidth());
+        std::shared_ptr<MGGrid> mggc = std::make_shared<MGGrid>(mggc_obj);
+        coa_->restrict(mgg, mggc); // mggCoarse is set complete, also p
         for(int i = 0; i < cycle_.gamma[level]; i++)
         {
-            MGCycle(level-1, mggCoarse);
+            MGCycle(level-1, mggc);
         }
-        std::shared_ptr<FieldVariable> c = coa_->interpolate(mggCoarse);
-        // add c to original solution
+        coa_->interpolate(mggc, mgg);
         for(int j = mgg->pJBegin(); j < mgg->pJEnd(); j++)
         {
             for(int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
             {
-                mgg->p(i,j) = mgg->p(i,j) + c->operator()(i,j); // adding theta ???
+                mgg->p(i,j) = mgg->p(i,j) + mgg->resVec(i,j); // adding theta ???
             }
         }
         sm_->postsmooth(mgg);
