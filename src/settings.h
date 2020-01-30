@@ -36,16 +36,10 @@ struct Settings
   int maximumNumberOfIterations = 1e5;    //< maximum number of iterations in the solver
 
   // multigrid parameters
-  std::string smoother_name;
-  std::string coarser_name;
-  std::string endSolver_name;
-  std::string cycle_name;
-
-  // Not working:
-  Smoother smoother;
-  Coarser coarser;
-  EndSolver endSolver;
-  Cycle cycle;
+  std::string smoother;
+  std::string coarser;
+  std::string endSolver;
+  std::string cycle;
 
   int numberOfIterationsPre;
   int numberOfIterationsPost;

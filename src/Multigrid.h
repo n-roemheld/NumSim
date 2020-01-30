@@ -40,16 +40,11 @@ protected:
     void setBoundaryValuesMGGrid (std::shared_ptr<MGGrid> mgg);
 
 private:
- //   // Not allow because of virtual
- //   Smoother smoother_obj;
- //   Coarser coarser_obj;
- //   EndSolver endSolver_obj;
 
     std::shared_ptr<Smoother> smoother_; // smoother
     std::shared_ptr<Coarser> coarser_; //coarsening operator
     std::shared_ptr<EndSolver> endSolver_; //endSolver at coarsest level
     Cycle cycle_; // defines cycle structure
 
-//    Settings settings_;
 
 };

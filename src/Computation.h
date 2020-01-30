@@ -12,6 +12,7 @@
 #include "Smoother.h"
 #include "SmootherJacobi.h"
 #include "EndSolver.h"
+#include "EndSolverNone.h"
 #include "Coarser.h"
 #include "CoarserDefault.h"
 #include "Multigrid.h"

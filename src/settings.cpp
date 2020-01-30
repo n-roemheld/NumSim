@@ -162,19 +162,19 @@ void Settings::loadFromFile(std::string filename)
     	}
 		else if (parameterName == "Smoother")
 		{
-			smoother_name = parameterValue.c_str();
+			smoother = parameterValue.c_str();
 		}
 		else if (parameterName == "Coarser")
 		{
-			coarser_name = parameterValue.c_str();
+			coarser = parameterValue.c_str();
 		}
 		else if (parameterName == "EndSolver")
 		{
-			endSolver_name = parameterValue.c_str();
+			endSolver = parameterValue.c_str();
 		}
 		else if (parameterName == "Cycle")
 		{
-			cycle_name = parameterValue.c_str();
+			cycle = parameterValue.c_str();
 		}
 		else if (parameterName == "NumberOfIterationsPre")
 		{
@@ -186,11 +186,11 @@ void Settings::loadFromFile(std::string filename)
 		}
 		else if (parameterName == "Recursive")
 		{
-			recursive = bool(int(atof(parameterValue.c_str)));
+			recursive = bool(int(atof(parameterValue.c_str())));
 		}
 		else if (parameterName == "MaxLevel")
 		{
-			maxLevel = int(atof(parameterValue.c_str));
+			maxLevel = int(atof(parameterValue.c_str()));
 		}
     	else
     	{
@@ -216,13 +216,6 @@ void Settings::loadFromFile(std::string filename)
     // print line
     std::cout << "line " << lineNo << ": " << line << std::endl;
   }
-
-
-  
-
-  cycle.recursive = recursive;
-  cycle.maxLevel = maxLevel;
-//   cycle.gamma = ?;
   	
 }
 

@@ -1,3 +1,4 @@
+#pragma once
 #include "Coarser.h"
 
 class CoarserDefault : public Coarser

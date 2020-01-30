@@ -36,11 +36,47 @@ void Computation::initialize (int argc, char *argv[])
 	}
 	else if (settings_.pressureSolver == "multigrid")
 	{
-		// TODO: Fallunterscheidungen einfügen
-		std::shared_ptr<Smoother> smoother = std::make_shared<SmootherJacobi>(settings_.numberOfiterationsPre, settings_.numberOfIterationsPost);
-		std::shared_ptr<Coarser> coarser = std::make_shared<CoarserDefault>();
-		std::shared_ptr<EndSolver> endSolver = std::make_shared<EndSolver>(settings_.epsilon, settings_.maximumNumberOfIterations);
-		pressureSolver_ = std::make_unique<Multigrid>(discretization_, smoother, coarser, endSolver);
+		std::shared_ptr<Smoother> smoother;
+		std::shared_ptr<Coarser> coarser;
+		std::shared_ptr<EndSolver> endSolver;
+		
+		// Smoother
+		if (settings_.smoother == "Jacobi")
+		{
+			smoother = std::make_shared<SmootherJacobi>(settings_.numberOfIterationsPre, settings_.numberOfIterationsPost);
+		}
+		else 
+		{
+			std::cout << "Unknown smoother!" << std::endl;
+		}
+
+		// Coarser
+		if (settings_.coarser == "Default")
+		{
+			coarser = std::make_shared<CoarserDefault>();
+		}
+		else
+		{
+			std::cout << "Unknown coarser!" << std::endl;
+		}
+
+		// End solver
+		if (settings_.endSolver == "None")
+		{
+			endSolver = std::make_shared<EndSolverNone>(settings_.epsilon, settings_.maximumNumberOfIterations);
+		}
+		else
+		{
+			std::cout << "Unknown Endsolver" << std::endl;
+		}
+
+		Cycle cycle;
+		cycle.recursive = settings_.recursive;
+		cycle.maxLevel = settings_.maxLevel;
+		// cycle.gamma = ?;
+
+		// Creating mg pressure solver
+		pressureSolver_ = std::make_unique<Multigrid>(discretization_, smoother, coarser, endSolver, cycle);
 	}
 	else
 	{
