@@ -4,7 +4,8 @@
 class CoarserDefault : public Coarser
 {
     public:
-    CoarserDefault();
+    CoarserDefault() : Coarser()
+    {};
 
     // restricts the current MGGrid to the coarser MGGrid and sets also nCells and meshWidth 
     void restrict(std::shared_ptr<MGGrid> mggf, std::shared_ptr<MGGrid> mggc);

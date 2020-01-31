@@ -19,7 +19,7 @@ add_executable(${PROJECT_NAME}
         FieldVariable.cpp FieldVariable.h
 	Smoother.h Smoother.cpp
 	SmootherJacobi.h SmootherJacobi.cpp
-	Coarser.h Coarser.cpp
+	Coarser.h
 	CoarserDefault.h CoarserDefault.cpp
 	EndSolver.h EndSolver.cpp
 	Multigrid.h Multigrid.cpp

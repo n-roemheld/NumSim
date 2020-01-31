@@ -8,5 +8,6 @@ class EndSolverNone : public EndSolver
     : EndSolver(epsilon, maximumNumberOfIterations)
     {};
 
-    void solve(std::shared_ptr<MGGrid> mgg);
+    void solve(std::shared_ptr<MGGrid> mgg)
+    {};
 };
