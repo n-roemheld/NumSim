@@ -162,11 +162,11 @@ void Settings::loadFromFile(std::string filename)
     	}
 		else if (parameterName == "Smoother")
 		{
-			smoother = parameterValue.c_str();
+			smoother = parameterValue;
 		}
 		else if (parameterName == "Coarser")
 		{
-			coarser = parameterValue.c_str();
+			coarser = parameterValue;
 		}
 		else if (parameterName == "EndSolver")
 		{

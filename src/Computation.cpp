@@ -47,27 +47,27 @@ void Computation::initialize (int argc, char *argv[])
 		}
 		else 
 		{
-			std::cout << "Unknown smoother!" << std::endl;
+			std::cout << "Unknown smoother! " << settings_.smoother << std::endl;
 		}
 
 		// Coarser
-		if (settings_.coarser == "Default")
+		if (settings_.coarser.compare("Default"))
 		{
 			coarser = std::make_shared<CoarserDefault>();
 		}
 		else
 		{
-			std::cout << "Unknown coarser!" << std::endl;
+			std::cout << "Unknown coarser! " << settings_.coarser << std::endl;
 		}
 
 		// End solver
-		if (settings_.endSolver == "None")
+		if (settings_.endSolver.compare("None"))
 		{
 			endSolver = std::make_shared<EndSolverNone>(settings_.epsilon, settings_.maximumNumberOfIterations);
 		}
 		else
 		{
-			std::cout << "Unknown Endsolver" << std::endl;
+			std::cout << "Unknown Endsolver! " << settings_.endSolver << std::endl;
 		}
 
 		Cycle cycle;
