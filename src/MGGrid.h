@@ -8,7 +8,7 @@
 class MGGrid
 {
 public:
-    MGGrid(std::array< int, 2> nCells, std::array< double, 2> meshWidth, std::shared_ptr<FieldVariable> p, std::shared_ptr<FieldVariable> rhs);
+    MGGrid(std::array< int, 2> nCells, std::array< double, 2> meshWidth, FieldVariable& p, FieldVariable& rhs);
     MGGrid(std::array< int, 2> nCells, std::array< double, 2> meshWidth);
     
     const std::array< double, 2 > 	meshWidth() const;

@@ -7,35 +7,37 @@ Multigrid:: Multigrid(std::shared_ptr<Discretization> discretization, std::share
 
 void Multigrid::solve()
 {
-  std::unique_ptr<GaussSeidel> pressureSolver_ = std::make_unique<GaussSeidel>(discretization_, epsilon_,
-   maximumNumberOfIterations_);
-   discretization_->p(5,5) = -0.7;
+//   std::unique_ptr<GaussSeidel> pressureSolver_ = std::make_unique<GaussSeidel>(discretization_, epsilon_,
+//    maximumNumberOfIterations_);
+//    discretization_->p(5,5) = -0.7;
 
-   pressureSolver_->solve();
-   discretization_->p(5,5) = -7;
+//    pressureSolver_->solve();
+//    discretization_->p(5,5) = -7;
+
+
     // std::shared_ptr<FieldVariable> p = std::make_shared<FieldVariable>(discretization_->p()); // wird eine Kopie erstellt??
     // std::shared_ptr<FieldVariable> rhs = std::make_shared<FieldVariable>(discretization_->rhs()); // wird eine Kopie erstellt??
-    // std::shared_ptr<MGGrid> mgg = std::make_shared<MGGrid>(discretization_->nCells(), discretization_->meshWidth(), p, rhs);
-    // if(cycle_.recursive)
-    // {
-    //   // std::cout << "maxLevel" << cycle_.maxLevel << std::endl;
-    //     MGCycle(cycle_.maxLevel, mgg);
-    //     //neue Werte von mgg in discretization_ schreiben??
-    // }
-    // else
-    // {
-    //     // TODO: iterative
-    //     MGLoop(cycle_.maxLevel, mgg);
-    // }
-    //
-    // for (int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
-    // {
-    //   for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
-    //   {
-    //     discretization_->p(i,j) = mgg->p().operator()(i,j);
-    //     discretization_->rhs(i,j) = mgg->rhs().operator()(i,j);
-    //   }
-    // }
+    std::shared_ptr<MGGrid> mgg = std::make_shared<MGGrid>(discretization_->nCells(), discretization_->meshWidth(), discretization_->p(), discretization_->rhs());
+    if(cycle_.recursive)
+    {
+      // std::cout << "maxLevel" << cycle_.maxLevel << std::endl;
+        MGCycle(cycle_.maxLevel, mgg);
+        //neue Werte von mgg in discretization_ schreiben??
+    }
+    else
+    {
+        // TODO: iterative
+        MGLoop(cycle_.maxLevel, mgg);
+    }
+    
+    for (int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
+    {
+      for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+      {
+        discretization_->p(i,j) = mgg->p().operator()(i,j);
+        discretization_->rhs(i,j) = mgg->rhs().operator()(i,j);
+      }
+    }
 
 };
 
@@ -97,7 +99,6 @@ void Multigrid::MGLoop(int maxLevel, std::shared_ptr<MGGrid> mgg)
 
 void Multigrid::computeResVec(std::shared_ptr < MGGrid> mgg)
 {
-    FieldVariable p = mgg->p();
     std::array<double,2> mW = mgg->meshWidth();
 	double dx = mW[0];
 	double dy = mW[1];
@@ -105,7 +106,7 @@ void Multigrid::computeResVec(std::shared_ptr < MGGrid> mgg)
     {
         for(int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
         {
-            mgg->resVec(i,j) = mgg->rhs(i,j) - (p(i+1,j)-2*p(i,j)+p(i-1,j))/(dx*dx) + (p(i,j+1)-2*p(i,j)+p(i,j-1))/(dy*dy);
+            mgg->resVec(i,j) = mgg->rhs(i,j) - (mgg->p(i+1,j)-2*mgg->p(i,j)+mgg->p(i-1,j))/(dx*dx) + (mgg->p(i,j+1)-2*mgg->p(i,j)+mgg->p(i,j-1))/(dy*dy);
         }
     }
 };
