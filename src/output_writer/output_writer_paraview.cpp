@@ -6,7 +6,7 @@
 #include <string>
 
 OutputWriterParaview::OutputWriterParaview(std::shared_ptr<Discretization> discretization, std::string outputFolder) :
-   OutputWriter(discretization), outputFolder_(outputFolder)
+   OutputWriter(discretization, outputFolder)
 {
   // Create a vtkWriter_
   vtkWriter_ = vtkSmartPointer<vtkXMLImageDataWriter>::New();

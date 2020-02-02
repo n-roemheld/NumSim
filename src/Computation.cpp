@@ -2,11 +2,15 @@
 #include "Computation.h"
 #include <math.h>
 #include <ctime>
+#include <string>
 
 void Computation::initialize (int argc, char *argv[])
 {
 	settings_.loadFromFile(argv[1]);
 	settings_.printSettings();
+
+	// get outputFolder
+	std::string outputFolder = "out_";
 
 	//computing meshWidth
 	double dx = settings_.physicalSize[0]/settings_.nCells[0];
@@ -44,14 +48,17 @@ void Computation::initialize (int argc, char *argv[])
 		if (settings_.smoother == "Jacobi")
 		{
 			smoother = std::make_shared<SmootherJacobi>(settings_.numberOfIterationsPre, settings_.numberOfIterationsPost);
+			outputFolder+="PJ_";
 		}
 		else if (settings_.smoother == "DJacobi")
 		{
 			smoother = std::make_shared<SmootherDJacobi>(settings_.numberOfIterationsPre, settings_.numberOfIterationsPost);
+			outputFolder+="DJ_";
 		}
 		else if (settings_.smoother == "GS")
 		{
 			smoother = std::make_shared<SmootherGaussSeidel>(settings_.numberOfIterationsPre, settings_.numberOfIterationsPost);
+			outputFolder+="GS_";
 		}
 		else
 		{
@@ -62,6 +69,7 @@ void Computation::initialize (int argc, char *argv[])
 		if (settings_.coarser == "Default")
 		{
 			coarser = std::make_shared<CoarserDefault>();
+			outputFolder += "NNS_";
 		}
 		else
 		{
@@ -72,10 +80,12 @@ void Computation::initialize (int argc, char *argv[])
 		if (settings_.endSolver == "None")
 		{
 			endSolver = std::make_shared<EndSolverNone>(settings_.epsilon, settings_.maximumNumberOfIterations);
+			outputFolder+="NO_";
 		}
 		else if (settings_.endSolver == "GS")
 		{
 			endSolver = std::make_shared<ESGaussSeidel>(settings_.epsilon, settings_.maximumNumberOfIterations);
+			outputFolder+="GS_";
 		}
 		else
 		{
@@ -113,10 +123,15 @@ void Computation::initialize (int argc, char *argv[])
 		std::cout << "Unknown pressure solver!" << std::endl;
 	}
 
+	outputFolder += std::to_string(settings_.maxLevel) + "_";
+	outputFolder += std::to_string(settings_.numberOfIterationsPre) + "_";
+	outputFolder += std::to_string(settings_.numberOfIterationsPost) + "_";
+	outputFolder += settings_.cycle;
+	
 
 	//initialize outputWriters
- 	outputWriterParaview_ = std::make_unique<OutputWriterParaview>(discretization_);
-	outputWriterText_ = std::make_unique<OutputWriterText>(discretization_);
+ 	outputWriterParaview_ = std::make_unique<OutputWriterParaview>(discretization_, outputFolder);
+	outputWriterText_ = std::make_unique<OutputWriterText>(discretization_, outputFolder);
 
 };
 
