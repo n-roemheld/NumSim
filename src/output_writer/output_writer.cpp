@@ -8,7 +8,7 @@ OutputWriter::OutputWriter(std::shared_ptr<Discretization> discretization, std::
  : discretization_(discretization), fileNo_(0), outputFolder_(outputFolder)
 {
   // create "out" subdirectory if it does not yet exist
-  std::string commandString = "mkdir -p" + outputFolder_;
+  std::string commandString = "mkdir -p " + outputFolder_;
   char * commandChar = new char [commandString.length() + 1];
   strcpy(commandChar, commandString.c_str());
   int returnValue = system(commandChar); // Hilfe

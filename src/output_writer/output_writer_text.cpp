@@ -179,7 +179,7 @@ void OutputWriterText::writePressureFile()
 
   // Assemble the filename
   std::stringstream fileName;
-  fileName << "out/pressure_" << std::setw(4) << std::setfill('0') << pressurefileNo++ << ".txt";
+  fileName << outputFolder_ << "/pressure_" << std::setw(4) << std::setfill('0') << pressurefileNo++ << ".txt";
 
   // open file
   std::ofstream file(fileName.str().c_str());

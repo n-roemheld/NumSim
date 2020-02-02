@@ -109,9 +109,9 @@ void Computation::initialize (int argc, char *argv[])
 		{
 	  	std::cout << "Unknown Cycle! " << settings_.endSolver << std::endl;
 		}
-		for(int i = 0; i < cycle.maxLevel; i++)
+		for(int i = 0; i <= cycle.maxLevel; i++)
 		{
-			cycle.gamma.at(i) = gamma_val;
+			cycle.gamma.push_back(gamma_val);
 		}
 		//cycle.gamma = cycleGamma;
 
@@ -127,7 +127,7 @@ void Computation::initialize (int argc, char *argv[])
 	outputFolder += std::to_string(settings_.numberOfIterationsPre) + "_";
 	outputFolder += std::to_string(settings_.numberOfIterationsPost) + "_";
 	outputFolder += settings_.cycle;
-	
+
 
 	//initialize outputWriters
  	outputWriterParaview_ = std::make_unique<OutputWriterParaview>(discretization_, outputFolder);
@@ -162,7 +162,7 @@ void Computation::runSimulation ()
 
 		outputWriterParaview_->writeFile(time);
 		outputWriterText_->writeFile(time);
-		outputWriterText_->writePressureFile();
+		// outputWriterText_->writePressureFile();
 	}
 };
 
