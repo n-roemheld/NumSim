@@ -69,16 +69,12 @@ void SmootherJacobi::smooth(std::shared_ptr<MGGrid> mgg, int numberOfIterations)
         {
             for(int i = mgg->pJBegin(); i < mgg->pJEnd(); i++)
             {
-        //         mgg->p(i,j) = (dx*dx*dy*dy)/(2*(dx*dx+dy*dy))
-				// * ( (p_old(i-1,j) + p_old(i+1,j)) / (dx*dx)
-				// + (p_old(i,j-1) + p_old(i,j+1)) / (dy*dy)
-				// - mgg->rhs(i,j) );
-// GS
-        mgg->p(i,j) = (dx*dx*dy*dy)/(2*(dx*dx+dy*dy))
-* ( (mgg->p(i-1,j) + mgg->p(i+1,j)) / (dx*dx)
-+ (mgg->p(i,j-1) + mgg->p(i,j+1)) / (dy*dy)
-- mgg->rhs(i,j) );
+                mgg->p(i,j) = (dx*dx*dy*dy)/(2*(dx*dx+dy*dy))
+				* ( (p_old(i-1,j) + p_old(i+1,j)) / (dx*dx)
+				+ (p_old(i,j-1) + p_old(i,j+1)) / (dy*dy)
+				- mgg->rhs(i,j) );
             }
+
         }
     }
     setBoundaryValues(mgg);
