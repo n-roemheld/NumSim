@@ -104,5 +104,5 @@ run/
 \!CMakeLists!.txt
 *.log
 \!run!.sh
-!lid_driven_cavity.txt
+!lid_driven_cavityMG.txt
 src_old
