@@ -7,16 +7,14 @@ Multigrid:: Multigrid(std::shared_ptr<Discretization> discretization, std::share
 
 void Multigrid::solve()
 {
-//   std::unique_ptr<GaussSeidel> pressureSolver_ = std::make_unique<GaussSeidel>(discretization_, epsilon_,
-//    maximumNumberOfIterations_);
-//    discretization_->p(5,5) = -0.7;
+  // std::unique_ptr<GaussSeidel> pressureSolver_ = std::make_unique<GaussSeidel>(discretization_, epsilon_,
+  //  maximumNumberOfIterations_);
+  //  // discretization_->p(5,5) = -0.7;
+  //
+  //  pressureSolver_->solve();
+   // discretization_->p(5,5) = -7;
 
-//    pressureSolver_->solve();
-//    discretization_->p(5,5) = -7;
 
-
-    // std::shared_ptr<FieldVariable> p = std::make_shared<FieldVariable>(discretization_->p()); // wird eine Kopie erstellt??
-    // std::shared_ptr<FieldVariable> rhs = std::make_shared<FieldVariable>(discretization_->rhs()); // wird eine Kopie erstellt??
     std::shared_ptr<MGGrid> mgg = std::make_shared<MGGrid>(discretization_->nCells(), discretization_->meshWidth(), discretization_->p(), discretization_->rhs());
     if(cycle_.recursive)
     {
@@ -29,7 +27,7 @@ void Multigrid::solve()
         // TODO: iterative
         MGLoop(cycle_.maxLevel, mgg);
     }
-    
+
     for (int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
     {
       for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)

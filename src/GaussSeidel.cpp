@@ -1,5 +1,7 @@
 #include "GaussSeidel.h"
 
+#include <iostream>
+
 GaussSeidel::GaussSeidel (std::shared_ptr< Discretization > discretization, double epsilon, int maximumNumberOfIterations) :
 	PressureSolver(discretization, epsilon, maximumNumberOfIterations)
 {};
@@ -33,6 +35,7 @@ void GaussSeidel::solve()
 		res_squared = compute_res();
 		it++;
 	}
+	std::cout << "iteration " << it << std::endl;
 	setBoundaryValues();
 
 };

@@ -25,11 +25,6 @@ public:
     // wrapper method for multigrid, computes p recursiv or iterative
     void solve();
 
-    // recursive method to perform multigrid
-    void MGCycle(int level, std::shared_ptr<MGGrid> mgg);
-
-    // loop method to perform multigrid
-    void MGLoop(int maxLevel, std::shared_ptr<MGGrid> mgg);
 
 protected:
 
@@ -39,7 +34,16 @@ protected:
     // set boundary values on MGGrid
     void setBoundaryValuesMGGrid (std::shared_ptr<MGGrid> mgg);
 
+    // recursive method to perform multigrid
+    void MGCycle(int level, std::shared_ptr<MGGrid> mgg);
+
+    // loop method to perform multigrid
+    void MGLoop(int maxLevel, std::shared_ptr<MGGrid> mgg);
+
+
 private:
+
+
 
     std::shared_ptr<Smoother> smoother_; // smoother
     std::shared_ptr<Coarser> coarser_; //coarsening operator
