@@ -6,6 +6,7 @@
 #include <vtkXMLImageDataWriter.h>
 
 #include <memory>
+#include <string>
 
 /** Write *.vti files that can be viewed with ParaView.
  *  The mesh that can be visualized in ParaView corresponds to the mesh of the computational domain.
@@ -18,7 +19,7 @@ class OutputWriterParaview :
 public:
   //! constructor
   //! @param discretization shared pointer to the discretization object that will contain all the data to be written to the file
-  OutputWriterParaview(std::shared_ptr<Discretization> discretization);
+  OutputWriterParaview(std::shared_ptr<Discretization> discretization, std::string outputFolder);
 
   //! write current velocities to file, filename is output_<count>.vti
   void writeFile(double currentTime);

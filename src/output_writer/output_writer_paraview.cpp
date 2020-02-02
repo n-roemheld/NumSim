@@ -3,9 +3,10 @@
 #include <vtkImageData.h>
 #include <vtkDoubleArray.h>
 #include <vtkPointData.h>
+#include <string>
 
-OutputWriterParaview::OutputWriterParaview(std::shared_ptr<Discretization> discretization) :
-   OutputWriter(discretization)
+OutputWriterParaview::OutputWriterParaview(std::shared_ptr<Discretization> discretization, std::string outputFolder) :
+   OutputWriter(discretization), outputFolder_(outputFolder)
 {
   // Create a vtkWriter_
   vtkWriter_ = vtkSmartPointer<vtkXMLImageDataWriter>::New();
@@ -15,7 +16,7 @@ void OutputWriterParaview::writeFile(double currentTime)
 {
   // Assemble the filename
   std::stringstream fileName;
-  fileName << "out/output_" << std::setw(4) << setfill('0') << fileNo_ << "." << vtkWriter_->GetDefaultFileExtension();
+  fileName << outputFolder_ << "/output_" << std::setw(4) << setfill('0') << fileNo_ << "." << vtkWriter_->GetDefaultFileExtension();
   
   // increment file no.
   fileNo_++;
