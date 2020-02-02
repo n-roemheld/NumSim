@@ -11,4 +11,7 @@ public:
 
     // postsmooths the mgg with numberOfIterationsPost times Jacobi 
     void postsmooth(std::shared_ptr<MGGrid> mgg);
+
+protected:
+    void smooth(std::shared_ptr<MGGrid> mgg, int numberOfIterations);
 };
