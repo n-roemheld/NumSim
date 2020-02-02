@@ -2,7 +2,7 @@
 
 
 Multigrid:: Multigrid(std::shared_ptr<Discretization> discretization, std::shared_ptr<Smoother> sm, std::shared_ptr<Coarser> coa, std::shared_ptr<EndSolver> es, Cycle cycle) :
-    PressureSolver(discretization, 0, 0), smoother_(sm), coarser_(coa), endSolver_(es) // epsilon und maximumNumberOfIterations einfach auf 0 gesetzt, da nicht gebraucht
+    PressureSolver(discretization, 0, 0), smoother_(sm), coarser_(coa), endSolver_(es), cycle_(cycle) // epsilon und maximumNumberOfIterations einfach auf 0 gesetzt, da nicht gebraucht
 {};
 
 void Multigrid::solve()
@@ -12,6 +12,7 @@ void Multigrid::solve()
     std::shared_ptr<MGGrid> mgg = std::make_shared<MGGrid>(discretization_->nCells(), discretization_->meshWidth(), p, rhs);
     if(cycle_.recursive)
     {
+      std::cout << "maxLevel" << cycle_.maxLevel << std::endl;
         MGCycle(cycle_.maxLevel, mgg);
         //neue Werte von mgg in discretization_ schreiben??
     }
@@ -19,6 +20,15 @@ void Multigrid::solve()
     {
         // TODO: iterative
         MGLoop(cycle_.maxLevel, mgg);
+    }
+
+    for (int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
+    {
+      for (int i = discretization_->pIBegin(); i < discretization_->pIEnd(); i++)
+      {
+        discretization_->p(i,j) = p->operator()(i,j);
+        discretization_->rhs(i,j) = rhs->operator()(i,j);
+      }
     }
 
 };
@@ -29,16 +39,16 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
     {
         endSolver_->solve(mgg);
     }
-    else 
+    else
     {
         smoother_->presmooth(mgg);
         computeResVec(mgg);
         std::shared_ptr<MGGrid> mggc = std::make_shared<MGGrid>(mgg->nCells(), mgg->meshWidth());
         coarser_->restrict(mgg, mggc); // mggCoarse is set complete, also p
-        for(int i = 0; i < cycle_.gamma[level]; i++)
-        {
+        // for(int i = 0; i < cycle_.gamma[level]; i++)
+        // {
             MGCycle(level-1, mggc);
-        }
+        // }
         coarser_->interpolate(mggc, mgg);
         for(int j = mgg->pJBegin(); j < mgg->pJEnd(); j++)
         {
@@ -121,4 +131,3 @@ void Multigrid::setBoundaryValuesMGGrid(std::shared_ptr<MGGrid> mgg)
 			mgg->p(i,j) = mgg->p(i-1,j);
 		}
 };
-

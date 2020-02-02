@@ -7,7 +7,6 @@
 
 class EndSolver
 {
-    //TODO
 
 public:
 

@@ -186,7 +186,15 @@ void Settings::loadFromFile(std::string filename)
 		}
 		else if (parameterName == "Recursive")
 		{
-			recursive = bool(int(atof(parameterValue.c_str())));
+      if(parameterValue == "true")
+      {
+        recursive = true;
+      } else if(parameterValue == "false")
+      {
+        recursive = false;
+      } else {
+        std::cout << "nix funktioniert" << std::endl;
+      }
 		}
 		else if (parameterName == "MaxLevel")
 		{
@@ -216,7 +224,7 @@ void Settings::loadFromFile(std::string filename)
     // print line
     std::cout << "line " << lineNo << ": " << line << std::endl;
   }
-  	
+
 }
 
 void Settings::printSettings()
@@ -229,6 +237,8 @@ void Settings::printSettings()
     << ", left: ("  << dirichletBcLeft[0] << "," << dirichletBcLeft[1] << ")"
     << ", right: ("  << dirichletBcRight[0] << "," << dirichletBcRight[1] << ")" << std::endl
     << "  useDonorCell: " << std::boolalpha << useDonorCell << ", alpha: " << alpha << std::endl
-    << "  pressureSolver: " << pressureSolver << ", omega: " << omega << ", epsilon: " << epsilon << ", maximumNumberOfIterations: " << maximumNumberOfIterations << std::endl;
+    << "  pressureSolver: " << pressureSolver << ", omega: " << omega << ", epsilon: " << epsilon << ", maxiNumberOfIterations: " << maximumNumberOfIterations
+    << "  Smoother: " << smoother << "  Coarser " << coarser << "  EndSolver " << endSolver << "  NumberOfIterationsPre " << numberOfIterationsPre
+    << "  NumberOfIterationsPost " << numberOfIterationsPost << "  Recursive " << recursive << "  MaxLevel " << maxLevel << std::endl;
 	// todo: add new parameters
 }

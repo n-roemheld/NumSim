@@ -5,7 +5,7 @@
 #include <memory>
 #include <array>
 #include <iostream>
-#include "Settings.h"
+#include "settings.h"
 #include "MGGrid.h"
 #include "Cycle.h"
 #include "Smoother.h"
@@ -26,13 +26,13 @@ public:
     void solve();
 
     // recursive method to perform multigrid
-    void MGCycle(int level, std::shared_ptr<MGGrid> mgg); 
+    void MGCycle(int level, std::shared_ptr<MGGrid> mgg);
 
     // loop method to perform multigrid
     void MGLoop(int maxLevel, std::shared_ptr<MGGrid> mgg);
 
 protected:
-    
+
     // computes residual vector
     void computeResVec(std::shared_ptr<MGGrid> mgg);
 

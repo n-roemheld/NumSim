@@ -34,24 +34,24 @@ void Computation::initialize (int argc, char *argv[])
 		pressureSolver_ = std::make_unique<GaussSeidel>(discretization_, settings_.epsilon,
 		 settings_.maximumNumberOfIterations);
 	}
-	else if (settings_.pressureSolver == "multigrid")
+	else if (settings_.pressureSolver == "Multigrid")
 	{
 		std::shared_ptr<Smoother> smoother;
 		std::shared_ptr<Coarser> coarser;
 		std::shared_ptr<EndSolver> endSolver;
-		
+
 		// Smoother
 		if (settings_.smoother == "Jacobi")
 		{
 			smoother = std::make_shared<SmootherJacobi>(settings_.numberOfIterationsPre, settings_.numberOfIterationsPost);
 		}
-		else 
+		else
 		{
 			std::cout << "Unknown smoother! " << settings_.smoother << std::endl;
 		}
 
 		// Coarser
-		if (settings_.coarser.compare("Default"))
+		if (settings_.coarser == "Default")
 		{
 			coarser = std::make_shared<CoarserDefault>();
 		}
@@ -61,7 +61,7 @@ void Computation::initialize (int argc, char *argv[])
 		}
 
 		// End solver
-		if (settings_.endSolver.compare("None"))
+		if (settings_.endSolver == "None")
 		{
 			endSolver = std::make_shared<EndSolverNone>(settings_.epsilon, settings_.maximumNumberOfIterations);
 		}
@@ -73,7 +73,7 @@ void Computation::initialize (int argc, char *argv[])
 		Cycle cycle;
 		cycle.recursive = settings_.recursive;
 		cycle.maxLevel = settings_.maxLevel;
-		// cycle.gamma = ?;
+		//cycle.gamma = cycleGamma;
 
 		// Creating mg pressure solver
 		pressureSolver_ = std::make_unique<Multigrid>(discretization_, smoother, coarser, endSolver, cycle);
@@ -82,7 +82,7 @@ void Computation::initialize (int argc, char *argv[])
 	{
 		std::cout << "Unknown pressure solver!" << std::endl;
 	}
-	
+
 
 	//initialize outputWriters
  	outputWriterParaview_ = std::make_unique<OutputWriterParaview>(discretization_);
