@@ -11,6 +11,9 @@
 
 #include "Smoother.h"
 #include "SmootherJacobi.h"
+#include "SmootherDJacobi.h"
+#include "SmootherGaussSeidel.h"
+
 #include "EndSolver.h"
 #include "EndSolverNone.h"
 #include "ESGaussSeidel.h"

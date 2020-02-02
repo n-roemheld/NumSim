@@ -45,6 +45,14 @@ void Computation::initialize (int argc, char *argv[])
 		{
 			smoother = std::make_shared<SmootherJacobi>(settings_.numberOfIterationsPre, settings_.numberOfIterationsPost);
 		}
+		else if (settings_.smoother == "DJacobi")
+		{
+			smoother = std::make_shared<SmootherDJacobi>(settings_.numberOfIterationsPre, settings_.numberOfIterationsPost);
+		}
+		else if (settings_.smoother == "GS")
+		{
+			smoother = std::make_shared<SmootherGaussSeidel>(settings_.numberOfIterationsPre, settings_.numberOfIterationsPost);
+		}
 		else
 		{
 			std::cout << "Unknown smoother! " << settings_.smoother << std::endl;

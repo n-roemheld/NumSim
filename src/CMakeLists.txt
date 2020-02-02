@@ -28,6 +28,7 @@ add_executable(${PROJECT_NAME}
 	Cycle.h
 	EndSolverNone.h
 	ESGaussSeidel.h ESGaussSeidel.cpp
+	SmootherDJacobi.h SmootherDJacobi.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR})
