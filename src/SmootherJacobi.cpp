@@ -10,17 +10,16 @@ void SmootherJacobi::presmooth(std::shared_ptr<MGGrid> mgg)
 	double dx = mW[0];
 	double dy = mW[1];
 
-    FieldVariable p = mgg->p(); // copy by reference (?)
+    FieldVariable p_old = mgg->p(); // copy by value?
 
     for(int it = 0; it < numberOfIterationsPre_; it++)
     {
         setBoundaryValues(mgg);
-        FieldVariable p_old = p; // copy by value (?)
         for(int j = mgg->pJBegin(); j < mgg->pJEnd(); j++)
         {
             for(int i = mgg->pJBegin(); i < mgg->pJEnd(); i++)
             {
-                p(i,j) = (dx*dx*dy*dy)/(2*(dx*dx+dy*dy))
+                mgg->p(i,j) = (dx*dx*dy*dy)/(2*(dx*dx+dy*dy))
 				* ( (p_old(i-1,j) + p_old(i+1,j)) / (dx*dx)
 				+ (p_old(i,j-1) + p_old(i,j+1)) / (dy*dy)
 				- mgg->rhs(i,j) );
