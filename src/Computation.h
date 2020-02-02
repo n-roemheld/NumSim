@@ -13,6 +13,7 @@
 #include "SmootherJacobi.h"
 #include "EndSolver.h"
 #include "EndSolverNone.h"
+#include "ESGaussSeidel.h"
 #include "Coarser.h"
 #include "CoarserDefault.h"
 #include "Multigrid.h"
@@ -37,6 +38,6 @@ private:
 	std::unique_ptr< OutputWriterText > outputWriterText_;
 	std::array< double, 2 > meshWidth_;
 	double dt_;
-	
+
 
 };

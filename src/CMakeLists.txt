@@ -25,6 +25,8 @@ add_executable(${PROJECT_NAME}
 	Multigrid.h Multigrid.cpp
 	MGGrid.h MGGrid.cpp
 	Cycle.h
+	EndSolverNone.h
+	ESGaussSeidel.h ESGaussSeidel.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR})

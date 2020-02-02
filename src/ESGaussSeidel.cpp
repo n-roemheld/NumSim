@@ -1,10 +1,12 @@
 #include "ESGaussSeidel.h"
 
-MGGaussSeidel::MGGaussSeidel (double epsilon, int maximumNumberOfIterations)
+#include <iostream>
+
+ESGaussSeidel::ESGaussSeidel (double epsilon, int maximumNumberOfIterations):
   EndSolver(epsilon, maximumNumberOfIterations)
 {};
 
-void MGGaussSeidel::solve(std::shared_ptr<MGGrid> mgg)
+void ESGaussSeidel::solve(std::shared_ptr<MGGrid> mgg)
 {
   std::array<double,2> mW = mgg->meshWidth();
   double dx = mW[0];
@@ -16,7 +18,7 @@ void MGGaussSeidel::solve(std::shared_ptr<MGGrid> mgg)
 	while (it < maximumNumberOfIterations_ && res_squared > epsilon_*epsilon_)
 	{
 		// set boundary values for p to achieve 0-Neumann conditions
-		setBoundaryValues();
+		setBoundaryValues(mgg);
 		// perform one itertaion step
 		for(int j = mgg->pJBegin(); j < mgg->pJEnd(); j++)
 		{
@@ -32,8 +34,8 @@ void MGGaussSeidel::solve(std::shared_ptr<MGGrid> mgg)
 		res_squared = compute_res(mgg);
 		it++;
 	}
-	setBoundaryValues();
+  std::cout << "iteration " << it << std::endl;
+
+	setBoundaryValues(mgg);
 
 };
-
-}
