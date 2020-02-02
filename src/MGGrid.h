@@ -8,9 +8,9 @@
 class MGGrid
 {
 public:
-    MGGrid(std::array< int, 2> nCells, std::array< double, 2> meshWidth, FieldVariable& p, FieldVariable& rhs);
+    MGGrid(std::array< int, 2> nCells, std::array< double, 2> meshWidth, FieldVariable p, FieldVariable rhs);
     MGGrid(std::array< int, 2> nCells, std::array< double, 2> meshWidth);
-    
+
     const std::array< double, 2 > 	meshWidth() const;
 
     const std::array< int, 2 > 	nCells() const;
@@ -19,7 +19,7 @@ public:
 
     const FieldVariable &   rhs() const;
 
-    const FieldVariable &   resVec() const; 
+    const FieldVariable &   resVec() const;
 
     double 	p(int i, int j) const;
 

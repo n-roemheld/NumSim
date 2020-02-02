@@ -3,7 +3,7 @@
 // Assumption: nCells are c*2^n_grids
 
 // Use to restrict Staggered Grid to MGGrid on finest level
-MGGrid::MGGrid(std::array< int, 2> nCells, std::array< double, 2> meshWidth, FieldVariable& p, FieldVariable& rhs)
+MGGrid::MGGrid(std::array< int, 2> nCells, std::array< double, 2> meshWidth, FieldVariable p, FieldVariable rhs)
 : nCells_(nCells), meshWidth_(meshWidth), p_(p), rhs_(rhs),
   resVec_({nCells[0]+2, nCells[1]+2}, {-.5*meshWidth_[0], -.5*meshWidth_[1]}, meshWidth_)
 {};
@@ -80,4 +80,3 @@ int MGGrid::pJEnd() const
 {
 	return nCells_[1] + 1;
 };
-
