@@ -1,4 +1,4 @@
-#include "MGGaussSeidel.h"
+#include "ESGaussSeidel.h"
 
 MGGaussSeidel::MGGaussSeidel (double epsilon, int maximumNumberOfIterations)
   EndSolver(epsilon, maximumNumberOfIterations)

@@ -65,6 +65,10 @@ void Computation::initialize (int argc, char *argv[])
 		{
 			endSolver = std::make_shared<EndSolverNone>(settings_.epsilon, settings_.maximumNumberOfIterations);
 		}
+		else if (settings_.endSolver == "GS")
+		{
+			endSolver = std::make_shared<ESGaussSeidel>(settings_.epsilon, settings_.maximumNumberOfIterations);
+		}
 		else
 		{
 			std::cout << "Unknown Endsolver! " << settings_.endSolver << std::endl;
