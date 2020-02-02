@@ -51,10 +51,10 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
         computeResVec(mgg);
         std::shared_ptr<MGGrid> mggc = std::make_shared<MGGrid>(mgg->nCells(), mgg->meshWidth());
         coarser_->restrict(mgg, mggc); // mggCoarse is set complete, also p
-        // for(int i = 0; i < cycle_.gamma[level]; i++)
-        // {
+        for(int i = 0; i < cycle_.gamma.at(level); i++)
+        {
             MGCycle(level-1, mggc);
-        // }
+        }
         coarser_->interpolate(mggc, mgg);
         for(int j = mgg->pJBegin(); j < mgg->pJEnd(); j++)
         {

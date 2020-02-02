@@ -238,7 +238,7 @@ void Settings::printSettings()
     << ", right: ("  << dirichletBcRight[0] << "," << dirichletBcRight[1] << ")" << std::endl
     << "  useDonorCell: " << std::boolalpha << useDonorCell << ", alpha: " << alpha << std::endl
     << "  pressureSolver: " << pressureSolver << ", omega: " << omega << ", epsilon: " << epsilon << ", maxiNumberOfIterations: " << maximumNumberOfIterations
-    << "  Smoother: " << smoother << "  Coarser " << coarser << "  EndSolver " << endSolver << "  NumberOfIterationsPre " << numberOfIterationsPre
-    << "  NumberOfIterationsPost " << numberOfIterationsPost << "  Recursive " << recursive << "  MaxLevel " << maxLevel << std::endl;
+    << "  Smoother: " << smoother << "  Coarser " << coarser << "  EndSolver " << endSolver << " Cycle " << cycle 
+    << "  NumberOfIterationsPre " << numberOfIterationsPre  << "  NumberOfIterationsPost " << numberOfIterationsPost << "  Recursive " << recursive << "  MaxLevel " << maxLevel << std::endl;
 	// todo: add new parameters
 }
