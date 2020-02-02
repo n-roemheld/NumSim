@@ -85,6 +85,24 @@ void Computation::initialize (int argc, char *argv[])
 		Cycle cycle;
 		cycle.recursive = settings_.recursive;
 		cycle.maxLevel = settings_.maxLevel;
+		const int size(cycle.maxLevel);
+		int gamma_val = 0;
+		if (settings_.cycle == "V")
+		{
+			gamma_val = 1;
+		}
+		else if (settings_.cycle == "W")
+		{
+			gamma_val = 2;
+		}
+		else
+		{
+	  	std::cout << "Unknown Cycle! " << settings_.endSolver << std::endl;
+		}
+		for(int i = 0; i < cycle.maxLevel; i++)
+		{
+			cycle.gamma.at(i) = gamma_val;
+		}
 		//cycle.gamma = cycleGamma;
 
 		// Creating mg pressure solver
