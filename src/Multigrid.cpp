@@ -63,23 +63,23 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
     {
         // std::array< int, 2 > nCellsmgg = mgg->nCells();
         // std::cout << "MGG.nCells: " << nCellsmgg[0] << "," << nCellsmgg[1] << std::endl;
-            writeToConsole(mgg, "before pre");
+            // writeToConsole(mgg, "before pre");
         smoother_->presmooth(mgg);
-            writeToConsole(mgg, "after pre");
+            // writeToConsole(mgg, "after pre");
         computeResVec(mgg);
-            writeToConsole(mgg, "after compute resVec");
+            // writeToConsole(mgg, "after compute resVec");
         std::shared_ptr<MGGrid> mggc = std::make_shared<MGGrid>(mgg->nCells(), mgg->meshWidth());
         coarser_->restrict(mgg, mggc); // mggCoarse is set complete, also p
-            writeToConsole(mggc, "after restrict");
+            // writeToConsole(mggc, "after restrict");
         // std::array< int, 2 > nCellsmggc = mggc->nCells();
         // std::cout << "MGGc.nCells: " << nCellsmggc[0] << "," << nCellsmggc[1] << std::endl;
         for(int i = 0; i < cycle_.gamma.at(level); i++)
         {
             MGCycle(level-1, mggc);
         }
-            writeToConsole(mggc, "after recursive");
+            // writeToConsole(mggc, "after recursive");
         coarser_->interpolate(mggc, mgg);
-            writeToConsole(mgg, "after interpolate");
+            // writeToConsole(mgg, "after interpolate");
         for(int j = mgg->pJBegin(); j < mgg->pJEnd(); j++)
         {
             for(int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
@@ -87,9 +87,9 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
                 mgg->p(i,j) = mgg->p(i,j) +0.5 * mgg->resVec(i,j); // adding theta ???
             }
         }
-            writeToConsole(mgg, "after adding");
+            // writeToConsole(mgg, "after adding");
         smoother_->postsmooth(mgg);
-            writeToConsole(mgg, "after post");
+            // writeToConsole(mgg, "after post");
     }
     //  std::cout << "Level2: " << level << std::endl;
 };
