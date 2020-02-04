@@ -29,6 +29,7 @@ add_executable(${PROJECT_NAME}
 	EndSolverNone.h
 	ESGaussSeidel.h ESGaussSeidel.cpp
 	SmootherDJacobi.h SmootherDJacobi.cpp
+	CoarserLinear.h CoarserLinear.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR})
