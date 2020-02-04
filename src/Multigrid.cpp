@@ -23,7 +23,6 @@ void Multigrid::solve()
     if(cycle_.recursive)
     {
         MGCycle(cycle_.maxLevel, mgg);
-        //neue Werte von mgg in discretization_ schreiben??
     }
     else
     {
@@ -45,7 +44,7 @@ void Multigrid::solve()
 void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
 {
     // std::cout << "Level1: " << level << std::endl;
-    if(level == 0) // nochmal überlegen, ob das passt!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if(level == 0)
     {
         endSolver_->solve(mgg);
     }
