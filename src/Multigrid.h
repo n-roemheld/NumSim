@@ -20,7 +20,7 @@ class Multigrid : public PressureSolver
 {
 public:
 //    Multigrid(std::shared_ptr<Discretization> discretization, Settings settings_, std::string smoother_name, std::string coarser_name, std::string endSolver_name, Cycle cycle);
-    Multigrid(std::shared_ptr<Discretization> discretization, std::shared_ptr<Smoother> sm, std::shared_ptr<Coarser> coa, std::shared_ptr<EndSolver> es, Cycle cycle);
+    Multigrid(std::shared_ptr<Discretization> discretization, std::shared_ptr<Smoother> sm, std::shared_ptr<Coarser> coa, std::shared_ptr<EndSolver> es, Cycle cycle, double epsilon, int maximumNumberOfIterations);
 
     // wrapper method for multigrid, computes p recursiv or iterative
     void solve();
@@ -33,6 +33,8 @@ protected:
 
     // set boundary values on MGGrid
     void setBoundaryValuesMGGrid (std::shared_ptr<MGGrid> mgg);
+
+    double compute_res(std::shared_ptr<MGGrid> mgg);
 
     // recursive method to perform multigrid
     void MGCycle(int level, std::shared_ptr<MGGrid> mgg);
