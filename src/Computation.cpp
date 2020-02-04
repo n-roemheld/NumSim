@@ -21,7 +21,7 @@ void Computation::initialize (int argc, char *argv[])
 	// settings_.cycle = cycleString;
 	//------------------------------------
 
-	// settings_.printSettings();
+	settings_.printSettings();
 
 	// get outputFolder
 	std::string outputFolder = "out_";
@@ -135,7 +135,7 @@ void Computation::initialize (int argc, char *argv[])
 		//cycle.gamma = cycleGamma;
 
 		// Creating mg pressure solver
-		pressureSolver_ = std::make_unique<Multigrid>(discretization_, smoother, coarser, endSolver, cycle);
+		pressureSolver_ = std::make_unique<Multigrid>(discretization_, smoother, coarser, endSolver, cycle, settings_.epsilon, settings_.maximumNumberOfIterations);
 	}
 	else
 	{

@@ -3,33 +3,33 @@ project(numsim)
 
 add_executable(${PROJECT_NAME}
         main.cpp
-        Computation.h Computation.cpp
-        settings.h settings.cpp
-        StaggeredGrid.h StaggeredGrid.cpp
-        Discretization.cpp Discretization.h
-        DonorCell.cpp DonorCell.h
-        CentralDifferences.h CentralDifferences.cpp
-        SOR.h SOR.cpp 
-	GaussSeidel.h GaussSeidel.cpp
-        PressureSolver.cpp PressureSolver.h
-        output_writer/output_writer_paraview.cpp output_writer/output_writer_paraview.h
-        output_writer/output_writer_text.cpp output_writer/output_writer_text.h
-        output_writer/output_writer.cpp output_writer/output_writer.h
-        Array2D.cpp Array2D.h
-        FieldVariable.cpp FieldVariable.h
-	Smoother.h Smoother.cpp
-	SmootherJacobi.h SmootherJacobi.cpp
-	SmootherGaussSeidel.h SmootherGaussSeidel.cpp
-	Coarser.h
-	CoarserDefault.h CoarserDefault.cpp
-	EndSolver.h EndSolver.cpp
-	Multigrid.h Multigrid.cpp
-	MGGrid.h MGGrid.cpp
+        Computation.h           Computation.cpp
+        settings.h              settings.cpp
+        StaggeredGrid.h         StaggeredGrid.cpp
+        Discretization.cpp      Discretization.h
+        DonorCell.cpp           DonorCell.h
+        CentralDifferences.h    CentralDifferences.cpp
+        SOR.h                   SOR.cpp 
+	GaussSeidel.h           GaussSeidel.cpp
+        PressureSolver.cpp      PressureSolver.h
+        output_writer/output_writer_paraview.cpp        output_writer/output_writer_paraview.h
+        output_writer/output_writer_text.cpp            output_writer/output_writer_text.h
+        output_writer/output_writer.cpp                 output_writer/output_writer.h
+        Array2D.cpp             Array2D.h
+        FieldVariable.cpp       FieldVariable.h
+	Multigrid.h             Multigrid.cpp
+	MGGrid.h                MGGrid.cpp
 	Cycle.h
+	Smoother.h              Smoother.cpp
+	SmootherJacobi.h        SmootherJacobi.cpp
+	SmootherDJacobi.h       SmootherDJacobi.cpp
+	SmootherGaussSeidel.h   SmootherGaussSeidel.cpp
+	Coarser.h
+	CoarserDefault.h        CoarserDefault.cpp
+	CoarserLinear.h         CoarserLinear.cpp
+	EndSolver.h             EndSolver.cpp
 	EndSolverNone.h
-	ESGaussSeidel.h ESGaussSeidel.cpp
-	SmootherDJacobi.h SmootherDJacobi.cpp
-	CoarserLinear.h CoarserLinear.cpp
+	ESGaussSeidel.h         ESGaussSeidel.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR})

@@ -5,9 +5,10 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <math.h>
 
-Multigrid:: Multigrid(std::shared_ptr<Discretization> discretization, std::shared_ptr<Smoother> sm, std::shared_ptr<Coarser> coa, std::shared_ptr<EndSolver> es, Cycle cycle) :
-    PressureSolver(discretization, 0, 0), smoother_(sm), coarser_(coa), endSolver_(es), cycle_(cycle) // epsilon und maximumNumberOfIterations einfach auf 0 gesetzt, da nicht gebraucht
+Multigrid:: Multigrid(std::shared_ptr<Discretization> discretization, std::shared_ptr<Smoother> sm, std::shared_ptr<Coarser> coa, std::shared_ptr<EndSolver> es, Cycle cycle, double epsilon, int maximumNumberOfIterations) :
+    PressureSolver(discretization, epsilon, maximumNumberOfIterations), smoother_(sm), coarser_(coa), endSolver_(es), cycle_(cycle) // epsilon und maximumNumberOfIterations einfach auf 0 gesetzt, da nicht gebraucht
 {};
 
 void Multigrid::solve()
@@ -22,7 +23,15 @@ void Multigrid::solve()
     std::shared_ptr<MGGrid> mgg = std::make_shared<MGGrid>(discretization_->nCells(), discretization_->meshWidth(), discretization_->p(), discretization_->rhs());
     if(cycle_.recursive)
     {
+      int it = 0;
+      double res_squared = 2*epsilon_*epsilon_;
+      while(it < maximumNumberOfIterations_ && res_squared > epsilon_*epsilon_)
+      {
         MGCycle(cycle_.maxLevel, mgg);
+        res_squared = compute_res(mgg);
+        it++;
+      }
+      // std::cout << it << std::endl;
     }
     else
     {
@@ -151,6 +160,27 @@ void Multigrid::setBoundaryValuesMGGrid(std::shared_ptr<MGGrid> mgg)
 		{
 			mgg->p(i,j) = mgg->p(i-1,j);
 		}
+};
+
+double Multigrid::compute_res(std::shared_ptr<MGGrid> mgg)
+{
+	//Array2D res_vec = Array2D(discretization_->nCells());
+	double res = 0;
+	FieldVariable p = mgg->p();
+	std::array<double,2> mW = mgg->meshWidth();
+	double dx = mW[0];
+	double dy = mW[1];
+	for(int j = mgg->pJBegin(); j < mgg->pJEnd(); j++)
+	{
+		for (int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
+		{
+			res += pow((p(i+1,j)-2*p(i,j)+p(i-1,j))/(dx*dx) + (p(i,j+1)-2*p(i,j)+p(i,j-1))/(dy*dy) - mgg->rhs(i,j),2);
+		};
+	};
+
+	// average residuum with respect to number of cells
+	res /= (mgg->nCells()[0]*mgg->nCells()[1]);
+	return res;
 };
 
 void Multigrid::writePtoConsole(std::shared_ptr<MGGrid> mgg, std::string word)
