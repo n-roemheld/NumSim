@@ -61,7 +61,7 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
         {
             for(int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
             {
-                mgg->p(i,j) = mgg->p(i,j) + mgg->resVec(i,j); // adding theta ???
+                mgg->p(i,j) = mgg->p(i,j) +0.5 * mgg->resVec(i,j); // adding theta ???
             }
         }
         smoother_->postsmooth(mgg);
@@ -106,7 +106,7 @@ void Multigrid::computeResVec(std::shared_ptr < MGGrid> mgg)
     {
         for(int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
         {
-            mgg->resVec(i,j) = mgg->rhs(i,j) - (mgg->p(i+1,j)-2*mgg->p(i,j)+mgg->p(i-1,j))/(dx*dx) + (mgg->p(i,j+1)-2*mgg->p(i,j)+mgg->p(i,j-1))/(dy*dy);
+            mgg->resVec(i,j) = mgg->rhs(i,j) - (mgg->p(i+1,j)-2*mgg->p(i,j)+mgg->p(i-1,j))/(dx*dx) - (mgg->p(i,j+1)-2*mgg->p(i,j)+mgg->p(i,j-1))/(dy*dy);
         }
     }
 };
