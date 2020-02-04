@@ -4,13 +4,27 @@
 #include <ctime>
 #include <string>
 
+//----changed for creating data--------
 void Computation::initialize (int argc, char *argv[])
+// void Computation::initialize (int argc, char *argv[], std::string smootherString, std::string coarserString, std::string endSolverString, int mL, int noIPre, int noIPost, std::string cycleString)
+//-------------------------------------
 {
 	settings_.loadFromFile(argv[1]);
-	settings_.printSettings();
+
+	//------added for creating data-------
+	// settings_.smoother = smootherString;
+	// settings_.coarser = coarserString;
+	// settings_.endSolver = endSolverString;
+	// settings_.maxLevel = mL;
+	// settings_.numberOfIterationsPre = noIPre;
+	// settings_.numberOfIterationsPost = noIPost;
+	// settings_.cycle = cycleString;
+	//------------------------------------
+
+	// settings_.printSettings();
 
 	// get outputFolder
-	std::string outputFolder = "out_";
+	std::string outputFolder = "/mnt/e/NumSimOut/out_";
 
 	//computing meshWidth
 	double dx = settings_.physicalSize[0]/settings_.nCells[0];
@@ -133,6 +147,7 @@ void Computation::initialize (int argc, char *argv[])
  	outputWriterParaview_ = std::make_unique<OutputWriterParaview>(discretization_, outputFolder);
 	outputWriterText_ = std::make_unique<OutputWriterText>(discretization_, outputFolder);
 
+	std::cout << outputFolder << std::endl;
 };
 
 void Computation::runSimulation ()

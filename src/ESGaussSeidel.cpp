@@ -34,7 +34,7 @@ void ESGaussSeidel::solve(std::shared_ptr<MGGrid> mgg)
 		res_squared = compute_res(mgg);
 		it++;
 	}
-  // std::cout << "iteration " << it << std::endl;
+    // std::cout << "iteration " << it << std::endl;
 
 	setBoundaryValues(mgg);
 
