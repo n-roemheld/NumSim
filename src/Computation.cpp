@@ -24,7 +24,7 @@ void Computation::initialize (int argc, char *argv[])
 	// settings_.printSettings();
 
 	// get outputFolder
-	std::string outputFolder = "/mnt/e/NumSimOut/out_";
+	std::string outputFolder = "out_";
 
 	//computing meshWidth
 	double dx = settings_.physicalSize[0]/settings_.nCells[0];

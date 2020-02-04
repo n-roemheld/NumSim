@@ -2,7 +2,7 @@
 
 #include "Coarser.h"
 
-class CoarserLinear : public CoarserLinear
+class CoarserLinear : public Coarser
 {
 public:
   CoarserLinear() : Coarser()
