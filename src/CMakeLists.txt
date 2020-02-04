@@ -27,6 +27,7 @@ add_executable(${PROJECT_NAME}
 	Coarser.h
 	CoarserDefault.h        CoarserDefault.cpp
 	CoarserLinear.h         CoarserLinear.cpp
+        Coarser2.h              Coarser2.cpp
 	EndSolver.h             EndSolver.cpp
 	EndSolverNone.h
 	ESGaussSeidel.h         ESGaussSeidel.cpp

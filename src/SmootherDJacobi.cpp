@@ -59,6 +59,7 @@ void SmootherDJacobi::smooth(std::shared_ptr<MGGrid> mgg, int numberOfIterations
     std::array<double,2> mW = mgg->meshWidth();
 	double dx = mW[0];
 	double dy = mW[1];
+    double d_factor = .5;
 
     FieldVariable p_old = mgg->p(); // copy by reference (?)
 
@@ -69,7 +70,8 @@ void SmootherDJacobi::smooth(std::shared_ptr<MGGrid> mgg, int numberOfIterations
         {
             for(int i = mgg->pJBegin(); i < mgg->pJEnd(); i++)
             {
-                mgg->p(i,j) = (dx*dx*dy*dy)/(2*(dx*dx+dy*dy))
+                mgg->p(i,j) = p_old(i,j) * (1-d_factor) + d_factor *
+                 (dx*dx*dy*dy)/(2*(dx*dx+dy*dy))
 				* ( (p_old(i-1,j) + p_old(i+1,j)) / (dx*dx)
 				+ (p_old(i,j-1) + p_old(i,j+1)) / (dy*dy)
 				- mgg->rhs(i,j) );

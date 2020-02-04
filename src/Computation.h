@@ -14,13 +14,14 @@
 #include "SmootherDJacobi.h"
 #include "SmootherGaussSeidel.h"
 
+#include "Multigrid.h"
 #include "EndSolver.h"
 #include "EndSolverNone.h"
 #include "ESGaussSeidel.h"
 #include "Coarser.h"
 #include "CoarserDefault.h"
 #include "CoarserLinear.h"
-#include "Multigrid.h"
+#include "Coarser2.h"
 
 class Computation
 {

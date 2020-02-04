@@ -94,6 +94,11 @@ void Computation::initialize (int argc, char *argv[], std::string smootherString
 			coarser = std::make_shared<CoarserLinear>();
 			outputFolder += "Lin_";
 		}
+		else if (settings_.coarser == "2")
+		{
+			coarser = std::make_shared<Coarser2>();
+			outputFolder += "Two_";
+		}
 		else
 		{
 			std::cout << "Unknown coarser! " << settings_.coarser << std::endl;
