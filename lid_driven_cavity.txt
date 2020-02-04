@@ -20,7 +20,7 @@ dirichletRightX  = 0
 dirichletRightY  = 0
 
 # Discretization parameters
-nCellsX = 32          # number of cells in x and y direction
+nCellsX = 32          # number of cells in x and y direction, must be 2^n each, but at least 2^MaxLevel
 nCellsY = 32
 useDonorCell = true   # if donor cell discretization should be used, possible values: true false
 alpha = 0.5           # factor for donor-cell scheme, 0 is equivalent to central differences
@@ -28,17 +28,17 @@ tau = 0.5             # safety factor for time step width
 maximumDt = 0.1       # maximum values for time step width
 
 # Solver parameters
-pressureSolver = Multigrid # which pressure solver to use, possible values: GaussSeidel SOR Multigrid
-omega = 1.6           # overrelaxation factor, only for SOR solver
-epsilon = 1e-5        # tolerance for 2-norm of residual
-maximumNumberOfIterations = 1e4    # maximum number of iterations in the solver
+pressureSolver = Multigrid        # which pressure solver to use, possible values: GaussSeidel SOR Multigrid
+omega = 1.6                       # overrelaxation factor, only for SOR solver
+epsilon = 1e-5                    # tolerance for 2-norm of residual
+maximumNumberOfIterations = 1e4   # maximum number of iterations in the solver
 
 # MG Solver parameters
-Smoother = GS    # Jacobi, DJacobi or GS
+Smoother = GS             # Jacobi, DJacobi or GS
 Coarser = Default         # Default
 EndSolver = None          # None or GS
 Cycle = V                 # V or W
 NumberOfIterationsPre = 2
 NumberOfIterationsPost = 2
-Recursive = true 
+Recursive = true          # if recursive should be used, possible values: true false
 MaxLevel = 4
