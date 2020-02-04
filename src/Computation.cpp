@@ -89,6 +89,11 @@ void Computation::initialize (int argc, char *argv[], std::string smootherString
 			coarser = std::make_shared<CoarserDefault>();
 			outputFolder += "NNS_";
 		}
+		else if (settings_.coarser == "Linear")
+		{
+			coarser = std::make_shared<CoarserLinear>();
+			outputFolder += "Lin_";
+		}
 		else
 		{
 			std::cout << "Unknown coarser! " << settings_.coarser << std::endl;

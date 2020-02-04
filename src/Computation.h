@@ -19,6 +19,7 @@
 #include "ESGaussSeidel.h"
 #include "Coarser.h"
 #include "CoarserDefault.h"
+#include "CoarserLinear.h"
 #include "Multigrid.h"
 
 class Computation
