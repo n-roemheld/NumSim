@@ -25,15 +25,13 @@ void Multigrid::solve()
     {
       int it = 0;
       double res_squared = 2*epsilon_*epsilon_;
-      std::cout << "max" << maximumNumberOfIterations_ << std::endl;
       while(it < maximumNumberOfIterations_ && res_squared > epsilon_*epsilon_)
       {
-        std::cout << "I was here" << std::endl;
         MGCycle(cycle_.maxLevel, mgg);
         res_squared = compute_res(mgg);
         it++;
       }
-      std::cout << it << std::endl;
+      // std::cout << it << std::endl;
     }
     else
     {
