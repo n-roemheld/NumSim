@@ -129,7 +129,7 @@ void Settings::loadFromFile(std::string filename)
     		{
     			useDonorCell = false;
     		} else {
-    			std::cout << "nix funktioniert" << std::endl;
+    			std::cout << "nix funktioniert useDonorCell" << std::endl;
     		}
     	}
     	else if(parameterName == "alpha")
@@ -186,15 +186,15 @@ void Settings::loadFromFile(std::string filename)
 		}
 		else if (parameterName == "Recursive")
 		{
-      if(parameterValue == "true")
-      {
-        recursive = true;
-      } else if(parameterValue == "false")
-      {
-        recursive = false;
-      } else {
-        std::cout << "nix funktioniert" << std::endl;
-      }
+			if(parameterValue == "true")
+			{
+				recursive = true;
+			} else if(parameterValue == "false")
+			{
+				recursive = false;
+			} else {
+				std::cout << "nix funktioniert recursive" << std::endl;
+			}
 		}
 		else if (parameterName == "MaxLevel")
 		{
@@ -222,7 +222,7 @@ void Settings::loadFromFile(std::string filename)
       break;
 
     // print line
-    std::cout << "line " << lineNo << ": " << line << std::endl;
+    // std::cout << "line " << lineNo << ": " << line << std::endl;
   }
 
 }
@@ -237,8 +237,8 @@ void Settings::printSettings()
     << ", left: ("  << dirichletBcLeft[0] << "," << dirichletBcLeft[1] << ")"
     << ", right: ("  << dirichletBcRight[0] << "," << dirichletBcRight[1] << ")" << std::endl
     << "  useDonorCell: " << std::boolalpha << useDonorCell << ", alpha: " << alpha << std::endl
-    << "  pressureSolver: " << pressureSolver << ", omega: " << omega << ", epsilon: " << epsilon << ", maxiNumberOfIterations: " << maximumNumberOfIterations
-    << "  Smoother: " << smoother << "  Coarser " << coarser << "  EndSolver " << endSolver << " Cycle " << cycle 
-    << "  NumberOfIterationsPre " << numberOfIterationsPre  << "  NumberOfIterationsPost " << numberOfIterationsPost << "  Recursive " << recursive << "  MaxLevel " << maxLevel << std::endl;
+    << "  pressureSolver: " << pressureSolver << ", omega: " << omega << ", epsilon: " << epsilon << ", maxiNumberOfIterations: " << maximumNumberOfIterations << std::endl
+    << "  Smoother: " << smoother << ", Coarser: " << coarser << ", EndSolver: " << endSolver << ", Cycle: " << cycle << std::endl
+    << "  NumberOfIterationsPre: " << numberOfIterationsPre  << ", NumberOfIterationsPost: " << numberOfIterationsPost << ", Recursive: " << recursive << ", MaxLevel: " << maxLevel << std::endl;
 	// todo: add new parameters
 }

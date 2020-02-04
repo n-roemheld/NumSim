@@ -24,8 +24,12 @@
 class Computation
 {
 public:
+	//----changed for creating data--------
 	void initialize (int argc, char *argv[]);
+	// void initialize (int argc, char *argv[], std::string smootherString, std::string coarserString, std::string endSolverString, int mL, int noIPre, int noIPost, std::string cycleString);
+	//-------------------------------------
 	void runSimulation ();
+
 private:
 	void computeTimeStepWidth ();
 	void applyBoundaryValues ();

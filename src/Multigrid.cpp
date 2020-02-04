@@ -41,6 +41,7 @@ void Multigrid::solve()
 
 void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
 {
+    // std::cout << "Level1: " << level << std::endl;
     if(level == 0)
     {
         endSolver_->solve(mgg);
@@ -65,6 +66,7 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
         }
         smoother_->postsmooth(mgg);
     }
+    //  std::cout << "Level2: " << level << std::endl;
 };
 
 void Multigrid::MGLoop(int maxLevel, std::shared_ptr<MGGrid> mgg)
