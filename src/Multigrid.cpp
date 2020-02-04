@@ -1,6 +1,11 @@
 #include "Multigrid.h"
 #include "GaussSeidel.h"
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <iomanip>
+
 Multigrid:: Multigrid(std::shared_ptr<Discretization> discretization, std::shared_ptr<Smoother> sm, std::shared_ptr<Coarser> coa, std::shared_ptr<EndSolver> es, Cycle cycle) :
     PressureSolver(discretization, 0, 0), smoother_(sm), coarser_(coa), endSolver_(es), cycle_(cycle) // epsilon und maximumNumberOfIterations einfach auf 0 gesetzt, da nicht gebraucht
 {};
@@ -14,11 +19,9 @@ void Multigrid::solve()
   //  pressureSolver_->solve();
    // discretization_->p(5,5) = -7;
 
-
     std::shared_ptr<MGGrid> mgg = std::make_shared<MGGrid>(discretization_->nCells(), discretization_->meshWidth(), discretization_->p(), discretization_->rhs());
     if(cycle_.recursive)
     {
-      // std::cout << "maxLevel" << cycle_.maxLevel << std::endl;
         MGCycle(cycle_.maxLevel, mgg);
         //neue Werte von mgg in discretization_ schreiben??
     }
@@ -42,21 +45,31 @@ void Multigrid::solve()
 void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
 {
     // std::cout << "Level1: " << level << std::endl;
-    if(level == 0)
+    if(level == 0) // nochmal überlegen, ob das passt!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
         endSolver_->solve(mgg);
     }
     else
     {
+        // std::array< int, 2 > nCellsmgg = mgg->nCells();
+        // std::cout << "MGG.nCells: " << nCellsmgg[0] << "," << nCellsmgg[1] << std::endl;
+            writeToConsole(mgg, "before pre");
         smoother_->presmooth(mgg);
+            writeToConsole(mgg, "after pre");
         computeResVec(mgg);
+            writeToConsole(mgg, "after compute resVec");
         std::shared_ptr<MGGrid> mggc = std::make_shared<MGGrid>(mgg->nCells(), mgg->meshWidth());
         coarser_->restrict(mgg, mggc); // mggCoarse is set complete, also p
+            writeToConsole(mggc, "after restrict");
+        // std::array< int, 2 > nCellsmggc = mggc->nCells();
+        // std::cout << "MGGc.nCells: " << nCellsmggc[0] << "," << nCellsmggc[1] << std::endl;
         for(int i = 0; i < cycle_.gamma.at(level); i++)
         {
             MGCycle(level-1, mggc);
         }
+            writeToConsole(mggc, "after recursive");
         coarser_->interpolate(mggc, mgg);
+            writeToConsole(mgg, "after interpolate");
         for(int j = mgg->pJBegin(); j < mgg->pJEnd(); j++)
         {
             for(int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
@@ -64,7 +77,9 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
                 mgg->p(i,j) = mgg->p(i,j) +0.5 * mgg->resVec(i,j); // adding theta ???
             }
         }
+            writeToConsole(mgg, "after adding");
         smoother_->postsmooth(mgg);
+            writeToConsole(mgg, "after post");
     }
     //  std::cout << "Level2: " << level << std::endl;
 };
@@ -138,3 +153,116 @@ void Multigrid::setBoundaryValuesMGGrid(std::shared_ptr<MGGrid> mgg)
 			mgg->p(i,j) = mgg->p(i-1,j);
 		}
 };
+
+void Multigrid::writePtoConsole(std::shared_ptr<MGGrid> mgg, std::string word)
+{
+    std::stringstream file;
+    // write mesh width
+    file << word << std::endl;
+//   file << "nCells: " << mgg->nCells()[0] << "x" << mgg->nCells()[1]
+//     << ", dx: " << mgg->meshWidth()[0] << ", dy: " << mgg->meshWidth()[1] << std::endl << std::endl;
+
+  const int fieldWidth = 9;   // number of characters to use for a single value
+
+  // write p
+  // ---------
+  // write header lines
+  file << "p (" << mgg->p().size()[0] << "x" << mgg->p().size()[1] << "): " << std::endl
+    << std::string(fieldWidth, ' ') << "|";
+  for (int i = mgg->pIBegin()-1; i < mgg->pIEnd()+1; i++)
+  {
+    file << std::setw(fieldWidth) << i;
+  }
+  file << std::endl << std::string(fieldWidth*(mgg->p().size()[0]+2)+1, '-') << std::endl;
+
+  // write p values
+  for (int j = mgg->pJEnd(); j >= mgg->pJBegin()-1; j--)
+  {
+    file << std::setw(fieldWidth) << j << "|";
+    for (int i = mgg->pIBegin()-1; i < mgg->pIEnd()+1; i++)
+    {
+      file << std::setw(fieldWidth) << std::setprecision(fieldWidth-6) << mgg->p(i,j);
+    }
+    file << std::endl;
+  }
+  file << std::endl;
+  std::cout << file.str() << std::endl;
+}
+
+void Multigrid::writeRHStoConsole(std::shared_ptr<MGGrid> mgg, std::string word)
+{
+    std::stringstream file;
+    // write mesh width
+    file << word << std::endl;
+//   file << "nCells: " << mgg->nCells()[0] << "x" << mgg->nCells()[1]
+//     << ", dx: " << mgg->meshWidth()[0] << ", dy: " << mgg->meshWidth()[1] << std::endl << std::endl;
+
+  const int fieldWidth = 9;   // number of characters to use for a single value
+
+  // write rhs
+  // ---------
+  // write header lines
+  file << "rhs (" << mgg->rhs().size()[0] << "x" << mgg->rhs().size()[1] << "): " << std::endl
+    << std::string(fieldWidth, ' ') << "|";
+  for (int i = mgg->pIBegin()-1; i < mgg->pIEnd()+1; i++)
+  {
+    file << std::setw(fieldWidth) << i;
+  }
+  file << std::endl << std::string(fieldWidth*(mgg->rhs().size()[0]+2)+1, '-') << std::endl;
+
+  // write rhs values
+  for (int j = mgg->pJEnd(); j >= mgg->pJBegin()-1; j--)
+  {
+    file << std::setw(fieldWidth) << j << "|";
+    for (int i = mgg->pIBegin()-1; i < mgg->pIEnd()+1; i++)
+    {
+      file << std::setw(fieldWidth) << std::setprecision(fieldWidth-6) << mgg->rhs(i,j);
+    }
+    file << std::endl;
+  }
+  file << std::endl;
+  std::cout << file.str() << std::endl;
+}
+
+void Multigrid::writeREStoConsole(std::shared_ptr<MGGrid> mgg, std::string word)
+{
+    std::stringstream file;
+    // write mesh width
+    file << word << std::endl;
+//   file << "nCells: " << mgg->nCells()[0] << "x" << mgg->nCells()[1]
+//     << ", dx: " << mgg->meshWidth()[0] << ", dy: " << mgg->meshWidth()[1] << std::endl << std::endl;
+
+  const int fieldWidth = 9;   // number of characters to use for a single value
+
+  // write resVec
+  // ---------
+  // write header lines
+  file << "resVec (" << mgg->resVec().size()[0] << "x" << mgg->resVec().size()[1] << "): " << std::endl
+    << std::string(fieldWidth, ' ') << "|";
+  for (int i = mgg->pIBegin()-1; i < mgg->pIEnd()+1; i++)
+  {
+    file << std::setw(fieldWidth) << i;
+  }
+  file << std::endl << std::string(fieldWidth*(mgg->resVec().size()[0]+2)+1, '-') << std::endl;
+
+  // write resVec values
+  for (int j = mgg->pJEnd(); j >= mgg->pJBegin()-1; j--)
+  {
+    file << std::setw(fieldWidth) << j << "|";
+    for (int i = mgg->pIBegin()-1; i < mgg->pIEnd()+1; i++)
+    {
+      file << std::setw(fieldWidth) << std::setprecision(fieldWidth-6) << mgg->resVec(i,j);
+    }
+    file << std::endl;
+  }
+  file << std::endl;
+  std::cout << file.str() << std::endl;
+}
+
+void Multigrid::writeToConsole(std::shared_ptr<MGGrid> mgg, std::string word)
+{
+    writePtoConsole(mgg, word);
+    writeRHStoConsole(mgg, "");
+    writeREStoConsole(mgg, "");
+
+}

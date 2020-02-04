@@ -40,6 +40,14 @@ protected:
     // loop method to perform multigrid
     void MGLoop(int maxLevel, std::shared_ptr<MGGrid> mgg);
 
+    void writePtoConsole(std::shared_ptr<MGGrid> mgg, std::string word);
+
+    void writeRHStoConsole(std::shared_ptr<MGGrid> mgg, std::string word);
+
+    void writeREStoConsole(std::shared_ptr<MGGrid> mgg, std::string word);
+
+    void writeToConsole(std::shared_ptr<MGGrid> mgg, std::string word);
+
 
 private:
 
