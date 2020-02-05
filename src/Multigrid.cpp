@@ -21,6 +21,16 @@ void Multigrid::solve()
    // discretization_->p(5,5) = -7;
 
     std::shared_ptr<MGGrid> mgg = std::make_shared<MGGrid>(discretization_->nCells(), discretization_->meshWidth(), discretization_->p(), discretization_->rhs());
+
+    // for testing:
+    for (int j = 0; j <= mgg->pJEnd(); j++)
+    {
+      for (int i = 0; i <= mgg->pIEnd(); i++)
+      {
+        mgg->p(i,j) = 0;
+      }
+    }
+
     if(cycle_.recursive)
     {
       int it = 0;
@@ -53,7 +63,7 @@ void Multigrid::solve()
 void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
 {
     // std::cout << "Level1: " << level << std::endl;
-    if (mgg->nCells[0] == 2 || mgg->nCells[1] == 2)
+    if (mgg->nCells()[0] == 2 || mgg->nCells()[1] == 2)
     {
         
     }

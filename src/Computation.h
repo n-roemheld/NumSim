@@ -13,6 +13,7 @@
 #include "SmootherJacobi.h"
 #include "SmootherDJacobi.h"
 #include "SmootherGaussSeidel.h"
+#include "SmootherGaussSeidelUnique.h"
 
 #include "Multigrid.h"
 #include "EndSolver.h"
