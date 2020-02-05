@@ -25,7 +25,7 @@ void SmootherGaussSeidel::smooth(std::shared_ptr<MGGrid> mgg, int numberOfIterat
         setBoundaryValues(mgg);
         for(int j = mgg->pJBegin(); j < mgg->pJEnd(); j++)
         {
-            for(int i = mgg->pJBegin(); i < mgg->pJEnd(); i++)
+            for(int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
             {
                 mgg->p(i,j) = (dx*dx*dy*dy)/(2*(dx*dx+dy*dy))
                 * ( (mgg->p(i-1,j) + mgg->p(i+1,j)) / (dx*dx)

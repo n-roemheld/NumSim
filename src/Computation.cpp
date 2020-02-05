@@ -78,6 +78,11 @@ void Computation::initialize (int argc, char *argv[], std::string smootherString
 			smoother = std::make_shared<SmootherGaussSeidel>(settings_.numberOfIterationsPre, settings_.numberOfIterationsPost);
 			outputFolder+="GS_";
 		}
+		else if (settings_.smoother == "GSU")
+		{
+			smoother = std::make_shared<SmootherGaussSeidelUnique>(settings_.numberOfIterationsPre, settings_.numberOfIterationsPost);
+			outputFolder+="GU_";
+		}
 		else
 		{
 			std::cout << "Unknown smoother! " << settings_.smoother << std::endl;
@@ -93,6 +98,11 @@ void Computation::initialize (int argc, char *argv[], std::string smootherString
 		{
 			coarser = std::make_shared<CoarserLinear>();
 			outputFolder += "Lin_";
+		}
+		else if (settings_.coarser == "2")
+		{
+			coarser = std::make_shared<Coarser2>();
+			outputFolder += "Two_";
 		}
 		else
 		{

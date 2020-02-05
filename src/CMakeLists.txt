@@ -24,9 +24,11 @@ add_executable(${PROJECT_NAME}
 	SmootherJacobi.h        SmootherJacobi.cpp
 	SmootherDJacobi.h       SmootherDJacobi.cpp
 	SmootherGaussSeidel.h   SmootherGaussSeidel.cpp
+        SmootherGaussSeidelUnique.h                     SmootherGaussSeidelUnique.cpp
 	Coarser.h
 	CoarserDefault.h        CoarserDefault.cpp
 	CoarserLinear.h         CoarserLinear.cpp
+        Coarser2.h              Coarser2.cpp
 	EndSolver.h             EndSolver.cpp
 	EndSolverNone.h
 	ESGaussSeidel.h         ESGaussSeidel.cpp
