@@ -34,9 +34,9 @@ epsilon = 1e-5                    # tolerance for 2-norm of residual
 maximumNumberOfIterations = 1e4   # maximum number of iterations in the solver
 
 # MG Solver parameters
-Smoother = GS             # Jacobi, DJacobi, GS or GSU
-Coarser = Default         # Default, Linear and 2
-EndSolver = None          # None or GS
+Smoother = GS             # Jacobi, DJacobi (damped Jacobi), GS (GaussSeidel) or GSU (GaussSeidel uniquification)
+Coarser = Default         # Default, Linear and 2 
+EndSolver = None          # None or GS (GaussSeidel)
 Cycle = V                 # V or W
 NumberOfIterationsPre = 2   # number of iterations for presmoothing
 NumberOfIterationsPost = 2  # number of iterations for postsmoothing

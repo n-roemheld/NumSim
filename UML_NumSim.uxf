@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.3.0">
+<diagram program="umlet" version="13.3">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>110</x>
-      <y>300</y>
+      <x>0</x>
+      <y>280</y>
       <w>420</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>Mulitgrid
 --
-- cycle : Cycle
+- smoother_: Smoother
+- coarser_: Coarser
+- endSolver_: EndSolver
+- cycle_: Cycle
 --
 + solve() : void 
 # MGCycle(level : int, mgg : shared_ptr&lt;MGGrid&gt;) : void
@@ -24,9 +27,9 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>270</x>
-      <y>200</y>
-      <w>100</w>
+      <x>80</x>
+      <y>180</y>
+      <w>250</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>PressureSolver</panel_attributes>
@@ -35,8 +38,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>310</x>
-      <y>220</y>
+      <x>200</x>
+      <y>200</y>
       <w>30</w>
       <h>100</h>
     </coordinates>
@@ -46,8 +49,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>730</x>
-      <y>130</y>
+      <x>620</x>
+      <y>110</y>
       <w>370</w>
       <h>190</h>
     </coordinates>
@@ -65,8 +68,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>690</x>
-      <y>360</y>
+      <x>210</x>
+      <y>520</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
@@ -84,8 +87,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>920</x>
-      <y>350</y>
+      <x>810</x>
+      <y>330</y>
       <w>500</w>
       <h>190</h>
     </coordinates>
@@ -94,6 +97,106 @@
 /+ restrict(mggf : shared_ptr&lt;MGGrid&gt;, mggc : shared_ptr&lt;MGGrid&gt;) : void/
 /+ interpolate(mggc : shared_ptr&lt;MGGrid&gt;, mggf : shared_ptr&lt;MGGrid&gt;) : void/
 </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>780</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>EndSolverNone
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>230</x>
+      <y>700</y>
+      <w>60</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>40.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>380</x>
+      <y>780</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>ESGaussSeidel
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>700</y>
+      <w>170</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>740</x>
+      <y>720</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>CoarserDefault
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>710</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>CoarserLinear
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>400</y>
+      <w>330</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>MGGrid
+--
+# nCells_: const std::array&lt;int,2&gt;
+# meshWidth_: const std::array&lt;double,2&gt; 
+# p_: FieldVariable
+# rhs_: FieldVariable
+# resVec_: FieldVariable
+--
++ meshWidth() const: const std::array&lt;double,2&gt;
++ nCells() const: const std::array&lt;int,2&gt; 
++ p() const: const FieldVariable&amp;
++ rhs() const: const FieldVariable&amp;
++ resVec() const: const FieldVariable&amp;
++ p(int i, int j) const: double
++ p(int i, int j): double &amp;
++ rhs(int i, int j): double &amp;
++ resVec(int i, int j): double &amp;
++ </panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

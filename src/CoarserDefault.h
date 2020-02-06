@@ -13,3 +13,5 @@ class CoarserDefault : public Coarser
     // interpolates the coarse MGGrid to the finer MGGrid in p
     void interpolate(std::shared_ptr<MGGrid> mggc, std::shared_ptr<MGGrid> mggf);
 };
+
+// coarsening strategy like in the lecture script

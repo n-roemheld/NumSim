@@ -5,6 +5,7 @@
 
 #include "FieldVariable.h"
 
+// truncated staggeredGrid
 class MGGrid
 {
 public:
