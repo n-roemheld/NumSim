@@ -1,4 +1,5 @@
 #include "SmootherGaussSeidelUnique.h"
+#include <iostream>
 
 SmootherGaussSeidelUnique::SmootherGaussSeidelUnique(int numberOfIterationsPre, int numberOfIterationsPost) :
     Smoother(numberOfIterationsPre, numberOfIterationsPost)
@@ -29,7 +30,9 @@ void SmootherGaussSeidelUnique::smooth(std::shared_ptr<MGGrid> mgg, int numberOf
             {
                 if (i == mgg->pIBegin() && j == mgg->pJBegin())
                 {
-                    mgg->p(i,j) = 0;
+                    // mgg->p(i,j) = 0;
+                    // mgg->p(i,j) = mgg->rhs(i,j);
+                    // std::cout << mgg->p(i,j) << std::endl;
                 }
                 else
                 {
