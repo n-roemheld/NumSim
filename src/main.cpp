@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
   std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
   // std::cout << "EndTime: "<< time(&endTime) << std::endl;
   // std::cout << "Difference: " << -(startTime-endTime) << std::endl;
-  std::cout << "Time difference: " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << "[s]" << std::endl;
+  std::cout << "Time difference: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
 
   
   //------added for creating data----------
