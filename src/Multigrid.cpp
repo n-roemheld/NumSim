@@ -46,7 +46,15 @@ void Multigrid::solve()
     else
     {
         // TODO: iterative
+      int it = 0;
+      double res_squared = 2*epsilon_*epsilon_;
+      while(it < maximumNumberOfIterations_ && res_squared > epsilon_*epsilon_)
+      {
         MGLoop(cycle_.maxLevel, mgg);
+        res_squared = compute_res(mgg);
+        it++;
+      }
+      std::cout << it << std::endl;
     }
 
     for (int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
@@ -96,7 +104,7 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
         {
             for(int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
             {
-                mgg->p(i,j) = mgg->p(i,j) +0.5 * mgg->resVec(i,j); // adding theta ???
+                mgg->p(i,j) = mgg->p(i,j) + mgg->resVec(i,j); 
             }
         }
             // writeToConsole(mgg, "after adding");
@@ -121,12 +129,12 @@ void Multigrid::MGLoop(int maxLevel, std::shared_ptr<MGGrid> mgg)
     endSolver_->solve(mgg);
     for (int l = maxLevel-2; l >= 0; l--)
     {
-        coarser_->interpolate(grids.at(l-1), grids.at(l));
+        coarser_->interpolate(grids.at(l+1), grids.at(l));
         for(int j = grids.at(l)->pJBegin(); j < grids.at(l)->pJEnd(); j++)
         {
             for(int i = grids.at(l)->pIBegin(); i < grids.at(l)->pIEnd(); i++)
             {
-                grids.at(l)->p(i,j) = grids.at(l)->p(i,j) + grids.at(l)->resVec(i,j); // adding theta ???
+                grids.at(l)->p(i,j) = grids.at(l)->p(i,j) + grids.at(l)->resVec(i,j); 
             }
         }
         smoother_->postsmooth(grids.at(l));
