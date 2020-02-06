@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>430</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Smoother
+--
+- numberOfIterationsPre_
+- numberOfIterationsPost_
+--
+/+ presmooth(mgg : shared_ptr&lt;MGGrid&gt;) : void/
+/+ postsmooth(mgg : shared_ptr&lt;MGGrid&gt;) : void/
+# setBoundaryValues(mgg : shared_ptr&lt;MGGrid&gt;) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

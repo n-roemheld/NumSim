@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>504</x>
+      <y>376</y>
+      <w>376</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>Mulitgrid
+--
++ solve() : void 
+# MGCycle(level : int, mgg : shared_ptr&lt;MGGrid&gt;) : void
+# MGLoop(maxLevel : int, mgg : shared_ptr&lt;MGGrid&gt;) : void
+# computeResVec(mgg : shared_ptr&lt;MGGrid&gt;) : void
+# setBoundaryValuesMGGrid(mgg : shared_ptr&lt;MGGrid&gt;) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>568</x>
+      <y>296</y>
+      <w>200</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>PressureSolver</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>664</x>
+      <y>312</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>576</y>
+      <w>344</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>Smoother
+--
+- numberOfIterationsPre_
+- numberOfIterationsPost_
+--
+/+ presmooth(mgg : shared_ptr&lt;MGGrid&gt;) : void/
+/+ postsmooth(mgg : shared_ptr&lt;MGGrid&gt;) : void/
+# setBoundaryValues(mgg : shared_ptr&lt;MGGrid&gt;) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>960</x>
+      <y>576</y>
+      <w>336</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>EndSolver
+--
+# epsilon_ : double
+# maximumNumberOfIterations_ : int
+--
+/+ solve(mgg : shared_ptr&lt;MGGrid&gt;) : void/
+# setBoundaryValues(mgg : shared_ptr&lt;MGGrid&gt;) : void
+# compute_res(mgg : shared_ptr&lt;MGGrid&gt;) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>448</x>
+      <y>576</y>
+      <w>480</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Coarser
+--
+/+ restrict(mggf : shared_ptr&lt;MGGrid&gt;, mggc : shared_ptr&lt;MGGrid&gt;) : void/
+/+ interpolate(mggc : shared_ptr&lt;MGGrid&gt;, mggf : shared_ptr&lt;MGGrid&gt;) : void/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>960</x>
+      <y>312</y>
+      <w>264</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>MGGrid
+--
+# nCells_: const std::array&lt;int,2&gt;
+# meshWidth_: const std::array&lt;double,2&gt; 
+# p_: FieldVariable
+# rhs_: FieldVariable
+# resVec_: FieldVariable
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>248</x>
+      <y>376</y>
+      <w>168</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Cycle
+--
++ recursive: boolean
++ maxLevel: int
++ gamma: std::vector&lt;int&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>408</x>
+      <y>416</y>
+      <w>112</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>488</y>
+      <w>280</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>330.0;10.0;10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>520</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>872</x>
+      <y>504</y>
+      <w>272</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;320.0;10.0;320.0;90.0</additional_attributes>
+  </element>
+</diagram>
