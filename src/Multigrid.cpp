@@ -41,7 +41,7 @@ void Multigrid::solve()
         res_squared = compute_res(mgg);
         it++;
       }
-      std::cout << it << std::endl;
+      // std::cout << it << std::endl;
     }
     else
     {
