@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>370</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>StaggeredGrid
+--
+# nCells_: const std::array&lt;int,2&gt;
+# meshWidth_: const std::array&lt;double,2&gt; 
+# u_: FieldVariable
+# v_: FieldVariable
+# p_: FieldVariable
+# f_: FieldVariable
+# g_: FieldVariable
+# rhs_: FieldVariable</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>20</y>
+      <w>330</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>MGGrid
+--
+# nCells_: const std::array&lt;int,2&gt;
+# meshWidth_: const std::array&lt;double,2&gt; 
+
+
+# p_: FieldVariable
+
+
+# rhs_: FieldVariable
+# resVec_: FieldVariable
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 #include "Smoother.h"
 
 class SmootherGaussSeidelUnique : public Smoother
@@ -13,3 +13,5 @@ public:
 protected:
     void smooth(std::shared_ptr<MGGrid> mgg, int numberOfIterations);
 };
+
+// GaussSeidel but with setting one node value to 0 to achieve uniqueness of the Neumann poisson problem

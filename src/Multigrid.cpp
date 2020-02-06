@@ -54,7 +54,7 @@ void Multigrid::solve()
         res_squared = compute_res(mgg);
         it++;
       }
-      std::cout << it << std::endl;
+      // std::cout << it << std::endl;
     }
 
     for (int j = discretization_->pJBegin(); j < discretization_->pJEnd(); j++)
@@ -73,7 +73,7 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
     // std::cout << "Level1: " << level << std::endl;
     if (mgg->nCells()[0] == 2 || mgg->nCells()[1] == 2)
     {
-        
+
     }
     else if (level == 0)
     {
@@ -104,7 +104,7 @@ void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
         {
             for(int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
             {
-                mgg->p(i,j) = mgg->p(i,j) + mgg->resVec(i,j); 
+                mgg->p(i,j) = mgg->p(i,j) + mgg->resVec(i,j);
             }
         }
             // writeToConsole(mgg, "after adding");
@@ -134,7 +134,7 @@ void Multigrid::MGLoop(int maxLevel, std::shared_ptr<MGGrid> mgg)
         {
             for(int i = grids.at(l)->pIBegin(); i < grids.at(l)->pIEnd(); i++)
             {
-                grids.at(l)->p(i,j) = grids.at(l)->p(i,j) + grids.at(l)->resVec(i,j); 
+                grids.at(l)->p(i,j) = grids.at(l)->p(i,j) + grids.at(l)->resVec(i,j);
             }
         }
         smoother_->postsmooth(grids.at(l));

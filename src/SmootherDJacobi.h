@@ -3,7 +3,7 @@
 
 class SmootherDJacobi : public Smoother
 {
-public: 
+public:
     SmootherDJacobi(int numberOfIterationsPre, int numberOfIterationsPost);
 
     // presmooths the mgg with numberOfIterationsPre times Jacobi
@@ -15,3 +15,5 @@ public:
 protected:
     void smooth(std::shared_ptr<MGGrid> mgg, int numberOfIterations);
 };
+
+// damped Jacobi
