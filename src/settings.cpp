@@ -156,6 +156,10 @@ void Settings::loadFromFile(std::string filename)
     	{
     		epsilon = atof(parameterValue.c_str());
     	}
+		else if(parameterName == "epsilonEndSolver")
+    	{
+    		epsilonEndSolver = atof(parameterValue.c_str());
+    	}
     	else if(parameterName == "maximumNumberOfIterations")
     	{
     		maximumNumberOfIterations = int(atof(parameterValue.c_str()));
@@ -239,6 +243,6 @@ void Settings::printSettings()
     << "  useDonorCell: " << std::boolalpha << useDonorCell << ", alpha: " << alpha << std::endl
     << "  pressureSolver: " << pressureSolver << ", omega: " << omega << ", epsilon: " << epsilon << ", maxiNumberOfIterations: " << maximumNumberOfIterations << std::endl
     << "  Smoother: " << smoother << ", Coarser: " << coarser << ", EndSolver: " << endSolver << ", Cycle: " << cycle << std::endl
-    << "  NumberOfIterationsPre: " << numberOfIterationsPre  << ", NumberOfIterationsPost: " << numberOfIterationsPost << ", Recursive: " << recursive << ", MaxLevel: " << maxLevel << std::endl;
+    << "  NumberOfIterationsPre: " << numberOfIterationsPre  << ", NumberOfIterationsPost: " << numberOfIterationsPost << ", Recursive: " << recursive << ", MaxLevel: " << maxLevel << ", epsilonEndSolver: " << epsilonEndSolver<< std::endl;
 	// todo: add new parameters
 }

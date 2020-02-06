@@ -47,6 +47,7 @@ struct Settings
   bool recursive;
   int maxLevel;
   std::vector<int> gamma; // todo: add to load from file
+  double epsilonEndSolver = 1e-5; //< tolerance for the residual in the endsolver
 
   //! parse a text file with settings, each line contains "<parameterName> = <value>"
   void loadFromFile(std::string filename);

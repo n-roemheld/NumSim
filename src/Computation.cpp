@@ -112,12 +112,12 @@ void Computation::initialize (int argc, char *argv[], std::string smootherString
 		// End solver
 		if (settings_.endSolver == "None")
 		{
-			endSolver = std::make_shared<EndSolverNone>(settings_.epsilon, settings_.maximumNumberOfIterations);
+			endSolver = std::make_shared<EndSolverNone>(settings_.epsilonEndSolver, settings_.maximumNumberOfIterations);
 			outputFolder+="NO_";
 		}
 		else if (settings_.endSolver == "GS")
 		{
-			endSolver = std::make_shared<ESGaussSeidel>(settings_.epsilon, settings_.maximumNumberOfIterations);
+			endSolver = std::make_shared<ESGaussSeidel>(settings_.epsilonEndSolver, settings_.maximumNumberOfIterations);
 			outputFolder+="GS_";
 		}
 		else
