@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <chrono>
 
 
 int main(int argc, char *argv[])
@@ -16,6 +17,7 @@ int main(int argc, char *argv[])
     return EXIT_FAILURE;
   }
 
+  // creating data independend of MG parameters in input file
   if(argc == 3 && argv[2] == std::string("-data"))
   {
     std::cout << "DATA" << std::endl;
@@ -77,10 +79,13 @@ int main(int argc, char *argv[])
 
   time_t startTime;
   time_t endTime;
-  std::cout << "StartTime: " << time(&startTime) << std::endl;
+  // std::cout << "StartTime: " << time(&startTime) << std::endl;
+  std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
   comp.runSimulation();
-  std::cout << "EndTime: "<< time(&endTime) << std::endl;
-  std::cout << "Difference: " << -(startTime-endTime) << std::endl;
+  std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+  // std::cout << "EndTime: "<< time(&endTime) << std::endl;
+  // std::cout << "Difference: " << -(startTime-endTime) << std::endl;
+  std::cout << "Time difference: " << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count() << "[s]" << std::endl;
 
   
   //------added for creating data----------
@@ -93,6 +98,7 @@ int main(int argc, char *argv[])
   }
   //---------------------------------------
   }
+  // run simulation with parameters from input file
   else
   {
     Computation comp;
@@ -101,10 +107,13 @@ int main(int argc, char *argv[])
 
     time_t startTime;
     time_t endTime;
-    std::cout << "StartTime: " << time(&startTime) << std::endl;
+    // std::cout << "StartTime: " << time(&startTime) << std::endl;
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     comp.runSimulation();
-    std::cout << "EndTime: "<< time(&endTime) << std::endl;
-    std::cout << "Difference: " << -(startTime-endTime) << std::endl;
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    // std::cout << "EndTime: "<< time(&endTime) << std::endl;
+    // std::cout << "Difference: " << -(startTime-endTime) << std::endl;
+    std::cout << "Time difference: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
   }
 
 
