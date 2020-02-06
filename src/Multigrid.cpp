@@ -22,14 +22,14 @@ void Multigrid::solve()
 
     std::shared_ptr<MGGrid> mgg = std::make_shared<MGGrid>(discretization_->nCells(), discretization_->meshWidth(), discretization_->p(), discretization_->rhs());
 
-    // for testing:
-    for (int j = 0; j <= mgg->pJEnd(); j++)
-    {
-      for (int i = 0; i <= mgg->pIEnd(); i++)
-      {
-        mgg->p(i,j) = 0;
-      }
-    }
+    // // for testing:
+    // for (int j = 0; j <= mgg->pJEnd(); j++)
+    // {
+    //   for (int i = 0; i <= mgg->pIEnd(); i++)
+    //   {
+    //     mgg->p(i,j) = 0;
+    //   }
+    // }
 
     if(cycle_.recursive)
     {

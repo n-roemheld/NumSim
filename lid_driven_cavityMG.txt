@@ -28,17 +28,17 @@ tau = 0.5             # safety factor for time step width
 maximumDt = 0.1       # maximum values for time step width
 
 # Solver parameters
-pressureSolver = Multigrid # which pressure solver to use, possible values: GaussSeidel SOR CG Multigrid
+pressureSolver = Multigrid # which pressure solver to use, possible values: GaussSeidel, SOR, CG, Multigrid
 omega = 1.6          # overrelaxation factor, only for SOR solver
-epsilon = 1e-4        # tolerance for 2-norm of residual
-maximumNumberOfIterations = 1000    # maximum number of iterations in the solver
+epsilon = 1e-5        # tolerance for 2-norm of residual
+maximumNumberOfIterations = 10000    # maximum number of iterations in the solver
 
 # MG Solver parameters
-Smoother = GSU # Jacobi, DJacobi or GS
-Coarser = Default
-EndSolver = GS
+Smoother = GSU # Jacobi, DJacobi, GS or GSU
+Coarser = Default # Default, Linear or 2
+EndSolver = GS # GS or None
 Cycle = V                 # V or W
 NumberOfIterationsPre = 2
 NumberOfIterationsPost = 2
 Recursive = true
-MaxLevel = 3
+MaxLevel = 3 # adapt to nCells
