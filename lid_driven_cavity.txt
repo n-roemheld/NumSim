@@ -4,7 +4,7 @@
 # Problem description
 physicalSizeX = 2.0   # physical size of the domain
 physicalSizeY = 2.0
-endTime = 50.0        # duration of the simulation
+endTime = 10.0        # duration of the simulation
 re = 1000             # Reynolds number
 gX = 0.0              # external forces, set to (gX,gY) = (0,-9.81) to account for gravity
 gY = 0.0
@@ -20,26 +20,26 @@ dirichletRightX  = 0
 dirichletRightY  = 0
 
 # Discretization parameters
-nCellsX = 64          # number of cells in x and y direction, must be 2^n each, but at least 2^(MaxLevel+1)
-nCellsY = 64
+nCellsX = 32          # number of cells in x and y direction, must be 2^n each, but at least 2^(MaxLevel+1)
+nCellsY = 32
 useDonorCell = true   # if donor cell discretization should be used, possible values: true false
 alpha = 0.5           # factor for donor-cell scheme, 0 is equivalent to central differences
 tau = 0.5             # safety factor for time step width
 maximumDt = 0.1       # maximum values for time step width
 
 # Solver parameters
-pressureSolver = Multigrid        # which pressure solver to use, possible values: GaussSeidel SOR Multigrid
+pressureSolver = SOR        # which pressure solver to use, possible values: GaussSeidel SOR Multigrid
 omega = 1.6                       # overrelaxation factor, only for SOR solver
 epsilon = 1e-5                    # tolerance for 2-norm of residual
 maximumNumberOfIterations = 1e4   # maximum number of iterations in the solver
 
 # MG Solver parameters
-Smoother = GS             # Jacobi, DJacobi (damped Jacobi), GS (GaussSeidel) or GSU (GaussSeidel uniquification)
+Smoother = Jacobi         # Jacobi, DJacobi (damped Jacobi), GS (GaussSeidel) or GSU (GaussSeidel uniquification)
 Coarser = Default         # Default, Linear and 2 
 EndSolver = None          # None or GS (GaussSeidel)
 Cycle = V                 # V or W
-NumberOfIterationsPre = 3   # number of iterations for presmoothing
-NumberOfIterationsPost = 3  # number of iterations for postsmoothing
+NumberOfIterationsPre = 1   # number of iterations for presmoothing
+NumberOfIterationsPost = 1  # number of iterations for postsmoothing
 Recursive = true          # if recursive should be used, possible values: true false
-MaxLevel = 5              # maximum level for Multigrid
+MaxLevel = 1              # maximum level for Multigrid
 epsilonEndSolver = 1e-5   # tolerance for 2-norm of residual for EndSolver

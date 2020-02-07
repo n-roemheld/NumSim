@@ -68,50 +68,40 @@ void Multigrid::solve()
 
 };
 
+void Multigrid::solve()
+{
+  std::shared_ptr<MGGrid> mgg = std::make_shared<MGGrid>(discretization_->nCells(), discretization_->meshWidth(), discretization_->p(), discretization_->rhs());
+  MGCycle(cycle_.maxLevel, mgg);
+}
+
 void Multigrid::MGCycle(int level, std::shared_ptr<MGGrid> mgg)
 {
-    // std::cout << "Level1: " << level << std::endl;
     if (mgg->nCells()[0] == 2 || mgg->nCells()[1] == 2)
-    {
-
-    }
+    {}
     else if (level == 0)
     {
         endSolver_->solve(mgg);
     }
     else
     {
-        // std::array< int, 2 > nCellsmgg = mgg->nCells();
-        // std::cout << "MGG.nCells: " << nCellsmgg[0] << "," << nCellsmgg[1] << std::endl;
-            // writeToConsole(mgg, "before pre");
         smoother_->presmooth(mgg);
-            // writeToConsole(mgg, "after pre");
         computeResVec(mgg);
-            // writeToConsole(mgg, "after compute resVec");
         std::shared_ptr<MGGrid> mggc = std::make_shared<MGGrid>(mgg->nCells(), mgg->meshWidth());
-        coarser_->restrict(mgg, mggc); // mggCoarse is set complete, also p
-            // writeToConsole(mggc, "after restrict");
-        // std::array< int, 2 > nCellsmggc = mggc->nCells();
-        // std::cout << "MGGc.nCells: " << nCellsmggc[0] << "," << nCellsmggc[1] << std::endl;
+        coarser_->restrict(mgg, mggc); 
         for(int i = 0; i < cycle_.gamma.at(level); i++)
         {
-            MGCycle(level-1, mggc);
+          MGCycle(level-1, mggc);
         }
-            // writeToConsole(mggc, "after recursive");
         coarser_->interpolate(mggc, mgg);
-            // writeToConsole(mgg, "after interpolate");
         for(int j = mgg->pJBegin(); j < mgg->pJEnd(); j++)
         {
-            for(int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
-            {
-                mgg->p(i,j) = mgg->p(i,j) + mgg->resVec(i,j);
-            }
+          for(int i = mgg->pIBegin(); i < mgg->pIEnd(); i++)
+          {
+            mgg->p(i,j) = mgg->p(i,j) + mgg->resVec(i,j);
+          }
         }
-            // writeToConsole(mgg, "after adding");
         smoother_->postsmooth(mgg);
-            // writeToConsole(mgg, "after post");
     }
-    //  std::cout << "Level2: " << level << std::endl;
 };
 
 void Multigrid::MGLoop(int maxLevel, std::shared_ptr<MGGrid> mgg)

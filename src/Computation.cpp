@@ -28,7 +28,7 @@ void Computation::initialize (int argc, char *argv[], std::string smootherString
 
 	// get outputFolder
 	// std::string outputFolder = "out_";
-	std::string outputFolder = "/mnt/e/NumSimOut/out_";
+	std::string outputFolder = "/mnt/e/out_";
 
 	//computing meshWidth
 	double dx = settings_.physicalSize[0]/settings_.nCells[0];
@@ -176,7 +176,7 @@ void Computation::runSimulation ()
 	{
 		applyBoundaryValues();
 
-		std::cout << "time" << time << std::endl;
+		// std::cout << "time" << time << std::endl;
 		// compute dt_ and time
 		computeTimeStepWidth();
 		if(time+dt_>settings_.endTime) dt_ = settings_.endTime - time;

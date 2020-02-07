@@ -9,7 +9,7 @@
       <w>376</w>
       <h>152</h>
     </coordinates>
-    <panel_attributes>Mulitgrid
+    <panel_attributes>Multigrid
 --
 + solve() : void 
 # MGCycle(level : int, mgg : shared_ptr&lt;MGGrid&gt;) : void
